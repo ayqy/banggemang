@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="成语接龙,成语游戏,帮小忙,腾讯QQ浏览器,在线工具箱">
+  <meta name="description" content="成语接龙在线工具，输入成语自动接龙，提升汉语词汇量和语言表达能力。">
+  <title>成语接龙-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .input-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+    .input-row input[type="text"]{flex:1;min-width:200px;height:44px;border:1px solid #ddd;border-radius:8px;padding:0 16px;font-size:15px;outline:none;transition:border-color .2s}
+    .input-row input[type="text"]:focus{border-color:#136ce9}
+    .btn-group{display:flex;gap:8px;flex-wrap:wrap}
+    .btn-primary{height:44px;padding:0 24px;font-size:15px}
+    .btn-secondary{height:44px;padding:0 20px;background:#fff;color:#136ce9;border:1px solid #136ce9;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s}
+    .btn-secondary:hover{background:#f0f5ff}
+    .btn-danger{height:44px;padding:0 20px;background:#fff;color:#e74c3c;border:1px solid #e74c3c;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s}
+    .btn-danger:hover{background:#fdf0ef}
+    .stats-bar{display:flex;gap:32px;margin-bottom:24px;padding:16px 20px;background:#f6f7fa;border-radius:10px;flex-wrap:wrap}
+    .stat-box{display:flex;align-items:center;gap:8px}
+    .stat-box .stat-label{font-size:14px;color:#666}
+    .stat-box .stat-value{font-size:22px;font-weight:700;color:#136ce9}
+    .stat-box.user .stat-value{color:#27ae60}
+    .stat-box.system .stat-value{color:#e67e22}
+    .chain-container{min-height:120px;padding:20px;background:#fafbfd;border-radius:12px;border:1px dashed #ddd;margin-bottom:24px;display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+    .chain-empty{width:100%;text-align:center;color:#bbb;font-size:15px;padding:40px 0}
+    .chain-item{position:relative;display:inline-flex;align-items:center;gap:4px}
+    .chain-word{display:inline-block;padding:8px 16px;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;position:relative;white-space:nowrap}
+    .chain-word.user-word{background:linear-gradient(135deg,#136ce9,#6c8fff);color:#fff}
+    .chain-word.system-word{background:linear-gradient(135deg,#e67e22,#f39c12);color:#fff}
+    .chain-word:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .chain-arrow{color:#999;font-size:18px;margin:0 2px}
+    .tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 14px;border-radius:8px;font-size:13px;line-height:1.5;white-space:nowrap;max-width:300px;white-space:normal;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+    .tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#333}
+    .chain-word:hover .tooltip{display:block}
+    .suggestions{margin-bottom:24px}
+    .suggestions h4{font-size:14px;color:#666;margin-bottom:10px;font-weight:500}
+    .suggestion-list{display:flex;flex-wrap:wrap;gap:8px}
+    .suggestion-btn{padding:6px 14px;background:#fff;border:1px solid #e0e0ff;border-radius:20px;font-size:14px;color:#136ce9;cursor:pointer;transition:all .2s}
+    .suggestion-btn:hover{background:#136ce9;color:#fff;border-color:#136ce9}
+    .no-suggestion{font-size:14px;color:#999;padding:8px 0}
+    .message-area{padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;display:none}
+    .message-area.error{display:block;background:#fdf0ef;color:#e74c3c;border:1px solid #f5c6cb}
+    .message-area.success{display:block;background:#eafaf1;color:#27ae60;border:1px solid #c3e6cb}
+    .message-area.info{display:block;background:#eaf4fd;color:#136ce9;border:1px solid #b8daff}
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯QQ浏览器在线工具箱</span>
+      </div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png"><span>全部</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=img" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png"><span>图片工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pdf" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png"><span>PDF转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=data" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png"><span>数据换算工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=life" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png"><span>生活娱乐工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=education" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png"><span>教育工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=text" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png"><span>文本工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=doc" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png"><span>文档转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=develop" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png"><span>开发工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=video" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png"><span>视频工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png"><span>浏览器插件</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item"><a class="nav-backtop" href="javascript:void(0)"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png"></a></div>
+    <div class="nav-button-item"><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png"></a><div class="qqgroup-tip">QQ群：459317399</div></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">共建</div></a></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">反馈</div></a></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Search Bar -->
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Area -->
+    <div class="tool-main">
+      <h2>成语接龙</h2>
+
+      <!-- Input -->
+      <div class="input-row">
+        <input type="text" id="idiomInput" placeholder="请输入一个成语开始接龙...">
+        <div class="btn-group">
+          <button class="btn-primary" id="chainBtn">接龙</button>
+          <button class="btn-secondary" id="autoOneBtn">系统自动接龙</button>
+          <button class="btn-secondary" id="autoTenBtn">自动接10个</button>
+          <button class="btn-danger" id="resetBtn">重新开始</button>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="message-area" id="messageArea"></div>
+
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat-box"><span class="stat-label">接龙长度</span><span class="stat-value" id="chainLength">0</span></div>
+        <div class="stat-box user"><span class="stat-label">用户接龙</span><span class="stat-value" id="userCount">0</span></div>
+        <div class="stat-box system"><span class="stat-label">系统接龙</span><span class="stat-value" id="systemCount">0</span></div>
+      </div>
+
+      <!-- Chain Display -->
+      <div class="chain-container" id="chainContainer">
+        <div class="chain-empty">输入一个成语开始接龙游戏吧！</div>
+      </div>
+
+      <!-- Suggestions -->
+      <div class="suggestions" id="suggestionsArea" style="display:none">
+        <h4>推荐下一个成语：</h4>
+        <div class="suggestion-list" id="suggestionList"></div>
+      </div>
+    </div>
+
+    <!-- Tool Introduction -->
+    <div class="tool-intro-section">
+      <h3>工具介绍及使用方法</h3>
+      <p>成语接龙是一款趣味性与教育性兼备的在线工具，通过成语接龙游戏帮助您扩展汉语词汇量，提升语言表达能力。</p>
+      <p><strong>游戏规则：</strong>下一个成语的第一个字必须是上一个成语的最后一个字。</p>
+      <p><strong>使用方法：</strong></p>
+      <p>1. 在输入框中输入一个成语，点击"接龙"按钮添加到接龙链中。</p>
+      <p>2. 点击"系统自动接龙"让系统自动接上下一个成语。</p>
+      <p>3. 点击"自动接10个"让系统连续自动接上10个成语。</p>
+      <p>4. 将鼠标悬停在成语上可以查看释义。蓝色为用户输入，橙色为系统接龙。</p>
+      <p>5. 点击"重新开始"可以清空接龙链，重新开始游戏。</p>
+      <p>6. 下方"推荐下一个成语"会显示可选择的接龙成语，点击即可快速接龙。</p>
+    </div>
+
+    <!-- More Recommendations -->
+    <div class="more-recommend">
+      <h3>更多推荐</h3>
+      <div class="recommend-list">
+        <a class="recommend-item" href="chengyujielong.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_UVpYlcJGb3t.png" alt="成语大全">
+          <div><div class="rec-name">成语大全</div><div class="rec-desc">成语查询及释义</div></div>
+        </a>
+        <a class="recommend-item" href="school.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_aI87pFy9qgC.png" alt="高校查询">
+          <div><div class="rec-name">高校查询</div><div class="rec-desc">全国高校信息查询</div></div>
+        </a>
+        <a class="recommend-item" href="allegory.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_LgMaUNruKSv.png" alt="歇后语">
+          <div><div class="rec-name">歇后语</div><div class="rec-desc">歇后语大全查询</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc">
+              <span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span>
+            </div>
+          </div>
+          <div class="qrcode"><img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+// ===== 成语接龙 Inline Data (150+ idioms) =====
+var IDIOMS = [
+  {w:"一心一意",p:"yi xin yi yi",m:"形容做事专心，毫不分心。"},
+  {w:"意气风发",p:"yi qi feng fa",m:"形容精神振奋，气概豪迈。"},
+  {w:"发愤图强",p:"fa fen tu qiang",m:"下定决心发奋努力，谋求强盛。"},
+  {w:"强词夺理",p:"qiang ci duo li",m:"无理硬说有理。"},
+  {w:"理直气壮",p:"li zhi qi zhuang",m:"理由充分，说话有气势。"},
+  {w:"壮志凌云",p:"zhuang zhi ling yun",m:"形容理想宏伟远大。"},
+  {w:"云开雾散",p:"yun kai wu san",m:"天气晴朗，比喻疑虑消除。"},
+  {w:"散兵游勇",p:"san bing you yong",m:"比喻没有组织的集体中的个人。"},
+  {w:"勇往直前",p:"yong wang zhi qian",m:"勇敢地一直向前进。"},
+  {w:"前功尽弃",p:"qian gong jin qi",m:"以前的功劳全部丢失。"},
+  {w:"弃暗投明",p:"qi an tou ming",m:"离开黑暗，投向光明。比喻弃邪归正。"},
+  {w:"明知故犯",p:"ming zhi gu fan",m:"明明知道不对，还故意去做。"},
+  {w:"犯上作乱",p:"fan shang zuo luan",m:"不顾法纪或舆论，公然做坏事。"},
+  {w:"乱七八糟",p:"luan qi ba zao",m:"形容无秩序、无条理、乱得不成样子。"},
+  {w:"糟糕透顶",p:"zao gao tou ding",m:"坏到了极点。"},
+  {w:"顶天立地",p:"ding tian li di",m:"形容人顶天立地，形象高大。"},
+  {w:"地大物博",p:"di da wu bo",m:"国家土地辽阔，资源丰富。"},
+  {w:"博古通今",p:"bo gu tong jin",m:"对古代和现代的事物都知道很多。"},
+  {w:"今非昔比",p:"jin fei xi bi",m:"现在不是过去能比得上的。"},
+  {w:"比翼双飞",p:"bi yi shuang fei",m:"比喻夫妻恩爱，朝夕相伴。"},
+  {w:"飞黄腾达",p:"fei huang teng da",m:"比喻人骤然得志，官职升得很快。"},
+  {w:"达官贵人",p:"da guan gui ren",m:"地位高的官吏和显赫的人物。"},
+  {w:"人山人海",p:"ren shan ren hai",m:"形容人聚集得很多。"},
+  {w:"海阔天空",p:"hai kuo tian kong",m:"形容大自然的广阔。"},
+  {w:"空前绝后",p:"kong qian jue hou",m:"从前没有过，以后也不会有。"},
+  {w:"后来居上",p:"hou lai ju shang",m:"后来的超过先前的。"},
+  {w:"上行下效",p:"shang xing xia xiao",m:"上面的人怎么做，下面的人就跟着学。"},
+  {w:"效犬马力",p:"xiao quan ma li",m:"甘愿像犬马一样为别人效力。"},
+  {w:"力不从心",p:"li bu cong xin",m:"心里想做，但力量够不上。"},
+  {w:"心花怒放",p:"xin hua nu fang",m:"形容内心高兴极了。"},
+  {w:"放虎归山",p:"fang hu gui shan",m:"把老虎放回山林，比喻把坏人放走。"},
+  {w:"山穷水尽",p:"shan qiong shui jin",m:"比喻陷入绝境。"},
+  {w:"尽善尽美",p:"jin shan jin mei",m:"极其完善，极其美好。"},
+  {w:"美中不足",p:"mei zhong bu zu",m:"大体很好，但还有不足。"},
+  {w:"足智多谋",p:"zu zhi duo mou",m:"富有智慧，善于谋划。"},
+  {w:"谋事在人",p:"mou shi zai ren",m:"谋划事情在于人的努力。"},
+  {w:"人定胜天",p:"ren ding sheng tian",m:"人力能够战胜自然。"},
+  {w:"天长地久",p:"tian chang di jiu",m:"比喻永久不变。"},
+  {w:"久负盛名",p:"jiu fu sheng ming",m:"长久地享有好的名声。"},
+  {w:"名不虚传",p:"ming bu xu chuan",m:"传出的名声不是虚假的。"},
+  {w:"传宗接代",p:"chuan zong jie dai",m:"传延宗族，接续后代。"},
+  {w:"代人受过",p:"dai ren shou guo",m:"替别人承受过错或惩罚。"},
+  {w:"过目不忘",p:"guo mu bu wang",m:"看过就不忘记，形容记忆力很强。"},
+  {w:"忘恩负义",p:"wang en fu yi",m:"忘掉别人的恩情，做出对不起人的事。"},
+  {w:"义不容辞",p:"yi bu rong ci",m:"在道义上不允许推辞。"},
+  {w:"辞旧迎新",p:"ci jiu ying xin",m:"辞别旧的，迎接新的。"},
+  {w:"新陈代谢",p:"xin chen dai xie",m:"比喻新事物不断产生代替旧事物。"},
+  {w:"谢天谢地",p:"xie tian xie di",m:"表示非常感激或非常庆幸。"},
+  {w:"地久天长",p:"di jiu tian chang",m:"形容时间悠久。"},
+  {w:"长驱直入",p:"chang qu zhi ru",m:"向很远的目的地一直前进。"},
+  {w:"入木三分",p:"ru mu san fen",m:"比喻见解、议论十分深刻。"},
+  {w:"分秒必争",p:"fen miao bi zheng",m:"一分一秒也一定要争取。"},
+  {w:"争先恐后",p:"zheng xian kong hou",m:"争着向前，唯恐落后。"},
+  {w:"后生可畏",p:"hou sheng ke wei",m:"年轻人是值得敬畏的。"},
+  {w:"畏首畏尾",p:"wei shou wei wei",m:"前也怕，后也怕，比喻做事胆子小。"},
+  {w:"尾大不掉",p:"wei da bu diao",m:"比喻机构庞大，指挥不灵。"},
+  {w:"掉以轻心",p:"diao yi qing xin",m:"对事情采取轻率的漫不经心的态度。"},
+  {w:"心想事成",p:"xin xiang shi cheng",m:"心里想的事情都能实现。"},
+  {w:"成竹在胸",p:"cheng zhu zai xiong",m:"比喻做事之前已有充分的准备和把握。"},
+  {w:"胸有成竹",p:"xiong you cheng zhu",m:"比喻做事之前已经有了主意。"},
+  {w:"竹篮打水",p:"zhu lan da shui",m:"比喻白费力气，没有效果。"},
+  {w:"水到渠成",p:"shui dao qu cheng",m:"比喻条件成熟，事情自然成功。"},
+  {w:"成家立业",p:"cheng jia li ye",m:"指结了婚，建立了事业。"},
+  {w:"业精于勤",p:"ye jing yu qin",m:"学业精深在于勤奋。"},
+  {w:"勤能补拙",p:"qin neng bu zhuo",m:"勤奋能够弥补先天的不足。"},
+  {w:"拙口笨舌",p:"zhuo kou ben she",m:"形容不善于讲话。"},
+  {w:"舌战群儒",p:"she zhan qun ru",m:"与众多学者辩论并取胜。"},
+  {w:"儒雅风流",p:"ru ya feng liu",m:"形容文雅而有风度。"},
+  {w:"流芳百世",p:"liu fang bai shi",m:"好的名声永远流传下去。"},
+  {w:"世外桃源",p:"shi wai tao yuan",m:"比喻理想中安乐而美好的地方。"},
+  {w:"源远流长",p:"yuan yuan liu chang",m:"比喻历史悠久。"},
+  {w:"长年累月",p:"chang nian lei yue",m:"形容经过了很多年月。"},
+  {w:"月明星稀",p:"yue ming xing xi",m:"月亮明亮时，星星就显得稀疏了。"},
+  {w:"稀世之宝",p:"xi shi zhi bao",m:"世上稀有的珍宝。"},
+  {w:"宝刀不老",p:"bao dao bu lao",m:"比喻虽然年老但功夫或技术并没有衰退。"},
+  {w:"老当益壮",p:"lao dang yi zhuang",m:"年纪虽老而志气更旺盛。"},
+  {w:"壮志未酬",p:"zhuang zhi wei chou",m:"宏大的志愿还没有实现。"},
+  {w:"愁眉苦脸",p:"chou mei ku lian",m:"形容愁苦的神色。"},
+  {w:"脸红耳赤",p:"lian hong er chi",m:"形容因激动或羞愧而脸色发红。"},
+  {w:"赤胆忠心",p:"chi dan zhong xin",m:"形容十分忠诚。"},
+  {w:"心直口快",p:"xin zhi kou kuai",m:"性情直爽，有话就说。"},
+  {w:"快马加鞭",p:"kuai ma jia bian",m:"对快跑的马再打几鞭，使它跑得更快。比喻加速前进。"},
+  {w:"鞭长莫及",p:"bian chang mo ji",m:"比喻力量达不到。"},
+  {w:"及时行乐",p:"ji shi xing le",m:"不失时机寻求快乐。"},
+  {w:"乐极生悲",p:"le ji sheng bei",m:"快乐到了极点就会发生令人悲伤的事。"},
+  {w:"悲欢离合",p:"bei huan li he",m:"泛指生活中经历的各种境遇和感触。"},
+  {w:"合情合理",p:"he qing he li",m:"符合情理。"},
+  {w:"理所当然",p:"li suo dang ran",m:"从道理上说应当这样。"},
+  {w:"然后知足",p:"ran hou zhi zu",m:"此后便感到满足了。"},
+  {w:"马到成功",p:"ma dao cheng gong",m:"形容事情顺利，一开始就取得成功。"},
+  {w:"功亏一篑",p:"gong kui yi kui",m:"比喻做事只差最后一点力量而没有成功。"},
+  {w:"开门见山",p:"kai men jian shan",m:"比喻说话直截了当。"},
+  {w:"山清水秀",p:"shan qing shui xiu",m:"形容风景优美。"},
+  {w:"秀色可餐",p:"xiu se ke can",m:"形容女子容貌非常美丽。"},
+  {w:"残兵败将",p:"can bing bai jiang",m:"残余的败兵败将。"},
+  {w:"将计就计",p:"jiang ji jiu ji",m:"利用对方计策向对方施计。"},
+  {w:"计日程功",p:"ji ri cheng gong",m:"可以计算日期来确定功效。形容进展很快。"},
+  {w:"功德无量",p:"gong de wu liang",m:"功劳和恩德非常大。"},
+  {w:"量力而行",p:"liang li er xing",m:"按照自己力量的大小去做。"},
+  {w:"行云流水",p:"xing yun liu shui",m:"比喻文章自然流畅。"},
+  {w:"水落石出",p:"shui luo shi chu",m:"比喻事情的真相完全显露出来。"},
+  {w:"出人头地",p:"chu ren tou di",m:"指高人一等，超出一般人。"},
+  {w:"地老天荒",p:"di lao tian huang",m:"形容经过的时间极久。"},
+  {w:"荒无人烟",p:"huang wu ren yan",m:"形容偏僻荒凉，没有人家。"},
+  {w:"烟消云散",p:"yan xiao yun san",m:"比喻事物消失得无影无踪。"},
+  {w:"三顾茅庐",p:"san gu mao lu",m:"比喻诚心诚意地邀请或拜访。"},
+  {w:"庐山真面",p:"lu shan zhen mian",m:"比喻事物的真相。"},
+  {w:"面目全非",p:"mian mu quan fei",m:"面目已经完全不是原来的样子了。"},
+  {w:"非同小可",p:"fei tong xiao ke",m:"不是一般的小事，形容事情重要或情况严重。"},
+  {w:"可歌可泣",p:"ke ge ke qi",m:"值得歌颂赞美，使人感动流泪。"},
+  {w:"泣不成声",p:"qi bu cheng sheng",m:"哭得发不出声音来。"},
+  {w:"声东击西",p:"sheng dong ji xi",m:"造成要攻打东边的声势，实际上却攻打西边。"},
+  {w:"西装革履",p:"xi zhuang ge lv",m:"穿着西装皮鞋，形容衣着时髦。"},
+  {w:"履薄临深",p:"lv bo lin shen",m:"比喻谨慎戒惧。"},
+  {w:"深入浅出",p:"shen ru qian chu",m:"用浅显易懂的话把深刻的道理表达出来。"},
+  {w:"出口成章",p:"chu kou cheng zhang",m:"说出话来就成文章，形容文思敏捷或口才好。"},
+  {w:"章法有度",p:"zhang fa you du",m:"做事有条理、有分寸。"},
+  {w:"度日如年",p:"du ri ru nian",m:"过一天像过一年那样长。形容日子很不好过。"},
+  {w:"年富力强",p:"nian fu li qiang",m:"年纪轻，精力旺盛。"},
+  {w:"大公无私",p:"da gong wu si",m:"完全为人民利益着想，没有私心。"},
+  {w:"私心杂念",p:"si xin za nian",m:"为个人利益打算的种种想法。"},
+  {w:"念念不忘",p:"nian nian bu wang",m:"形容牢记于心，时刻不忘。"},
+  {w:"忘乎所以",p:"wang hu suo yi",m:"由于过度兴奋而忘了应有的举止。"},
+  {w:"以德报怨",p:"yi de bao yuan",m:"不记别人的仇，反而给他好处。"},
+  {w:"怨天尤人",p:"yuan tian you ren",m:"遇到不如意的事只是一味抱怨天、责怪他人。"},
+  {w:"人才济济",p:"ren cai ji ji",m:"形容人才很多。"},
+  {w:"一马当先",p:"yi ma dang xian",m:"形容领先、带头。"},
+  {w:"先发制人",p:"xian fa zhi ren",m:"先下手争取主动来制服对方。"},
+  {w:"人杰地灵",p:"ren jie di ling",m:"人有才能是因为地方好。"},
+  {w:"灵机一动",p:"ling ji yi dong",m:"急忙中转了一下念头。"},
+  {w:"动人心弦",p:"dong ren xin xian",m:"形容使人感动。"},
+  {w:"弦外之音",p:"xian wai zhi yin",m:"比喻言外之意。"},
+  {w:"音容笑貌",p:"yin rong xiao mao",m:"指死者生前的声音容貌和神情。"},
+  {w:"貌合神离",p:"mao he shen li",m:"表面关系密切，实际两条心。"},
+  {w:"离群索居",p:"li qun suo ju",m:"离开同伴而孤独生活。"},
+  {w:"居安思危",p:"ju an si wei",m:"在安定的时候想到可能出现的危险。"},
+  {w:"危言耸听",p:"wei yan song ting",m:"故意说些使人惊恐的话。"},
+  {w:"听天由命",p:"ting tian you ming",m:"听凭自然的安排，由命运来决定。"},
+  {w:"命中注定",p:"ming zhong zhu ding",m:"事情在冥冥中早已决定了。"},
+  {w:"定国安邦",p:"ding guo an bang",m:"治理国家，使之安定。"},
+  {w:"邦国殄灭",p:"bang guo tian mie",m:"国家灭亡。"},
+  {w:"安居乐业",p:"an ju le ye",m:"安定地生活，愉快地工作。"},
+  {w:"一帆风顺",p:"yi fan feng shun",m:"比喻非常顺利，没有任何阻碍。"},
+  {w:"顺水推舟",p:"shun shui tui zhou",m:"比喻顺应趋势办事。"},
+  {w:"舟车劳顿",p:"zhou che lao dun",m:"长途跋涉十分辛劳。"},
+  {w:"对症下药",p:"dui zheng xia yao",m:"针对病因用药，比喻针对问题的关键解决。"},
+  {w:"药到病除",p:"yao dao bing chu",m:"药一服下病就好了。比喻措施恰当。"},
+  {w:"除暴安良",p:"chu bao an liang",m:"铲除强暴，安抚善良的人们。"},
+  {w:"良辰美景",p:"liang chen mei jing",m:"美好的时光和景物。"},
+  {w:"景色宜人",p:"jing se yi ren",m:"形容景色优美。"},
+  {w:"万象更新",p:"wan xiang geng xin",m:"一切事物或景象改换了样子，出现了一番新气象。"},
+  {w:"新仇旧恨",p:"xin chou jiu hen",m:"新的仇怨和旧的仇恨。"},
+  {w:"恨之入骨",p:"hen zhi ru gu",m:"形容痛恨到极点。"},
+  {w:"骨瘦如柴",p:"gu shou ru chai",m:"形容消瘦到极点。"},
+  {w:"柴米油盐",p:"chai mi you yan",m:"泛指一日三餐的生活必需品。"},
+  {w:"盐梅相成",p:"yan mei xiang cheng",m:"比喻相辅相成。"},
+  {w:"画龙点睛",p:"hua long dian jing",m:"比喻在关键处点明实质，使内容更加生动。"},
+  {w:"精益求精",p:"jing yi qiu jing",m:"好了还求更好。"},
+  {w:"花好月圆",p:"hua hao yue yuan",m:"比喻美好圆满。"},
+  {w:"圆满成功",p:"yuan man cheng gong",m:"非常成功完满。"},
+  {w:"异口同声",p:"yi kou tong sheng",m:"不同的嘴说出同样的话，形容大家说的完全一致。"},
+  {w:"声色俱厉",p:"sheng se ju li",m:"说话时声音和脸色都很严厉。"},
+  {w:"厉兵秣马",p:"li bing mo ma",m:"磨好兵器，喂好马，形容做好战斗准备。"},
+  {w:"一鸣惊人",p:"yi ming jing ren",m:"比喻平时没有突出的表现，一下子做出惊人的成绩。"},
+  {w:"百发百中",p:"bai fa bai zhong",m:"形容射箭或射击非常准确。"},
+  {w:"中流砥柱",p:"zhong liu di zhu",m:"比喻坚强的、能起支柱作用的人或集体。"},
+  {w:"柱天踏地",p:"zhu tian ta di",m:"指顶天立地的事物。"},
+  {w:"四面楚歌",p:"si mian chu ge",m:"比喻孤立无援的困境。"},
+  {w:"歌舞升平",p:"ge wu sheng ping",m:"边歌边舞，庆祝太平。"},
+  {w:"平分秋色",p:"ping fen qiu se",m:"比喻双方各得一半，不分上下。"},
+  {w:"色彩缤纷",p:"se cai bin fen",m:"形容色彩复杂或花样繁多。"}
+];
+
+// Build lookup index: lastChar -> [idiom objects]
+var lastCharIndex = {};
+var firstCharIndex = {};
+var idiomMap = {};
+for (var i = 0; i < IDIOMS.length; i++) {
+  var item = IDIOMS[i];
+  idiomMap[item.w] = item;
+  var firstChar = item.w.charAt(0);
+  var lastChar = item.w.charAt(item.w.length - 1);
+  if (!firstCharIndex[firstChar]) firstCharIndex[firstChar] = [];
+  firstCharIndex[firstChar].push(item);
+}
+
+// ===== App State =====
+var chain = []; // [{w, p, m, type:'user'|'system'}]
+var usedIdioms = {};
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('chainBtn').addEventListener('click', userChain);
+  document.getElementById('autoOneBtn').addEventListener('click', autoChainOne);
+  document.getElementById('autoTenBtn').addEventListener('click', autoChainTen);
+  document.getElementById('resetBtn').addEventListener('click', resetChain);
+  document.getElementById('idiomInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') userChain();
+  });
+});
+
+function showMessage(text, type) {
+  var el = document.getElementById('messageArea');
+  el.textContent = text;
+  el.className = 'message-area ' + type;
+  setTimeout(function() { el.className = 'message-area'; }, 4000);
+}
+
+function getLastChar() {
+  if (chain.length === 0) return null;
+  var last = chain[chain.length - 1].w;
+  return last.charAt(last.length - 1);
+}
+
+function findNextIdioms(lastChar) {
+  var candidates = firstCharIndex[lastChar] || [];
+  return candidates.filter(function(item) { return !usedIdioms[item.w]; });
+}
+
+function addToChain(word, pinyin, meaning, type) {
+  chain.push({ w: word, p: pinyin, m: meaning, type: type });
+  usedIdioms[word] = true;
+  updateUI();
+}
+
+function userChain() {
+  var input = document.getElementById('idiomInput').value.trim();
+  if (!input) { showMessage('请输入一个成语', 'error'); return; }
+  if (input.length < 2) { showMessage('请输入一个有效的成语（至少2个字）', 'error'); return; }
+
+  // Check if it follows the chain
+  if (chain.length > 0) {
+    var lastChar = getLastChar();
+    if (input.charAt(0) !== lastChar) {
+      showMessage('接龙失败！成语的第一个字必须是"' + lastChar + '"', 'error');
+      return;
+    }
+  }
+
+  if (usedIdioms[input]) {
+    showMessage('这个成语已经使用过了！', 'error');
+    return;
+  }
+
+  // Look up in dictionary
+  var found = idiomMap[input];
+  var pinyin = found ? found.p : '';
+  var meaning = found ? found.m : '（用户输入成语）';
+
+  addToChain(input, pinyin, meaning, 'user');
+  document.getElementById('idiomInput').value = '';
+  showMessage('接龙成功！', 'success');
+}
+
+function autoChainOne() {
+  if (chain.length === 0) {
+    // Pick a random starting idiom
+    var random = IDIOMS[Math.floor(Math.random() * IDIOMS.length)];
+    addToChain(random.w, random.p, random.m, 'system');
+    showMessage('系统起始成语："' + random.w + '"', 'info');
+    return;
+  }
+
+  var lastChar = getLastChar();
+  var candidates = findNextIdioms(lastChar);
+
+  if (candidates.length === 0) {
+    showMessage('系统找不到以"' + lastChar + '"开头的成语了，接龙结束！', 'error');
+    return;
+  }
+
+  var pick = candidates[Math.floor(Math.random() * candidates.length)];
+  addToChain(pick.w, pick.p, pick.m, 'system');
+  showMessage('系统接龙："' + pick.w + '"', 'info');
+}
+
+function autoChainTen() {
+  var count = 0;
+  for (var i = 0; i < 10; i++) {
+    if (chain.length === 0) {
+      var random = IDIOMS[Math.floor(Math.random() * IDIOMS.length)];
+      addToChain(random.w, random.p, random.m, 'system');
+      count++;
+      continue;
+    }
+    var lastChar = getLastChar();
+    var candidates = findNextIdioms(lastChar);
+    if (candidates.length === 0) {
+      showMessage('系统自动接了' + count + '个后找不到以"' + lastChar + '"开头的成语了！', 'info');
+      return;
+    }
+    var pick = candidates[Math.floor(Math.random() * candidates.length)];
+    addToChain(pick.w, pick.p, pick.m, 'system');
+    count++;
+  }
+  showMessage('系统自动接龙完成，共接了' + count + '个成语！', 'success');
+}
+
+function resetChain() {
+  chain = [];
+  usedIdioms = {};
+  document.getElementById('idiomInput').value = '';
+  updateUI();
+  showMessage('已重新开始！', 'info');
+}
+
+function updateUI() {
+  // Stats
+  var userCnt = 0, sysCnt = 0;
+  for (var i = 0; i < chain.length; i++) {
+    if (chain[i].type === 'user') userCnt++;
+    else sysCnt++;
+  }
+  document.getElementById('chainLength').textContent = chain.length;
+  document.getElementById('userCount').textContent = userCnt;
+  document.getElementById('systemCount').textContent = sysCnt;
+
+  // Chain display
+  var container = document.getElementById('chainContainer');
+  if (chain.length === 0) {
+    container.innerHTML = '<div class="chain-empty">\u8F93\u5165\u4E00\u4E2A\u6210\u8BED\u5F00\u59CB\u63A5\u9F99\u6E38\u620F\u5427\uFF01</div>';
+  } else {
+    var html = '';
+    for (var j = 0; j < chain.length; j++) {
+      if (j > 0) html += '<span class="chain-arrow">\u2192</span>';
+      var cls = chain[j].type === 'user' ? 'user-word' : 'system-word';
+      html += '<div class="chain-item"><span class="chain-word ' + cls + '">' +
+        escHtml(chain[j].w) +
+        '<div class="tooltip"><strong>' + escHtml(chain[j].w) + '</strong>' +
+        (chain[j].p ? '<br><em>' + escHtml(chain[j].p) + '</em>' : '') +
+        '<br>' + escHtml(chain[j].m) +
+        '</div></span></div>';
+    }
+    container.innerHTML = html;
+  }
+
+  // Suggestions
+  var sugArea = document.getElementById('suggestionsArea');
+  var sugList = document.getElementById('suggestionList');
+  if (chain.length > 0) {
+    var lastChar = getLastChar();
+    var candidates = findNextIdioms(lastChar);
+    sugArea.style.display = 'block';
+    if (candidates.length === 0) {
+      sugList.innerHTML = '<div class="no-suggestion">\u6CA1\u6709\u627E\u5230\u4EE5\u201C' + escHtml(lastChar) + '\u201D\u5F00\u5934\u7684\u6210\u8BED</div>';
+    } else {
+      var shown = candidates.slice(0, 12);
+      var shtml = '';
+      for (var k = 0; k < shown.length; k++) {
+        shtml += '<button class="suggestion-btn" data-word="' + escAttr(shown[k].w) + '" data-pinyin="' + escAttr(shown[k].p) + '" data-meaning="' + escAttr(shown[k].m) + '">' + escHtml(shown[k].w) + '</button>';
+      }
+      if (candidates.length > 12) {
+        shtml += '<span class="no-suggestion">\u2026\u8FD8\u6709' + (candidates.length - 12) + '\u4E2A</span>';
+      }
+      sugList.innerHTML = shtml;
+    }
+  } else {
+    sugArea.style.display = 'none';
+  }
+
+  // Event delegation for suggestion buttons
+  sugList.onclick = function(e) {
+    var btn = e.target.closest('.suggestion-btn');
+    if (!btn) return;
+    var w = btn.getAttribute('data-word');
+    var p = btn.getAttribute('data-pinyin');
+    var m = btn.getAttribute('data-meaning');
+    addToChain(w, p, m, 'user');
+    showMessage('\u63A5\u9F99\u6210\u529F\uFF01', 'success');
+  };
+}
+
+function escHtml(s) {
+  var d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function escAttr(s) {
+  return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>

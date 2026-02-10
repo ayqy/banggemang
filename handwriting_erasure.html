@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="去手写,帮小忙,腾讯QQ浏览器,在线工具箱">
+  <meta name="description" content="去手写-帮小忙，腾讯QQ浏览器在线工具箱。智能去除文件中的手写笔迹，还原干净文档。">
+  <title>去手写-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .upload-zone{border:2px dashed #d0d5dd;border-radius:12px;padding:60px 20px;text-align:center;cursor:pointer;transition:all .2s;background:#fafbff;margin-bottom:24px;position:relative}
+    .upload-zone:hover,.upload-zone.dragover{border-color:#136ce9;background:#f0f4ff}
+    .upload-zone svg{width:48px;height:48px;margin:0 auto 16px;display:block;fill:#136ce9}
+    .upload-zone .upload-title{font-size:16px;font-weight:600;color:#242424;margin-bottom:8px}
+    .upload-zone .upload-hint{font-size:13px;color:#8f8f8f}
+    .upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+    .preview-area{display:none;gap:24px;margin-bottom:24px}
+    .preview-area.show{display:flex}
+    .preview-box{flex:1;border:1px solid #e5eafb;border-radius:12px;overflow:hidden;background:#fafbff;min-height:300px;display:flex;flex-direction:column}
+    .preview-box .preview-label{padding:12px 16px;font-size:14px;font-weight:600;color:#242424;background:#f6f7fa;border-bottom:1px solid #e5eafb}
+    .preview-box .preview-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:16px;position:relative}
+    .preview-box img{max-width:100%;max-height:400px;object-fit:contain}
+    .btn-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+    .btn-secondary{height:40px;padding:0 24px;background:#fff;color:#136ce9;border:1px solid #136ce9;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s}
+    .btn-secondary:hover{background:#f0f4ff}
+    .btn-disabled{opacity:.5;pointer-events:none}
+    .slider-group{display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+    .slider-group label{font-size:14px;color:#666;min-width:60px}
+    .slider-group input[type="range"]{flex:1;min-width:150px;accent-color:#136ce9}
+    .slider-group .slider-val{font-size:14px;color:#136ce9;font-weight:600;min-width:40px;text-align:right}
+    .process-status{font-size:14px;color:#136ce9;margin-bottom:16px;display:none}
+    .process-status.show{display:block}
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯QQ浏览器在线工具箱</span></div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png"><span>全部</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=img" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png"><span>图片工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pdf" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png"><span>PDF转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=data" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png"><span>数据换算工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=life" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png"><span>生活娱乐工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=education" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png"><span>教育工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=text" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png"><span>文本工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=doc" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png"><span>文档转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=develop" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png"><span>开发工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=video" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png"><span>视频工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png"><span>浏览器插件</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item"><a class="nav-backtop" href="javascript:void(0)"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png"></a></div>
+    <div class="nav-button-item"><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png"></a><div class="qqgroup-tip">QQ群：459317399</div></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">共建</div></a></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">反馈</div></a></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Content -->
+    <div class="tool-main">
+      <h2>去手写</h2>
+
+      <div class="upload-zone" id="uploadZone">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+        <div class="upload-title">点击或拖拽文件到此处上传</div>
+        <div class="upload-hint">支持 JPG、PNG、PDF 格式，文件大小不超过 10MB</div>
+        <input type="file" id="fileInput" accept="image/jpeg,image/png,application/pdf">
+      </div>
+
+      <div class="slider-group" id="sliderBrightness" style="display:none">
+        <label>亮度调节</label>
+        <input type="range" id="brightness" min="100" max="250" value="150">
+        <span class="slider-val" id="brightnessVal">150%</span>
+      </div>
+      <div class="slider-group" id="sliderContrast" style="display:none">
+        <label>对比度</label>
+        <input type="range" id="contrast" min="100" max="350" value="200">
+        <span class="slider-val" id="contrastVal">200%</span>
+      </div>
+      <div class="slider-group" id="sliderSaturate" style="display:none">
+        <label>饱和度</label>
+        <input type="range" id="saturate" min="0" max="100" value="0">
+        <span class="slider-val" id="saturateVal">0%</span>
+      </div>
+
+      <div class="process-status" id="processStatus">正在处理中，请稍候...</div>
+
+      <div class="btn-row" id="btnRow" style="display:none">
+        <button class="btn-primary" id="btnProcess">处理</button>
+        <button class="btn-secondary" id="btnDownload" disabled>下载结果</button>
+        <button class="btn-secondary" id="btnReset">重新上传</button>
+      </div>
+
+      <div class="preview-area" id="previewArea">
+        <div class="preview-box">
+          <div class="preview-label">原图</div>
+          <div class="preview-img-wrap"><img id="originalImg"></div>
+        </div>
+        <div class="preview-box">
+          <div class="preview-label">处理结果</div>
+          <div class="preview-img-wrap"><img id="resultImg" style="display:none"><canvas id="resultCanvas" style="display:none"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Introduction -->
+    <div class="tool-intro-section">
+      <h3>工具介绍及使用方法</h3>
+      <p>去手写是一款专为处理文件中的手写笔迹而设计的在线工具。它能够智能识别并抹除文件中的手写内容，如笔记、标注和答案，从而还原干净的试卷或文档，方便用户重新练习或使用。使用方法：1. 点击上传区域或拖拽图片文件上传；2. 调节亮度、对比度、饱和度参数（默认参数适用于大多数情况）；3. 点击"处理"按钮开始去除手写内容；4. 处理完成后可点击"下载结果"保存处理后的图片。本工具采用客户端图像处理技术，通过提高亮度和对比度来弱化手写笔迹，同时保留印刷文字，所有处理在本地完成，不会上传您的文件。</p>
+    </div>
+
+    <!-- More Recommendations -->
+    <div class="more-recommend">
+      <h3>更多推荐</h3>
+      <div class="recommend-list">
+        <a class="recommend-item" href="zitie_new.html">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_mfZWm5RYfb5.png" alt="字帖生成">
+          <div><div class="rec-name">字帖生成</div><div class="rec-desc">在线生成个性化练字字帖</div></div>
+        </a>
+        <a class="recommend-item" href="translate.html">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_evABSEpv1y-.png" alt="翻译">
+          <div><div class="rec-name">翻译</div><div class="rec-desc">聚合多引擎一键翻译</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc"><span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span></div>
+          </div>
+          <div class="qrcode"><img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+(function(){
+  var zone = document.getElementById('uploadZone');
+  var fileInput = document.getElementById('fileInput');
+  var previewArea = document.getElementById('previewArea');
+  var originalImg = document.getElementById('originalImg');
+  var resultImg = document.getElementById('resultImg');
+  var resultCanvas = document.getElementById('resultCanvas');
+  var btnRow = document.getElementById('btnRow');
+  var btnProcess = document.getElementById('btnProcess');
+  var btnDownload = document.getElementById('btnDownload');
+  var btnReset = document.getElementById('btnReset');
+  var processStatus = document.getElementById('processStatus');
+  var brightnessSlider = document.getElementById('brightness');
+  var contrastSlider = document.getElementById('contrast');
+  var saturateSlider = document.getElementById('saturate');
+  var brightnessVal = document.getElementById('brightnessVal');
+  var contrastVal = document.getElementById('contrastVal');
+  var saturateVal = document.getElementById('saturateVal');
+  var sliderBrightness = document.getElementById('sliderBrightness');
+  var sliderContrast = document.getElementById('sliderContrast');
+  var sliderSaturate = document.getElementById('sliderSaturate');
+  var currentFile = null;
+
+  zone.addEventListener('dragover', function(e){ e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', function(){ zone.classList.remove('dragover'); });
+  zone.addEventListener('drop', function(e){ e.preventDefault(); zone.classList.remove('dragover'); if(e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]); });
+  fileInput.addEventListener('change', function(){ if(fileInput.files.length) handleFile(fileInput.files[0]); });
+
+  brightnessSlider.addEventListener('input', function(){ brightnessVal.textContent = this.value + '%'; });
+  contrastSlider.addEventListener('input', function(){ contrastVal.textContent = this.value + '%'; });
+  saturateSlider.addEventListener('input', function(){ saturateVal.textContent = this.value + '%'; });
+
+  function handleFile(file){
+    if(!file.type.match(/image\/(jpeg|png)/)){
+      alert('请上传 JPG 或 PNG 格式的图片文件');
+      return;
+    }
+    if(file.size > 10*1024*1024){
+      alert('文件大小不能超过 10MB');
+      return;
+    }
+    currentFile = file;
+    var reader = new FileReader();
+    reader.onload = function(e){
+      originalImg.src = e.target.result;
+      zone.style.display = 'none';
+      previewArea.classList.add('show');
+      btnRow.style.display = 'flex';
+      sliderBrightness.style.display = 'flex';
+      sliderContrast.style.display = 'flex';
+      sliderSaturate.style.display = 'flex';
+      resultImg.style.display = 'none';
+      btnDownload.disabled = true;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  btnProcess.addEventListener('click', function(){
+    if(!currentFile) return;
+    processStatus.classList.add('show');
+    btnProcess.disabled = true;
+    setTimeout(function(){
+      var canvas = resultCanvas;
+      var ctx = canvas.getContext('2d');
+      var img = new Image();
+      img.onload = function(){
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var b = parseInt(brightnessSlider.value);
+        var c = parseInt(contrastSlider.value);
+        var s = parseInt(saturateSlider.value);
+        ctx.filter = 'brightness('+b+'%) contrast('+c+'%) saturate('+s+'%)';
+        ctx.drawImage(img, 0, 0);
+        resultImg.src = canvas.toDataURL('image/png');
+        resultImg.style.display = 'block';
+        processStatus.classList.remove('show');
+        btnProcess.disabled = false;
+        btnDownload.disabled = false;
+      };
+      img.src = originalImg.src;
+    }, 800);
+  });
+
+  btnDownload.addEventListener('click', function(){
+    if(!resultImg.src) return;
+    var a = document.createElement('a');
+    a.href = resultImg.src;
+    a.download = 'handwriting_removed_' + Date.now() + '.png';
+    a.click();
+  });
+
+  btnReset.addEventListener('click', function(){
+    currentFile = null;
+    originalImg.src = '';
+    resultImg.src = '';
+    resultImg.style.display = 'none';
+    previewArea.classList.remove('show');
+    btnRow.style.display = 'none';
+    sliderBrightness.style.display = 'none';
+    sliderContrast.style.display = 'none';
+    sliderSaturate.style.display = 'none';
+    zone.style.display = '';
+    fileInput.value = '';
+    btnDownload.disabled = true;
+    brightnessSlider.value = 150;
+    contrastSlider.value = 200;
+    saturateSlider.value = 0;
+    brightnessVal.textContent = '150%';
+    contrastVal.textContent = '200%';
+    saturateVal.textContent = '0%';
+  });
+})();
+</script>
+</body>
+</html>

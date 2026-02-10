@@ -1,0 +1,295 @@
+[      12ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[      19ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[     321ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[     325ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[     339ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.03557120329469443&error_msg=Failed%20to%20fetch&error_code=600:0
+[     340ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[     373ms] undefined
+[     367ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[     422ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[     421ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[     436ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.8249361110932739&error_msg=Failed%20to%20fetch&error_code=600:0
+[    1472ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   10216ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[   13344ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  439233ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  441789ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  441790ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  441790ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  441790ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  441794ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  441797ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.8226465144759337&error_msg=Failed%20to%20fetch&error_code=600:0
+[  441798ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  442109ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  442109ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  442117ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.815342859297581&error_msg=Failed%20to%20fetch&error_code=600:0
+[  442122ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  442123ms] undefined
+[  442159ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  442192ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  442194ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  442205ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.26851707960361726&error_msg=Failed%20to%20fetch&error_code=600:0
+[  443276ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  448430ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  448430ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  448430ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  448430ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  448433ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  448436ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.3277395187787021&error_msg=Failed%20to%20fetch&error_code=600:0
+[  448436ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  448570ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  448575ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.5378117681040223&error_msg=Failed%20to%20fetch&error_code=600:0
+[  448629ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  448683ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  448692ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.2930656056609654&error_msg=Failed%20to%20fetch&error_code=600:0
+[  449693ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  450058ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  450061ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  450060ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  450060ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  450062ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  450066ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.6477311019663551&error_msg=Failed%20to%20fetch&error_code=600:0
+[  450067ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  450183ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  450188ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  450195ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  450197ms] undefined
+[  450197ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.645599861176372&error_msg=Failed%20to%20fetch&error_code=600:0
+[  450257ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  450314ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  450319ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  450327ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.5474832258521989&error_msg=Failed%20to%20fetch&error_code=600:0
+[  451339ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  451540ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  451541ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  451544ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  451544ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  451545ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  451548ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.7123132776105179&error_msg=Failed%20to%20fetch&error_code=600:0
+[  451549ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  451706ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  451778ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.547606096760132&error_msg=Failed%20to%20fetch&error_code=600:0
+[  451781ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  451848ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  451855ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.20663515927396514&error_msg=Failed%20to%20fetch&error_code=600:0
+[  451914ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  452607ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  452614ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  452615ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  452615ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  452617ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  452618ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.6295880239293461&error_msg=Failed%20to%20fetch&error_code=600:0
+[  452619ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  452715ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  452723ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.16520835118405874&error_msg=Failed%20to%20fetch&error_code=600:0
+[  452766ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  452809ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  452818ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.06816048650245232&error_msg=Failed%20to%20fetch&error_code=600:0
+[  453816ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  453937ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  453939ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  453940ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  453940ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  453943ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  453944ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.48975092441600776&error_msg=Failed%20to%20fetch&error_code=600:0
+[  453945ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  454141ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  454157ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  454164ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  454324ms] undefined
+[  454166ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.2357665648382249&error_msg=Failed%20to%20fetch&error_code=600:0
+[  454197ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  454330ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  454247ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  454257ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.7031465872492632&error_msg=Failed%20to%20fetch&error_code=600:0
+[  455313ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  456917ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  457828ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  457839ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  457838ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  457838ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  457839ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  457847ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.4809253626237183&error_msg=Failed%20to%20fetch&error_code=600:0
+[  457847ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  458007ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  458011ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  458024ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  458024ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.2520352850066301&error_msg=Failed%20to%20fetch&error_code=600:0
+[  458062ms] undefined
+[  458032ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  458110ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  458117ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  458124ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.8190379626377629&error_msg=Failed%20to%20fetch&error_code=600:0
+[  459152ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  461922ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  462838ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  462838ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  462840ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  462841ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  462844ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  462847ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.7278980404771204&error_msg=Failed%20to%20fetch&error_code=600:0
+[  462851ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  462970ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  462976ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  462987ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  462992ms] undefined
+[  462992ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.19846620173871543&error_msg=Failed%20to%20fetch&error_code=600:0
+[  463018ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  463066ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  463069ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  463070ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  463079ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.3867197917207388&error_msg=Failed%20to%20fetch&error_code=600:0
+[  463081ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.19127388375181031&error_msg=Failed%20to%20fetch&error_code=600:0
+[  464105ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  465778ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  465779ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  465781ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  465780ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  465782ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  465787ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.8406574534497371&error_msg=Failed%20to%20fetch&error_code=600:0
+[  465787ms] Uncaught (in promise) TypeError: Failed to fetch
+    at ur.find.window.fetch.window.fetch (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:93145)
+    at s (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100367)
+    at l (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:100556)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:143344)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:139913)
+    at <anonymous> (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:140018)
+    at a (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:2:138757)
+[  465894ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  465900ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.9206319178247554&error_msg=Failed%20to%20fetch&error_code=600:0
+[  465952ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  465980ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  465986ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.6041900154665397&error_msg=Failed%20to%20fetch&error_code=600:0

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="元素周期表,帮小忙,腾讯QQ浏览器,在线工具箱,化学元素">
+  <meta name="description" content="元素周期表-帮小忙，腾讯QQ浏览器在线工具箱。包含全部118个化学元素的详细信息。">
+  <title>元素周期表-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .pt-wrap{overflow-x:auto;padding-bottom:16px}
+    .pt-table{border-collapse:separate;border-spacing:2px;width:100%;min-width:1080px;table-layout:fixed}
+    .pt-table td{width:calc(100%/18);padding:0;vertical-align:top}
+    .pt-cell{border-radius:6px;padding:3px 2px;cursor:pointer;transition:all .15s;text-align:center;position:relative;border:1.5px solid transparent;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .pt-cell:hover{transform:scale(1.15);z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.18);border-color:#333}
+    .pt-cell .el-num{font-size:9px;color:rgba(0,0,0,.55);line-height:1;margin-bottom:1px}
+    .pt-cell .el-sym{font-size:16px;font-weight:700;line-height:1.2;color:#222}
+    .pt-cell .el-name{font-size:8px;color:rgba(0,0,0,.6);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+    .pt-cell .el-mass{font-size:7px;color:rgba(0,0,0,.4);line-height:1;margin-top:1px}
+    .pt-empty{background:transparent}
+    .pt-spacer td{height:8px}
+    .pt-label{font-size:10px;color:#666;font-weight:600;text-align:center;padding:4px 0}
+    /* Category colors */
+    .cat-alkali{background:#ffcccc}.cat-alkaline{background:#ffdead}.cat-transition{background:#ffc0c0}
+    .cat-post-transition{background:#cccccc}.cat-metalloid{background:#cccc99}.cat-nonmetal{background:#a0ffa0}
+    .cat-halogen{background:#ffff99}.cat-noble{background:#c0ffff}.cat-lanthanide{background:#ffbfff}
+    .cat-actinide{background:#ff99cc}.cat-unknown{background:#e8e8e8}
+    /* Legend */
+    .pt-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+    .pt-legend-item{display:flex;align-items:center;gap:4px;font-size:12px;color:#666}
+    .pt-legend-color{width:14px;height:14px;border-radius:3px}
+    /* Detail Modal */
+    .el-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9999;align-items:center;justify-content:center}
+    .el-modal-overlay.show{display:flex}
+    .el-modal{background:#fff;border-radius:16px;padding:32px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative}
+    .el-modal-close{position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#999;background:none;border:none;line-height:1}
+    .el-modal-close:hover{color:#333}
+    .el-modal .el-detail-sym{font-size:64px;font-weight:700;text-align:center;line-height:1}
+    .el-modal .el-detail-name{font-size:20px;font-weight:600;text-align:center;margin:4px 0 16px;color:#242424}
+    .el-modal .el-detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:14px}
+    .el-modal .el-detail-row .label{color:#8f8f8f}.el-modal .el-detail-row .value{color:#242424;font-weight:500}
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯QQ浏览器在线工具箱</span></div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png"><span>全部</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=img" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png"><span>图片工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pdf" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png"><span>PDF转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=data" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png"><span>数据换算工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=life" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png"><span>生活娱乐工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=education" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png"><span>教育工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=text" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png"><span>文本工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=doc" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png"><span>文档转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=develop" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png"><span>开发工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=video" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png"><span>视频工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png"><span>浏览器插件</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item"><a class="nav-backtop" href="javascript:void(0)"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png"></a></div>
+    <div class="nav-button-item"><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png"></a><div class="qqgroup-tip">QQ群：459317399</div></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">共建</div></a></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">反馈</div></a></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Content -->
+    <div class="tool-main">
+      <h2>元素周期表</h2>
+
+      <div class="pt-legend" id="ptLegend"></div>
+      <div class="pt-wrap">
+        <table class="pt-table" id="ptTable"></table>
+      </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="el-modal-overlay" id="elModal">
+      <div class="el-modal">
+        <button class="el-modal-close" id="elModalClose">&times;</button>
+        <div class="el-detail-sym" id="detailSym"></div>
+        <div class="el-detail-name" id="detailName"></div>
+        <div id="detailRows"></div>
+      </div>
+    </div>
+
+    <!-- Tool Introduction -->
+    <div class="tool-intro-section">
+      <h3>工具介绍及使用方法</h3>
+      <p>元素周期表工具可以帮助您快速查阅和了解化学元素的详细信息。周期表按照标准排列方式展示全部118个化学元素，并以不同颜色区分元素类别（碱金属、碱土金属、过渡金属、后过渡金属、类金属、非金属、卤素、稀有气体、镧系元素、锕系元素）。点击任意元素可查看该元素的详细信息，包括原子序数、元素符号、中文名称、拼音、原子量、所属周期和族等。适用于化学学习、教学和科学研究等场景。</p>
+    </div>
+
+    <!-- More Recommendations -->
+    <div class="more-recommend">
+      <h3>更多推荐</h3>
+      <div class="recommend-list">
+        <a class="recommend-item" href="relatives_name.html">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_5QJiaZbeCPA.png" alt="亲戚关系计算">
+          <div><div class="rec-name">亲戚关系计算</div><div class="rec-desc">快速计算复杂亲戚关系称呼</div></div>
+        </a>
+        <a class="recommend-item" href="translate.html">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_evABSEpv1y-.png" alt="翻译">
+          <div><div class="rec-name">翻译</div><div class="rec-desc">聚合多引擎一键翻译</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc"><span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span></div>
+          </div>
+          <div class="qrcode"><img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+(function(){
+/* All 118 elements: [atomicNum, symbol, chineseName, pinyin, atomicMass, category, period, group] */
+/* Categories: 1=alkali,2=alkaline,3=transition,4=post-transition,5=metalloid,6=nonmetal,7=halogen,8=noble,9=lanthanide,10=actinide,11=unknown */
+var E=[
+[1,"H","氢","qīng","1.008",6,1,1],[2,"He","氦","hài","4.003",8,1,18],
+[3,"Li","锂","lǐ","6.941",1,2,1],[4,"Be","铍","pí","9.012",2,2,2],[5,"B","硼","péng","10.81",5,2,13],[6,"C","碳","tàn","12.01",6,2,14],[7,"N","氮","dàn","14.01",6,2,15],[8,"O","氧","yǎng","16.00",6,2,16],[9,"F","氟","fú","19.00",7,2,17],[10,"Ne","氖","nǎi","20.18",8,2,18],
+[11,"Na","钠","nà","22.99",1,3,1],[12,"Mg","镁","měi","24.31",2,3,2],[13,"Al","铝","lǚ","26.98",4,3,13],[14,"Si","硅","guī","28.09",5,3,14],[15,"P","磷","lín","30.97",6,3,15],[16,"S","硫","liú","32.07",6,3,16],[17,"Cl","氯","lǜ","35.45",7,3,17],[18,"Ar","氩","yà","39.95",8,3,18],
+[19,"K","钾","jiǎ","39.10",1,4,1],[20,"Ca","钙","gài","40.08",2,4,2],[21,"Sc","钪","kàng","44.96",3,4,3],[22,"Ti","钛","tài","47.87",3,4,4],[23,"V","钒","fán","50.94",3,4,5],[24,"Cr","铬","gè","52.00",3,4,6],[25,"Mn","锰","měng","54.94",3,4,7],[26,"Fe","铁","tiě","55.85",3,4,8],[27,"Co","钴","gǔ","58.93",3,4,9],[28,"Ni","镍","niè","58.69",3,4,10],[29,"Cu","铜","tóng","63.55",3,4,11],[30,"Zn","锌","xīn","65.38",3,4,12],[31,"Ga","镓","jiā","69.72",4,4,13],[32,"Ge","锗","zhě","73.63",5,4,14],[33,"As","砷","shēn","74.92",5,4,15],[34,"Se","硒","xī","78.97",6,4,16],[35,"Br","溴","xiù","79.90",7,4,17],[36,"Kr","氪","kè","83.80",8,4,18],
+[37,"Rb","铷","rú","85.47",1,5,1],[38,"Sr","锶","sī","87.62",2,5,2],[39,"Y","钇","yǐ","88.91",3,5,3],[40,"Zr","锆","gào","91.22",3,5,4],[41,"Nb","铌","ní","92.91",3,5,5],[42,"Mo","钼","mù","95.95",3,5,6],[43,"Tc","锝","dé","[98]",3,5,7],[44,"Ru","钌","liǎo","101.1",3,5,8],[45,"Rh","铑","lǎo","102.9",3,5,9],[46,"Pd","钯","bǎ","106.4",3,5,10],[47,"Ag","银","yín","107.9",3,5,11],[48,"Cd","镉","gé","112.4",3,5,12],[49,"In","铟","yīn","114.8",4,5,13],[50,"Sn","锡","xī","118.7",4,5,14],[51,"Sb","锑","tī","121.8",5,5,15],[52,"Te","碲","dì","127.6",5,5,16],[53,"I","碘","diǎn","126.9",7,5,17],[54,"Xe","氙","xiān","131.3",8,5,18],
+[55,"Cs","铯","sè","132.9",1,6,1],[56,"Ba","钡","bèi","137.3",2,6,2],
+[57,"La","镧","lán","138.9",9,6,0],[58,"Ce","铈","shì","140.1",9,6,0],[59,"Pr","镨","pǔ","140.9",9,6,0],[60,"Nd","钕","nǚ","144.2",9,6,0],[61,"Pm","钷","pǒ","[145]",9,6,0],[62,"Sm","钐","shān","150.4",9,6,0],[63,"Eu","铕","yǒu","152.0",9,6,0],[64,"Gd","钆","gá","157.3",9,6,0],[65,"Tb","铽","tè","158.9",9,6,0],[66,"Dy","镝","dī","162.5",9,6,0],[67,"Ho","钬","huǒ","164.9",9,6,0],[68,"Er","铒","ěr","167.3",9,6,0],[69,"Tm","铥","diū","168.9",9,6,0],[70,"Yb","镱","yì","173.0",9,6,0],[71,"Lu","镥","lǔ","175.0",9,6,0],
+[72,"Hf","铪","hā","178.5",3,6,4],[73,"Ta","钽","tǎn","180.9",3,6,5],[74,"W","钨","wū","183.8",3,6,6],[75,"Re","铼","lái","186.2",3,6,7],[76,"Os","锇","é","190.2",3,6,8],[77,"Ir","铱","yī","192.2",3,6,9],[78,"Pt","铂","bó","195.1",3,6,10],[79,"Au","金","jīn","197.0",3,6,11],[80,"Hg","汞","gǒng","200.6",3,6,12],[81,"Tl","铊","tā","204.4",4,6,13],[82,"Pb","铅","qiān","207.2",4,6,14],[83,"Bi","铋","bì","209.0",4,6,15],[84,"Po","钋","pō","[209]",5,6,16],[85,"At","砹","ài","[210]",7,6,17],[86,"Rn","氡","dōng","[222]",8,6,18],
+[87,"Fr","钫","fāng","[223]",1,7,1],[88,"Ra","镭","léi","[226]",2,7,2],
+[89,"Ac","锕","ā","[227]",10,7,0],[90,"Th","钍","tǔ","232.0",10,7,0],[91,"Pa","镤","pú","231.0",10,7,0],[92,"U","铀","yóu","238.0",10,7,0],[93,"Np","镎","ná","[237]",10,7,0],[94,"Pu","钚","bù","[244]",10,7,0],[95,"Am","镅","méi","[243]",10,7,0],[96,"Cm","锔","jú","[247]",10,7,0],[97,"Bk","锫","péi","[247]",10,7,0],[98,"Cf","锎","kāi","[251]",10,7,0],[99,"Es","锿","āi","[252]",10,7,0],[100,"Fm","镄","fèi","[257]",10,7,0],[101,"Md","钔","mén","[258]",10,7,0],[102,"No","锘","nuò","[259]",10,7,0],[103,"Lr","铹","láo","[266]",10,7,0],
+[104,"Rf","𬬻","lú","[267]",3,7,4],[105,"Db","𬭊","dù","[268]",3,7,5],[106,"Sg","𬭳","xǐ","[269]",3,7,6],[107,"Bh","𬭛","bō","[270]",3,7,7],[108,"Hs","𬭶","hēi","[277]",3,7,8],[109,"Mt","鿏","mài","[278]",11,7,9],[110,"Ds","鿔","dá","[281]",11,7,10],[111,"Rg","𬬭","lún","[282]",11,7,11],[112,"Cn","鿔","gē","[285]",3,7,12],[113,"Nh","鿭","nǐ","[286]",11,7,13],[114,"Fl","𫓧","fū","[289]",4,7,14],[115,"Mc","镆","mò","[290]",11,7,15],[116,"Lv","𫟷","lì","[293]",11,7,16],[117,"Ts","鿬","tián","[294]",7,7,17],[118,"Og","鿫","ào","[294]",8,7,18]
+];
+
+var catNames={1:"碱金属",2:"碱土金属",3:"过渡金属",4:"后过渡金属",5:"类金属",6:"非金属",7:"卤素",8:"稀有气体",9:"镧系元素",10:"锕系元素",11:"未确定"};
+var catClasses={1:"cat-alkali",2:"cat-alkaline",3:"cat-transition",4:"cat-post-transition",5:"cat-metalloid",6:"cat-nonmetal",7:"cat-halogen",8:"cat-noble",9:"cat-lanthanide",10:"cat-actinide",11:"cat-unknown"};
+
+// Build element map by position
+var elMap={};
+E.forEach(function(el){ elMap[el[0]]=el; });
+
+// Standard periodic table layout: grid[period][group] = atomic number
+// Period 1-7 (rows 0-6), Group 1-18 (cols 0-17)
+var grid=[[],[],[],[],[],[],[],[]]; // 7 periods
+// Period 1
+grid[0]=[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2];
+// Period 2
+grid[1]=[3,4,0,0,0,0,0,0,0,0,0,0,5,6,7,8,9,10];
+// Period 3
+grid[2]=[11,12,0,0,0,0,0,0,0,0,0,0,13,14,15,16,17,18];
+// Period 4
+grid[3]=[19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36];
+// Period 5
+grid[4]=[37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
+// Period 6
+grid[5]=[55,56,-1,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86]; // -1=lanthanide placeholder
+// Period 7
+grid[6]=[87,88,-2,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118]; // -2=actinide placeholder
+
+// Lanthanides (57-71) and Actinides (89-103)
+var lanthanides=[57,58,59,60,61,62,63,64,65,66,67,68,69,70,71];
+var actinides=[89,90,91,92,93,94,95,96,97,98,99,100,101,102,103];
+
+function makeCell(num){
+  if(!num||num===0) return '<td><div class="pt-empty"></div></td>';
+  if(num===-1) return '<td><div class="pt-cell cat-lanthanide" style="font-size:10px;font-weight:600;cursor:default">镧系<br>57-71</div></td>';
+  if(num===-2) return '<td><div class="pt-cell cat-actinide" style="font-size:10px;font-weight:600;cursor:default">锕系<br>89-103</div></td>';
+  var el=elMap[num];
+  if(!el) return '<td><div class="pt-empty"></div></td>';
+  var cls=catClasses[el[5]]||'cat-unknown';
+  return '<td><div class="pt-cell '+cls+'" data-z="'+el[0]+'" onclick="showDetail('+el[0]+')">'
+    +'<span class="el-num">'+el[0]+'</span>'
+    +'<span class="el-sym">'+el[1]+'</span>'
+    +'<span class="el-name">'+el[2]+' '+el[3]+'</span>'
+    +'<span class="el-mass">'+el[4]+'</span>'
+    +'</div></td>';
+}
+
+function buildTable(){
+  var html='';
+  // Main 7 rows
+  for(var p=0;p<7;p++){
+    html+='<tr>';
+    for(var g=0;g<18;g++){
+      html+=makeCell(grid[p][g]);
+    }
+    html+='</tr>';
+  }
+  // Spacer
+  html+='<tr class="pt-spacer"><td colspan="18"></td></tr>';
+  // Lanthanides row
+  html+='<tr>';
+  html+='<td></td><td></td><td><div class="pt-label">镧系</div></td>';
+  for(var i=0;i<15;i++) html+=makeCell(lanthanides[i]);
+  html+='</tr>';
+  // Actinides row
+  html+='<tr>';
+  html+='<td></td><td></td><td><div class="pt-label">锕系</div></td>';
+  for(var i=0;i<15;i++) html+=makeCell(actinides[i]);
+  html+='</tr>';
+  document.getElementById('ptTable').innerHTML=html;
+}
+
+// Legend
+function buildLegend(){
+  var html='';
+  for(var k in catNames){
+    html+='<div class="pt-legend-item"><div class="pt-legend-color '+catClasses[k]+'"></div>'+catNames[k]+'</div>';
+  }
+  document.getElementById('ptLegend').innerHTML=html;
+}
+
+// Detail modal
+window.showDetail=function(z){
+  var el=elMap[z];
+  if(!el)return;
+  var cls=catClasses[el[5]]||'';
+  document.getElementById('detailSym').textContent=el[1];
+  document.getElementById('detailSym').className='el-detail-sym';
+  document.getElementById('detailName').textContent=el[2]+' ('+el[3]+')';
+  var rows=[
+    ['原子序数',el[0]],
+    ['元素符号',el[1]],
+    ['中文名称',el[2]],
+    ['拼音',el[3]],
+    ['原子量',el[4]],
+    ['所属分类',catNames[el[5]]||'未知'],
+    ['所在周期','第'+el[6]+'周期'],
+    ['所在族',el[7]?'第'+el[7]+'族':(el[5]===9?'镧系':'锕系')]
+  ];
+  var rhtml='';
+  rows.forEach(function(r){
+    rhtml+='<div class="el-detail-row"><span class="label">'+r[0]+'</span><span class="value">'+r[1]+'</span></div>';
+  });
+  document.getElementById('detailRows').innerHTML=rhtml;
+  document.getElementById('elModal').classList.add('show');
+};
+
+document.getElementById('elModalClose').addEventListener('click',function(){
+  document.getElementById('elModal').classList.remove('show');
+});
+document.getElementById('elModal').addEventListener('click',function(e){
+  if(e.target===this) this.classList.remove('show');
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') document.getElementById('elModal').classList.remove('show');
+});
+
+buildLegend();
+buildTable();
+})();
+</script>
+</body>
+</html>

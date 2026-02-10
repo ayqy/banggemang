@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="字数计算,帮小忙,腾讯QQ浏览器,在线工具箱,教育工具">
+  <meta name="description" content="字数计算工具，快速统计文本字数、字符数、单词数和句子数。帮小忙，腾讯QQ浏览器在线工具箱。">
+  <title>字数计算-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .wc-textarea {
+      width: 100%;
+      min-height: 220px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 15px;
+      line-height: 1.8;
+      outline: none;
+      resize: vertical;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      color: #242424;
+    }
+    .wc-textarea:focus {
+      border-color: #136ce9;
+      box-shadow: 0 0 0 3px rgba(19,108,233,0.08);
+    }
+    .wc-textarea::placeholder {
+      color: #b3b3b3;
+    }
+    .wc-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 20px;
+      background: #f6f7fa;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .wc-stat-card {
+      flex: 1;
+      text-align: center;
+      padding: 20px 16px;
+      position: relative;
+    }
+    .wc-stat-card:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: #e0e0e0;
+    }
+    .wc-stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #136ce9;
+      line-height: 1.2;
+    }
+    .wc-stat-label {
+      font-size: 13px;
+      color: #8f8f8f;
+      margin-top: 6px;
+    }
+    .wc-clear-btn {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 16px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .wc-clear-btn:hover {
+      border-color: #136ce9;
+      color: #136ce9;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯QQ浏览器在线工具箱</span>
+      </div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png">
+            <span>全部</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=img" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png">
+            <span>图片工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=pdf" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png">
+            <span>PDF转换工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=data" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png">
+            <span>数据换算工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=life" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png">
+            <span>生活娱乐工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=education" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png">
+            <span>教育工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=text" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png">
+            <span>文本工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=doc" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png">
+            <span>文档转换工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=develop" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png">
+            <span>开发工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=video" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png">
+            <span>视频工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png">
+            <span>浏览器插件</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item">
+      <a class="nav-backtop" href="javascript:void(0)">
+        <img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png">
+      </a>
+    </div>
+    <div class="nav-button-item">
+      <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank">
+        <img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png">
+      </a>
+      <div class="qqgroup-tip">QQ群：459317399</div>
+    </div>
+    <div class="nav-button-item">
+      <a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank">
+        <div class="nav-button-text">共建</div>
+      </a>
+    </div>
+    <div class="nav-button-item">
+      <a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank">
+        <div class="nav-button-text">反馈</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Search Bar -->
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Area -->
+    <div class="tool-page-container">
+      <div class="tool-page-title">字数计算</div>
+      <div class="tool-main">
+        <h2>输入或粘贴文本</h2>
+        <textarea class="wc-textarea" id="wcInput" placeholder="请在此输入或粘贴需要统计的文本内容..."></textarea>
+        <button class="wc-clear-btn" id="wcClear">清空内容</button>
+        <div class="wc-stats">
+          <div class="wc-stat-card">
+            <div class="wc-stat-value" id="statChars">0</div>
+            <div class="wc-stat-label">字数（不含空格）</div>
+          </div>
+          <div class="wc-stat-card">
+            <div class="wc-stat-value" id="statTotal">0</div>
+            <div class="wc-stat-label">字符数</div>
+          </div>
+          <div class="wc-stat-card">
+            <div class="wc-stat-value" id="statWords">0</div>
+            <div class="wc-stat-label">单词数</div>
+          </div>
+          <div class="wc-stat-card">
+            <div class="wc-stat-value" id="statSentences">0</div>
+            <div class="wc-stat-label">句子数</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tool Introduction -->
+      <div class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <p>字数计算工具专为快速计算文本中的字数、字符数、单词数和句子数而设计。无论您是需要统计文章的字数、检查字符限制，还是进行文本分析，这款工具都能帮助您高效完成任务。</p>
+        <p style="margin-top:10px"><strong>使用方法：</strong>在上方文本框中输入或粘贴文本内容，工具会实时自动统计以下数据：</p>
+        <p style="margin-top:6px">1. <strong>字数（不含空格）</strong>：统计所有非空白字符的数量，包括汉字、英文字母、数字和标点符号。</p>
+        <p>2. <strong>字符数</strong>：统计文本中所有字符的总数，包括空格、换行符等。</p>
+        <p>3. <strong>单词数</strong>：统计英文单词和中文字符的数量。连续的英文字母视为一个单词，每个中文字符视为一个独立单词。</p>
+        <p>4. <strong>句子数</strong>：根据中英文句号、问号、感叹号等标点符号统计句子数量。</p>
+      </div>
+
+      <!-- More Recommendations -->
+      <div class="more-recommend">
+        <h3>更多推荐</h3>
+        <div class="recommend-list">
+          <a class="recommend-item" href="dynasties.html" target="_blank">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_M4UejcjNNLA.png" alt="历史朝代查询">
+            <div>
+              <div class="rec-name">历史朝代查询</div>
+              <div class="rec-desc">快速查询各个历史朝代的相关信息</div>
+            </div>
+          </a>
+          <a class="recommend-item" href="capital.html" target="_blank">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_jdB6qNUoFvz.png" alt="各国首都">
+            <div>
+              <div class="rec-name">各国首都</div>
+              <div class="rec-desc">查询世界各国首都信息</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc">
+              <span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span>
+            </div>
+          </div>
+          <div class="qrcode">
+            <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+(function() {
+  var input = document.getElementById('wcInput');
+  var statChars = document.getElementById('statChars');
+  var statTotal = document.getElementById('statTotal');
+  var statWords = document.getElementById('statWords');
+  var statSentences = document.getElementById('statSentences');
+  var clearBtn = document.getElementById('wcClear');
+
+  function countStats() {
+    var text = input.value;
+
+    // Total characters (including spaces, newlines)
+    var totalChars = text.length;
+
+    // Characters without spaces/whitespace
+    var noSpaceChars = text.replace(/\s/g, '').length;
+
+    // Word count: each CJK char = 1 word, consecutive English letters = 1 word
+    var words = 0;
+    if (text.trim().length > 0) {
+      // Count CJK characters
+      var cjkMatches = text.match(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g);
+      var cjkCount = cjkMatches ? cjkMatches.length : 0;
+
+      // Remove CJK characters and count English words
+      var noCjk = text.replace(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g, ' ');
+      var engMatches = noCjk.match(/[a-zA-Z0-9]+/g);
+      var engCount = engMatches ? engMatches.length : 0;
+
+      words = cjkCount + engCount;
+    }
+
+    // Sentence count: split by sentence-ending punctuation
+    var sentences = 0;
+    if (text.trim().length > 0) {
+      var sentenceMatches = text.match(/[.!?\u3002\uff01\uff1f\u2026]+/g);
+      sentences = sentenceMatches ? sentenceMatches.length : 0;
+      // If text doesn't end with punctuation but has content, count as at least 1 sentence
+      if (sentences === 0 && text.trim().length > 0) {
+        sentences = 1;
+      }
+    }
+
+    statChars.textContent = noSpaceChars;
+    statTotal.textContent = totalChars;
+    statWords.textContent = words;
+    statSentences.textContent = sentences;
+  }
+
+  input.addEventListener('input', countStats);
+  input.addEventListener('paste', function() {
+    setTimeout(countStats, 0);
+  });
+
+  clearBtn.addEventListener('click', function() {
+    input.value = '';
+    countStats();
+    input.focus();
+  });
+
+  countStats();
+})();
+</script>
+</body>
+</html>

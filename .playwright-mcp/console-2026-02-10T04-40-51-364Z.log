@@ -1,0 +1,270 @@
+[      21ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[      23ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[     364ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[     370ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://oth.str.beacon.qq.com/trpc.beacon.configserver.BeaconConfigService/QueryConfig:0
+[     370ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[     379ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[     416ms] undefined
+[     382ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.1017447887805375&error_msg=Failed%20to%20fetch&error_code=600:0
+[     408ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[     429ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[     434ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[     445ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.3027927294048943&error_msg=Failed%20to%20fetch&error_code=600:0
+[    1485ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   10223ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[   13520ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   14717ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   14720ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   14886ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   14889ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[   14898ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.11596010274548396&error_msg=Failed%20to%20fetch&error_code=600:0
+[   14901ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[   14952ms] undefined
+[   14917ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[   14957ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[   14951ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   14956ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.2800045887789352&error_msg=Failed%20to%20fetch&error_code=600:0
+[   15997ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   24782ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[   27845ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   40427ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   40430ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   40557ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[   40562ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   40569ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[   40598ms] undefined
+[   40570ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.7353444967646298&error_msg=Failed%20to%20fetch&error_code=600:0
+[   40602ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[   40641ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[   40645ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   40652ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.06605402491989432&error_msg=Failed%20to%20fetch&error_code=600:0
+[   41693ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   50481ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[   53045ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   53046ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   53186ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   53187ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[   53203ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[   53250ms] undefined
+[   53207ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.5346806139426673&error_msg=Failed%20to%20fetch&error_code=600:0
+[   53242ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[   53283ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[   53284ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   53285ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   53304ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.7972574886749736&error_msg=Failed%20to%20fetch&error_code=600:0
+[   53304ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.9016372634877322&error_msg=Failed%20to%20fetch&error_code=600:0
+[   54339ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   63139ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[   65717ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   65720ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   65876ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   65883ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.3594304305623016&error_msg=Failed%20to%20fetch&error_code=600:0
+[   65925ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[   65969ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   65978ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.8934618005798378&error_msg=Failed%20to%20fetch&error_code=600:0
+[   67011ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   75783ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[   78324ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   78324ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   78483ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   78497ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.17286134962436162&error_msg=Failed%20to%20fetch&error_code=600:0
+[   78541ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[   78565ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   78575ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.3345417393897776&error_msg=Failed%20to%20fetch&error_code=600:0
+[   79578ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   88383ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[   90923ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   90923ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[   91037ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   91046ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.2705525590227924&error_msg=Failed%20to%20fetch&error_code=600:0
+[   91103ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[   91111ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[   91121ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.686101105700254&error_msg=Failed%20to%20fetch&error_code=600:0
+[   92119ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  100972ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  103514ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  103515ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  103617ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  103625ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.19736212504219552&error_msg=Failed%20to%20fetch&error_code=600:0
+[  103669ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  103690ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  103696ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.48647045034632497&error_msg=Failed%20to%20fetch&error_code=600:0
+[  104710ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  113565ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  116112ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  116112ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  116264ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  116266ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  116285ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.15127360149329128&error_msg=Failed%20to%20fetch&error_code=600:0
+[  116291ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  116339ms] undefined
+[  116324ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  116360ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  116364ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  116370ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.5214716541284918&error_msg=Failed%20to%20fetch&error_code=600:0
+[  117406ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  126178ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  128704ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  128704ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  128960ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  128975ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.8819875913006835&error_msg=Failed%20to%20fetch&error_code=600:0
+[  129007ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  129044ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  129051ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.5459487219094555&error_msg=Failed%20to%20fetch&error_code=600:0
+[  130068ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  138772ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  141336ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  141336ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  141494ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  141518ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.261667092565398&error_msg=Failed%20to%20fetch&error_code=600:0
+[  141586ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  141726ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  141765ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.01746593483502934&error_msg=Failed%20to%20fetch&error_code=600:0
+[  142793ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  151468ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  154545ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  163564ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  163565ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  163785ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  163808ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.17817876334064753&error_msg=Failed%20to%20fetch&error_code=600:0
+[  163808ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  163834ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  163899ms] undefined
+[  163837ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  163915ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  163913ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  163925ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.7438763711870083&error_msg=Failed%20to%20fetch&error_code=600:0
+[  164968ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  173655ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  176193ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  176193ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  176339ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  176341ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  176355ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  176387ms] undefined
+[  176362ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.3765144771293354&error_msg=Failed%20to%20fetch&error_code=600:0
+[  176384ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  176420ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  176425ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  176427ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  176434ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.3249571624191768&error_msg=Failed%20to%20fetch&error_code=600:0
+[  176436ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.10483351913407102&error_msg=Failed%20to%20fetch&error_code=600:0
+[  177463ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  186260ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  188805ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  188806ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  188913ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  188926ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.43628711838889667&error_msg=Failed%20to%20fetch&error_code=600:0
+[  188962ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  189011ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  189022ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.9851381885250413&error_msg=Failed%20to%20fetch&error_code=600:0
+[  190026ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  198857ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  201391ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  201391ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  201552ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  201560ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.15506719861453322&error_msg=Failed%20to%20fetch&error_code=600:0
+[  201610ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  201626ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  201634ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.16780500690049094&error_msg=Failed%20to%20fetch&error_code=600:0
+[  202644ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  211472ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  214030ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  214032ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  214142ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  214151ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.7602339080872212&error_msg=Failed%20to%20fetch&error_code=600:0
+[  214190ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  214212ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  214240ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.9586237599941668&error_msg=Failed%20to%20fetch&error_code=600:0
+[  215246ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  224088ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  226628ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  226628ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  226728ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  226739ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.9330571811324749&error_msg=Failed%20to%20fetch&error_code=600:0
+[  226811ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  226817ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  226827ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.7456900418865405&error_msg=Failed%20to%20fetch&error_code=600:0
+[  227832ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  236678ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  239217ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  239217ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  239350ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  239359ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  239363ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  239366ms] undefined
+[  239369ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.5373951404677754&error_msg=Failed%20to%20fetch&error_code=600:0
+[  239414ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  239435ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:31874)
+    at u (https://static.res.qq.com/qbtool/js/pchome.1b724347.js:39:32086)
+[  239440ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  239448ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.15260493846297585&error_msg=Failed%20to%20fetch&error_code=600:0
+[  240452ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  249269ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  251817ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  251818ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  251984ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  251995ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.46528686978570455&error_msg=Failed%20to%20fetch&error_code=600:0
+[  252031ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  252051ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  252059ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.6103954956917125&error_msg=Failed%20to%20fetch&error_code=600:0
+[  253084ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  261920ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  264482ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  264484ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  264602ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  264609ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.49108963828546415&error_msg=Failed%20to%20fetch&error_code=600:0
+[  264654ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  264681ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  264688ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.15795683269440575&error_msg=Failed%20to%20fetch&error_code=600:0
+[  265715ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  274546ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  277618ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  323559ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  323560ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  324133ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  324134ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  324150ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  324152ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.442791079632875&error_msg=Failed%20to%20fetch&error_code=600:0
+[  324155ms] undefined
+[  324168ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  324186ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pcplugin.f9942a15.js:39:28868)
+    at u (https://static.res.qq.com/qbtool/js/pcplugin.f9942a15.js:39:29080)
+[  324195ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  324202ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.1733614313784&error_msg=Failed%20to%20fetch&error_code=600:0
+[  325257ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  333890ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  337142ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  346975ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  346977ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  347240ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  347242ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  347269ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.2207171412629747&error_msg=Failed%20to%20fetch&error_code=600:0
+[  347275ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js:0
+[  347373ms] undefined
+[  347286ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=cd8bab981fb6f5e73883439df8be49b0&topic=SDK-62c36261a5aaf49b42bf:0
+[  347376ms] Uncaught (in promise) undefined
+    at n (https://static.res.qq.com/qbtool/js/pcplugin.f9942a15.js:39:28868)
+    at u (https://static.res.qq.com/qbtool/js/pcplugin.f9942a15.js:39:29080)
+[  347321ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF:0
+[  347328ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://h.trace.qq.com/kv?attaid=00400014144&token=6478159937&product_id=00300EMEH839B0XF&platform=web&uin=bAfEJT71m9m61BJaZhWKYFm9naZRT2pe&model=&os=web&app_version=&sdk_version=4.5.31-web&error_stack=&_dc=0.8714159078088706&error_msg=Failed%20to%20fetch&error_code=600:0
+[  348360ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[  357180ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2:0
+[  360268ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0
+[ 1248238ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://galileotelemetry.tencent.com/collect:0

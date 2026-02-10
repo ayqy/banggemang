@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="亲戚关系计算,帮小忙,腾讯QQ浏览器,在线工具箱">
+  <meta name="description" content="亲戚关系计算-帮小忙，腾讯QQ浏览器在线工具箱。快速计算复杂亲戚关系称呼。">
+  <title>亲戚关系计算-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .rel-chain{min-height:60px;background:#f6f7fa;border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+    .rel-chain .chain-label{font-size:14px;color:#8f8f8f;margin-right:4px;white-space:nowrap}
+    .rel-chain .chain-item{background:#fff;border:1px solid #e5eafb;border-radius:20px;padding:6px 16px;font-size:14px;color:#136ce9;font-weight:500}
+    .rel-chain .chain-arrow{font-size:16px;color:#b3b3b3}
+    .rel-chain .chain-empty{font-size:14px;color:#b3b3b3}
+    .rel-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+    .rel-buttons .section-title{width:100%;font-size:13px;color:#8f8f8f;margin:8px 0 2px;font-weight:500}
+    .rel-buttons .section-title:first-child{margin-top:0}
+    .rel-btn{height:44px;min-width:100px;padding:0 20px;border-radius:10px;border:1px solid #e5eafb;background:#fff;font-size:15px;color:#242424;cursor:pointer;transition:all .2s;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+    .rel-btn:hover{background:#f0f4ff;border-color:#136ce9;color:#136ce9}
+    .rel-btn:active{transform:scale(.97)}
+    .rel-btn .rel-btn-sub{font-size:12px;color:#8f8f8f;font-weight:400}
+    .rel-action-row{display:flex;gap:12px;margin-bottom:24px}
+    .rel-result{padding:24px;background:linear-gradient(135deg,#f0f4ff,#e8e8fd);border-radius:12px;text-align:center;display:none}
+    .rel-result.show{display:block}
+    .rel-result .result-chain{font-size:16px;color:#666;margin-bottom:12px}
+    .rel-result .result-name{font-size:32px;font-weight:700;color:#136ce9;margin-bottom:8px}
+    .rel-result .result-note{font-size:13px;color:#8f8f8f}
+    .rel-gender{display:flex;gap:16px;margin-bottom:20px;align-items:center}
+    .rel-gender label{font-size:14px;color:#666;cursor:pointer;display:flex;align-items:center;gap:6px}
+    .rel-gender .gender-label{font-size:14px;color:#242424;font-weight:500;margin-right:4px}
+    .rel-gender input{accent-color:#136ce9}
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯QQ浏览器在线工具箱</span></div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png"><span>全部</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=img" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png"><span>图片工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pdf" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png"><span>PDF转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=data" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png"><span>数据换算工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=life" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png"><span>生活娱乐工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=education" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png"><span>教育工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=text" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png"><span>文本工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=doc" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png"><span>文档转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=develop" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png"><span>开发工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=video" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png"><span>视频工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png"><span>浏览器插件</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item"><a class="nav-backtop" href="javascript:void(0)"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png"></a></div>
+    <div class="nav-button-item"><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png"></a><div class="qqgroup-tip">QQ群：459317399</div></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">共建</div></a></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">反馈</div></a></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Content -->
+    <div class="tool-main">
+      <h2>亲戚关系计算</h2>
+
+      <div class="rel-gender">
+        <span class="gender-label">我的性别：</span>
+        <label><input type="radio" name="myGender" value="m" checked> 男</label>
+        <label><input type="radio" name="myGender" value="f"> 女</label>
+      </div>
+
+      <div class="rel-chain" id="chainDisplay">
+        <span class="chain-label">关系链：</span>
+        <span class="chain-empty" id="chainEmpty">请点击下方按钮构建亲戚关系链</span>
+      </div>
+
+      <div class="rel-buttons">
+        <div class="section-title">长辈</div>
+        <button class="rel-btn" data-rel="父" onclick="addRel(this)">爸爸<span class="rel-btn-sub">（父）</span></button>
+        <button class="rel-btn" data-rel="母" onclick="addRel(this)">妈妈<span class="rel-btn-sub">（母）</span></button>
+
+        <div class="section-title">平辈</div>
+        <button class="rel-btn" data-rel="兄" onclick="addRel(this)">哥哥<span class="rel-btn-sub">（兄）</span></button>
+        <button class="rel-btn" data-rel="弟" onclick="addRel(this)">弟弟<span class="rel-btn-sub">（弟）</span></button>
+        <button class="rel-btn" data-rel="姐" onclick="addRel(this)">姐姐<span class="rel-btn-sub">（姐）</span></button>
+        <button class="rel-btn" data-rel="妹" onclick="addRel(this)">妹妹<span class="rel-btn-sub">（妹）</span></button>
+
+        <div class="section-title">晚辈</div>
+        <button class="rel-btn" data-rel="子" onclick="addRel(this)">儿子<span class="rel-btn-sub">（子）</span></button>
+        <button class="rel-btn" data-rel="女" onclick="addRel(this)">女儿<span class="rel-btn-sub">（女）</span></button>
+
+        <div class="section-title">配偶</div>
+        <button class="rel-btn" data-rel="夫" onclick="addRel(this)">丈夫<span class="rel-btn-sub">（夫）</span></button>
+        <button class="rel-btn" data-rel="妻" onclick="addRel(this)">妻子<span class="rel-btn-sub">（妻）</span></button>
+      </div>
+
+      <div class="rel-action-row">
+        <button class="btn-primary" id="btnCalc">计算</button>
+        <button class="btn-primary" id="btnBack" style="background:linear-gradient(135deg,#ff8a14,#ffc20d)">撤销一步</button>
+        <button class="btn-primary" id="btnReset" style="background:#8f8f8f">重置</button>
+      </div>
+
+      <div class="rel-result" id="relResult">
+        <div class="result-chain" id="resultChain"></div>
+        <div class="result-name" id="resultName"></div>
+        <div class="result-note" id="resultNote"></div>
+      </div>
+    </div>
+
+    <!-- Tool Introduction -->
+    <div class="tool-intro-section">
+      <h3>工具介绍及使用方法</h3>
+      <p>亲戚关系计算可以帮助用户快速计算两个或多个对象之间复杂的亲戚关系称呼。使用方法：1. 首先选择自己的性别；2. 点击关系按钮依次构建关系链，例如"爸爸的哥哥"就依次点击"爸爸"和"哥哥"；3. 点击"计算"按钮，工具会自动计算并显示对应的中国传统称呼（如"伯父"）；4. 如果输入有误，可以点击"撤销一步"回退，或点击"重置"清空重新开始。本工具支持多层复杂关系链，覆盖中国传统亲属称谓体系。</p>
+    </div>
+
+    <!-- More Recommendations -->
+    <div class="more-recommend">
+      <h3>更多推荐</h3>
+      <div class="recommend-list">
+        <a class="recommend-item" href="periodic.html">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_zmxsNOQj-Ex.png" alt="元素周期表">
+          <div><div class="rec-name">元素周期表</div><div class="rec-desc">快速查阅化学元素详细信息</div></div>
+        </a>
+        <a class="recommend-item" href="zitie_new.html">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_mfZWm5RYfb5.png" alt="字帖生成">
+          <div><div class="rec-name">字帖生成</div><div class="rec-desc">在线生成个性化练字字帖</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc"><span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span></div>
+          </div>
+          <div class="qrcode"><img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+var chain = [];
+var relNames = {'父':'爸爸','母':'妈妈','兄':'哥哥','弟':'弟弟','姐':'姐姐','妹':'妹妹','子':'儿子','女':'女儿','夫':'丈夫','妻':'妻子'};
+
+/* Comprehensive Chinese kinship lookup table - maps relationship chain to kinship term.
+   Key: relationship chain string (e.g. "父,兄"), Value: [male_caller_term, female_caller_term] or string for both */
+var kinshipDB = {
+  "父":["爸爸/父亲","爸爸/父亲"],
+  "母":["妈妈/母亲","妈妈/母亲"],
+  "兄":["哥哥","哥哥"],
+  "弟":["弟弟","弟弟"],
+  "姐":["姐姐","姐姐"],
+  "妹":["妹妹","妹妹"],
+  "子":["儿子","儿子"],
+  "女":["女儿","女儿"],
+  "夫":["丈夫","丈夫"],
+  "妻":["妻子","妻子"],
+  // Parents' parents
+  "父,父":["爷爷/祖父","爷爷/祖父"],
+  "父,母":["奶奶/祖母","奶奶/祖母"],
+  "母,父":["外公/姥爷","外公/姥爷"],
+  "母,母":["外婆/姥姥","外婆/姥姥"],
+  // Parents' siblings
+  "父,兄":["伯父/伯伯","伯父/伯伯"],
+  "父,弟":["叔叔/叔父","叔叔/叔父"],
+  "父,姐":["姑妈/姑母","姑妈/姑母"],
+  "父,妹":["姑姑/小姑","姑姑/小姑"],
+  "母,兄":["大舅/舅舅","大舅/舅舅"],
+  "母,弟":["舅舅/小舅","舅舅/小舅"],
+  "母,姐":["大姨/姨妈","大姨/姨妈"],
+  "母,妹":["小姨/姨妈","小姨/姨妈"],
+  // Parents' siblings' spouses
+  "父,兄,妻":["伯母/大娘","伯母/大娘"],
+  "父,弟,妻":["婶婶/婶母","婶婶/婶母"],
+  "父,姐,夫":["姑父/姑丈","姑父/姑丈"],
+  "父,妹,夫":["姑父/姑丈","姑父/姑丈"],
+  "母,兄,妻":["舅妈/舅母","舅妈/舅母"],
+  "母,弟,妻":["舅妈/舅母","舅妈/舅母"],
+  "母,姐,夫":["姨父/姨丈","姨父/姨丈"],
+  "母,妹,夫":["姨父/姨丈","姨父/姨丈"],
+  // Children's spouses
+  "子,妻":["儿媳妇/媳妇","儿媳妇/媳妇"],
+  "女,夫":["女婿/姑爷","女婿/姑爷"],
+  // Siblings' children
+  "兄,子":["侄子/侄儿","侄子/侄儿"],
+  "兄,女":["侄女","侄女"],
+  "弟,子":["侄子/侄儿","侄子/侄儿"],
+  "弟,女":["侄女","侄女"],
+  "姐,子":["外甥","外甥"],
+  "姐,女":["外甥女","外甥女"],
+  "妹,子":["外甥","外甥"],
+  "妹,女":["外甥女","外甥女"],
+  // Siblings' spouses
+  "兄,妻":["嫂子/嫂嫂","嫂子/嫂嫂"],
+  "弟,妻":["弟媳/弟妹","弟媳/弟妹"],
+  "姐,夫":["姐夫","姐夫"],
+  "妹,夫":["妹夫","妹夫"],
+  // Spouse's parents
+  "夫,父":["公公/公爹","公公/公爹"],
+  "夫,母":["婆婆/婆母","婆婆/婆母"],
+  "妻,父":["岳父/丈人","岳父/丈人"],
+  "妻,母":["岳母/丈母娘","岳母/丈母娘"],
+  // Spouse's siblings
+  "夫,兄":["大伯子/大伯","大伯子/大伯"],
+  "夫,弟":["小叔子/小叔","小叔子/小叔"],
+  "夫,姐":["大姑子/大姑姐","大姑子/大姑姐"],
+  "夫,妹":["小姑子/小姑","小姑子/小姑"],
+  "妻,兄":["大舅子/内兄","大舅子/内兄"],
+  "妻,弟":["小舅子/内弟","小舅子/内弟"],
+  "妻,姐":["大姨子/姨姐","大姨子/姨姐"],
+  "妻,妹":["小姨子/姨妹","小姨子/姨妹"],
+  // Grandparents' parents
+  "父,父,父":["曾祖父/太爷爷","曾祖父/太爷爷"],
+  "父,父,母":["曾祖母/太奶奶","曾祖母/太奶奶"],
+  "母,母,父":["外曾祖父","外曾祖父"],
+  "母,母,母":["外曾祖母","外曾祖母"],
+  "父,母,父":["外曾祖父（奶奶的爸爸）","外曾祖父（奶奶的爸爸）"],
+  "父,母,母":["外曾祖母（奶奶的妈妈）","外曾祖母（奶奶的妈妈）"],
+  "母,父,父":["外曾祖父（外公的爸爸）","外曾祖父（外公的爸爸）"],
+  "母,父,母":["外曾祖母（外公的妈妈）","外曾祖母（外公的妈妈）"],
+  // Grandparents' siblings
+  "父,父,兄":["伯祖父/大爷爷","伯祖父/大爷爷"],
+  "父,父,弟":["叔祖父/小爷爷","叔祖父/小爷爷"],
+  "父,父,姐":["姑祖母/姑奶奶","姑祖母/姑奶奶"],
+  "父,父,妹":["姑祖母/姑奶奶","姑祖母/姑奶奶"],
+  "父,母,兄":["舅公/舅爷爷","舅公/舅爷爷"],
+  "父,母,弟":["舅公/舅爷爷","舅公/舅爷爷"],
+  "父,母,姐":["姨婆/姨奶奶","姨婆/姨奶奶"],
+  "父,母,妹":["姨婆/姨奶奶","姨婆/姨奶奶"],
+  // Cousins (paternal uncle's children)
+  "父,兄,子":["堂哥/堂兄","堂哥/堂兄"],
+  "父,兄,女":["堂姐","堂姐"],
+  "父,弟,子":["堂弟","堂弟"],
+  "父,弟,女":["堂妹","堂妹"],
+  // Cousins (paternal aunt's children)
+  "父,姐,子":["表哥/表兄","表哥/表兄"],
+  "父,姐,女":["表姐","表姐"],
+  "父,妹,子":["表弟","表弟"],
+  "父,妹,女":["表妹","表妹"],
+  // Cousins (maternal uncle's children)
+  "母,兄,子":["表哥/表兄","表哥/表兄"],
+  "母,兄,女":["表姐","表姐"],
+  "母,弟,子":["表弟","表弟"],
+  "母,弟,女":["表妹","表妹"],
+  // Cousins (maternal aunt's children)
+  "母,姐,子":["表哥/表兄","表哥/表兄"],
+  "母,姐,女":["表姐","表姐"],
+  "母,妹,子":["表弟","表弟"],
+  "母,妹,女":["表妹","表妹"],
+  // Children's children
+  "子,子":["孙子","孙子"],
+  "子,女":["孙女","孙女"],
+  "女,子":["外孙","外孙"],
+  "女,女":["外孙女","外孙女"],
+  // Great-grandchildren
+  "子,子,子":["曾孙","曾孙"],
+  "子,子,女":["曾孙女","曾孙女"],
+  "女,女,子":["外曾孙","外曾孙"],
+  "女,女,女":["外曾孙女","外曾孙女"],
+  // Spouse's siblings' spouses
+  "夫,兄,妻":["大嫂/妯娌","大嫂/妯娌"],
+  "夫,弟,妻":["弟媳/妯娌","弟媳/妯娌"],
+  "妻,兄,妻":["舅嫂","舅嫂"],
+  "妻,弟,妻":["舅媳","舅媳"],
+  "妻,姐,夫":["襟兄/连襟","襟兄/连襟"],
+  "妻,妹,夫":["襟弟/连襟","襟弟/连襟"],
+  // Cousins' spouses
+  "父,兄,子,妻":["堂嫂","堂嫂"],
+  "父,弟,子,妻":["堂弟媳","堂弟媳"],
+  "父,姐,子,妻":["表嫂","表嫂"],
+  "父,妹,子,妻":["表弟媳","表弟媳"],
+  // Self reference
+  "父,子":["兄弟/自己","姐妹/自己"],
+  "父,女":["姐妹/自己","姐妹/自己"],
+  "母,子":["兄弟/自己","姐妹/自己"],
+  "母,女":["姐妹/自己","姐妹/自己"]
+};
+
+function addRel(btn){
+  var rel = btn.getAttribute('data-rel');
+  chain.push(rel);
+  renderChain();
+}
+
+function renderChain(){
+  var display = document.getElementById('chainDisplay');
+  var empty = document.getElementById('chainEmpty');
+  // remove old chain items
+  var items = display.querySelectorAll('.chain-item,.chain-arrow');
+  items.forEach(function(el){ el.remove(); });
+  if(chain.length === 0){
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+  chain.forEach(function(rel, i){
+    if(i > 0){
+      var arrow = document.createElement('span');
+      arrow.className = 'chain-arrow';
+      arrow.textContent = '→';
+      display.appendChild(arrow);
+    }
+    var item = document.createElement('span');
+    item.className = 'chain-item';
+    item.textContent = relNames[rel] || rel;
+    display.appendChild(item);
+  });
+  document.getElementById('relResult').classList.remove('show');
+}
+
+function getGender(){
+  return document.querySelector('input[name="myGender"]:checked').value;
+}
+
+function calculate(){
+  if(chain.length === 0){
+    alert('请先点击按钮构建关系链');
+    return;
+  }
+  var key = chain.join(',');
+  var gender = getGender();
+  var gIdx = gender === 'm' ? 0 : 1;
+
+  var result = null;
+  if(kinshipDB[key]){
+    var entry = kinshipDB[key];
+    result = typeof entry === 'string' ? entry : entry[gIdx];
+  }
+
+  // Try simplification rules if no direct match
+  if(!result){
+    result = trySimplify(chain.slice(), gIdx);
+  }
+
+  var chainText = chain.map(function(r){ return relNames[r]; }).join('的');
+  var resultDiv = document.getElementById('relResult');
+  document.getElementById('resultChain').textContent = chainText;
+
+  if(result){
+    document.getElementById('resultName').textContent = result;
+    document.getElementById('resultNote').textContent = '称呼：' + result;
+    document.getElementById('resultName').style.color = '#136ce9';
+  } else {
+    document.getElementById('resultName').textContent = '未找到对应称呼';
+    document.getElementById('resultNote').textContent = '该关系链暂不在数据库中，可尝试简化关系链后重新计算';
+    document.getElementById('resultName').style.color = '#ff4837';
+  }
+  resultDiv.classList.add('show');
+}
+
+function trySimplify(ch, gIdx){
+  // Apply reduction rules
+  var rules = [
+    // spouse cancellation
+    {p:['夫','妻'], r:[]}, {p:['妻','夫'], r:[]},
+    // parent-child cancellation (back to self or sibling)
+    {p:['父','子'], r:['兄']}, {p:['父','女'], r:['姐']},
+    {p:['母','子'], r:['兄']}, {p:['母','女'], r:['姐']},
+    // uncle/aunt to cousin shorthand already in DB
+  ];
+  var changed = true;
+  var maxIter = 20;
+  while(changed && maxIter-- > 0){
+    changed = false;
+    for(var r = 0; r < rules.length; r++){
+      var pat = rules[r].p;
+      var rep = rules[r].r;
+      for(var i = 0; i <= ch.length - pat.length; i++){
+        var match = true;
+        for(var j = 0; j < pat.length; j++){
+          if(ch[i+j] !== pat[j]){ match = false; break; }
+        }
+        if(match){
+          ch.splice(i, pat.length);
+          for(var k = rep.length - 1; k >= 0; k--){
+            ch.splice(i, 0, rep[k]);
+          }
+          changed = true;
+          break;
+        }
+      }
+      if(changed) break;
+    }
+  }
+  if(ch.length === 0) return '自己';
+  var key2 = ch.join(',');
+  if(kinshipDB[key2]){
+    var e = kinshipDB[key2];
+    return typeof e === 'string' ? e : e[gIdx];
+  }
+  return null;
+}
+
+document.getElementById('btnCalc').addEventListener('click', calculate);
+document.getElementById('btnBack').addEventListener('click', function(){
+  if(chain.length > 0){
+    chain.pop();
+    renderChain();
+  }
+});
+document.getElementById('btnReset').addEventListener('click', function(){
+  chain = [];
+  renderChain();
+  document.getElementById('relResult').classList.remove('show');
+});
+</script>
+</body>
+</html>
