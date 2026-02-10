@@ -1,0 +1,12 @@
+{
+  "routeId": "wordcount",
+  "routeName": "字数计算",
+  "remotePath": "/wordcount.html",
+  "caseId": "wordcount-calc",
+  "capturedAt": "2026-02-09T23:49:34.936Z",
+  "expected": {
+    "pageTitle": "字数计算-帮小忙，腾讯QQ浏览器在线工具箱",
+    "inputText": "天地玄黄\nabc",
+    "outputText": "x"
+  }
+}

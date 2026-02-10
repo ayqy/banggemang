@@ -1,0 +1,25 @@
+{
+  "title": "各国首都-帮小忙，腾讯QQ浏览器在线工具箱",
+  "bodyClass": "",
+  "scriptCount": 5,
+  "stylesheetCount": 1,
+  "navLabels": [
+    "全部",
+    "图片工具",
+    "PDF转换工具",
+    "数据换算工具",
+    "生活娱乐工具",
+    "教育工具",
+    "文本工具",
+    "文档转换工具",
+    "开发工具",
+    "视频工具",
+    "浏览器插件"
+  ],
+  "toolNames": [],
+  "recommendTitles": [
+    "历史朝代查询"
+  ],
+  "hasSearchInput": true,
+  "hasFooter": true
+}

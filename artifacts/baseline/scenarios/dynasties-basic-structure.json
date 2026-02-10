@@ -1,0 +1,15 @@
+{
+  "routeId": "dynasties",
+  "routeName": "历史朝代查询",
+  "remotePath": "/dynasties.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:35.950Z",
+  "expected": {
+    "pageTitle": "历史朝代查询-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "历史朝代查询",
+    "inputCount": 1,
+    "buttonTexts": [],
+    "firstRecommend": "各国首都",
+    "hasToolContainer": true
+  }
+}

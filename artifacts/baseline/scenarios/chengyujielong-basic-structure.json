@@ -1,0 +1,17 @@
+{
+  "routeId": "chengyujielong",
+  "routeName": "成语大全",
+  "remotePath": "/chengyujielong.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:47.621Z",
+  "expected": {
+    "pageTitle": "成语大全-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "成语大全",
+    "inputCount": 5,
+    "buttonTexts": [
+      "查询"
+    ],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

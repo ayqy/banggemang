@@ -1,0 +1,7 @@
+{
+  "upstream": "https://tool.browser.qq.com",
+  "prefixes": [
+    "/api/",
+    "/cgi-bin/"
+  ]
+}

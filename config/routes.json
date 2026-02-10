@@ -1,0 +1,122 @@
+[
+  {
+    "id": "education-home",
+    "name": "教育工具首页",
+    "remotePath": "/category/education",
+    "localPath": "/index.html",
+    "localFile": "index.html",
+    "isHome": true
+  },
+  {
+    "id": "handwriting_erasure",
+    "name": "去手写",
+    "remotePath": "/handwriting_erasure.html",
+    "localPath": "/handwriting_erasure.html",
+    "localFile": "handwriting_erasure.html"
+  },
+  {
+    "id": "zitie_new",
+    "name": "字帖生成",
+    "remotePath": "/zitie_new.html",
+    "localPath": "/zitie_new.html",
+    "localFile": "zitie_new.html"
+  },
+  {
+    "id": "relatives_name",
+    "name": "亲戚关系计算",
+    "remotePath": "/relatives_name.html",
+    "localPath": "/relatives_name.html",
+    "localFile": "relatives_name.html"
+  },
+  {
+    "id": "school",
+    "name": "高校查询",
+    "remotePath": "/school.html",
+    "localPath": "/school.html",
+    "localFile": "school.html"
+  },
+  {
+    "id": "wordcount",
+    "name": "字数计算",
+    "remotePath": "/wordcount.html",
+    "localPath": "/wordcount.html",
+    "localFile": "wordcount.html"
+  },
+  {
+    "id": "dynasties",
+    "name": "历史朝代查询",
+    "remotePath": "/dynasties.html",
+    "localPath": "/dynasties.html",
+    "localFile": "dynasties.html"
+  },
+  {
+    "id": "capital",
+    "name": "各国首都",
+    "remotePath": "/capital.html",
+    "localPath": "/capital.html",
+    "localFile": "capital.html"
+  },
+  {
+    "id": "jielong",
+    "name": "成语接龙",
+    "remotePath": "/jielong.html",
+    "localPath": "/jielong.html",
+    "localFile": "jielong.html"
+  },
+  {
+    "id": "markmap",
+    "name": "便捷思维导图",
+    "remotePath": "/markmap.html",
+    "localPath": "/markmap.html",
+    "localFile": "markmap.html"
+  },
+  {
+    "id": "hanzifayin",
+    "name": "汉字标准发音",
+    "remotePath": "/hanzifayin.html",
+    "localPath": "/hanzifayin.html",
+    "localFile": "hanzifayin.html"
+  },
+  {
+    "id": "periodic",
+    "name": "元素周期表",
+    "remotePath": "/periodic.html",
+    "localPath": "/periodic.html",
+    "localFile": "periodic.html"
+  },
+  {
+    "id": "translate",
+    "name": "翻译",
+    "remotePath": "/translate.html",
+    "localPath": "/translate.html",
+    "localFile": "translate.html"
+  },
+  {
+    "id": "radical",
+    "name": "汉字偏旁",
+    "remotePath": "/radical.html",
+    "localPath": "/radical.html",
+    "localFile": "radical.html"
+  },
+  {
+    "id": "allegory",
+    "name": "歇后语",
+    "remotePath": "/allegory.html",
+    "localPath": "/allegory.html",
+    "localFile": "allegory.html"
+  },
+  {
+    "id": "explain",
+    "name": "词语注解",
+    "remotePath": "/explain.html",
+    "localPath": "/explain.html",
+    "localFile": "explain.html"
+  },
+  {
+    "id": "chengyujielong",
+    "name": "成语大全",
+    "remotePath": "/chengyujielong.html",
+    "localPath": "/chengyujielong.html",
+    "localFile": "chengyujielong.html"
+  }
+]

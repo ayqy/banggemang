@@ -1,0 +1,23 @@
+{
+  "name": "banggemang-mirror",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "recover:pages": "node scripts/recovery/fetch-pages.mjs",
+    "recover:assets": "node scripts/recovery/download-assets.mjs",
+    "recover:rewrite": "node scripts/recovery/rewrite-html.mjs",
+    "recover:patch": "node scripts/recovery/patch-runtime.mjs",
+    "recover:all": "npm run recover:pages && npm run recover:assets && npm run recover:rewrite && npm run recover:patch",
+    "dev": "node server/dev-server.mjs",
+    "baseline:capture": "node scripts/baseline/capture-baseline.mjs",
+    "baseline:scenarios": "node scripts/baseline/capture-scenarios.mjs",
+    "test:e2e": "playwright test -c tests/e2e/playwright.config.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "pixelmatch": "^6.0.0",
+    "pngjs": "^7.0.0",
+    "playwright": "^1.51.1"
+  }
+}

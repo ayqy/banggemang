@@ -1,0 +1,15 @@
+{
+  "routeId": "capital",
+  "routeName": "各国首都",
+  "remotePath": "/capital.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:36.910Z",
+  "expected": {
+    "pageTitle": "各国首都-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "各国首都",
+    "inputCount": 1,
+    "buttonTexts": [],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

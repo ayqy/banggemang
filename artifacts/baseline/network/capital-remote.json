@@ -1,0 +1,126 @@
+[
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_jdB6qNUoFvz.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_M4UejcjNNLA.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png",
+    "status": 200
+  },
+  {
+    "url": "https://static.res.qq.com/qbtool/css/capital.c673b.css",
+    "status": 304
+  },
+  {
+    "url": "https://static.res.qq.com/qbtool/manifest/manifest.5150f596.js",
+    "status": 304
+  },
+  {
+    "url": "https://static.res.qq.com/qbtool/js/vendors.e58e88ef.js",
+    "status": 304
+  },
+  {
+    "url": "https://static.res.qq.com/qbtool/js/capital.d3cca99b.js",
+    "status": 304
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/pcqb/qbtool/tool-share-link.png",
+    "status": 200
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/share_icon.png",
+    "status": 200
+  },
+  {
+    "url": "https://tool.browser.qq.com/api/getToken",
+    "status": 200
+  },
+  {
+    "url": "https://tool.browser.qq.com/api/get_tool_list",
+    "status": 200
+  },
+  {
+    "url": "https://tool.browser.qq.com/api/getLoginInfo?userInfo=%7B%22guid%22:%22aaaa5y0upgc70eqyv2l4u9ycje5n88cb%22,%22qua2%22:%22PR%3DPC%26CO%3DWBK%26QV%3D3%26PL%3DMAC%26PB%3DGE%26PPVN%3D%26COVC%3D049400%26CHID%3D43653%26RL%3D2560*1440%26MO%3DQB%26VE%3DB1%26BIT%3D64%26OS%3D10.0.18362%22%7D",
+    "status": 200
+  },
+  {
+    "url": "https://tool.browser.qq.com/cgi-bin/tools/report",
+    "status": 200
+  },
+  {
+    "url": "https://tool.browser.qq.com/cgi-bin/tools/get_statistics",
+    "status": 200
+  },
+  {
+    "url": "https://tool.browser.qq.com/api/addToolPV",
+    "status": 200
+  }
+]
