@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="词语注解,词语解释,帮小忙,腾讯QQ浏览器,在线工具箱,教育工具">
+  <meta name="description" content="词语注解查询工具，输入词语即可查看拼音、释义和例句。帮小忙，腾讯QQ浏览器在线工具箱。">
+  <title>词语注解-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .explain-results {
+      margin-top: 24px;
+    }
+    .explain-results .result-header {
+      font-size: 14px;
+      color: #8f8f8f;
+      margin-bottom: 14px;
+    }
+    .explain-results .result-header b {
+      color: #136ce9;
+    }
+    .explain-card {
+      background: #fff;
+      border: 1px solid #e8e8fd;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+      transition: all 0.2s;
+    }
+    .explain-card:hover {
+      box-shadow: 0 4px 16px rgba(19,108,233,0.08);
+      border-color: #c0c0ff;
+    }
+    .explain-card-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .explain-word {
+      font-size: 22px;
+      font-weight: 700;
+      color: #242424;
+    }
+    .explain-pinyin {
+      font-size: 15px;
+      color: #136ce9;
+      font-style: italic;
+    }
+    .explain-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #e8e8fd;
+      color: #6c8fff;
+      font-weight: 500;
+    }
+    .explain-def {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 10px;
+      padding-left: 12px;
+      border-left: 3px solid #e8e8fd;
+    }
+    .explain-example {
+      font-size: 13px;
+      color: #8f8f8f;
+      line-height: 1.7;
+      padding-left: 12px;
+    }
+    .explain-example::before {
+      content: "例：";
+      color: #b3b3b3;
+      font-weight: 500;
+    }
+    .explain-empty {
+      text-align: center;
+      padding: 40px 0;
+      color: #b3b3b3;
+      font-size: 14px;
+    }
+    .explain-divider {
+      height: 1px;
+      background: #f0f0f0;
+      margin: 10px 0 12px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯QQ浏览器在线工具箱</span>
+      </div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png">
+            <span>全部</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=img" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png">
+            <span>图片工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=pdf" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png">
+            <span>PDF转换工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=data" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png">
+            <span>数据换算工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=life" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png">
+            <span>生活娱乐工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=education" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png">
+            <span>教育工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=text" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png">
+            <span>文本工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=doc" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png">
+            <span>文档转换工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=develop" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png">
+            <span>开发工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=video" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png">
+            <span>视频工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png">
+            <span>浏览器插件</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item">
+      <a class="nav-backtop" href="javascript:void(0)">
+        <img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png">
+      </a>
+    </div>
+    <div class="nav-button-item">
+      <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank">
+        <img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png">
+      </a>
+      <div class="qqgroup-tip">QQ群：459317399</div>
+    </div>
+    <div class="nav-button-item">
+      <a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank">
+        <div class="nav-button-text">共建</div>
+      </a>
+    </div>
+    <div class="nav-button-item">
+      <a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank">
+        <div class="nav-button-text">反馈</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Search Bar -->
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Area -->
+    <div class="tool-page-container">
+      <div class="tool-page-title">词语注解</div>
+      <div class="tool-main">
+        <h2>词语注解查询</h2>
+        <div class="input-group">
+          <label>请输入查询汉词</label>
+          <input type="text" id="explainInput" placeholder="请输入查询汉词" maxlength="10">
+          <button class="btn-primary" id="explainBtn">注解查询</button>
+        </div>
+        <div class="explain-results" id="explainResults">
+          <div class="explain-empty">请输入词语进行查询，支持精确匹配和模糊搜索</div>
+        </div>
+      </div>
+
+      <!-- Tool Introduction -->
+      <div class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <p>词语注解工具可以帮助您查找和学习词语的详细解释和用法。通过这款工具，您可以输入任意词语，快速获取该词语的注解、拼音、词性、例句等信息，便于语言学习、写作和日常交流。</p>
+        <p style="margin-top:10px"><strong>使用方法：</strong></p>
+        <p style="margin-top:6px">1. 在输入框中输入需要查询的词语。</p>
+        <p>2. 点击"注解查询"按钮或按回车键。</p>
+        <p>3. 工具将展示最多3条匹配结果，包含拼音、释义和例句。</p>
+        <p>4. 支持精确匹配和模糊搜索，输入部分词语也可查询。</p>
+      </div>
+
+      <!-- More Recommendations -->
+      <div class="more-recommend">
+        <h3>更多推荐</h3>
+        <div class="recommend-list">
+          <a class="recommend-item" href="dynasties.html" target="_blank">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_M4UejcjNNLA.png" alt="历史朝代查询">
+            <div>
+              <div class="rec-name">历史朝代查询</div>
+              <div class="rec-desc">快速查询各个历史朝代的相关信息</div>
+            </div>
+          </a>
+          <a class="recommend-item" href="capital.html" target="_blank">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_jdB6qNUoFvz.png" alt="各国首都">
+            <div>
+              <div class="rec-name">各国首都</div>
+              <div class="rec-desc">查询世界各国首都信息</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc">
+              <span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span>
+            </div>
+          </div>
+          <div class="qrcode">
+            <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+(function() {
+  // 200+ Chinese word definitions: [word, pinyin, tag, definition, example]
+  var dictionary = [
+    ["幸福","xìng fú","形容词","指人们感到生活美满、心情愉悦的状态；也指使人心情舒畅的境遇和生活。","一家人在一起就是最大的幸福。"],
+    ["勇敢","yǒng gǎn","形容词","不怕危险和困难，有胆量；敢于面对困境的品质。","他勇敢地站出来保护了同学。"],
+    ["智慧","zhì huì","名词","对事物能迅速、灵活、正确地理解和处理的能力。辨析事物、判断是非善恶的能力。","古人用智慧建造了万里长城。"],
+    ["美丽","měi lì","形容词","好看、漂亮，使人感到赏心悦目。","春天的花园非常美丽。"],
+    ["善良","shàn liáng","形容词","心地纯洁、纯真温厚、没有恶意；和善而不怀恶意。","她是一个善良的姑娘，总是乐于助人。"],
+    ["坚持","jiān chí","动词","意志坚强，坚韧不拔；始终如一地保持某种态度或做法。","只要坚持努力，就一定能成功。"],
+    ["温暖","wēn nuǎn","形容词","指暖和，不冷也不太热；也比喻使人感到亲切和关怀。","妈妈的拥抱让我感到温暖。"],
+    ["友谊","yǒu yì","名词","朋友之间的交情、感情。","真正的友谊是经得起考验的。"],
+    ["梦想","mèng xiǎng","名词","即对未来的一种期望，指在未来想实现的事或是达到的境界。","每个人都应该有自己的梦想。"],
+    ["努力","nǔ lì","动词/形容词","把力量尽量使出来；尽力做某事。","他一直在努力学习，成绩进步很快。"],
+    ["诚实","chéng shí","形容词","言行跟内心思想一致（指好的思想行为），不虚假、不欺骗。","做人要诚实守信。"],
+    ["谦虚","qiān xū","形容词","不自满，肯接受批评，能虚心向人请教。","谦虚使人进步，骄傲使人落后。"],
+    ["快乐","kuài lè","形容词","感到幸福或满意；心情愉快。","孩子们在操场上快乐地玩耍。"],
+    ["自信","zì xìn","形容词/名词","相信自己的能力和价值。","自信是成功的第一步。"],
+    ["感恩","gǎn ēn","动词","对别人所给的恩惠表示感激。","我们要学会感恩，珍惜身边的人。"],
+    ["理想","lǐ xiǎng","名词","对未来事物的美好想象和希望；符合希望的，令人满意的。","他的理想是成为一名科学家。"],
+    ["团结","tuán jié","动词/形容词","为了集中力量实现共同理想或完成共同任务而联合或结合在一起。","团结就是力量。"],
+    ["创造","chuàng zào","动词","想出新方法、建立新理论、做出新的成绩或东西。","人类创造了灿烂的文明。"],
+    ["勤劳","qín láo","形容词","努力劳动，不怕辛苦。","勤劳的农民在田间辛苦劳作。"],
+    ["和平","hé píng","名词","指没有战争也没有其他敌视暴力行为的状态。","世界人民都渴望和平。"],
+    ["责任","zé rèn","名词","分内应做的事；没有做好分内应做的事，因而应该承担的过失。","每个人都应该承担自己的责任。"],
+    ["宽容","kuān róng","形容词/动词","宽大有气量，不计较或不追究。","学会宽容是一种美德。"],
+    ["奉献","fèng xiàn","动词","恭敬地交付、呈献；为某种目的而付出。","老师为教育事业无私奉献。"],
+    ["独立","dú lì","形容词/动词","不依靠别人；单独地站立。","孩子要学会独立思考。"],
+    ["包容","bāo róng","动词","容纳、宽容；指对不同的意见或行为的接纳。","大海之所以伟大，是因为它能包容百川。"],
+    ["希望","xī wàng","名词/动词","心里想着达到某种目的或出现某种情况。","我们希望明天是个好天气。"],
+    ["诚信","chéng xìn","名词","诚实而有信用。","诚信是做人的根本。"],
+    ["乐观","lè guān","形容词","精神愉快，对事物的发展充满信心。","保持乐观的心态很重要。"],
+    ["勤奋","qín fèn","形容词","不懈地努力；勤劳而奋发。","勤奋是成功的基石。"],
+    ["尊重","zūn zhòng","动词","敬重、重视；尊敬。","我们应该尊重每一个人。"],
+    ["珍惜","zhēn xī","动词","珍重爱惜，认为宝贵而爱惜。","我们要珍惜时间，好好学习。"],
+    ["自由","zì yóu","名词/形容词","不受限制和约束；在法律规定的范围内，随自己意志活动的权利。","鸟儿在天空中自由地飞翔。"],
+    ["公正","gōng zhèng","形容词","公平正直，没有偏私。","法律面前人人平等，要做到公正。"],
+    ["热情","rè qíng","形容词/名词","有热烈的感情；对人或事物有深厚的兴趣和浓烈的感情。","他热情地接待了远方来的客人。"],
+    ["坚强","jiān qiáng","形容词","坚固，不可摧毁；不动摇。","她是一个坚强的女孩。"],
+    ["忠诚","zhōng chéng","形容词","尽心尽力，没有二心。","他对国家忠诚不二。"],
+    ["优秀","yōu xiù","形容词","品行、学问、成绩等非常好。","她是一名优秀的学生。"],
+    ["纯洁","chún jié","形容词","纯粹清白，没有污点。","孩子们的心灵是纯洁的。"],
+    ["聪明","cōng ming","形容词","智力发达，记忆和理解力强。","这个孩子很聪明，学什么都很快。"],
+    ["勇气","yǒng qì","名词","敢于面对困难、危险的胆量和气魄。","面对挑战需要勇气。"],
+    ["感激","gǎn jī","动词","因对方的好意或帮助而对其产生好感。","我非常感激老师对我的帮助。"],
+    ["信任","xìn rèn","动词/名词","相信而敢于托付。","朋友之间要相互信任。"],
+    ["耐心","nài xīn","名词/形容词","不急躁，不厌烦；心里不急躁。","老师耐心地解答学生的问题。"],
+    ["礼貌","lǐ mào","名词","言语动作谦虚恭敬的表现。","对人要有礼貌。"],
+    ["成功","chéng gōng","名词/动词","达到预期的目的；事业上获得成就。","经过多年努力，他终于获得了成功。"],
+    ["失败","shī bài","名词/动词","在斗争或竞赛中被对方打败；工作没有达到预定的目的。","失败是成功之母。"],
+    ["进步","jìn bù","名词/动词","人或事物向前发展、比原来好。","他的学习成绩有了很大进步。"],
+    ["和谐","hé xié","形容词","配合得适当；和睦协调。","我们要建设和谐社会。"],
+    ["文明","wén míng","名词/形容词","人类社会发展到较高阶段的文化状态；有教养的。","讲文明，树新风。"],
+    ["传统","chuán tǒng","名词","世代相传、具有特点的社会因素，如风俗、道德、思想等。","我们要继承和发扬优良传统。"],
+    ["自然","zì rán","名词/形容词","天然，非人为的；不做作、不拘束。","大自然是最好的老师。"],
+    ["环境","huán jìng","名词","周围的地方和条件；自然环境和社会环境的总称。","保护环境是每个人的责任。"],
+    ["健康","jiàn kāng","名词/形容词","生理机能正常，没有疾病；也指精神状态良好。","健康是最大的财富。"],
+    ["安全","ān quán","形容词/名词","没有危险；不受威胁；不出事故。","注意交通安全。"],
+    ["教育","jiào yù","名词/动词","按一定的要求培养人的工作。","教育是国家发展的根本。"],
+    ["科学","kē xué","名词/形容词","反映自然、社会、思维等的客观规律的分科知识体系。","我们要相信科学。"],
+    ["艺术","yì shù","名词","用形象来反映现实但比现实有典型性的社会意识形态。","音乐是一门美妙的艺术。"],
+    ["历史","lì shǐ","名词","自然界和人类社会的发展过程；过去的事实。","以史为鉴，可以知兴替。"],
+    ["文化","wén huà","名词","人类在社会历史发展过程中所创造的物质财富和精神财富的总和。","中华文化博大精深。"],
+    ["经济","jīng jì","名词","指社会物质生产和再生产的活动。","发展经济是国家的重要任务。"],
+    ["政治","zhèng zhì","名词","关于国家治理的社会活动和制度。","国家的政治制度关系到人民的幸福。"],
+    ["法律","fǎ lǜ","名词","由国家制定或认可的行为规范的总和。","每个公民都要遵守法律。"],
+    ["道德","dào dé","名词","社会意识形态之一，是人们共同生活及其行为的准则和规范。","道德是社会的基石。"],
+    ["理解","lǐ jiě","动词","懂得；了解。","我完全理解你的心情。"],
+    ["沟通","gōu tōng","动词","使两方能通连；人与人之间的信息交流。","良好的沟通是解决问题的关键。"],
+    ["合作","hé zuò","动词","互相配合做某事或共同完成某项任务。","团队合作精神很重要。"],
+    ["竞争","jìng zhēng","动词/名词","为了自己的利益而跟人争胜。","市场竞争日趋激烈。"],
+    ["发展","fā zhǎn","动词","事物由小到大、由简单到复杂、由低级到高级的变化。","社会在不断发展进步。"],
+    ["改革","gǎi gé","名词/动词","把事物中旧的不合理的部分改成新的、能适应客观情况的。","改革开放是中国发展的关键一招。"],
+    ["创新","chuàng xīn","动词/名词","抛开旧的，创造新的。","科技创新推动社会进步。"],
+    ["质量","zhì liàng","名词","产品或工作的优劣程度。","我们要注重产品质量。"],
+    ["效率","xiào lǜ","名词","单位时间内完成的工作量；功与消耗能量之比。","提高工作效率是很重要的。"],
+    ["平衡","píng héng","名词/形容词","对立的各方面在数量或质量上相等或相抵。","要注意工作和生活的平衡。"],
+    ["稳定","wěn dìng","形容词","稳固安定，没有变动。","社会稳定是发展的前提。"],
+    ["灿烂","càn làn","形容词","光彩鲜明夺目；形容事物美好。","阳光灿烂的日子让人心情愉快。"],
+    ["朴素","pǔ sù","形容词","质朴，无文饰；俭朴，不奢侈。","她穿着朴素，为人真诚。"],
+    ["渊博","yuān bó","形容词","（学识）深而广博。","李教授的学识非常渊博。"],
+    ["崇高","chóng gāo","形容词","最高的；最高尚的。","他有着崇高的理想和信念。"],
+    ["辽阔","liáo kuò","形容词","广阔，宽广。","辽阔的草原一望无际。"],
+    ["璀璨","cuǐ càn","形容词","形容珠玉等光彩鲜明。","夜空中星星璀璨夺目。"],
+    ["蓬勃","péng bó","形容词","繁荣；旺盛。","祖国的事业蓬勃发展。"],
+    ["矫健","jiǎo jiàn","形容词","强壮有力；英勇威武。","运动员迈着矫健的步伐走来。"],
+    ["镇定","zhèn dìng","形容词","遇到紧急的情况不慌不乱。","面对突发情况，他非常镇定。"],
+    ["敏捷","mǐn jié","形容词","反应迅速而灵敏。","猫的动作非常敏捷。"],
+    ["恬静","tián jìng","形容词","安静；安然。","乡村的夜晚非常恬静。"],
+    ["憧憬","chōng jǐng","动词/名词","对美好事物的向往。","她对未来充满了憧憬。"],
+    ["惬意","qiè yì","形容词","满意；称心；舒服。","午后躺在沙发上看书，十分惬意。"],
+    ["惊叹","jīng tàn","动词","惊奇赞叹。","大家对他的表演惊叹不已。"],
+    ["徘徊","pái huái","动词","在一个地方来回地走；比喻犹豫不决。","他在门口徘徊了很久才进去。"],
+    ["踌躇","chóu chú","动词","犹豫不决。","他踌躇了一会儿，终于做出了决定。"],
+    ["斟酌","zhēn zhuó","动词","反复考虑以后决定取舍。","这件事需要再斟酌一下。"],
+    ["琢磨","zhuó mo","动词","思索；考虑。","这个问题值得好好琢磨。"],
+    ["蕴含","yùn hán","动词","包含在内。","这篇文章蕴含着深刻的道理。"],
+    ["陶冶","táo yě","动词","烧制陶器和冶炼金属；比喻给人的思想、性格以有益的影响。","读书可以陶冶情操。"],
+    ["沉淀","chén diàn","动词/名词","溶液中难溶解的物质沉到底层；比喻凝聚，积累。","时间会让一切慢慢沉淀。"],
+    ["磨砺","mó lì","动词","摩擦使其锐利；比喻人经受磨练。","宝剑锋从磨砺出。"],
+    ["锲而不舍","qiè ér bù shě","成语","雕刻一件东西，一直刻下去不放手。比喻做事情有恒心有毅力。","只要锲而不舍，就没有克服不了的困难。"],
+    ["厚积薄发","hòu jī bó fā","成语","多多积蓄，慢慢放出。形容只有准备充分才能办好事情。","他多年的积累终于厚积薄发，取得了骄人的成绩。"],
+    ["循序渐进","xún xù jiàn jìn","成语","按照次序逐步深入或提高。","学习要循序渐进，不能急于求成。"],
+    ["博大精深","bó dà jīng shēn","成语","形容思想和学术广博高深。多形容理论、学识等。","中国传统文化博大精深。"],
+    ["源远流长","yuán yuǎn liú cháng","成语","河流的源头很远，水流很长。比喻历史悠久。","中华文明源远流长。"],
+    ["脚踏实地","jiǎo tà shí dì","成语","脚踏在坚实的土地上。比喻做事踏实，认真。","做人要脚踏实地。"],
+    ["栩栩如生","xǔ xǔ rú shēng","成语","形容画作、雕塑中的艺术形象等生动逼真，就像活的一样。","这幅画画得栩栩如生。"],
+    ["循规蹈矩","xún guī dǎo jǔ","成语","遵守规矩，不敢违反。","他是个循规蹈矩的人。"],
+    ["融会贯通","róng huì guàn tōng","成语","把各方面的知识和道理融化汇合，得到全面透彻的理解。","学习要注意融会贯通。"],
+    ["举一反三","jǔ yī fǎn sān","成语","从一件事情类推而知道其他许多事情。比喻善于学习，能够由此及彼。","好学生要学会举一反三。"],
+    ["孜孜不倦","zī zī bù juàn","成语","勤勤恳恳，不知疲倦。","他孜孜不倦地钻研学问。"],
+    ["任重道远","rèn zhòng dào yuǎn","成语","担子很重，路程遥远。比喻责任重大。","建设美好家园，我们任重道远。"],
+    ["风景","fēng jǐng","名词","一定地域内由山水、花草、树木、建筑物以及某些自然现象（如雨、雪）形成的可供人观赏的景象。","这里的风景非常优美。"],
+    ["故乡","gù xiāng","名词","出生或长期居住过的地方。","每个人心中都有一个美好的故乡。"],
+    ["童年","tóng nián","名词","儿童时期；幼年。","童年是人生中最无忧无虑的时光。"],
+    ["记忆","jì yì","名词/动词","过去的事物在脑中留下的印象；对过去事物的回忆。","这段美好的记忆将伴随我一生。"],
+    ["思念","sī niàn","动词","想念；怀念。","我非常思念远方的家人。"],
+    ["期待","qī dài","动词","期望；等待。","我们期待着美好的明天。"],
+    ["陪伴","péi bàn","动词","随同做伴。","父母的陪伴是孩子最好的礼物。"],
+    ["成长","chéng zhǎng","动词/名词","长大；生长。","每个人在成长过程中都会遇到困难。"],
+    ["挑战","tiǎo zhàn","名词/动词","激使对方出来应战；比喻鼓动对方与自己竞赛。","人生充满了各种挑战。"],
+    ["机遇","jī yù","名词","好的境遇，有利的时机。","机遇总是留给有准备的人。"],
+    ["奋斗","fèn dòu","动词","为了达到一定目的而努力干。","幸福是奋斗出来的。"],
+    ["收获","shōu huò","名词/动词","取得成熟的农作物；比喻取得的成绩或得到的结果。","今年秋天，农民们有了大收获。"],
+    ["微笑","wēi xiào","动词/名词","轻微地笑；不出声地笑。","她的微笑温暖了每个人的心。"],
+    ["拥抱","yōng bào","动词","搂抱。","妈妈紧紧地拥抱着孩子。"],
+    ["倾听","qīng tīng","动词","细心地听取。","我们要学会倾听别人的意见。"],
+    ["分享","fēn xiǎng","动词","和别人分着享受（欢乐、幸福、好处等）。","他喜欢和朋友分享快乐。"],
+    ["鼓励","gǔ lì","动词","激发；勉励。","老师的鼓励让他重新振作起来。"],
+    ["感动","gǎn dòng","动词/形容词","思想感情受外界事物的影响而激动。","他的故事深深地感动了我们。"],
+    ["温柔","wēn róu","形容词","温和柔顺。","她说话的声音很温柔。"],
+    ["浪漫","làng màn","形容词","富有诗意、充满幻想。","他给了她一个浪漫的惊喜。"],
+    ["执着","zhí zhuó","形容词","坚持不懈。","他对梦想的执着令人敬佩。"],
+    ["淡泊","dàn bó","形容词","对名利等不追求。","淡泊明志，宁静致远。"],
+    ["从容","cóng róng","形容词","不慌不忙，镇静沉着。","她从容不迫地完成了演讲。"],
+    ["豁达","huò dá","形容词","性格开朗；气量大。","他是一个豁达乐观的人。"],
+    ["睿智","ruì zhì","形容词","英明有远见。","他的睿智得到了大家的尊敬。"],
+    ["气质","qì zhì","名词","人的比较稳定的个性特点和风格气度。","她有一种与生俱来的优雅气质。"],
+    ["风度","fēng dù","名词","美好的举止姿态。","他的风度翩翩给人留下了深刻印象。"],
+    ["魅力","mèi lì","名词","极能吸引人的力量。","她有一种独特的人格魅力。"],
+    ["境界","jìng jiè","名词","事物所达到的程度或表现的情况。","他的书法已达到了很高的境界。"],
+    ["格局","gé jú","名词","结构和格式；对事物的认知范围。","一个人的格局决定了他的未来。"],
+    ["底蕴","dǐ yùn","名词","内心蕴藏的才智、思想等。","这座城市有着深厚的文化底蕴。"],
+    ["氛围","fēn wéi","名词","笼罩着某个场所的特殊气氛或情调。","节日的氛围非常浓厚。"],
+    ["沉默","chén mò","形容词/动词","不出声；不说话。","沉默是金。"],
+    ["启迪","qǐ dí","动词","开导；启发。","这本书给了我很大的启迪。"],
+    ["领悟","lǐng wù","动词","理解；领会。","经过老师的指点，他终于领悟了这道题的解法。"],
+    ["感悟","gǎn wù","动词/名词","有所感触而领悟。","读完这本书，我有很多感悟。"],
+    ["反思","fǎn sī","动词","回头、反过来思考。","我们应该经常反思自己的行为。"],
+    ["探索","tàn suǒ","动词","多方寻求答案；研究未知事物。","科学家不断探索宇宙的奥秘。"],
+    ["追求","zhuī qiú","动词","用积极的行动来争取达到某种目的。","每个人都有追求幸福的权利。"],
+    ["超越","chāo yuè","动词","超出；越过。","他不断超越自我，追求卓越。"],
+    ["突破","tū pò","动词/名词","集中兵力向一点进攻或反攻；打破困难或限制。","这项研究取得了重大突破。"],
+    ["飞跃","fēi yuè","动词/名词","比喻事物突飞猛进。","近年来，科技发展实现了巨大飞跃。"],
+    ["蜕变","tuì biàn","动词/名词","比喻人或事物发生质的变化。","经过几年的磨练，她完成了华丽的蜕变。"],
+    ["升华","shēng huá","动词","比喻事物的提高和精炼。","他把个人经历升华为艺术作品。"],
+    ["积累","jī lěi","动词/名词","逐渐聚集。","知识需要日积月累。"],
+    ["沉淀","chén diàn","动词/名词","凝聚、积累。","岁月的沉淀让他更加沉稳。"],
+    ["传承","chuán chéng","动词/名词","传授和继承。","我们要传承中华民族的优秀文化。"],
+    ["担当","dān dāng","动词/名词","承担；担负（任务、责任等）。","年轻人要有担当精神。"],
+    ["奉献","fèng xiàn","动词","恭敬地交付、呈献。","无私奉献是一种高尚的品德。"],
+    ["坦然","tǎn rán","形容词","坦白，心安；形容心里平静、无顾虑。","面对结果，他坦然接受。"],
+    ["释然","shì rán","形容词","疑虑消除后心中平静的样子。","听了他的解释，我终于释然了。"],
+    ["欣慰","xīn wèi","形容词","喜欢而心安。","看到孩子的进步，父母感到很欣慰。"],
+    ["满足","mǎn zú","动词/形容词","感到已经足够了。","他对现在的生活很满足。"],
+    ["充实","chōng shí","形容词/动词","丰富；充足。","每天都过得很充实。"],
+    ["精彩","jīng cǎi","形容词","（表演、展览、言论、文章等）优美；出色。","这场比赛非常精彩。"],
+    ["辉煌","huī huáng","形容词","光辉灿烂的；也用来形容成绩等十分显著。","他取得了辉煌的成就。"],
+    ["壮丽","zhuàng lì","形容词","雄壮而美丽。","长城的壮丽景色令人叹为观止。"],
+    ["宏伟","hóng wěi","形容词","（规模、计划等）雄壮而伟大。","这座建筑非常宏伟。"],
+    ["浩瀚","hào hàn","形容词","水势盛大的样子；也形容广大、壮观。","浩瀚的宇宙中有无数颗星星。"],
+    ["永恒","yǒng héng","形容词","永远不变。","真爱是永恒的。"],
+    ["瞬间","shùn jiān","名词","一眨眼的工夫；刹那。","美好的瞬间值得珍藏。"],
+    ["岁月","suì yuè","名词","年月，泛指时间。","岁月如歌，转瞬即逝。"],
+    ["光阴","guāng yīn","名词","时间。","光阴似箭，日月如梭。"],
+    ["沧桑","cāng sāng","名词","比喻世事变化很大。","老人饱经沧桑的脸上写满了故事。"],
+    ["蹉跎","cuō tuó","动词","光阴白白地过去；虚度光阴。","莫等闲，白了少年头，空悲切，不要蹉跎岁月。"],
+    ["恍惚","huǎng hū","形容词","神志不清；精神不集中。","他恍惚间看到了一个熟悉的身影。"],
+    ["朦胧","méng lóng","形容词","月光不明；看不清楚。","月色朦胧的夜晚格外美丽。"],
+    ["飘渺","piāo miǎo","形容词","隐隐约约，若有若无。","远处的山峰在云雾中若隐若现，飘渺如仙境。"],
+    ["绚丽","xuàn lì","形容词","灿烂美丽。","秋天的枫叶绚丽多彩。"],
+    ["旖旎","yǐ nǐ","形容词","柔美的样子。","湖边风光旖旎。"],
+    ["斑斓","bān lán","形容词","灿烂多彩。","蝴蝶的翅膀色彩斑斓。"],
+    ["婉约","wǎn yuē","形容词","婉转含蓄。","她的歌声婉约动听。"],
+    ["典雅","diǎn yǎ","形容词","优美不粗俗。","这间茶室布置得十分典雅。"],
+    ["素雅","sù yǎ","形容词","素净雅致。","她穿了一件素雅的旗袍。"],
+    ["古朴","gǔ pǔ","形容词","古老而质朴。","这座小镇保留着古朴的风貌。"],
+    ["清幽","qīng yōu","形容词","（风景）秀丽而幽静。","山间小路清幽宜人。"],
+    ["宁静","níng jìng","形容词","（环境、心情）安静；平静。","夜晚的湖面宁静如镜。"],
+    ["祥和","xiáng hé","形容词","吉祥和顺。","村庄呈现出一片祥和的景象。"]
+  ];
+
+  var inputEl = document.getElementById('explainInput');
+  var btn = document.getElementById('explainBtn');
+  var resultsEl = document.getElementById('explainResults');
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  function doSearch() {
+    var keyword = inputEl.value.trim();
+    if (!keyword) {
+      resultsEl.innerHTML = '<div class="explain-empty">请输入词语进行查询，支持精确匹配和模糊搜索</div>';
+      return;
+    }
+
+    // Exact match first, then partial match
+    var exactMatches = [];
+    var partialMatches = [];
+
+    dictionary.forEach(function(item) {
+      if (item[0] === keyword) {
+        exactMatches.push(item);
+      } else if (item[0].indexOf(keyword) !== -1 || keyword.indexOf(item[0]) !== -1) {
+        partialMatches.push(item);
+      }
+    });
+
+    var matches = exactMatches.concat(partialMatches).slice(0, 3);
+
+    if (matches.length === 0) {
+      resultsEl.innerHTML = '<div class="explain-empty">未找到与"' + escapeHtml(keyword) + '"相关的词语注解，请换个词语试试</div>';
+      return;
+    }
+
+    var html = '<div class="result-header">展示结果（共 <b>' + matches.length + '</b> 条）</div>';
+    matches.forEach(function(item, idx) {
+      html += '<div class="explain-card">'
+        + '<div class="explain-card-header">'
+        + '<span class="explain-word">' + escapeHtml(item[0]) + '</span>'
+        + '<span class="explain-pinyin">[' + escapeHtml(item[1]) + ']</span>'
+        + '<span class="explain-tag">' + escapeHtml(item[2]) + '</span>'
+        + '</div>'
+        + '<div class="explain-def">' + escapeHtml(item[3]) + '</div>'
+        + '<div class="explain-divider"></div>'
+        + '<div class="explain-example">' + escapeHtml(item[4]) + '</div>'
+        + '</div>';
+    });
+    resultsEl.innerHTML = html;
+  }
+
+  btn.addEventListener('click', doSearch);
+  inputEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doSearch();
+  });
+})();
+</script>
+</body>
+</html>

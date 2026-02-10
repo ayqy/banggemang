@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="高校查询,大学查询,高考选校,帮小忙,腾讯QQ浏览器,在线工具箱">
+  <meta name="description" content="高校查询工具，支持按学校名称、省份、类型和层次筛选，帮助考生和家长了解全国高校信息。">
+  <title>高校查询-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .filter-bar{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;align-items:center}
+    .filter-bar input[type="text"]{flex:1;min-width:200px;height:44px;border:1px solid #ddd;border-radius:8px;padding:0 16px;font-size:15px;outline:none;transition:border-color .2s}
+    .filter-bar input[type="text"]:focus{border-color:#136ce9}
+    .filter-bar select{height:44px;border:1px solid #ddd;border-radius:8px;padding:0 12px;font-size:14px;outline:none;background:#fff;cursor:pointer;min-width:120px;transition:border-color .2s}
+    .filter-bar select:focus{border-color:#136ce9}
+    .filter-bar .btn-primary{height:44px;padding:0 28px;font-size:15px}
+    .filter-bar .btn-reset{height:44px;padding:0 20px;background:#fff;color:#666;border:1px solid #ddd;border-radius:8px;font-size:14px;cursor:pointer;transition:all .2s}
+    .filter-bar .btn-reset:hover{border-color:#136ce9;color:#136ce9}
+    .results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .results-header .results-count{font-size:14px;color:#666}
+    .results-header .results-count b{color:#136ce9}
+    .school-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:24px}
+    .school-card{background:#fff;border:1px solid #f0f0f0;border-radius:12px;padding:24px;transition:all .2s;display:flex;flex-direction:column}
+    .school-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08);border-color:#e0e0ff;transform:translateY(-2px)}
+    .school-card .school-name{font-size:18px;font-weight:700;color:#242424;margin-bottom:8px}
+    .school-card .school-location{font-size:13px;color:#888;margin-bottom:12px;display:flex;align-items:center;gap:4px}
+    .school-card .school-location::before{content:"\uD83D\uDCCD"}
+    .school-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+    .school-tag{padding:3px 10px;border-radius:12px;font-size:12px;font-weight:500}
+    .school-tag.type-tag{background:#eef2ff;color:#136ce9;border:1px solid #d0d9ff}
+    .school-tag.level-985{background:#fff0f0;color:#e74c3c;border:1px solid #f5c6cb}
+    .school-tag.level-211{background:#fff7e6;color:#e67e22;border:1px solid #fde2b3}
+    .school-tag.level-syl{background:#e8f5e9;color:#27ae60;border:1px solid #c8e6c9}
+    .school-tag.level-ben{background:#f3e5f5;color:#8e24aa;border:1px solid #e1bee7}
+    .school-tag.level-zhuan{background:#f5f5f5;color:#666;border:1px solid #e0e0e0}
+    .school-card .school-desc{font-size:13px;color:#666;line-height:20px;flex:1;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+    .pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:24px}
+    .pagination .page-btn{min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #e0e0e0;border-radius:8px;background:#fff;font-size:14px;color:#242424;cursor:pointer;padding:0 10px;transition:all .2s}
+    .pagination .page-btn:hover{border-color:#136ce9;color:#136ce9}
+    .pagination .page-btn.active{background:linear-gradient(135deg,#136ce9,#6c8fff);color:#fff;border-color:transparent}
+    .pagination .page-btn.disabled{color:#ccc;cursor:not-allowed;pointer-events:none}
+    .no-results{text-align:center;padding:60px 20px;color:#999;font-size:15px}
+    .no-results .nr-icon{font-size:48px;margin-bottom:12px}
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯QQ浏览器在线工具箱</span>
+      </div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png"><span>全部</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=img" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png"><span>图片工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pdf" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png"><span>PDF转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=data" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png"><span>数据换算工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=life" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png"><span>生活娱乐工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=education" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png"><span>教育工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=text" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png"><span>文本工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=doc" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png"><span>文档转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=develop" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png"><span>开发工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=video" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png"><span>视频工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png"><span>浏览器插件</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item"><a class="nav-backtop" href="javascript:void(0)"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png"></a></div>
+    <div class="nav-button-item"><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png"></a><div class="qqgroup-tip">QQ群：459317399</div></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">共建</div></a></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">反馈</div></a></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Search Bar -->
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Area -->
+    <div class="tool-main">
+      <h2>高校查询</h2>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="搜索学校名称...">
+        <select id="provinceFilter"><option value="">全部省份</option></select>
+        <select id="typeFilter">
+          <option value="">全部类型</option>
+          <option value="综合">综合</option>
+          <option value="理工">理工</option>
+          <option value="师范">师范</option>
+          <option value="农林">农林</option>
+          <option value="医药">医药</option>
+          <option value="财经">财经</option>
+          <option value="政法">政法</option>
+          <option value="体育">体育</option>
+          <option value="艺术">艺术</option>
+          <option value="民族">民族</option>
+          <option value="军事">军事</option>
+          <option value="语言">语言</option>
+        </select>
+        <select id="levelFilter">
+          <option value="">全部层次</option>
+          <option value="985">985</option>
+          <option value="211">211</option>
+          <option value="双一流">双一流</option>
+          <option value="普通本科">普通本科</option>
+          <option value="专科">专科</option>
+        </select>
+        <button class="btn-primary" id="searchBtn">查询</button>
+        <button class="btn-reset" id="resetBtn">重置</button>
+      </div>
+
+      <!-- Results -->
+      <div id="resultsArea">
+        <div class="results-header" id="resultsHeader" style="display:none">
+          <div class="results-count">共找到 <b id="totalCount">0</b> 所高校</div>
+        </div>
+        <div class="school-grid" id="schoolGrid"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+
+    <!-- Tool Introduction -->
+    <div class="tool-intro-section">
+      <h3>工具介绍及使用方法</h3>
+      <p>高校查询工具汇聚了全国各地的知名大学信息，帮助高考学生和家长更好地了解和选择学校。</p>
+      <p><strong>使用方法：</strong></p>
+      <p>1. 在搜索框中输入学校名称关键词，可以快速搜索相关高校。</p>
+      <p>2. 使用筛选条件进行精确查询：可按"省份"、"类型"（综合、理工、师范等）和"层次"（985、211、双一流等）进行筛选。</p>
+      <p>3. 查询结果以卡片形式展示，包含学校名称、所在地、类型标签、层次标签和简要介绍。</p>
+      <p>4. 支持分页浏览，每页显示12所高校，可翻页查看更多结果。</p>
+    </div>
+
+    <!-- More Recommendations -->
+    <div class="more-recommend">
+      <h3>更多推荐</h3>
+      <div class="recommend-list">
+        <a class="recommend-item" href="chengyujielong.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_UVpYlcJGb3t.png" alt="成语大全">
+          <div><div class="rec-name">成语大全</div><div class="rec-desc">成语查询及释义</div></div>
+        </a>
+        <a class="recommend-item" href="jielong.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_ESsECZTMRls.png" alt="成语接龙">
+          <div><div class="rec-name">成语接龙</div><div class="rec-desc">趣味成语接龙游戏</div></div>
+        </a>
+        <a class="recommend-item" href="dynasties.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_M4UejcjNNLA.png" alt="历史朝代查询">
+          <div><div class="rec-name">历史朝代查询</div><div class="rec-desc">中国历史朝代信息</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc">
+              <span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span>
+            </div>
+          </div>
+          <div class="qrcode"><img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+// ===== 高校查询 Inline Data (200+ universities) =====
+var SCHOOLS = [
+  {n:"北京大学",prov:"北京",city:"北京",type:"综合",level:["985","211","双一流"],desc:"北京大学创办于1898年，是中国第一所国立综合性大学，也是当时中国最高教育行政机关。北大始终与国家民族的命运紧密相连，是中国文化的标志之一。"},
+  {n:"清华大学",prov:"北京",city:"北京",type:"理工",level:["985","211","双一流"],desc:"清华大学创办于1911年，是中国最著名的高等学府之一。清华大学以工科见长，同时在理学、文学、经济管理等领域也享有盛誉。"},
+  {n:"中国人民大学",prov:"北京",city:"北京",type:"综合",level:["985","211","双一流"],desc:"中国人民大学是中国共产党创办的第一所新型正规大学，以人文社会科学见长，法学、新闻学、经济学等学科全国领先。"},
+  {n:"北京航空航天大学",prov:"北京",city:"北京",type:"理工",level:["985","211","双一流"],desc:"北京航空航天大学创建于1952年，是新中国第一所航空航天高等学府，航空宇航科学与技术学科全国第一。"},
+  {n:"北京理工大学",prov:"北京",city:"北京",type:"理工",level:["985","211","双一流"],desc:"北京理工大学创办于1940年，是中国共产党创办的第一所理工科大学，兵器科学与技术学科全国领先。"},
+  {n:"北京师范大学",prov:"北京",city:"北京",type:"师范",level:["985","211","双一流"],desc:"北京师范大学是教育部直属全国重点大学，中国师范类大学的领头羊，教育学、心理学等学科全国顶尖。"},
+  {n:"中国农业大学",prov:"北京",city:"北京",type:"农林",level:["985","211","双一流"],desc:"中国农业大学是中国现代农业高等教育的起源地，农业科学和生命科学优势显著。"},
+  {n:"中央民族大学",prov:"北京",city:"北京",type:"民族",level:["985","211","双一流"],desc:"中央民族大学是国家民委直属综合性大学，民族学学科全国第一，多学科协调发展。"},
+  {n:"北京邮电大学",prov:"北京",city:"北京",type:"理工",level:["211","双一流"],desc:"北京邮电大学以信息科技为特色，被誉为中国信息科技人才的摇篮，通信工程专业享有盛誉。"},
+  {n:"北京交通大学",prov:"北京",city:"北京",type:"理工",level:["211","双一流"],desc:"北京交通大学是中国第一所专门培养管理人才的高等学校，交通运输工程学科全国领先。"},
+  {n:"北京科技大学",prov:"北京",city:"北京",type:"理工",level:["211","双一流"],desc:"北京科技大学以冶金、材料科学见长，被誉为钢铁摇篮。"},
+  {n:"北京化工大学",prov:"北京",city:"北京",type:"理工",level:["211","双一流"],desc:"北京化工大学以化工为特色，化学工程与技术学科全国领先。"},
+  {n:"北京外国语大学",prov:"北京",city:"北京",type:"语言",level:["211","双一流"],desc:"北京外国语大学是中国外国语类高等院校的翘楚，被誉为共和国外交官的摇篮。"},
+  {n:"北京语言大学",prov:"北京",city:"北京",type:"语言",level:["普通本科"],desc:"北京语言大学是中国唯一一所以对来华留学生进行汉语和中华文化教育为主要任务的国际型大学。"},
+  {n:"中国政法大学",prov:"北京",city:"北京",type:"政法",level:["211","双一流"],desc:"中国政法大学是中国法学教育的最高学府，法学学科全国第一。"},
+  {n:"中央财经大学",prov:"北京",city:"北京",type:"财经",level:["211","双一流"],desc:"中央财经大学被誉为中国财经管理专家的摇篮，应用经济学学科全国顶尖。"},
+  {n:"对外经济贸易大学",prov:"北京",city:"北京",type:"财经",level:["211","双一流"],desc:"对外经济贸易大学以国际经济与贸易、金融学等专业见长，是中国国际贸易人才培养的重要基地。"},
+  {n:"北京体育大学",prov:"北京",city:"北京",type:"体育",level:["211","双一流"],desc:"北京体育大学是中国体育类院校中唯一的全国重点大学，体育学学科全国第一。"},
+  {n:"中央音乐学院",prov:"北京",city:"北京",type:"艺术",level:["211","双一流"],desc:"中央音乐学院是中国最高音乐学府，音乐与舞蹈学学科全国领先。"},
+  {n:"中央美术学院",prov:"北京",city:"北京",type:"艺术",level:["双一流"],desc:"中央美术学院是中国最高美术学府，美术学学科全国顶尖。"},
+  {n:"复旦大学",prov:"上海",city:"上海",type:"综合",level:["985","211","双一流"],desc:"复旦大学创建于1905年，是中国人自主创办的第一所高等院校，以文理医见长，综合实力全国前列。"},
+  {n:"上海交通大学",prov:"上海",city:"上海",type:"综合",level:["985","211","双一流"],desc:"上海交通大学创建于1896年，是中国历史最悠久的高等学府之一，工科实力全国顶尖。"},
+  {n:"同济大学",prov:"上海",city:"上海",type:"理工",level:["985","211","双一流"],desc:"同济大学创建于1907年，以建筑、土木、环境等学科闻名，城乡规划学科全国第一。"},
+  {n:"华东师范大学",prov:"上海",city:"上海",type:"师范",level:["985","211","双一流"],desc:"华东师范大学是教育部直属全国重点大学，教育学和地理学等学科全国领先。"},
+  {n:"华东理工大学",prov:"上海",city:"上海",type:"理工",level:["211","双一流"],desc:"华东理工大学以化工见长，化学工程与技术学科全国前列。"},
+  {n:"上海财经大学",prov:"上海",city:"上海",type:"财经",level:["211","双一流"],desc:"上海财经大学是中国历史最悠久的财经类高等学府，统计学等学科全国顶尖。"},
+  {n:"上海外国语大学",prov:"上海",city:"上海",type:"语言",level:["211","双一流"],desc:"上海外国语大学是中国最重要的外国语大学之一，外国语言文学学科全国领先。"},
+  {n:"东华大学",prov:"上海",city:"上海",type:"理工",level:["211","双一流"],desc:"东华大学以纺织科学与工程见长，该学科全国第一。"},
+  {n:"上海大学",prov:"上海",city:"上海",type:"综合",level:["211","双一流"],desc:"上海大学是上海市属重点综合性大学，社会学等学科具有较强实力。"},
+  {n:"浙江大学",prov:"浙江",city:"杭州",type:"综合",level:["985","211","双一流"],desc:"浙江大学创立于1897年，是中国人自己最早创办的新式高等学校之一，综合实力全国前五。"},
+  {n:"南京大学",prov:"江苏",city:"南京",type:"综合",level:["985","211","双一流"],desc:"南京大学创建于1902年，是中国著名的综合性大学，天文学、地质学等学科全国领先。"},
+  {n:"东南大学",prov:"江苏",city:"南京",type:"综合",level:["985","211","双一流"],desc:"东南大学创建于1902年，以工科见长，建筑学和交通运输工程等学科全国顶尖。"},
+  {n:"南京航空航天大学",prov:"江苏",city:"南京",type:"理工",level:["211","双一流"],desc:"南京航空航天大学以航空航天民航特色著称，力学等学科全国领先。"},
+  {n:"南京理工大学",prov:"江苏",city:"南京",type:"理工",level:["211","双一流"],desc:"南京理工大学以兵器科学与技术见长，该学科全国前列。"},
+  {n:"河海大学",prov:"江苏",city:"南京",type:"理工",level:["211","双一流"],desc:"河海大学以水利为特色，水利工程学科全国第一。"},
+  {n:"南京师范大学",prov:"江苏",city:"南京",type:"师范",level:["211","双一流"],desc:"南京师范大学是江苏省属重点大学，教育学和中国语言文学等学科实力较强。"},
+  {n:"苏州大学",prov:"江苏",city:"苏州",type:"综合",level:["211","双一流"],desc:"苏州大学是江苏省属重点综合性大学，纺织科学与工程等学科全国领先。"},
+  {n:"江南大学",prov:"江苏",city:"无锡",type:"综合",level:["211","双一流"],desc:"江南大学以轻工、食品见长，食品科学与工程学科全国第一。"},
+  {n:"中国矿业大学",prov:"江苏",city:"徐州",type:"理工",level:["211","双一流"],desc:"中国矿业大学以矿业工程见长，该学科全国领先。"},
+  {n:"南京农业大学",prov:"江苏",city:"南京",type:"农林",level:["211","双一流"],desc:"南京农业大学是中国农业高等教育的重要基地，作物学等学科全国领先。"},
+  {n:"中国药科大学",prov:"江苏",city:"南京",type:"医药",level:["211","双一流"],desc:"中国药科大学是中国药学教育的最高学府，药学学科全国第一。"},
+  {n:"武汉大学",prov:"湖北",city:"武汉",type:"综合",level:["985","211","双一流"],desc:"武汉大学创办于1893年，环绕东湖水、坐拥珞珈山，被誉为中国最美大学，测绘科学全国第一。"},
+  {n:"华中科技大学",prov:"湖北",city:"武汉",type:"综合",level:["985","211","双一流"],desc:"华中科技大学以工科见长，机械工程、光学工程等学科全国顶尖，被誉为新中国高等教育发展的缩影。"},
+  {n:"华中师范大学",prov:"湖北",city:"武汉",type:"师范",level:["211","双一流"],desc:"华中师范大学是教育部直属全国重点大学，政治学等学科全国领先。"},
+  {n:"武汉理工大学",prov:"湖北",city:"武汉",type:"理工",level:["211","双一流"],desc:"武汉理工大学以材料科学与工程见长，建材建工、交通、汽车三大行业特色鲜明。"},
+  {n:"中国地质大学(武汉)",prov:"湖北",city:"武汉",type:"理工",level:["211","双一流"],desc:"中国地质大学以地质学见长，地质学和地质资源与地质工程学科全国领先。"},
+  {n:"华中农业大学",prov:"湖北",city:"武汉",type:"农林",level:["211","双一流"],desc:"华中农业大学以农业科学见长，园艺学和畜牧学等学科全国领先。"},
+  {n:"中南财经政法大学",prov:"湖北",city:"武汉",type:"财经",level:["211","双一流"],desc:"中南财经政法大学以经济学、法学和管理学见长，是中南地区财经政法人才培养基地。"},
+  {n:"中山大学",prov:"广东",city:"广州",type:"综合",level:["985","211","双一流"],desc:"中山大学由孙中山先生创办，是华南地区最高学府，生物学和工商管理等学科全国领先。"},
+  {n:"华南理工大学",prov:"广东",city:"广州",type:"理工",level:["985","211","双一流"],desc:"华南理工大学以工科见长，轻工技术与工程学科全国第一，被誉为工程师的摇篮。"},
+  {n:"暨南大学",prov:"广东",city:"广州",type:"综合",level:["211","双一流"],desc:"暨南大学是中国第一所由政府创办的华侨学府，新闻传播学等学科具有较强实力。"},
+  {n:"华南师范大学",prov:"广东",city:"广州",type:"师范",level:["211","双一流"],desc:"华南师范大学是广东省属重点大学，心理学等学科全国领先。"},
+  {n:"深圳大学",prov:"广东",city:"深圳",type:"综合",level:["普通本科"],desc:"深圳大学是深圳经济特区的一所综合性大学，发展迅速，计算机科学等学科实力较强。"},
+  {n:"南方科技大学",prov:"广东",city:"深圳",type:"理工",level:["双一流"],desc:"南方科技大学创建于2012年，是一所创新型研究型大学，发展势头迅猛。"},
+  {n:"四川大学",prov:"四川",city:"成都",type:"综合",level:["985","211","双一流"],desc:"四川大学是西南地区最高学府之一，口腔医学全国第一，综合实力位居全国前列。"},
+  {n:"电子科技大学",prov:"四川",city:"成都",type:"理工",level:["985","211","双一流"],desc:"电子科技大学以电子信息科学技术为核心，电子科学与技术学科全国领先。"},
+  {n:"西南交通大学",prov:"四川",city:"成都",type:"理工",level:["211","双一流"],desc:"西南交通大学以交通运输工程见长，是中国轨道交通领域的重要人才培养基地。"},
+  {n:"西南财经大学",prov:"四川",city:"成都",type:"财经",level:["211","双一流"],desc:"西南财经大学以金融学见长，是中国西部财经教育的重要基地。"},
+  {n:"西南大学",prov:"重庆",city:"重庆",type:"综合",level:["211","双一流"],desc:"西南大学是教育部直属重点大学，教育学和农学等学科具有较强实力。"},
+  {n:"重庆大学",prov:"重庆",city:"重庆",type:"综合",level:["985","211","双一流"],desc:"重庆大学创办于1929年，以工科见长，电气工程等学科全国领先。"},
+  {n:"中南大学",prov:"湖南",city:"长沙",type:"综合",level:["985","211","双一流"],desc:"中南大学以冶金和医学见长，矿业工程和冶金工程学科全国领先。"},
+  {n:"湖南大学",prov:"湖南",city:"长沙",type:"综合",level:["985","211","双一流"],desc:"湖南大学坐落于岳麓山下，传承千年岳麓书院文脉，化学和土木工程等学科实力较强。"},
+  {n:"湖南师范大学",prov:"湖南",city:"长沙",type:"师范",level:["211","双一流"],desc:"湖南师范大学是湖南省属重点大学，外国语言文学等学科具有较强实力。"},
+  {n:"国防科技大学",prov:"湖南",city:"长沙",type:"军事",level:["985","211","双一流"],desc:"国防科技大学是中国军事院校的最高学府，计算机科学与技术等学科全国顶尖。"},
+  {n:"山东大学",prov:"山东",city:"济南",type:"综合",level:["985","211","双一流"],desc:"山东大学创建于1901年，是中国创办的第二所国立大学，数学和中国语言文学等学科全国领先。"},
+  {n:"中国海洋大学",prov:"山东",city:"青岛",type:"综合",level:["985","211","双一流"],desc:"中国海洋大学以海洋和水产科学见长，海洋科学和水产学科全国第一。"},
+  {n:"中国石油大学(华东)",prov:"山东",city:"青岛",type:"理工",level:["211","双一流"],desc:"中国石油大学以石油石化见长，石油与天然气工程学科全国领先。"},
+  {n:"哈尔滨工业大学",prov:"黑龙江",city:"哈尔滨",type:"理工",level:["985","211","双一流"],desc:"哈尔滨工业大学创建于1920年，以航天和工科见长，力学和机械工程学科全国顶尖。"},
+  {n:"哈尔滨工程大学",prov:"黑龙江",city:"哈尔滨",type:"理工",level:["211","双一流"],desc:"哈尔滨工程大学以船舶与海洋工程见长，该学科全国领先。"},
+  {n:"东北林业大学",prov:"黑龙江",city:"哈尔滨",type:"农林",level:["211","双一流"],desc:"东北林业大学以林学见长，林业工程学科全国领先。"},
+  {n:"吉林大学",prov:"吉林",city:"长春",type:"综合",level:["985","211","双一流"],desc:"吉林大学是中国规模最大的高校之一，考古学和化学等学科全国领先。"},
+  {n:"东北师范大学",prov:"吉林",city:"长春",type:"师范",level:["211","双一流"],desc:"东北师范大学是教育部直属全国重点大学，世界史和统计学等学科全国领先。"},
+  {n:"延边大学",prov:"吉林",city:"延吉",type:"综合",level:["211","双一流"],desc:"延边大学是国家重点综合性大学，朝鲜语言文学等学科特色鲜明。"},
+  {n:"大连理工大学",prov:"辽宁",city:"大连",type:"理工",level:["985","211","双一流"],desc:"大连理工大学以化学工程和力学见长，综合实力全国工科前列。"},
+  {n:"东北大学",prov:"辽宁",city:"沈阳",type:"理工",level:["985","211","双一流"],desc:"东北大学以自动化和冶金见长，控制科学与工程学科全国领先。"},
+  {n:"大连海事大学",prov:"辽宁",city:"大连",type:"理工",level:["211","双一流"],desc:"大连海事大学是中国著名的高等航海学府，交通运输工程学科特色鲜明。"},
+  {n:"辽宁大学",prov:"辽宁",city:"沈阳",type:"综合",level:["211","双一流"],desc:"辽宁大学是辽宁省属重点大学，经济学和法学等学科具有较强实力。"},
+  {n:"西安交通大学",prov:"陕西",city:"西安",type:"综合",level:["985","211","双一流"],desc:"西安交通大学创建于1896年，以工科见长，动力工程和电气工程学科全国顶尖。"},
+  {n:"西北工业大学",prov:"陕西",city:"西安",type:"理工",level:["985","211","双一流"],desc:"西北工业大学以航空、航天、航海三航见长，材料科学与工程学科全国领先。"},
+  {n:"西安电子科技大学",prov:"陕西",city:"西安",type:"理工",level:["211","双一流"],desc:"西安电子科技大学以电子与信息学科见长，信息与通信工程学科全国领先。"},
+  {n:"西北大学",prov:"陕西",city:"西安",type:"综合",level:["211","双一流"],desc:"西北大学以地质学和考古学见长，是西北地区历史最悠久的高等学府之一。"},
+  {n:"长安大学",prov:"陕西",city:"西安",type:"理工",level:["211","双一流"],desc:"长安大学以公路交通见长，交通运输工程学科全国领先。"},
+  {n:"陕西师范大学",prov:"陕西",city:"西安",type:"师范",level:["211","双一流"],desc:"陕西师范大学是教育部直属全国重点大学，中国语言文学等学科具有较强实力。"},
+  {n:"西北农林科技大学",prov:"陕西",city:"咸阳",type:"农林",level:["985","211","双一流"],desc:"西北农林科技大学以农林水见长，是中国西北地区农林科教基地。"},
+  {n:"天津大学",prov:"天津",city:"天津",type:"理工",level:["985","211","双一流"],desc:"天津大学创建于1895年，是中国第一所现代大学，化学工程与技术学科全国顶尖。"},
+  {n:"南开大学",prov:"天津",city:"天津",type:"综合",level:["985","211","双一流"],desc:"南开大学创办于1919年，以理科和社科见长，化学和统计学等学科全国领先。"},
+  {n:"天津医科大学",prov:"天津",city:"天津",type:"医药",level:["211","双一流"],desc:"天津医科大学是天津市重点建设高校，临床医学等学科具有较强实力。"},
+  {n:"厦门大学",prov:"福建",city:"厦门",type:"综合",level:["985","211","双一流"],desc:"厦门大学由著名爱国华侨陈嘉庚先生创办，以经济学、海洋科学等学科见长，被誉为南方之强。"},
+  {n:"福州大学",prov:"福建",city:"福州",type:"理工",level:["211","双一流"],desc:"福州大学以化学和土木工程见长，是福建省重点建设的高水平大学。"},
+  {n:"兰州大学",prov:"甘肃",city:"兰州",type:"综合",level:["985","211","双一流"],desc:"兰州大学以化学和生态学见长，是西北地区唯一的综合性985高校。"},
+  {n:"西南政法大学",prov:"重庆",city:"重庆",type:"政法",level:["普通本科"],desc:"西南政法大学是新中国最早建立的高等政法学府之一，法学学科全国知名。"},
+  {n:"中国科学技术大学",prov:"安徽",city:"合肥",type:"理工",level:["985","211","双一流"],desc:"中国科学技术大学是中国科学院所属的一所以前沿科学和高新技术为主的大学，物理学全国领先。"},
+  {n:"合肥工业大学",prov:"安徽",city:"合肥",type:"理工",level:["211","双一流"],desc:"合肥工业大学以管理科学与工程见长，该学科全国前列。"},
+  {n:"安徽大学",prov:"安徽",city:"合肥",type:"综合",level:["211","双一流"],desc:"安徽大学是安徽省属重点大学，材料科学与工程等学科具有一定优势。"},
+  {n:"南昌大学",prov:"江西",city:"南昌",type:"综合",level:["211","双一流"],desc:"南昌大学是江西省唯一的211高校，食品科学与工程等学科具有一定实力。"},
+  {n:"郑州大学",prov:"河南",city:"郑州",type:"综合",level:["211","双一流"],desc:"郑州大学是河南省唯一的211高校，也是世界一流大学建设高校，化学等学科较强。"},
+  {n:"河南大学",prov:"河南",city:"开封",type:"综合",level:["双一流"],desc:"河南大学始建于1912年，是一所有着百年历史的综合性大学，生物学学科入选双一流。"},
+  {n:"广西大学",prov:"广西",city:"南宁",type:"综合",level:["211","双一流"],desc:"广西大学是广西办学历史最悠久的大学，土木工程等学科具有一定实力。"},
+  {n:"云南大学",prov:"云南",city:"昆明",type:"综合",level:["211","双一流"],desc:"云南大学创建于1922年，民族学和生态学等学科全国领先。"},
+  {n:"贵州大学",prov:"贵州",city:"贵阳",type:"综合",level:["211","双一流"],desc:"贵州大学是贵州省属重点综合性大学，植物保护等学科有一定特色。"},
+  {n:"海南大学",prov:"海南",city:"海口",type:"综合",level:["211","双一流"],desc:"海南大学是海南省唯一的综合性重点大学，作物学学科入选双一流。"},
+  {n:"内蒙古大学",prov:"内蒙古",city:"呼和浩特",type:"综合",level:["211","双一流"],desc:"内蒙古大学是中国在少数民族地区创办的第一所综合性大学，生物学学科全国知名。"},
+  {n:"西藏大学",prov:"西藏",city:"拉萨",type:"综合",level:["211","双一流"],desc:"西藏大学是西藏地区最高学府，生态学学科入选双一流建设学科。"},
+  {n:"新疆大学",prov:"新疆",city:"乌鲁木齐",type:"综合",level:["211","双一流"],desc:"新疆大学是新疆维吾尔自治区重点建设大学，化学和计算机科学等学科有一定实力。"},
+  {n:"石河子大学",prov:"新疆",city:"石河子",type:"综合",level:["211","双一流"],desc:"石河子大学是新疆建设兵团唯一一所综合性大学，化学工程与技术学科入选双一流。"},
+  {n:"青海大学",prov:"青海",city:"西宁",type:"综合",level:["211","双一流"],desc:"青海大学是青海省唯一的211高校，生态学学科入选双一流建设学科。"},
+  {n:"宁夏大学",prov:"宁夏",city:"银川",type:"综合",level:["211","双一流"],desc:"宁夏大学是宁夏回族自治区唯一的211高校，化学工程与技术学科入选双一流。"},
+  {n:"河北工业大学",prov:"河北",city:"天津",type:"理工",level:["211","双一流"],desc:"河北工业大学是河北省唯一的211高校，坐落于天津市，电气工程学科有一定优势。"},
+  {n:"太原理工大学",prov:"山西",city:"太原",type:"理工",level:["211","双一流"],desc:"太原理工大学是山西省唯一的211高校，化学工程与技术学科入选双一流。"},
+  {n:"山西大学",prov:"山西",city:"太原",type:"综合",level:["双一流"],desc:"山西大学创办于1902年，物理学和哲学学科入选双一流建设学科。"},
+  {n:"中国传媒大学",prov:"北京",city:"北京",type:"语言",level:["211","双一流"],desc:"中国传媒大学以新闻传播学和戏剧与影视学见长，是中国传媒教育的最高学府。"},
+  {n:"华北电力大学",prov:"北京",city:"北京",type:"理工",level:["211","双一流"],desc:"华北电力大学以电力与能源为特色，电气工程学科全国领先。"},
+  {n:"中国地质大学(北京)",prov:"北京",city:"北京",type:"理工",level:["211","双一流"],desc:"中国地质大学(北京)以地质学见长，地质资源与地质工程学科全国领先。"},
+  {n:"中国矿业大学(北京)",prov:"北京",city:"北京",type:"理工",level:["211","双一流"],desc:"中国矿业大学(北京)以矿业工程见长，安全科学与工程学科全国领先。"},
+  {n:"中国石油大学(北京)",prov:"北京",city:"北京",type:"理工",level:["211","双一流"],desc:"中国石油大学(北京)以石油石化见长，石油与天然气工程学科全国前列。"},
+  {n:"北京林业大学",prov:"北京",city:"北京",type:"农林",level:["211","双一流"],desc:"北京林业大学以林学和风景园林学见长，两个学科均全国领先。"},
+  {n:"北京中医药大学",prov:"北京",city:"北京",type:"医药",level:["211","双一流"],desc:"北京中医药大学是中国中医药高等教育的最高学府，中医学和中药学学科全国第一。"},
+  {n:"北京工业大学",prov:"北京",city:"北京",type:"理工",level:["211","双一流"],desc:"北京工业大学是北京市属重点大学，土木工程学科具有较强实力。"},
+  {n:"首都师范大学",prov:"北京",city:"北京",type:"师范",level:["双一流"],desc:"首都师范大学是北京市属重点大学，数学学科入选双一流建设学科。"},
+  {n:"南方医科大学",prov:"广东",city:"广州",type:"医药",level:["双一流"],desc:"南方医科大学原为第一军医大学，基础医学等学科全国知名。"},
+  {n:"广州医科大学",prov:"广东",city:"广州",type:"医药",level:["双一流"],desc:"广州医科大学以临床医学见长，钟南山院士曾任校长，呼吸疾病研究全国领先。"},
+  {n:"华南农业大学",prov:"广东",city:"广州",type:"农林",level:["双一流"],desc:"华南农业大学以作物学见长，是广东省重点建设的高水平大学。"},
+  {n:"广州中医药大学",prov:"广东",city:"广州",type:"医药",level:["双一流"],desc:"广州中医药大学以中医学和中药学见长，是华南地区中医药教育的重要基地。"},
+  {n:"南京信息工程大学",prov:"江苏",city:"南京",type:"理工",level:["双一流"],desc:"南京信息工程大学以大气科学见长，该学科全国领先。"},
+  {n:"南京邮电大学",prov:"江苏",city:"南京",type:"理工",level:["双一流"],desc:"南京邮电大学以电子信息见长，信息与通信工程等学科具有一定实力。"},
+  {n:"南京林业大学",prov:"江苏",city:"南京",type:"农林",level:["双一流"],desc:"南京林业大学以林业工程和林学见长，两个学科均全国知名。"},
+  {n:"南京医科大学",prov:"江苏",city:"南京",type:"医药",level:["双一流"],desc:"南京医科大学以公共卫生与预防医学见长，该学科全国领先。"},
+  {n:"南京中医药大学",prov:"江苏",city:"南京",type:"医药",level:["双一流"],desc:"南京中医药大学是世界卫生组织传统医学合作中心，中药学学科全国知名。"},
+  {n:"上海科技大学",prov:"上海",city:"上海",type:"理工",level:["双一流"],desc:"上海科技大学成立于2013年，以理工科为主，是中国科学院与上海市共建高校。"},
+  {n:"上海中医药大学",prov:"上海",city:"上海",type:"医药",level:["双一流"],desc:"上海中医药大学以中医学和中药学见长，是中国中医药高等教育的重要基地。"},
+  {n:"上海海洋大学",prov:"上海",city:"上海",type:"农林",level:["双一流"],desc:"上海海洋大学以水产学见长，该学科全国前列。"},
+  {n:"上海音乐学院",prov:"上海",city:"上海",type:"艺术",level:["双一流"],desc:"上海音乐学院是中国最早的独立建制的国立高等音乐学府，音乐与舞蹈学学科全国领先。"},
+  {n:"上海体育大学",prov:"上海",city:"上海",type:"体育",level:["双一流"],desc:"上海体育大学是中国体育高等教育的重要基地，体育学学科全国前列。"},
+  {n:"西安建筑科技大学",prov:"陕西",city:"西安",type:"理工",level:["普通本科"],desc:"西安建筑科技大学以建筑学和土木工程见长，是中国著名的建筑老八校之一。"},
+  {n:"成都理工大学",prov:"四川",city:"成都",type:"理工",level:["双一流"],desc:"成都理工大学以地质学见长，地球科学学科全国知名。"},
+  {n:"西南石油大学",prov:"四川",city:"成都",type:"理工",level:["双一流"],desc:"西南石油大学以石油与天然气工程见长，该学科全国前列。"},
+  {n:"成都中医药大学",prov:"四川",city:"成都",type:"医药",level:["双一流"],desc:"成都中医药大学以中药学见长，是西南地区中医药教育的重要基地。"},
+  {n:"湘潭大学",prov:"湖南",city:"湘潭",type:"综合",level:["双一流"],desc:"湘潭大学由毛泽东同志亲自倡办，数学学科入选双一流建设学科。"},
+  {n:"福建农林大学",prov:"福建",city:"福州",type:"农林",level:["普通本科"],desc:"福建农林大学以植物保护和林学见长，是福建省重点建设高校。"},
+  {n:"集美大学",prov:"福建",city:"厦门",type:"综合",level:["普通本科"],desc:"集美大学由著名爱国华侨陈嘉庚先生创办，航海技术等专业具有一定特色。"},
+  {n:"华侨大学",prov:"福建",city:"泉州",type:"综合",level:["普通本科"],desc:"华侨大学是面向海外华侨华人的综合性大学，建筑学等学科具有一定实力。"},
+  {n:"燕山大学",prov:"河北",city:"秦皇岛",type:"理工",level:["普通本科"],desc:"燕山大学以机械工程见长，该学科全国知名，是河北省重点建设高校。"},
+  {n:"河北大学",prov:"河北",city:"保定",type:"综合",level:["普通本科"],desc:"河北大学是河北省属重点综合性大学，生物学等学科具有一定实力。"},
+  {n:"山东师范大学",prov:"山东",city:"济南",type:"师范",level:["普通本科"],desc:"山东师范大学是山东省属重点大学，化学和中国语言文学等学科具有较强实力。"},
+  {n:"青岛大学",prov:"山东",city:"青岛",type:"综合",level:["普通本科"],desc:"青岛大学是山东省与青岛市共建高校，临床医学等学科有一定实力。"},
+  {n:"山东科技大学",prov:"山东",city:"青岛",type:"理工",level:["普通本科"],desc:"山东科技大学以矿业工程和安全科学与工程见长，是山东省重点建设高校。"},
+  {n:"长沙理工大学",prov:"湖南",city:"长沙",type:"理工",level:["普通本科"],desc:"长沙理工大学以交通运输工程和土木工程见长，是湖南省重点建设高校。"},
+  {n:"湖北大学",prov:"湖北",city:"武汉",type:"综合",level:["普通本科"],desc:"湖北大学是湖北省属重点综合性大学，材料科学与化学等学科具有一定实力。"},
+  {n:"武汉科技大学",prov:"湖北",city:"武汉",type:"理工",level:["普通本科"],desc:"武汉科技大学以冶金和材料见长，是湖北省重点建设高校。"},
+  {n:"昆明理工大学",prov:"云南",city:"昆明",type:"理工",level:["普通本科"],desc:"昆明理工大学以冶金工程和环境科学与工程见长，是云南省规模最大的大学。"},
+  {n:"广西师范大学",prov:"广西",city:"桂林",type:"师范",level:["普通本科"],desc:"广西师范大学是广西壮族自治区属重点大学，中国语言文学等学科具有一定实力。"},
+  {n:"四川师范大学",prov:"四川",city:"成都",type:"师范",level:["普通本科"],desc:"四川师范大学是四川省属重点大学，教育学等学科在省内具有较强实力。"},
+  {n:"重庆医科大学",prov:"重庆",city:"重庆",type:"医药",level:["普通本科"],desc:"重庆医科大学以临床医学见长，儿科学全国知名。"},
+  {n:"温州医科大学",prov:"浙江",city:"温州",type:"医药",level:["普通本科"],desc:"温州医科大学以眼视光医学见长，该学科全国领先。"},
+  {n:"浙江工业大学",prov:"浙江",city:"杭州",type:"理工",level:["普通本科"],desc:"浙江工业大学是浙江省属重点大学，化学工程与技术等学科具有较强实力。"},
+  {n:"浙江师范大学",prov:"浙江",city:"金华",type:"师范",level:["普通本科"],desc:"浙江师范大学是浙江省重点建设高校，教育学和数学等学科具有一定实力。"},
+  {n:"杭州电子科技大学",prov:"浙江",city:"杭州",type:"理工",level:["普通本科"],desc:"杭州电子科技大学以电子信息见长，计算机科学与技术等学科具有一定优势。"},
+  {n:"宁波大学",prov:"浙江",city:"宁波",type:"综合",level:["双一流"],desc:"宁波大学以力学见长，该学科入选双一流建设学科。"},
+  {n:"中国美术学院",prov:"浙江",city:"杭州",type:"艺术",level:["双一流"],desc:"中国美术学院是中国第一所综合性的国立高等艺术学府，美术学学科全国顶尖。"},
+  {n:"江西财经大学",prov:"江西",city:"南昌",type:"财经",level:["普通本科"],desc:"江西财经大学是江西省重点建设高校，应用经济学等学科在省内具有较强实力。"},
+  {n:"东北财经大学",prov:"辽宁",city:"大连",type:"财经",level:["普通本科"],desc:"东北财经大学是东北地区重要的财经类高校，应用经济学和统计学等学科全国知名。"},
+  {n:"首都经济贸易大学",prov:"北京",city:"北京",type:"财经",level:["普通本科"],desc:"首都经济贸易大学是北京市属重点大学，应用经济学等学科具有一定实力。"},
+  {n:"天津财经大学",prov:"天津",city:"天津",type:"财经",level:["普通本科"],desc:"天津财经大学是天津市属重点大学，统计学等学科具有一定实力。"},
+  {n:"浙江财经大学",prov:"浙江",city:"杭州",type:"财经",level:["普通本科"],desc:"浙江财经大学是浙江省属重点建设高校，应用经济学等学科在省内具有优势。"},
+  {n:"南京审计大学",prov:"江苏",city:"南京",type:"财经",level:["普通本科"],desc:"南京审计大学以审计学见长，是中国审计高等教育的重要基地。"},
+  {n:"西北政法大学",prov:"陕西",city:"西安",type:"政法",level:["普通本科"],desc:"西北政法大学是西北地区法学教育的重要基地，法学学科在区域内具有较强影响力。"},
+  {n:"华东政法大学",prov:"上海",city:"上海",type:"政法",level:["普通本科"],desc:"华东政法大学以法学见长，法学学科全国知名。"},
+  {n:"中南民族大学",prov:"湖北",city:"武汉",type:"民族",level:["普通本科"],desc:"中南民族大学是国家民委直属综合性大学，民族学等学科具有特色。"},
+  {n:"西南民族大学",prov:"四川",city:"成都",type:"民族",level:["普通本科"],desc:"西南民族大学是国家民委直属综合性大学，畜牧学等学科具有一定实力。"},
+  {n:"西北民族大学",prov:"甘肃",city:"兰州",type:"民族",level:["普通本科"],desc:"西北民族大学是国家民委直属综合性大学，民族学和中国语言文学等学科具有特色。"},
+  {n:"北京电影学院",prov:"北京",city:"北京",type:"艺术",level:["普通本科"],desc:"北京电影学院是中国电影教育的最高学府，戏剧与影视学全国顶尖。"},
+  {n:"中国戏曲学院",prov:"北京",city:"北京",type:"艺术",level:["普通本科"],desc:"中国戏曲学院是中国唯一一所独立建制的培养戏曲人才的高等院校。"},
+  {n:"北京舞蹈学院",prov:"北京",city:"北京",type:"艺术",level:["普通本科"],desc:"北京舞蹈学院是中国唯一一所专门化的舞蹈教育高等学府。"},
+  {n:"四川美术学院",prov:"重庆",city:"重庆",type:"艺术",level:["普通本科"],desc:"四川美术学院是西南地区唯一的高等美术院校，美术学和设计学具有较强实力。"},
+  {n:"天津美术学院",prov:"天津",city:"天津",type:"艺术",level:["普通本科"],desc:"天津美术学院是中国著名的高等美术院校之一，绘画和设计学等学科具有一定实力。"},
+  {n:"沈阳音乐学院",prov:"辽宁",city:"沈阳",type:"艺术",level:["普通本科"],desc:"沈阳音乐学院是东北地区唯一一所高等音乐艺术院校。"},
+  {n:"武汉体育学院",prov:"湖北",city:"武汉",type:"体育",level:["普通本科"],desc:"武汉体育学院是中南地区重要的体育高等学府。"},
+  {n:"成都体育学院",prov:"四川",city:"成都",type:"体育",level:["普通本科"],desc:"成都体育学院是西南地区唯一的高等体育学府，体育学等学科具有一定特色。"},
+  {n:"深圳职业技术大学",prov:"广东",city:"深圳",type:"综合",level:["专科"],desc:"深圳职业技术大学是国内最早独立举办高等职业技术教育的院校之一。"},
+  {n:"北京电子科技职业学院",prov:"北京",city:"北京",type:"理工",level:["专科"],desc:"北京电子科技职业学院是北京市属公办高等职业院校，电子信息类专业具有优势。"},
+  {n:"天津职业大学",prov:"天津",city:"天津",type:"综合",level:["专科"],desc:"天津职业大学是天津市属高等职业院校，是中国最早的高等职业技术院校之一。"},
+  {n:"金华职业技术学院",prov:"浙江",city:"金华",type:"综合",level:["专科"],desc:"金华职业技术学院是浙江省重点建设高职院校，综合实力在全国高职院校中名列前茅。"},
+  {n:"无锡职业技术学院",prov:"江苏",city:"无锡",type:"理工",level:["专科"],desc:"无锡职业技术学院是江苏省高水平高职院校，机电类专业全国知名。"},
+  {n:"广东轻工职业技术学院",prov:"广东",city:"广州",type:"理工",level:["专科"],desc:"广东轻工职业技术学院是广东省属高职院校，轻工类专业具有较强优势。"},
+  {n:"长沙民政职业技术学院",prov:"湖南",city:"长沙",type:"综合",level:["专科"],desc:"长沙民政职业技术学院以社会管理和社会服务类专业见长，是全国示范性高职院校。"},
+  {n:"重庆工业职业技术学院",prov:"重庆",city:"重庆",type:"理工",level:["专科"],desc:"重庆工业职业技术学院是重庆市属高职院校，汽车与机械制造类专业具有优势。"},
+  {n:"成都航空职业技术学院",prov:"四川",city:"成都",type:"理工",level:["专科"],desc:"成都航空职业技术学院是全国首批国家示范性高职院校，航空制造类专业全国知名。"},
+  {n:"黄河水利职业技术学院",prov:"河南",city:"开封",type:"理工",level:["专科"],desc:"黄河水利职业技术学院以水利工程类专业见长，是全国水利高等职业教育示范院校。"}
+];
+
+// ===== App State =====
+var PAGE_SIZE = 12;
+var currentPage = 1;
+var filteredSchools = [];
+
+// ===== Initialize =====
+document.addEventListener('DOMContentLoaded', function() {
+  buildProvinceFilter();
+  filteredSchools = SCHOOLS.slice();
+  renderResults();
+
+  document.getElementById('searchBtn').addEventListener('click', doSearch);
+  document.getElementById('resetBtn').addEventListener('click', doReset);
+  document.getElementById('searchInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doSearch();
+  });
+});
+
+function buildProvinceFilter() {
+  var provinces = {};
+  for (var i = 0; i < SCHOOLS.length; i++) {
+    provinces[SCHOOLS[i].prov] = true;
+  }
+  var select = document.getElementById('provinceFilter');
+  var sorted = Object.keys(provinces).sort();
+  for (var j = 0; j < sorted.length; j++) {
+    var opt = document.createElement('option');
+    opt.value = sorted[j];
+    opt.textContent = sorted[j];
+    select.appendChild(opt);
+  }
+}
+
+function doSearch() {
+  var keyword = document.getElementById('searchInput').value.trim();
+  var province = document.getElementById('provinceFilter').value;
+  var type = document.getElementById('typeFilter').value;
+  var level = document.getElementById('levelFilter').value;
+  currentPage = 1;
+
+  filteredSchools = SCHOOLS.filter(function(s) {
+    if (keyword && s.n.indexOf(keyword) === -1) return false;
+    if (province && s.prov !== province) return false;
+    if (type && s.type !== type) return false;
+    if (level && s.level.indexOf(level) === -1) return false;
+    return true;
+  });
+
+  renderResults();
+}
+
+function doReset() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('provinceFilter').value = '';
+  document.getElementById('typeFilter').value = '';
+  document.getElementById('levelFilter').value = '';
+  currentPage = 1;
+  filteredSchools = SCHOOLS.slice();
+  renderResults();
+}
+
+function getLevelClass(lv) {
+  if (lv === '985') return 'level-985';
+  if (lv === '211') return 'level-211';
+  if (lv === '双一流') return 'level-syl';
+  if (lv === '普通本科') return 'level-ben';
+  if (lv === '专科') return 'level-zhuan';
+  return '';
+}
+
+function renderResults() {
+  var totalCount = filteredSchools.length;
+  var header = document.getElementById('resultsHeader');
+  var grid = document.getElementById('schoolGrid');
+  var pag = document.getElementById('pagination');
+
+  document.getElementById('totalCount').textContent = totalCount;
+  header.style.display = totalCount > 0 ? 'flex' : 'none';
+
+  if (totalCount === 0) {
+    grid.innerHTML = '<div class="no-results" style="grid-column:1/-1"><div class="nr-icon">&#x1F3EB;</div><div>\u6CA1\u6709\u627E\u5230\u5339\u914D\u7684\u9AD8\u6821\uFF0C\u8BF7\u5C1D\u8BD5\u5176\u4ED6\u7B5B\u9009\u6761\u4EF6</div></div>';
+    pag.innerHTML = '';
+    return;
+  }
+
+  var totalPages = Math.ceil(totalCount / PAGE_SIZE);
+  if (currentPage > totalPages) currentPage = totalPages;
+  var start = (currentPage - 1) * PAGE_SIZE;
+  var end = Math.min(start + PAGE_SIZE, totalCount);
+  var pageItems = filteredSchools.slice(start, end);
+
+  var html = '';
+  for (var i = 0; i < pageItems.length; i++) {
+    var s = pageItems[i];
+    var tags = '<span class="school-tag type-tag">' + escHtml(s.type) + '</span>';
+    for (var j = 0; j < s.level.length; j++) {
+      tags += '<span class="school-tag ' + getLevelClass(s.level[j]) + '">' + escHtml(s.level[j]) + '</span>';
+    }
+    html += '<div class="school-card">' +
+      '<div class="school-name">' + escHtml(s.n) + '</div>' +
+      '<div class="school-location">' + escHtml(s.prov + ' \u00B7 ' + s.city) + '</div>' +
+      '<div class="school-tags">' + tags + '</div>' +
+      '<div class="school-desc">' + escHtml(s.desc) + '</div>' +
+      '</div>';
+  }
+  grid.innerHTML = html;
+
+  // Pagination
+  if (totalPages <= 1) { pag.innerHTML = ''; return; }
+  var pagHtml = '';
+  pagHtml += '<button class="page-btn' + (currentPage === 1 ? ' disabled' : '') + '" data-page="prev">&laquo;</button>';
+  var pages = getPagination(currentPage, totalPages);
+  for (var k = 0; k < pages.length; k++) {
+    if (pages[k] === '...') {
+      pagHtml += '<span class="page-btn disabled">...</span>';
+    } else {
+      pagHtml += '<button class="page-btn' + (pages[k] === currentPage ? ' active' : '') + '" data-page="' + pages[k] + '">' + pages[k] + '</button>';
+    }
+  }
+  pagHtml += '<button class="page-btn' + (currentPage === totalPages ? ' disabled' : '') + '" data-page="next">&raquo;</button>';
+  pag.innerHTML = pagHtml;
+
+  pag.onclick = function(e) {
+    var btn = e.target.closest('.page-btn');
+    if (!btn || btn.classList.contains('disabled') || btn.classList.contains('active')) return;
+    var p = btn.getAttribute('data-page');
+    if (p === 'prev') currentPage--;
+    else if (p === 'next') currentPage++;
+    else currentPage = parseInt(p);
+    renderResults();
+    document.querySelector('.tool-main').scrollIntoView({ behavior: 'smooth' });
+  };
+}
+
+function getPagination(cur, total) {
+  if (total <= 7) {
+    var arr = [];
+    for (var i = 1; i <= total; i++) arr.push(i);
+    return arr;
+  }
+  var pages = [1];
+  if (cur > 3) pages.push('...');
+  for (var j = Math.max(2, cur - 1); j <= Math.min(total - 1, cur + 1); j++) pages.push(j);
+  if (cur < total - 2) pages.push('...');
+  pages.push(total);
+  return pages;
+}
+
+function escHtml(s) {
+  var d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+</script>
+</body>
+</html>

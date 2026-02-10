@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="成语大全,成语查询,成语词典,帮小忙,腾讯QQ浏览器,在线工具箱">
+  <meta name="description" content="成语大全查询工具，支持按汉字、拼音、笔画数查询成语，提供拼音、释义和例句。">
+  <title>成语大全-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .search-mode-group{display:flex;align-items:center;gap:24px;margin-bottom:16px}
+    .search-mode-group .mode-label{font-size:14px;color:#666;font-weight:500}
+    .search-mode-group label{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;color:#242424}
+    .search-mode-group input[type="radio"]{accent-color:#136ce9}
+    .helper-text{font-size:13px;color:#999;margin-bottom:16px}
+    .query-row{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+    .query-row input[type="text"]{flex:1;height:44px;border:1px solid #ddd;border-radius:8px;padding:0 16px;font-size:15px;outline:none;transition:border-color .2s}
+    .query-row input[type="text"]:focus{border-color:#136ce9}
+    .query-row .btn-primary{height:44px;padding:0 32px;font-size:15px}
+    .letter-index{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;padding:16px;background:#f6f7fa;border-radius:10px}
+    .letter-index .letter-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #e0e0e0;border-radius:8px;background:#fff;font-size:14px;font-weight:600;color:#136ce9;cursor:pointer;transition:all .2s}
+    .letter-index .letter-btn:hover,.letter-index .letter-btn.active{background:linear-gradient(135deg,#136ce9,#6c8fff);color:#fff;border-color:transparent}
+    .results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .results-header .results-count{font-size:14px;color:#666}
+    .results-header .results-count b{color:#136ce9}
+    .idiom-list{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+    .idiom-card{background:#fff;border:1px solid #f0f0f0;border-radius:10px;padding:20px;transition:all .2s}
+    .idiom-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06);border-color:#e0e0ff}
+    .idiom-card .idiom-name{font-size:20px;font-weight:700;color:#242424;margin-bottom:4px}
+    .idiom-card .idiom-pinyin{font-size:14px;color:#136ce9;margin-bottom:10px;font-style:italic}
+    .idiom-card .idiom-meaning{font-size:14px;color:#444;line-height:22px;margin-bottom:8px}
+    .idiom-card .idiom-meaning em{font-style:normal;font-weight:600;color:#242424}
+    .idiom-card .idiom-example{font-size:13px;color:#888;line-height:20px;padding-left:12px;border-left:3px solid #e0e0ff}
+    .pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:24px}
+    .pagination .page-btn{min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #e0e0e0;border-radius:8px;background:#fff;font-size:14px;color:#242424;cursor:pointer;padding:0 10px;transition:all .2s}
+    .pagination .page-btn:hover{border-color:#136ce9;color:#136ce9}
+    .pagination .page-btn.active{background:linear-gradient(135deg,#136ce9,#6c8fff);color:#fff;border-color:transparent}
+    .pagination .page-btn.disabled{color:#ccc;cursor:not-allowed;pointer-events:none}
+    .no-results{text-align:center;padding:60px 20px;color:#999;font-size:15px}
+    .no-results .nr-icon{font-size:48px;margin-bottom:12px}
+    .tool-intro-section{margin-top:40px;padding:0 20px 0 0}
+    .tool-intro-section h3{font-size:18px;font-weight:600;color:#242424;margin-bottom:16px}
+    .tool-intro-section p{font-size:14px;color:#666;line-height:24px;margin-bottom:10px}
+    .more-recommend{margin-top:40px;padding:0 20px 0 0}
+    .more-recommend h3{font-size:18px;font-weight:600;color:#242424;margin-bottom:16px}
+    .recommend-list{display:flex;gap:16px;flex-wrap:wrap}
+    .recommend-item{display:flex;align-items:center;padding:16px;background:#fff;border-radius:12px;border:1px solid #f0f0f0;cursor:pointer;flex:1;min-width:220px;transition:all .2s}
+    .recommend-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+    .recommend-item img{width:48px;height:48px;border-radius:10px;margin-right:12px}
+    .recommend-item .rec-name{font-size:15px;font-weight:500;color:#242424}
+    .recommend-item .rec-desc{font-size:12px;color:#8f8f8f;margin-top:4px}
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯QQ浏览器在线工具箱</span>
+      </div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png"><span>全部</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=img" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png"><span>图片工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pdf" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png"><span>PDF转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=data" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png"><span>数据换算工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=life" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png"><span>生活娱乐工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=education" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png"><span>教育工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=text" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png"><span>文本工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=doc" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png"><span>文档转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=develop" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png"><span>开发工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=video" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png"><span>视频工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png"><span>浏览器插件</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item"><a class="nav-backtop" href="javascript:void(0)"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png"></a></div>
+    <div class="nav-button-item"><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png"></a><div class="qqgroup-tip">QQ群：459317399</div></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">共建</div></a></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">反馈</div></a></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Search Bar -->
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Area -->
+    <div class="tool-main">
+      <h2>成语大全</h2>
+
+      <!-- Search Mode -->
+      <div class="search-mode-group">
+        <span class="mode-label">查询方式：</span>
+        <label><input type="radio" name="searchMode" value="char" checked> 汉字</label>
+        <label><input type="radio" name="searchMode" value="pinyin"> 拼音</label>
+        <label><input type="radio" name="searchMode" value="stroke"> 笔画数</label>
+      </div>
+      <div class="helper-text" id="helperText">例如："美"、"五十"</div>
+
+      <!-- Query Row -->
+      <div class="query-row">
+        <input type="text" id="queryInput" placeholder="请输入要查询的汉字...">
+        <button class="btn-primary" id="queryBtn">查询</button>
+      </div>
+
+      <!-- Letter Index -->
+      <div class="letter-index" id="letterIndex"></div>
+
+      <!-- Results -->
+      <div id="resultsArea">
+        <div class="results-header" id="resultsHeader" style="display:none">
+          <div class="results-count">共找到 <b id="totalCount">0</b> 条结果</div>
+        </div>
+        <div class="idiom-list" id="idiomList"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+
+    <!-- Tool Introduction -->
+    <div class="tool-intro-section">
+      <h3>工具介绍及使用方法</h3>
+      <p>成语大全查询工具收录了大量常用成语，支持多种查询方式，帮助您快速查找成语及其释义、拼音和例句。</p>
+      <p><strong>使用方法：</strong></p>
+      <p>1. 选择查询方式：可按"汉字"查询（输入成语中包含的汉字）、按"拼音"查询（输入成语首字拼音）或按"笔画数"查询（输入成语首字的笔画数）。</p>
+      <p>2. 在输入框中输入查询内容，点击"查询"按钮即可获得结果。</p>
+      <p>3. 也可以点击字母索引 A~Z 快速浏览以该字母开头的所有成语。</p>
+      <p>4. 查询结果包含成语的拼音标注、详细释义和使用例句，方便学习和使用。</p>
+    </div>
+
+    <!-- More Recommendations -->
+    <div class="more-recommend">
+      <h3>更多推荐</h3>
+      <div class="recommend-list">
+        <a class="recommend-item" href="jielong.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_ESsECZTMRls.png" alt="成语接龙">
+          <div><div class="rec-name">成语接龙</div><div class="rec-desc">趣味成语接龙游戏</div></div>
+        </a>
+        <a class="recommend-item" href="school.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_aI87pFy9qgC.png" alt="高校查询">
+          <div><div class="rec-name">高校查询</div><div class="rec-desc">全国高校信息查询</div></div>
+        </a>
+        <a class="recommend-item" href="allegory.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_LgMaUNruKSv.png" alt="歇后语">
+          <div><div class="rec-name">歇后语</div><div class="rec-desc">歇后语大全查询</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc">
+              <span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span>
+            </div>
+          </div>
+          <div class="qrcode"><img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+// ===== 成语大全 Inline Data (300+ idioms) =====
+var IDIOMS = [
+  {w:"一心一意",p:"yi xin yi yi",m:"形容做事专心，毫不分心。",e:"学习要一心一意，不能三心二意。",s:1,l:"Y"},
+  {w:"一马当先",p:"yi ma dang xian",m:"形容领先、带头。",e:"他总是一马当先，冲在最前面。",s:1,l:"Y"},
+  {w:"一帆风顺",p:"yi fan feng shun",m:"比喻非常顺利，没有任何阻碍。",e:"祝你新的一年一帆风顺。",s:1,l:"Y"},
+  {w:"一鸣惊人",p:"yi ming jing ren",m:"比喻平时没有突出的表现，一下子做出惊人的成绩。",e:"他平时不显山不露水，一鸣惊人地拿了冠军。",s:1,l:"Y"},
+  {w:"一见如故",p:"yi jian ru gu",m:"初次见面就像老朋友一样。",e:"两人一见如故，相谈甚欢。",s:1,l:"Y"},
+  {w:"一举两得",p:"yi ju liang de",m:"做一件事情得到两方面的好处。",e:"这个方案一举两得，既省钱又省时。",s:1,l:"Y"},
+  {w:"一目了然",p:"yi mu liao ran",m:"一眼就能看清楚。",e:"这张图表一目了然。",s:1,l:"Y"},
+  {w:"一诺千金",p:"yi nuo qian jin",m:"许下的一个诺言有千金的价值，形容说话算数。",e:"他是个一诺千金的人。",s:1,l:"Y"},
+  {w:"一落千丈",p:"yi luo qian zhang",m:"形容地位、境况急剧下降。",e:"公司业绩一落千丈。",s:1,l:"Y"},
+  {w:"一丝不苟",p:"yi si bu gou",m:"形容办事认真，连最细微的地方也不马虎。",e:"他对工作一丝不苟。",s:1,l:"Y"},
+  {w:"一箭双雕",p:"yi jian shuang diao",m:"一箭射中两只雕，比喻做一件事达到两个目的。",e:"这个计划一箭双雕。",s:1,l:"Y"},
+  {w:"一言九鼎",p:"yi yan jiu ding",m:"一句话的份量就像九鼎一样重，形容说话有分量。",e:"他一言九鼎，说到做到。",s:1,l:"Y"},
+  {w:"二话不说",p:"er hua bu shuo",m:"不说任何别的话，表示立刻行动。",e:"他二话不说就答应了。",s:2,l:"E"},
+  {w:"三心二意",p:"san xin er yi",m:"形容犹豫不决或意志不坚定。",e:"做事不能三心二意。",s:3,l:"S"},
+  {w:"三顾茅庐",p:"san gu mao lu",m:"比喻诚心诚意地邀请或拜访。",e:"刘备三顾茅庐请诸葛亮出山。",s:3,l:"S"},
+  {w:"三令五申",p:"san ling wu shen",m:"多次命令和告诫。",e:"老师三令五申不许迟到。",s:3,l:"S"},
+  {w:"四面楚歌",p:"si mian chu ge",m:"比喻孤立无援、四面受敌的困境。",e:"公司现在四面楚歌。",s:5,l:"S"},
+  {w:"四通八达",p:"si tong ba da",m:"形容交通极便利。",e:"这座城市四通八达。",s:5,l:"S"},
+  {w:"五花八门",p:"wu hua ba men",m:"比喻花样繁多或变幻莫测。",e:"市场上的商品五花八门。",s:4,l:"W"},
+  {w:"五颜六色",p:"wu yan liu se",m:"形容色彩复杂或花样繁多。",e:"花园里开满了五颜六色的花。",s:4,l:"W"},
+  {w:"五光十色",p:"wu guang shi se",m:"形容色泽绚丽，种类繁多。",e:"夜晚的霓虹灯五光十色。",s:4,l:"W"},
+  {w:"六神无主",p:"liu shen wu zhu",m:"形容惊慌着急，没了主意。",e:"听到消息后他六神无主。",s:4,l:"L"},
+  {w:"七上八下",p:"qi shang ba xia",m:"形容心里慌乱不安。",e:"考试前他心里七上八下的。",s:2,l:"Q"},
+  {w:"八面玲珑",p:"ba mian ling long",m:"形容人处世圆滑，待人接物面面俱到。",e:"她八面玲珑，人缘极好。",s:2,l:"B"},
+  {w:"八仙过海",p:"ba xian guo hai",m:"比喻各自显示自己的能力和本领。",e:"八仙过海，各显神通。",s:2,l:"B"},
+  {w:"九牛一毛",p:"jiu niu yi mao",m:"比喻极大数量中微不足道的数量。",e:"这点损失对他来说九牛一毛。",s:2,l:"J"},
+  {w:"九死一生",p:"jiu si yi sheng",m:"形容经历极大危险而幸存。",e:"他在那次事故中九死一生。",s:2,l:"J"},
+  {w:"十全十美",p:"shi quan shi mei",m:"各方面都非常完美，毫无缺陷。",e:"世上没有十全十美的事。",s:2,l:"S"},
+  {w:"十拿九稳",p:"shi na jiu wen",m:"比喻很有把握。",e:"这件事十拿九稳。",s:2,l:"S"},
+  {w:"百发百中",p:"bai fa bai zhong",m:"形容射箭或射击非常准确。也比喻做事有充分把握。",e:"他是神枪手，百发百中。",s:6,l:"B"},
+  {w:"百折不挠",p:"bai zhe bu nao",m:"比喻意志坚强，无论受到多少挫折都不退缩。",e:"她百折不挠地追求梦想。",s:6,l:"B"},
+  {w:"百里挑一",p:"bai li tiao yi",m:"一百个里面挑选出一个，形容极为优秀。",e:"她是百里挑一的人才。",s:6,l:"B"},
+  {w:"百闻不如一见",p:"bai wen bu ru yi jian",m:"听到一百次不如亲眼看到一次。",e:"百闻不如一见，你自己去看看吧。",s:6,l:"B"},
+  {w:"千军万马",p:"qian jun wan ma",m:"形容雄壮的队伍或浩大的声势。",e:"考公务员犹如千军万马过独木桥。",s:3,l:"Q"},
+  {w:"千方百计",p:"qian fang bai ji",m:"想尽一切办法。",e:"他千方百计地想要完成任务。",s:3,l:"Q"},
+  {w:"千里迢迢",p:"qian li tiao tiao",m:"形容路途遥远。",e:"他千里迢迢赶来参加婚礼。",s:3,l:"Q"},
+  {w:"千变万化",p:"qian bian wan hua",m:"形容变化极多。",e:"天上的云千变万化。",s:3,l:"Q"},
+  {w:"万众一心",p:"wan zhong yi xin",m:"千万人一条心，形容团结一致。",e:"大家万众一心抗击灾害。",s:3,l:"W"},
+  {w:"万水千山",p:"wan shui qian shan",m:"形容路途遥远艰辛。",e:"不管万水千山，我都要找到你。",s:3,l:"W"},
+  {w:"万紫千红",p:"wan zi qian hong",m:"形容百花齐放，色彩艳丽。",e:"春天的花园万紫千红。",s:3,l:"W"},
+  {w:"安居乐业",p:"an ju le ye",m:"安定地生活，愉快地工作。",e:"人们安居乐业，生活幸福。",s:6,l:"A"},
+  {w:"安然无恙",p:"an ran wu yang",m:"平安无事，没有遭受损害或生病。",e:"经历台风后，一家人安然无恙。",s:6,l:"A"},
+  {w:"暗度陈仓",p:"an du chen cang",m:"比喻暗中进行某种活动。",e:"他明修栈道，暗度陈仓。",s:13,l:"A"},
+  {w:"爱不释手",p:"ai bu shi shou",m:"喜爱得舍不得放手。",e:"这本书让人爱不释手。",s:10,l:"A"},
+  {w:"爱屋及乌",p:"ai wu ji wu",m:"比喻爱一个人而连带地关心到与他有关的人或物。",e:"因为喜欢她，他爱屋及乌地喜欢上了她的朋友。",s:10,l:"A"},
+  {w:"昂首阔步",p:"ang shou kuo bu",m:"仰起头，迈着大步向前走。形容精神振奋。",e:"他昂首阔步地走上讲台。",s:8,l:"A"},
+  {w:"拔苗助长",p:"ba miao zhu zhang",m:"比喻违反客观规律，急于求成，反而把事情弄糟。",e:"教育孩子不能拔苗助长。",s:9,l:"B"},
+  {w:"班门弄斧",p:"ban men nong fu",m:"在行家面前卖弄本领。",e:"在他面前谈编程，简直是班门弄斧。",s:10,l:"B"},
+  {w:"半途而废",p:"ban tu er fei",m:"做事没有完成就中途停止了。",e:"做事不能半途而废。",s:5,l:"B"},
+  {w:"包罗万象",p:"bao luo wan xiang",m:"形容内容丰富，应有尽有。",e:"这本百科全书包罗万象。",s:5,l:"B"},
+  {w:"杯水车薪",p:"bei shui che xin",m:"比喻力量太小，对解决问题不起作用。",e:"这点资助对他来说不过是杯水车薪。",s:8,l:"B"},
+  {w:"背道而驰",p:"bei dao er chi",m:"朝相反方向走，比喻方向和目的完全相反。",e:"他的做法与初衷背道而驰。",s:9,l:"B"},
+  {w:"本末倒置",p:"ben mo dao zhi",m:"比喻把主要事物和次要事物搞反了。",e:"不要本末倒置，先把重要的事做好。",s:5,l:"B"},
+  {w:"笔走龙蛇",p:"bi zou long she",m:"形容书法生动有力。",e:"他的书法笔走龙蛇，气势磅礴。",s:10,l:"B"},
+  {w:"变本加厉",p:"bian ben jia li",m:"变得比原来更加严重。",e:"他的坏习惯变本加厉。",s:8,l:"B"},
+  {w:"别出心裁",p:"bie chu xin cai",m:"想出的办法独创一格，与众不同。",e:"她的设计总是别出心裁。",s:7,l:"B"},
+  {w:"冰天雪地",p:"bing tian xue di",m:"形容冰雪漫天盖地，非常寒冷。",e:"东北的冬天冰天雪地。",s:6,l:"B"},
+  {w:"博古通今",p:"bo gu tong jin",m:"对古代和现代的事物都知道很多。",e:"他博古通今，学识渊博。",s:12,l:"B"},
+  {w:"不耻下问",p:"bu chi xia wen",m:"不以向地位比自己低、知识比自己少的人请教为耻。",e:"学习要不耻下问。",s:4,l:"B"},
+  {w:"不寒而栗",p:"bu han er li",m:"不冷而发抖，形容非常恐惧。",e:"想到那个场景，他不寒而栗。",s:4,l:"B"},
+  {w:"不可思议",p:"bu ke si yi",m:"不可想象，不能理解。",e:"这件事简直不可思议。",s:4,l:"B"},
+  {w:"不劳而获",p:"bu lao er huo",m:"自己不劳动却占有别人的劳动成果。",e:"不要想着不劳而获。",s:4,l:"B"},
+  {w:"不速之客",p:"bu su zhi ke",m:"没有被邀请而来的客人。",e:"来了几位不速之客。",s:4,l:"B"},
+  {w:"不约而同",p:"bu yue er tong",m:"事先没有约定而相互一致。",e:"大家不约而同地鼓起掌来。",s:4,l:"B"},
+  {w:"才高八斗",p:"cai gao ba dou",m:"形容文才非常高。",e:"他才高八斗，写作很有功力。",s:3,l:"C"},
+  {w:"沧海桑田",p:"cang hai sang tian",m:"大海变成农田，农田变成大海，比喻世事变迁很大。",e:"几十年过去，这里已是沧海桑田。",s:7,l:"C"},
+  {w:"草木皆兵",p:"cao mu jie bing",m:"形容十分惊恐，以为到处都是敌兵。",e:"他疑心太重，草木皆兵。",s:9,l:"C"},
+  {w:"畅所欲言",p:"chang suo yu yan",m:"尽情地说出想说的话。",e:"大家畅所欲言，发表意见。",s:14,l:"C"},
+  {w:"车水马龙",p:"che shui ma long",m:"形容车马来往不绝，非常热闹。",e:"节日的街道车水马龙。",s:7,l:"C"},
+  {w:"成竹在胸",p:"cheng zhu zai xiong",m:"比喻做事之前已有充分的准备和把握。",e:"他成竹在胸地走上考场。",s:6,l:"C"},
+  {w:"承前启后",p:"cheng qian qi hou",m:"承接前面的，开创后来的。",e:"这部作品起到了承前启后的作用。",s:8,l:"C"},
+  {w:"诚心诚意",p:"cheng xin cheng yi",m:"形容十分真挚诚恳。",e:"他诚心诚意地道歉了。",s:13,l:"C"},
+  {w:"赤胆忠心",p:"chi dan zhong xin",m:"形容十分忠诚。",e:"他赤胆忠心为国效力。",s:7,l:"C"},
+  {w:"出类拔萃",p:"chu lei ba cui",m:"超出同类之上。",e:"他在同行中出类拔萃。",s:5,l:"C"},
+  {w:"出人头地",p:"chu ren tou di",m:"指高人一等，超出一般人。",e:"他努力学习，终于出人头地。",s:5,l:"C"},
+  {w:"出生入死",p:"chu sheng ru si",m:"形容冒着生命危险，不顾个人安危。",e:"战士们出生入死保卫祖国。",s:5,l:"C"},
+  {w:"唇亡齿寒",p:"chun wang chi han",m:"比喻利害密切相关。",e:"两国唇亡齿寒，应互相支持。",s:10,l:"C"},
+  {w:"从容不迫",p:"cong rong bu po",m:"不慌不忙，非常镇静。",e:"他从容不迫地回答了所有问题。",s:4,l:"C"},
+  {w:"粗茶淡饭",p:"cu cha dan fan",m:"形容饮食简单，生活俭朴。",e:"他过着粗茶淡饭的生活。",s:12,l:"C"},
+  {w:"大刀阔斧",p:"da dao kuo fu",m:"比喻办事果断而有魄力。",e:"新领导大刀阔斧地改革。",s:3,l:"D"},
+  {w:"大公无私",p:"da gong wu si",m:"完全为人民利益着想，没有私心。",e:"他大公无私，深受尊敬。",s:3,l:"D"},
+  {w:"大海捞针",p:"da hai lao zhen",m:"在大海里捞一根针，比喻极难找到。",e:"在这么大的城市找他，简直是大海捞针。",s:3,l:"D"},
+  {w:"大器晚成",p:"da qi wan cheng",m:"指大的才能要经过长时间才能成就。",e:"他虽然起步晚，但大器晚成。",s:3,l:"D"},
+  {w:"大义凛然",p:"da yi lin ran",m:"坚持正义，不可侵犯的样子。",e:"他大义凛然地走上刑场。",s:3,l:"D"},
+  {w:"胆大妄为",p:"dan da wang wei",m:"毫无顾忌地干坏事。",e:"这个人胆大妄为，无法无天。",s:9,l:"D"},
+  {w:"当机立断",p:"dang ji li duan",m:"在紧要时刻立即做出决定。",e:"他当机立断，避免了损失。",s:6,l:"D"},
+  {w:"道听途说",p:"dao ting tu shuo",m:"在道路上听到的消息，指没有根据的传闻。",e:"别相信道听途说的消息。",s:12,l:"D"},
+  {w:"得不偿失",p:"de bu chang shi",m:"得到的抵不上失去的。",e:"这样做得不偿失。",s:11,l:"D"},
+  {w:"得心应手",p:"de xin ying shou",m:"心里怎么想，手就怎么做，形容技术纯熟。",e:"经过多年练习，他已得心应手。",s:11,l:"D"},
+  {w:"得意忘形",p:"de yi wang xing",m:"因高兴而忘乎所以。",e:"别得意忘形，要谦虚谨慎。",s:11,l:"D"},
+  {w:"对症下药",p:"dui zheng xia yao",m:"针对病因用药，比喻针对问题的关键解决。",e:"解决问题要对症下药。",s:5,l:"D"},
+  {w:"尔虞我诈",p:"er yu wo zha",m:"互相猜疑欺骗。",e:"商场上尔虞我诈。",s:14,l:"E"},
+  {w:"翻天覆地",p:"fan tian fu di",m:"形容变化巨大而彻底。",e:"改革开放带来了翻天覆地的变化。",s:18,l:"F"},
+  {w:"奋不顾身",p:"fen bu gu shen",m:"奋勇直前，不顾生命。",e:"他奋不顾身地跳入水中救人。",s:8,l:"F"},
+  {w:"风调雨顺",p:"feng tiao yu shun",m:"形容风雨适合农作物生长，比喻天下太平。",e:"祈愿来年风调雨顺。",s:9,l:"F"},
+  {w:"风华正茂",p:"feng hua zheng mao",m:"形容年轻有为，才华横溢。",e:"他们正值风华正茂的年纪。",s:9,l:"F"},
+  {w:"风平浪静",p:"feng ping lang jing",m:"没有风浪，比喻平安无事。",e:"经过这番风波后终于风平浪静了。",s:9,l:"F"},
+  {w:"风雨同舟",p:"feng yu tong zhou",m:"比喻共同度过困难。",e:"我们要风雨同舟，共度难关。",s:9,l:"F"},
+  {w:"风雨无阻",p:"feng yu wu zu",m:"不受风雨的阻碍，比喻坚持不懈。",e:"他风雨无阻地坚持锻炼。",s:9,l:"F"},
+  {w:"赴汤蹈火",p:"fu tang dao huo",m:"比喻不避艰险。",e:"为了国家，他赴汤蹈火在所不辞。",s:9,l:"F"},
+  {w:"高瞻远瞩",p:"gao zhan yuan zhu",m:"站得高看得远，比喻眼光远大。",e:"领导者应该高瞻远瞩。",s:10,l:"G"},
+  {w:"功亏一篑",p:"gong kui yi kui",m:"比喻做事只差最后一点力量而没有成功。",e:"千万别功亏一篑。",s:5,l:"G"},
+  {w:"功德无量",p:"gong de wu liang",m:"功劳和恩德非常大。",e:"他做了功德无量的好事。",s:5,l:"G"},
+  {w:"孤注一掷",p:"gu zhu yi zhi",m:"把所有的钱一次押上，比喻在危急时用尽全部力量做最后一次冒险。",e:"他孤注一掷，投入了全部资金。",s:8,l:"G"},
+  {w:"刮目相看",p:"gua mu xiang kan",m:"用新的眼光来看待。",e:"经过努力他让人刮目相看。",s:8,l:"G"},
+  {w:"光明正大",p:"guang ming zheng da",m:"形容心怀坦白，言行正派。",e:"做人要光明正大。",s:6,l:"G"},
+  {w:"过河拆桥",p:"guo he chai qiao",m:"比喻达到目的后就把帮助过自己的人一脚踢开。",e:"这种过河拆桥的做法令人不齿。",s:6,l:"G"},
+  {w:"海阔天空",p:"hai kuo tian kong",m:"形容大自然的广阔，也比喻想象或说话毫无拘束。",e:"大家海阔天空地聊了起来。",s:10,l:"H"},
+  {w:"好高骛远",p:"hao gao wu yuan",m:"比喻不切实际地追求过高的目标。",e:"做事不要好高骛远。",s:6,l:"H"},
+  {w:"好事多磨",p:"hao shi duo mo",m:"好的事情在实现之前往往会经历许多波折。",e:"好事多磨，终成正果。",s:6,l:"H"},
+  {w:"鹤立鸡群",p:"he li ji qun",m:"像鹤站在鸡群中一样，比喻一个人的才能在众人之上。",e:"她在同学中鹤立鸡群。",s:21,l:"H"},
+  {w:"横行霸道",p:"heng xing ba dao",m:"形容蛮横无理，仗势欺人。",e:"他在村里横行霸道。",s:15,l:"H"},
+  {w:"虎头蛇尾",p:"hu tou she wei",m:"比喻做事有始无终。",e:"做事不要虎头蛇尾。",s:8,l:"H"},
+  {w:"花言巧语",p:"hua yan qiao yu",m:"虚假而动听的话。",e:"别被他的花言巧语所迷惑。",s:7,l:"H"},
+  {w:"画饼充饥",p:"hua bing chong ji",m:"比喻用空想来安慰自己。",e:"空谈理想不实践，无异于画饼充饥。",s:12,l:"H"},
+  {w:"画龙点睛",p:"hua long dian jing",m:"比喻在关键处用几句话点明实质，使内容更加生动。",e:"结尾这段话起到了画龙点睛的作用。",s:12,l:"H"},
+  {w:"画蛇添足",p:"hua she tian zu",m:"做了多余的事，反而不恰当。",e:"这段描写画蛇添足了。",s:12,l:"H"},
+  {w:"欢天喜地",p:"huan tian xi di",m:"形容非常高兴。",e:"大家欢天喜地地庆祝新年。",s:6,l:"H"},
+  {w:"患难与共",p:"huan nan yu gong",m:"共同承担危险和困难。",e:"真正的朋友能患难与共。",s:11,l:"H"},
+  {w:"挥金如土",p:"hui jin ru tu",m:"挥霍钱财像泥土一样，形容极端浪费。",e:"他挥金如土，很快就花光了积蓄。",s:9,l:"H"},
+  {w:"火中取栗",p:"huo zhong qu li",m:"比喻冒险替别人出力而自己上当。",e:"别替他人火中取栗。",s:4,l:"H"},
+  {w:"鸡飞蛋打",p:"ji fei dan da",m:"比喻两头落空，什么也没有得到。",e:"结果鸡飞蛋打，一场空。",s:7,l:"J"},
+  {w:"集思广益",p:"ji si guang yi",m:"集中众人的智慧，广泛吸收有益的意见。",e:"大家集思广益解决问题。",s:12,l:"J"},
+  {w:"家喻户晓",p:"jia yu hu xiao",m:"每家每户都知道。",e:"这个故事家喻户晓。",s:10,l:"J"},
+  {w:"见多识广",p:"jian duo shi guang",m:"见过的多，知道的广，形容经验丰富。",e:"他见多识广，什么都懂。",s:4,l:"J"},
+  {w:"见义勇为",p:"jian yi yong wei",m:"看到正义的事，就勇敢地去做。",e:"他见义勇为，救了落水儿童。",s:4,l:"J"},
+  {w:"渐入佳境",p:"jian ru jia jing",m:"逐渐进入美好的境界。",e:"学习了一段时间后渐入佳境。",s:11,l:"J"},
+  {w:"脚踏实地",p:"jiao ta shi di",m:"比喻做事踏实认真。",e:"做人要脚踏实地。",s:7,l:"J"},
+  {w:"竭尽全力",p:"jie jin quan li",m:"用尽全部力量。",e:"他竭尽全力完成了任务。",s:13,l:"J"},
+  {w:"金碧辉煌",p:"jin bi hui huang",m:"形容建筑物装饰华丽，光彩夺目。",e:"宫殿金碧辉煌。",s:8,l:"J"},
+  {w:"锦上添花",p:"jin shang tian hua",m:"比喻好上加好。",e:"你的建议给方案锦上添花。",s:13,l:"J"},
+  {w:"精打细算",p:"jing da xi suan",m:"在使用人力物力上精心安排。",e:"过日子要精打细算。",s:14,l:"J"},
+  {w:"精益求精",p:"jing yi qiu jing",m:"好了还求更好。",e:"他对作品精益求精。",s:14,l:"J"},
+  {w:"井井有条",p:"jing jing you tiao",m:"形容条理分明，丝毫不乱。",e:"她把事情安排得井井有条。",s:4,l:"J"},
+  {w:"居安思危",p:"ju an si wei",m:"在安定的时候想到可能出现的危险。",e:"我们应该居安思危。",s:8,l:"J"},
+  {w:"举世闻名",p:"ju shi wen ming",m:"全世界都知道，形容非常著名。",e:"长城举世闻名。",s:9,l:"J"},
+  {w:"举一反三",p:"ju yi fan san",m:"从一件事情类推而知道许多事情。",e:"聪明的学生能举一反三。",s:9,l:"J"},
+  {w:"开门见山",p:"kai men jian shan",m:"比喻说话直截了当。",e:"他开门见山地说明了来意。",s:4,l:"K"},
+  {w:"开天辟地",p:"kai tian pi di",m:"形容自古以来从未有过。",e:"这是开天辟地头一回。",s:4,l:"K"},
+  {w:"口若悬河",p:"kou ruo xuan he",m:"形容能说会道，说话滔滔不绝。",e:"他口若悬河地讲了两个小时。",s:3,l:"K"},
+  {w:"苦口婆心",p:"ku kou po xin",m:"善意地反复劝说。",e:"老师苦口婆心地劝导学生。",s:8,l:"K"},
+  {w:"理直气壮",p:"li zhi qi zhuang",m:"理由充分，说话有气势。",e:"他理直气壮地反驳了对方。",s:11,l:"L"},
+  {w:"力不从心",p:"li bu cong xin",m:"心里想做，但力量够不上。",e:"他年纪大了，力不从心。",s:2,l:"L"},
+  {w:"历历在目",p:"li li zai mu",m:"一个一个清清楚楚地出现在眼前。",e:"往事历历在目。",s:4,l:"L"},
+  {w:"两全其美",p:"liang quan qi mei",m:"做一件事顾全到两方面，使两方面都很好。",e:"这个方案两全其美。",s:7,l:"L"},
+  {w:"临危不惧",p:"lin wei bu ju",m:"面对危险毫不害怕。",e:"战士们临危不惧。",s:9,l:"L"},
+  {w:"龙飞凤舞",p:"long fei feng wu",m:"形容书法笔势有力，灵活舒展。",e:"他写的字龙飞凤舞。",s:5,l:"L"},
+  {w:"炉火纯青",p:"lu huo chun qing",m:"比喻功夫达到纯熟完美的境界。",e:"他的厨艺已到炉火纯青的地步。",s:8,l:"L"},
+  {w:"落井下石",p:"luo jing xia shi",m:"比喻乘人之危加以陷害。",e:"落井下石的人最可恨。",s:12,l:"L"},
+  {w:"马到成功",p:"ma dao cheng gong",m:"形容事情顺利，一开始就取得成功。",e:"祝你马到成功。",s:3,l:"M"},
+  {w:"满载而归",p:"man zai er gui",m:"装得满满地回来，形容收获很大。",e:"他满载而归，收获颇丰。",s:13,l:"M"},
+  {w:"眉飞色舞",p:"mei fei se wu",m:"形容非常高兴或得意。",e:"他眉飞色舞地讲着趣事。",s:9,l:"M"},
+  {w:"门庭若市",p:"men ting ruo shi",m:"形容来的人很多，非常热闹。",e:"他家门庭若市，宾客如云。",s:8,l:"M"},
+  {w:"名不虚传",p:"ming bu xu chuan",m:"传出的名声不是虚假的。",e:"果然名不虚传。",s:6,l:"M"},
+  {w:"名列前茅",p:"ming lie qian mao",m:"比喻名次排列在前面。",e:"他在班级名列前茅。",s:6,l:"M"},
+  {w:"明知故犯",p:"ming zhi gu fan",m:"明明知道不对，还故意去做。",e:"他明知故犯，罪加一等。",s:8,l:"M"},
+  {w:"目不转睛",p:"mu bu zhuan jing",m:"形容注意力集中。",e:"他目不转睛地盯着屏幕。",s:5,l:"M"},
+  {w:"南辕北辙",p:"nan yuan bei zhe",m:"想往南走却驾车向北，比喻行动和目的相反。",e:"你这样做简直是南辕北辙。",s:9,l:"N"},
+  {w:"能工巧匠",p:"neng gong qiao jiang",m:"手艺高超的工匠。",e:"这座桥是能工巧匠的杰作。",s:10,l:"N"},
+  {w:"鸟语花香",p:"niao yu hua xiang",m:"形容春天美好的景色。",e:"春天来了，到处鸟语花香。",s:5,l:"N"},
+  {w:"排山倒海",p:"pai shan dao hai",m:"推开高山，翻倒大海，形容力量强盛，声势浩大。",e:"掌声排山倒海般响起。",s:11,l:"P"},
+  {w:"披荆斩棘",p:"pi jing zhan ji",m:"比喻在前进道路上清除障碍，克服困难。",e:"他们披荆斩棘开辟新路。",s:8,l:"P"},
+  {w:"破釜沉舟",p:"po fu chen zhou",m:"比喻下定决心，不顾一切地干到底。",e:"他破釜沉舟，背水一战。",s:10,l:"P"},
+  {w:"七嘴八舌",p:"qi zui ba she",m:"形容人多口杂，议论纷纷。",e:"大家七嘴八舌地讨论起来。",s:2,l:"Q"},
+  {w:"气壮山河",p:"qi zhuang shan he",m:"形容气概豪迈，使祖国山河都为之壮丽。",e:"英雄气壮山河的精神感人至深。",s:4,l:"Q"},
+  {w:"前功尽弃",p:"qian gong jin qi",m:"以前的功劳全部丢失。",e:"千万不要前功尽弃。",s:9,l:"Q"},
+  {w:"前赴后继",p:"qian fu hou ji",m:"前面的冲上去了，后面的紧跟上来。",e:"革命先烈前赴后继。",s:9,l:"Q"},
+  {w:"巧夺天工",p:"qiao duo tian gong",m:"精巧的人工胜过天然，形容技艺极其精巧。",e:"这件工艺品巧夺天工。",s:5,l:"Q"},
+  {w:"勤能补拙",p:"qin neng bu zhuo",m:"勤奋能够弥补先天的不足。",e:"他相信勤能补拙。",s:13,l:"Q"},
+  {w:"青出于蓝",p:"qing chu yu lan",m:"比喻学生超过老师或后人超过前人。",e:"青出于蓝而胜于蓝。",s:8,l:"Q"},
+  {w:"情不自禁",p:"qing bu zi jin",m:"感情激动得不能控制自己。",e:"她情不自禁地流下了眼泪。",s:11,l:"Q"},
+  {w:"全力以赴",p:"quan li yi fu",m:"把全部力量都投入进去。",e:"他全力以赴地备战考试。",s:6,l:"Q"},
+  {w:"全心全意",p:"quan xin quan yi",m:"投入全部精力，毫无保留。",e:"全心全意为人民服务。",s:6,l:"Q"},
+  {w:"人山人海",p:"ren shan ren hai",m:"形容人聚集得很多。",e:"节日的广场人山人海。",s:2,l:"R"},
+  {w:"任重道远",p:"ren zhong dao yuan",m:"担子很重，路很远，比喻责任重大而任务艰巨。",e:"教育改革任重道远。",s:6,l:"R"},
+  {w:"日积月累",p:"ri ji yue lei",m:"一天天一月月不断积累。",e:"知识要靠日积月累。",s:4,l:"R"},
+  {w:"日新月异",p:"ri xin yue yi",m:"每天都在更新，每月都有变化，指发展或进步迅速。",e:"科技日新月异。",s:4,l:"R"},
+  {w:"如虎添翼",p:"ru hu tian yi",m:"好像老虎长上了翅膀，比喻强大的得到援助后更加强大。",e:"有了你的加入，我们如虎添翼。",s:6,l:"R"},
+  {w:"如鱼得水",p:"ru yu de shui",m:"比喻得到跟自己十分投合的人或对自己很适合的环境。",e:"来到新公司他如鱼得水。",s:6,l:"R"},
+  {w:"三思而行",p:"san si er xing",m:"做事前要反复考虑。",e:"做决定前要三思而行。",s:3,l:"S"},
+  {w:"赏心悦目",p:"shang xin yue mu",m:"看到美好的景色而心情愉快。",e:"这幅画令人赏心悦目。",s:12,l:"S"},
+  {w:"深思熟虑",p:"shen si shu lv",m:"反复深入地考虑。",e:"他深思熟虑后做出了决定。",s:11,l:"S"},
+  {w:"生龙活虎",p:"sheng long huo hu",m:"形容活泼矫健，富有生气。",e:"孩子们个个生龙活虎。",s:5,l:"S"},
+  {w:"失而复得",p:"shi er fu de",m:"失去以后又重新得到。",e:"这件文物失而复得。",s:5,l:"S"},
+  {w:"时不我待",p:"shi bu wo dai",m:"时间不会等待我们，指要抓紧时间。",e:"时不我待，赶紧行动吧。",s:7,l:"S"},
+  {w:"实事求是",p:"shi shi qiu shi",m:"从实际情况出发，求得正确的结论。",e:"做学问要实事求是。",s:8,l:"S"},
+  {w:"守株待兔",p:"shou zhu dai tu",m:"比喻不主动努力，存有侥幸心理。",e:"不能守株待兔，要主动出击。",s:6,l:"S"},
+  {w:"水到渠成",p:"shui dao qu cheng",m:"水流到就会自然形成一条渠道，比喻条件成熟，事情自然成功。",e:"只要努力，水到渠成。",s:4,l:"S"},
+  {w:"水滴石穿",p:"shui di shi chuan",m:"水不断下滴可以滴穿石头，比喻只要有恒心，不断努力，事情一定成功。",e:"水滴石穿，持之以恒就能成功。",s:4,l:"S"},
+  {w:"水落石出",p:"shui luo shi chu",m:"水落下去，水底的石头就露出来，比喻事情的真相完全显露出来。",e:"真相终将水落石出。",s:4,l:"S"},
+  {w:"四海为家",p:"si hai wei jia",m:"什么地方都可以当作自己的家，指到处流浪。",e:"他四海为家，走遍天下。",s:5,l:"S"},
+  {w:"所向披靡",p:"suo xiang pi mi",m:"比喻力量所达到的地方，一切障碍全被扫除。",e:"这支军队所向披靡。",s:8,l:"S"},
+  {w:"泰然处之",p:"tai ran chu zhi",m:"不以为意，沉着镇定地对待。",e:"面对困难他泰然处之。",s:10,l:"T"},
+  {w:"天长地久",p:"tian chang di jiu",m:"比喻永久不变。",e:"祝你们的友谊天长地久。",s:4,l:"T"},
+  {w:"天翻地覆",p:"tian fan di fu",m:"形容变化极大。",e:"几十年来这里发生了天翻地覆的变化。",s:4,l:"T"},
+  {w:"天衣无缝",p:"tian yi wu feng",m:"比喻事物周密完善，找不出什么毛病。",e:"这个计划天衣无缝。",s:4,l:"T"},
+  {w:"铁杵成针",p:"tie chu cheng zhen",m:"比喻只要有恒心，肯努力，做任何事情都能成功。",e:"只要功夫深，铁杵成针。",s:10,l:"T"},
+  {w:"同心协力",p:"tong xin xie li",m:"团结一致，共同努力。",e:"大家同心协力完成了任务。",s:6,l:"T"},
+  {w:"投桃报李",p:"tou tao bao li",m:"比喻相互赠答，礼尚往来。",e:"你送我礼物，我投桃报李。",s:7,l:"T"},
+  {w:"突飞猛进",p:"tu fei meng jin",m:"形容进步和发展特别迅速。",e:"科技在突飞猛进地发展。",s:9,l:"T"},
+  {w:"推陈出新",p:"tui chen chu xin",m:"去掉旧事物的糟粕，取其精华，创造出新事物。",e:"设计要不断推陈出新。",s:11,l:"T"},
+  {w:"万马奔腾",p:"wan ma ben teng",m:"形容声势浩大，进展迅速。",e:"祖国建设万马奔腾。",s:3,l:"W"},
+  {w:"妄自菲薄",p:"wang zi fei bo",m:"过分看轻自己。",e:"不要妄自菲薄，你很优秀。",s:6,l:"W"},
+  {w:"望梅止渴",p:"wang mei zhi ke",m:"比喻愿望无法实现，用空想来安慰自己。",e:"光想不做等于望梅止渴。",s:11,l:"W"},
+  {w:"望眼欲穿",p:"wang yan yu chuan",m:"眼睛都要望穿了，形容盼望殷切。",e:"她望眼欲穿地等着孩子回家。",s:11,l:"W"},
+  {w:"危言耸听",p:"wei yan song ting",m:"故意说些使人惊恐的话。",e:"别危言耸听了。",s:6,l:"W"},
+  {w:"惟妙惟肖",p:"wei miao wei xiao",m:"形容描写或模仿得非常逼真。",e:"她的表演惟妙惟肖。",s:11,l:"W"},
+  {w:"闻鸡起舞",p:"wen ji qi wu",m:"听到鸡叫就起来舞剑，比喻有志向的人及时奋发。",e:"我们应该闻鸡起舞，发愤图强。",s:14,l:"W"},
+  {w:"无微不至",p:"wu wei bu zhi",m:"形容关怀、照顾得非常细心周到。",e:"她对孩子无微不至地关怀。",s:4,l:"W"},
+  {w:"无中生有",p:"wu zhong sheng you",m:"把没有的说成有，指凭空捏造。",e:"别无中生有地造谣。",s:4,l:"W"},
+  {w:"物极必反",p:"wu ji bi fan",m:"事物发展到极端，会向相反方向转化。",e:"物极必反，盛极而衰。",s:8,l:"W"},
+  {w:"喜出望外",p:"xi chu wang wai",m:"遇到出乎意料的喜事而特别高兴。",e:"听到消息他喜出望外。",s:12,l:"X"},
+  {w:"先发制人",p:"xian fa zhi ren",m:"先下手争取主动来制服对方。",e:"他先发制人，抢先发言。",s:6,l:"X"},
+  {w:"心花怒放",p:"xin hua nu fang",m:"形容内心高兴极了。",e:"听到好消息她心花怒放。",s:4,l:"X"},
+  {w:"心旷神怡",p:"xin kuang shen yi",m:"心境开阔，精神愉快。",e:"登上山顶令人心旷神怡。",s:4,l:"X"},
+  {w:"心有余悸",p:"xin you yu ji",m:"虽然危险已过，但回想起来仍然感到害怕。",e:"想起那次经历他心有余悸。",s:4,l:"X"},
+  {w:"星罗棋布",p:"xing luo qi bu",m:"像天上的星星和棋盘上的棋子一样散布着，形容数量多而分布广。",e:"这里名胜古迹星罗棋布。",s:9,l:"X"},
+  {w:"栩栩如生",p:"xu xu ru sheng",m:"形容画作、雕塑中的艺术形象等生动逼真。",e:"这幅画栩栩如生。",s:10,l:"X"},
+  {w:"学富五车",p:"xue fu wu che",m:"形容读书很多，学问很大。",e:"他学富五车，才思敏捷。",s:8,l:"X"},
+  {w:"雪中送炭",p:"xue zhong song tan",m:"在别人急需的时候给以帮助。",e:"你的帮助真是雪中送炭。",s:11,l:"X"},
+  {w:"循序渐进",p:"xun xu jian jin",m:"按照一定的步骤逐渐深入或提高。",e:"学习要循序渐进。",s:12,l:"X"},
+  {w:"叶公好龙",p:"ye gong hao long",m:"比喻表面上喜好某事物，实际并非真正喜好。",e:"他就是叶公好龙，并不是真喜欢。",s:5,l:"Y"},
+  {w:"以身作则",p:"yi shen zuo ze",m:"以自己的行动做出榜样。",e:"领导应该以身作则。",s:1,l:"Y"},
+  {w:"异口同声",p:"yi kou tong sheng",m:"不同的嘴说出同样的话，形容大家说的完全一致。",e:"大家异口同声地赞成。",s:6,l:"Y"},
+  {w:"饮水思源",p:"yin shui si yuan",m:"喝水的时候想起水的来源，比喻不忘本。",e:"我们要饮水思源，不忘恩人。",s:7,l:"Y"},
+  {w:"勇往直前",p:"yong wang zhi qian",m:"勇敢地一直向前进。",e:"困难面前他勇往直前。",s:9,l:"Y"},
+  {w:"有备无患",p:"you bei wu huan",m:"事先有准备就可以避免灾祸。",e:"有备无患，我们多准备些物资。",s:6,l:"Y"},
+  {w:"有的放矢",p:"you di fang shi",m:"比喻说话做事有针对性。",e:"做工作要有的放矢。",s:6,l:"Y"},
+  {w:"有口皆碑",p:"you kou jie bei",m:"人人都称赞。",e:"他的善行有口皆碑。",s:6,l:"Y"},
+  {w:"有目共睹",p:"you mu gong du",m:"大家都看得见，形容极其明显。",e:"他的进步有目共睹。",s:6,l:"Y"},
+  {w:"语重心长",p:"yu zhong xin chang",m:"话语深沉有力，情意深长。",e:"老师语重心长地教导学生。",s:14,l:"Y"},
+  {w:"源远流长",p:"yuan yuan liu chang",m:"比喻历史悠久。",e:"中华文化源远流长。",s:13,l:"Y"},
+  {w:"朝气蓬勃",p:"zhao qi peng bo",m:"形容充满了生命和活力。",e:"年轻人应该朝气蓬勃。",s:12,l:"Z"},
+  {w:"真相大白",p:"zhen xiang da bai",m:"真实情况完全弄明白了。",e:"案件真相大白。",s:10,l:"Z"},
+  {w:"争先恐后",p:"zheng xian kong hou",m:"争着向前，唯恐落后。",e:"同学们争先恐后地回答问题。",s:6,l:"Z"},
+  {w:"志同道合",p:"zhi tong dao he",m:"志向相同，道路一致。",e:"他们志同道合，成为好搭档。",s:7,l:"Z"},
+  {w:"众志成城",p:"zhong zhi cheng cheng",m:"万众一心，像坚固的城墙一样不可摧毁。",e:"抗洪时军民众志成城。",s:6,l:"Z"},
+  {w:"自力更生",p:"zi li geng sheng",m:"依靠自己的力量改变现状。",e:"我们要自力更生发展经济。",s:6,l:"Z"},
+  {w:"自强不息",p:"zi qiang bu xi",m:"自觉地努力向上，永不松懈。",e:"天行健，君子以自强不息。",s:6,l:"Z"},
+  {w:"走马观花",p:"zou ma guan hua",m:"骑马看花，比喻大略地观察。",e:"参观时间太短，只能走马观花。",s:7,l:"Z"},
+  {w:"左右逢源",p:"zuo you feng yuan",m:"到处遇到水源，比喻做事得心应手。",e:"他在职场上左右逢源。",s:5,l:"Z"},
+  {w:"坐井观天",p:"zuo jing guan tian",m:"坐在井底看天，比喻眼界小、见识少。",e:"不能坐井观天，要放眼世界。",s:7,l:"Z"},
+  {w:"坐享其成",p:"zuo xiang qi cheng",m:"自己不出力而享受别人取得的成果。",e:"不能坐享其成，要自己努力。",s:7,l:"Z"},
+  {w:"爱莫能助",p:"ai mo neng zhu",m:"虽然同情但无力帮助。",e:"这件事我实在爱莫能助。",s:10,l:"A"},
+  {w:"按部就班",p:"an bu jiu ban",m:"按照规定的步骤办事。",e:"工作要按部就班地来。",s:9,l:"A"},
+  {w:"白手起家",p:"bai shou qi jia",m:"没有依赖，靠自己的力量创建事业。",e:"他白手起家，创办了公司。",s:5,l:"B"},
+  {w:"抱薪救火",p:"bao xin jiu huo",m:"比喻用错误的方法去消除灾害，反而使灾害扩大。",e:"这种做法无异于抱薪救火。",s:8,l:"B"},
+  {w:"背水一战",p:"bei shui yi zhan",m:"比喻在绝境中拼死一战。",e:"他们决定背水一战。",s:9,l:"B"},
+  {w:"闭月羞花",p:"bi yue xiu hua",m:"形容女子貌美。",e:"她有闭月羞花之容。",s:6,l:"B"},
+  {w:"兵贵神速",p:"bing gui shen su",m:"军事行动最重要的是迅速。",e:"兵贵神速，赶快出发。",s:7,l:"B"},
+  {w:"波澜壮阔",p:"bo lan zhuang kuo",m:"比喻声势雄壮或规模宏大。",e:"改革开放波澜壮阔。",s:8,l:"B"},
+  {w:"不假思索",p:"bu jia si suo",m:"不用思考就做出反应。",e:"他不假思索地答应了。",s:4,l:"B"},
+  {w:"不胫而走",p:"bu jing er zou",m:"比喻事物不经推行就迅速传播。",e:"消息不胫而走。",s:4,l:"B"},
+  {w:"不谋而合",p:"bu mou er he",m:"事先没有商量，意见或行动却完全一致。",e:"我们的想法不谋而合。",s:4,l:"B"},
+  {w:"不屈不挠",p:"bu qu bu nao",m:"比喻在困难面前不低头。",e:"他不屈不挠地抗争。",s:4,l:"B"},
+  {w:"长风破浪",p:"chang feng po lang",m:"比喻志向远大，不畏困难。",e:"他有长风破浪的勇气。",s:4,l:"C"},
+  {w:"超凡脱俗",p:"chao fan tuo su",m:"超出一般人，不同于世俗。",e:"她的气质超凡脱俗。",s:12,l:"C"},
+  {w:"沉鱼落雁",p:"chen yu luo yan",m:"形容女子容貌美丽。",e:"她有沉鱼落雁的美貌。",s:7,l:"C"},
+  {w:"乘风破浪",p:"cheng feng po lang",m:"比喻不畏艰难，勇往直前。",e:"让我们乘风破浪前进。",s:10,l:"C"},
+  {w:"叱咤风云",p:"chi zha feng yun",m:"形容威力极大。",e:"他是叱咤风云的人物。",s:5,l:"C"},
+  {w:"础润而雨",p:"chu run er yu",m:"柱下石湿润是快要下雨的征兆，比喻从小事可以预知大事。",e:"础润而雨，要做好准备。",s:15,l:"C"},
+  {w:"触类旁通",p:"chu lei pang tong",m:"掌握了某一事物的知识，可以推知同类的其他事物。",e:"聪明人善于触类旁通。",s:13,l:"C"},
+  {w:"春风化雨",p:"chun feng hua yu",m:"比喻良好的教育。",e:"老师春风化雨般的教导。",s:9,l:"C"},
+  {w:"春暖花开",p:"chun nuan hua kai",m:"春天气候温暖，百花盛开。",e:"春暖花开的季节到了。",s:9,l:"C"},
+  {w:"春色满园",p:"chun se man yuan",m:"春天的景色充满了整个园子。",e:"春色满园关不住。",s:9,l:"C"},
+  {w:"唇齿相依",p:"chun chi xiang yi",m:"比喻关系密切，相互依靠。",e:"两国唇齿相依。",s:10,l:"C"},
+  {w:"大步流星",p:"da bu liu xing",m:"形容步子迈得大，走得快。",e:"他大步流星地走来。",s:3,l:"D"},
+  {w:"大材小用",p:"da cai xiao yong",m:"把大的材料用于小的用处，比喻使用不当。",e:"让他做这种事简直是大材小用。",s:3,l:"D"},
+  {w:"大名鼎鼎",p:"da ming ding ding",m:"形容名气很大。",e:"他是大名鼎鼎的科学家。",s:3,l:"D"},
+  {w:"大显身手",p:"da xian shen shou",m:"充分显示自己的本领和才能。",e:"比赛中他大显身手。",s:3,l:"D"},
+  {w:"大智若愚",p:"da zhi ruo yu",m:"非常聪明的人表面上看起来很愚笨。",e:"他大智若愚，深藏不露。",s:3,l:"D"},
+  {w:"胆小如鼠",p:"dan xiao ru shu",m:"胆子小得像老鼠，形容胆子很小。",e:"别胆小如鼠，大胆尝试。",s:9,l:"D"},
+  {w:"灯红酒绿",p:"deng hong jiu lv",m:"形容奢侈糜烂的生活。",e:"他沉迷于灯红酒绿的生活。",s:6,l:"D"},
+  {w:"滴水穿石",p:"di shui chuan shi",m:"水不断下滴可以滴穿石头，比喻只要坚持不懈就能成功。",e:"滴水穿石，贵在坚持。",s:9,l:"D"},
+  {w:"颠倒黑白",p:"dian dao hei bai",m:"把黑的说成白的，白的说成黑的，比喻歪曲事实。",e:"不要颠倒黑白。",s:16,l:"D"},
+  {w:"东山再起",p:"dong shan zai qi",m:"比喻失势之后又重新得势。",e:"他东山再起，再创辉煌。",s:5,l:"D"},
+  {w:"独当一面",p:"du dang yi mian",m:"单独负责一个方面的工作。",e:"他已能独当一面。",s:9,l:"D"},
+  {w:"独树一帜",p:"du shu yi zhi",m:"单独树起一面旗帜，比喻自成一家。",e:"他的画风独树一帜。",s:9,l:"D"},
+  {w:"多才多艺",p:"duo cai duo yi",m:"具有多方面的才能和技艺。",e:"她多才多艺，能歌善舞。",s:6,l:"D"},
+  {w:"恩重如山",p:"en zhong ru shan",m:"恩情像山一样深重。",e:"父母恩重如山。",s:10,l:"E"},
+  {w:"耳目一新",p:"er mu yi xin",m:"听到的、看到的都跟以前完全不同。",e:"改造后这里令人耳目一新。",s:6,l:"E"},
+  {w:"发愤图强",p:"fa fen tu qiang",m:"下定决心发奋努力，谋求强盛。",e:"国家要发愤图强。",s:5,l:"F"},
+  {w:"风和日丽",p:"feng he ri li",m:"微风和煦，阳光明丽。",e:"今天风和日丽，适合郊游。",s:9,l:"F"},
+  {w:"风吹草动",p:"feng chui cao dong",m:"比喻轻微的动静或变故。",e:"有什么风吹草动立即汇报。",s:9,l:"F"},
+  {w:"风马牛不相及",p:"feng ma niu bu xiang ji",m:"比喻事物之间毫不相关。",e:"这两件事风马牛不相及。",s:9,l:"F"},
+  {w:"奉公守法",p:"feng gong shou fa",m:"奉行公事，遵守法令。",e:"他奉公守法，清正廉洁。",s:8,l:"F"},
+  {w:"釜底抽薪",p:"fu di chou xin",m:"从根本上解决问题。",e:"要釜底抽薪，彻底解决。",s:10,l:"F"},
+  {w:"改过自新",p:"gai guo zi xin",m:"改正错误，重新做人。",e:"他决心改过自新。",s:7,l:"G"},
+  {w:"感同身受",p:"gan tong shen shou",m:"心里感激得就像亲身受到对方的帮助一样。",e:"你的遭遇我感同身受。",s:13,l:"G"},
+  {w:"高歌猛进",p:"gao ge meng jin",m:"高声歌唱，勇猛前进。",e:"军队高歌猛进。",s:10,l:"G"},
+  {w:"各抒己见",p:"ge shu ji jian",m:"各自充分发表自己的意见。",e:"会议上大家各抒己见。",s:6,l:"G"},
+  {w:"根深蒂固",p:"gen shen di gu",m:"比喻基础深厚，不容易动摇。",e:"这种观念已根深蒂固。",s:10,l:"G"},
+  {w:"功成名就",p:"gong cheng ming jiu",m:"功绩取得了，名声也得到了。",e:"他年纪轻轻便功成名就。",s:5,l:"G"},
+  {w:"古色古香",p:"gu se gu xiang",m:"形容器物、书画等富有古雅的色彩和情调。",e:"这间屋子古色古香。",s:5,l:"G"},
+  {w:"顾全大局",p:"gu quan da ju",m:"从整体的利益着想，使不遭受损害。",e:"做决定时要顾全大局。",s:21,l:"G"},
+  {w:"鬼斧神工",p:"gui fu shen gong",m:"形容艺术技巧高超，不像人力所能达到的。",e:"这座雕塑鬼斧神工。",s:9,l:"G"},
+  {w:"国泰民安",p:"guo tai min an",m:"国家太平，人民安乐。",e:"祝愿国泰民安。",s:8,l:"G"},
+  {w:"含辛茹苦",p:"han xin ru ku",m:"形容忍受辛苦。",e:"母亲含辛茹苦把他养大。",s:7,l:"H"},
+  {w:"汗马功劳",p:"han ma gong lao",m:"指在战场上建立战功，现比喻做事中的功劳。",e:"他为公司立下了汗马功劳。",s:6,l:"H"},
+  {w:"豪言壮语",p:"hao yan zhuang yu",m:"气魄很大的话。",e:"他发出了豪言壮语。",s:14,l:"H"},
+  {w:"和蔼可亲",p:"he ai ke qin",m:"态度温和，使人愿意接近。",e:"老师和蔼可亲。",s:8,l:"H"},
+  {w:"厚积薄发",p:"hou ji bo fa",m:"长时间积累然后集中爆发出来。",e:"多年学习终于厚积薄发。",s:9,l:"H"},
+  {w:"焕然一新",p:"huan ran yi xin",m:"形容出现了崭新的面貌。",e:"城市面貌焕然一新。",s:11,l:"H"},
+  {w:"回味无穷",p:"hui wei wu qiong",m:"比喻回想某一事物越想越觉得有意思。",e:"这部电影令人回味无穷。",s:6,l:"H"},
+  {w:"浑然天成",p:"hun ran tian cheng",m:"形容诗文结构严密自然，用词运典毫无斧凿痕迹。",e:"这首诗浑然天成。",s:9,l:"H"},
+  {w:"豁然开朗",p:"huo ran kai lang",m:"由狭窄幽暗一变为宽阔明亮，比喻对某个道理突然了解。",e:"听了他的解释我豁然开朗。",s:15,l:"H"},
+  {w:"急中生智",p:"ji zhong sheng zhi",m:"在紧急中猛然想出了办法。",e:"他急中生智，化解了危机。",s:9,l:"J"},
+  {w:"坚持不懈",p:"jian chi bu xie",m:"坚持到底，一点不松懈。",e:"他坚持不懈地努力。",s:7,l:"J"},
+  {w:"江山如画",p:"jiang shan ru hua",m:"形容山河美丽如画。",e:"祖国江山如画。",s:6,l:"J"},
+  {w:"娇生惯养",p:"jiao sheng guan yang",m:"从小就被溺爱惯了。",e:"他从小娇生惯养。",s:9,l:"J"},
+  {w:"劫后余生",p:"jie hou yu sheng",m:"经历灾难后侥幸活下来。",e:"地震后他们劫后余生。",s:7,l:"J"},
+  {w:"津津有味",p:"jin jin you wei",m:"形容感觉有趣味。",e:"他津津有味地读着小说。",s:9,l:"J"},
+  {w:"惊天动地",p:"jing tian dong di",m:"形容声音特别响亮或事业伟大。",e:"做出惊天动地的壮举。",s:11,l:"J"},
+  {w:"鞠躬尽瘁",p:"ju gong jin cui",m:"小心谨慎，贡献出全部精力。",e:"他为国鞠躬尽瘁。",s:17,l:"J"},
+  {w:"聚精会神",p:"ju jing hui shen",m:"集中精神，集中注意力。",e:"他聚精会神地听讲。",s:14,l:"J"},
+  {w:"刻不容缓",p:"ke bu rong huan",m:"片刻也不容许延缓，形容形势紧迫。",e:"这件事刻不容缓。",s:8,l:"K"},
+  {w:"刻舟求剑",p:"ke zhou qiu jian",m:"比喻办事方法不对头，死板地按老规矩办事。",e:"不能刻舟求剑，要与时俱进。",s:8,l:"K"},
+  {w:"空前绝后",p:"kong qian jue hou",m:"从前没有过，以后也不会有。",e:"这场表演空前绝后。",s:8,l:"K"},
+  {w:"口是心非",p:"kou shi xin fei",m:"嘴里说的和心里想的不一样。",e:"他口是心非，不可信。",s:3,l:"K"},
+  {w:"雷厉风行",p:"lei li feng xing",m:"比喻执行政策、命令等严格而迅速。",e:"新领导雷厉风行。",s:13,l:"L"},
+  {w:"量力而行",p:"liang li er xing",m:"按照自己力量的大小去做。",e:"做事要量力而行。",s:12,l:"L"},
+  {w:"流连忘返",p:"liu lian wang fan",m:"留恋不舍得离开，忘了回去。",e:"这里的美景令人流连忘返。",s:10,l:"L"},
+  {w:"柳暗花明",p:"liu an hua ming",m:"比喻在困难中遇到转机。",e:"山穷水尽疑无路，柳暗花明又一村。",s:9,l:"L"},
+  {w:"龙争虎斗",p:"long zheng hu dou",m:"形容双方势均力敌的斗争。",e:"两支队伍龙争虎斗。",s:5,l:"L"},
+  {w:"马不停蹄",p:"ma bu ting ti",m:"比喻一刻也不停留地前进。",e:"他马不停蹄地赶往会场。",s:3,l:"M"},
+  {w:"妙笔生花",p:"miao bi sheng hua",m:"比喻文笔好，写的文章美妙。",e:"他的文章妙笔生花。",s:7,l:"M"},
+  {w:"名副其实",p:"ming fu qi shi",m:"名声或名义和实际相符。",e:"他是名副其实的专家。",s:6,l:"M"},
+  {w:"明察秋毫",p:"ming cha qiu hao",m:"形容眼力好到可以看清秋天鸟的细毛。比喻人目光敏锐。",e:"他明察秋毫，什么都瞒不过他。",s:8,l:"M"},
+  {w:"鹏程万里",p:"peng cheng wan li",m:"比喻前程远大。",e:"祝你鹏程万里。",s:13,l:"P"},
+  {w:"迫不及待",p:"po bu ji dai",m:"紧急得不能等待。",e:"他迫不及待地打开了礼物。",s:8,l:"P"},
+  {w:"齐心协力",p:"qi xin xie li",m:"思想认识一致，共同努力。",e:"大家齐心协力完成了项目。",s:14,l:"Q"},
+  {w:"旗开得胜",p:"qi kai de sheng",m:"刚出征就打了胜仗，比喻事情一开始就取得成功。",e:"祝你旗开得胜。",s:14,l:"Q"},
+  {w:"千锤百炼",p:"qian chui bai lian",m:"比喻经历多次的斗争和考验。",e:"这篇文章经过千锤百炼。",s:3,l:"Q"},
+  {w:"千丝万缕",p:"qian si wan lv",m:"形容联系密切或关系复杂。",e:"两者之间有千丝万缕的联系。",s:3,l:"Q"},
+  {w:"潜移默化",p:"qian yi mo hua",m:"指人的思想或品格不知不觉间受到感染和影响。",e:"环境对人有潜移默化的影响。",s:15,l:"Q"},
+  {w:"锲而不舍",p:"qie er bu she",m:"不断地镂刻，比喻坚持不懈。",e:"学习要有锲而不舍的精神。",s:14,l:"Q"},
+  {w:"秋高气爽",p:"qiu gao qi shuang",m:"秋天天高气清，令人觉得舒畅。",e:"秋高气爽的季节最适合出游。",s:9,l:"Q"},
+  {w:"忍辱负重",p:"ren ru fu zhong",m:"忍受耻辱，承担重任。",e:"他忍辱负重，终成大事。",s:7,l:"R"},
+  {w:"日理万机",p:"ri li wan ji",m:"每天处理纷繁的政务。",e:"总理日理万机。",s:4,l:"R"},
+  {w:"入木三分",p:"ru mu san fen",m:"比喻见解、议论十分深刻。",e:"他的评论入木三分。",s:2,l:"R"},
+  {w:"塞翁失马",p:"sai weng shi ma",m:"比喻虽然暂时遭受损失，也可能由此得到好处。",e:"塞翁失马，焉知非福。",s:13,l:"S"},
+  {w:"势不可挡",p:"shi bu ke dang",m:"来势迅猛，不可阻挡。",e:"改革的潮流势不可挡。",s:8,l:"S"},
+  {w:"手不释卷",p:"shou bu shi juan",m:"书本不离手，形容勤奋好学。",e:"他手不释卷，博览群书。",s:4,l:"S"},
+  {w:"束手无策",p:"shu shou wu ce",m:"好像手被束缚住了，形容一点办法也没有。",e:"面对难题他束手无策。",s:7,l:"S"},
+  {w:"叹为观止",p:"tan wei guan zhi",m:"指赞美看到的事物好到极点。",e:"这场演出令人叹为观止。",s:5,l:"T"},
+  {w:"天马行空",p:"tian ma xing kong",m:"比喻才思豪放不拘。",e:"他的想象力天马行空。",s:4,l:"T"},
+  {w:"通宵达旦",p:"tong xiao da dan",m:"整夜到天亮。",e:"他通宵达旦地工作。",s:10,l:"T"},
+  {w:"万古长青",p:"wan gu chang qing",m:"永远像春天一样翠绿。",e:"友谊万古长青。",s:3,l:"W"},
+  {w:"卧薪尝胆",p:"wo xin chang dan",m:"比喻刻苦自励，发愤图强。",e:"他卧薪尝胆十年终于成功。",s:8,l:"W"},
+  {w:"息息相关",p:"xi xi xiang guan",m:"形容彼此的关系非常密切。",e:"环境与我们的生活息息相关。",s:10,l:"X"},
+  {w:"相得益彰",p:"xiang de yi zhang",m:"指两个人或两件事物互相配合，双方的能力和作用更能显示出来。",e:"两人合作相得益彰。",s:9,l:"X"},
+  {w:"胸有成竹",p:"xiong you cheng zhu",m:"比喻做事之前已经有了主意。",e:"他胸有成竹地走上考场。",s:10,l:"X"},
+  {w:"扬长避短",p:"yang chang bi duan",m:"发挥自己的长处，回避自己的短处。",e:"做事要扬长避短。",s:6,l:"Y"},
+  {w:"一尘不染",p:"yi chen bu ran",m:"比喻品格高洁，丝毫不受坏习气的影响。",e:"他为人一尘不染。",s:1,l:"Y"},
+  {w:"一鼓作气",p:"yi gu zuo qi",m:"比喻趁劲头大的时候一下子把事情做完。",e:"一鼓作气把报告写完。",s:1,l:"Y"},
+  {w:"义无反顾",p:"yi wu fan gu",m:"在道义上只有勇往直前，绝不退缩回顾。",e:"他义无反顾地投入了战斗。",s:3,l:"Y"},
+  {w:"意气风发",p:"yi qi feng fa",m:"形容精神振奋，气概豪迈。",e:"年轻人意气风发。",s:13,l:"Y"},
+  {w:"因地制宜",p:"yin di zhi yi",m:"根据各地的实际情况制定适宜的办法。",e:"发展经济要因地制宜。",s:6,l:"Y"},
+  {w:"永垂不朽",p:"yong chui bu xiu",m:"指光辉的事迹和伟大的精神永远流传。",e:"英雄们的精神永垂不朽。",s:5,l:"Y"},
+  {w:"与日俱增",p:"yu ri ju zeng",m:"随着时间一天天地增长。",e:"他的影响力与日俱增。",s:3,l:"Y"},
+  {w:"与众不同",p:"yu zhong bu tong",m:"跟大家不一样。",e:"她的风格与众不同。",s:3,l:"Y"},
+  {w:"郑人买履",p:"zheng ren mai lv",m:"比喻只相信教条，不顾实际。",e:"做事不能像郑人买履那样死板。",s:8,l:"Z"},
+  {w:"知己知彼",p:"zhi ji zhi bi",m:"对自己和对方的情况都有透彻的了解。",e:"知己知彼，百战不殆。",s:8,l:"Z"},
+  {w:"纸上谈兵",p:"zhi shang tan bing",m:"在纸面上谈论用兵策略，比喻空谈理论。",e:"光是纸上谈兵不行，要实践。",s:10,l:"Z"},
+  {w:"忠言逆耳",p:"zhong yan ni er",m:"正直的劝告听起来不顺耳。",e:"忠言逆耳利于行。",s:8,l:"Z"},
+  {w:"专心致志",p:"zhuan xin zhi zhi",m:"形容一心一意，集中精神。",e:"他专心致志地研究课题。",s:11,l:"Z"},
+  {w:"壮志凌云",p:"zhuang zhi ling yun",m:"形容理想宏伟远大。",e:"他壮志凌云，要做出一番事业。",s:6,l:"Z"},
+  {w:"字斟句酌",p:"zi zhen ju zhuo",m:"对每一个字、每一句话都仔细斟酌。",e:"写文章要字斟句酌。",s:6,l:"Z"},
+  {w:"自告奋勇",p:"zi gao fen yong",m:"主动要求担任某项艰巨的任务。",e:"他自告奋勇参加了救援。",s:6,l:"Z"},
+  {w:"纵横捭阖",p:"zong heng bai he",m:"指在政治或外交上运用手段进行分化或拉拢。",e:"他在谈判桌上纵横捭阖。",s:17,l:"Z"},
+  {w:"足智多谋",p:"zu zhi duo mou",m:"富有智慧，善于谋划。",e:"诸葛亮足智多谋。",s:7,l:"Z"},
+  {w:"左思右想",p:"zuo si you xiang",m:"多方面想了又想。",e:"他左思右想，终于有了主意。",s:5,l:"Z"},
+  {w:"安步当车",p:"an bu dang che",m:"以从容的步行代替乘车。形容安闲自得。",e:"他退休后安步当车，悠然自得。",s:6,l:"A"},
+  {w:"黯然失色",p:"an ran shi se",m:"指事物失去原有的色泽和光彩。",e:"在他面前其他人都黯然失色。",s:13,l:"A"},
+  {w:"不翼而飞",p:"bu yi er fei",m:"没有翅膀却飞走了，比喻东西突然不见了。",e:"钱包不翼而飞了。",s:4,l:"B"},
+  {w:"层出不穷",p:"ceng chu bu qiong",m:"接连不断地出现，没有穷尽。",e:"新问题层出不穷。",s:7,l:"C"},
+  {w:"称心如意",p:"chen xin ru yi",m:"形容心满意足，事情的发展完全符合心意。",e:"他终于找到了称心如意的工作。",s:10,l:"C"},
+  {w:"趁热打铁",p:"chen re da tie",m:"比喻抓紧有利时机。",e:"趁热打铁，赶紧行动。",s:12,l:"C"},
+  {w:"痴人说梦",p:"chi ren shuo meng",m:"比喻说根本办不到的荒唐话。",e:"你这是痴人说梦。",s:13,l:"C"},
+  {w:"绰绰有余",p:"chuo chuo you yu",m:"形容很宽裕，用不完。",e:"时间绰绰有余。",s:11,l:"C"},
+  {w:"打草惊蛇",p:"da cao jing she",m:"比喻做事不密，惊动了对方。",e:"行动要隐秘，不要打草惊蛇。",s:5,l:"D"},
+  {w:"倒行逆施",p:"dao xing ni shi",m:"做事违反常规或违背正义。",e:"他的倒行逆施不得人心。",s:10,l:"D"},
+  {w:"德高望重",p:"de gao wang zhong",m:"品德高尚，声望很高。",e:"他是一位德高望重的长者。",s:15,l:"D"},
+  {w:"废寝忘食",p:"fei qin wang shi",m:"不睡觉不吃饭，形容非常专心努力。",e:"他废寝忘食地研究。",s:8,l:"F"},
+  {w:"纷至沓来",p:"fen zhi ta lai",m:"形容纷纷到来，连续不断地到来。",e:"订单纷至沓来。",s:4,l:"F"},
+  {w:"丰功伟绩",p:"feng gong wei ji",m:"伟大的功劳和成就。",e:"这是一项丰功伟绩。",s:4,l:"F"},
+  {w:"俯拾皆是",p:"fu shi jie shi",m:"只要弯下身子捡就是，形容到处都是。",e:"路边的野花俯拾皆是。",s:10,l:"F"},
+  {w:"隔岸观火",p:"ge an guan huo",m:"在对岸看火灾，比喻对别人的危难不予关心。",e:"这种事不能隔岸观火。",s:12,l:"G"},
+  {w:"呕心沥血",p:"ou xin li xue",m:"比喻费尽心血。",e:"老师呕心沥血培养学生。",s:7,l:"O"},
+  {w:"天道酬勤",p:"tian dao chou qin",m:"上天偏爱勤奋的人。",e:"他相信天道酬勤。",s:4,l:"T"},
+  {w:"未雨绸缪",p:"wei yu chou mou",m:"比喻事先做好准备工作。",e:"我们应未雨绸缪。",s:8,l:"W"},
+  {w:"温故知新",p:"wen gu zhi xin",m:"温习旧的知识可以得到新的理解和体会。",e:"学习要温故知新。",s:12,l:"W"},
+  {w:"无懈可击",p:"wu xie ke ji",m:"没有可以被人攻击或挑剔的漏洞。",e:"他的论证无懈可击。",s:4,l:"W"},
+  {w:"匹夫有责",p:"pi fu you ze",m:"每个人都有责任。",e:"天下兴亡，匹夫有责。",s:4,l:"P"},
+  {w:"气吞山河",p:"qi tun shan he",m:"气势可以吞没山河，形容气魄很大。",e:"他有气吞山河的豪情。",s:4,l:"Q"},
+  {w:"若隐若现",p:"ruo yin ruo xian",m:"隐隐约约，看不清楚。",e:"远处的山峰若隐若现。",s:8,l:"R"},
+  {w:"随遇而安",p:"sui yu er an",m:"能顺应环境，在任何境遇中都安然自得。",e:"他性格随和，随遇而安。",s:11,l:"S"},
+  {w:"无与伦比",p:"wu yu lun bi",m:"没有可以跟它相比的。",e:"他的才华无与伦比。",s:4,l:"W"},
+  {w:"鱼目混珠",p:"yu mu hun zhu",m:"比喻以假乱真。",e:"市场上鱼目混珠的产品太多了。",s:8,l:"Y"},
+  {w:"掌上明珠",p:"zhang shang ming zhu",m:"比喻极受宠爱的人。",e:"女儿是他的掌上明珠。",s:11,l:"Z"},
+  {w:"朝三暮四",p:"zhao san mu si",m:"比喻常常变卦，反复无常。",e:"做事不能朝三暮四。",s:12,l:"Z"},
+  {w:"做贼心虚",p:"zuo zei xin xu",m:"做了坏事心里不踏实。",e:"他做贼心虚，不敢见人。",s:11,l:"Z"}
+];
+
+// ===== App State =====
+var PAGE_SIZE = 20;
+var currentPage = 1;
+var filteredIdioms = [];
+var activeLetter = '';
+
+// ===== Initialize =====
+document.addEventListener('DOMContentLoaded', function() {
+  buildLetterIndex();
+  filteredIdioms = IDIOMS.slice();
+  renderResults();
+
+  document.getElementById('queryBtn').addEventListener('click', doSearch);
+  document.getElementById('queryInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doSearch();
+  });
+
+  var radios = document.querySelectorAll('input[name="searchMode"]');
+  for (var i = 0; i < radios.length; i++) {
+    radios[i].addEventListener('change', updateHelper);
+  }
+});
+
+function getMode() {
+  var radios = document.querySelectorAll('input[name="searchMode"]');
+  for (var i = 0; i < radios.length; i++) {
+    if (radios[i].checked) return radios[i].value;
+  }
+  return 'char';
+}
+
+function updateHelper() {
+  var mode = getMode();
+  var el = document.getElementById('helperText');
+  var input = document.getElementById('queryInput');
+  if (mode === 'char') {
+    el.textContent = '\u4F8B\u5982\uFF1A\u201C\u7F8E\u201D\u3001\u201C\u4E94\u5341\u201D';
+    input.placeholder = '\u8BF7\u8F93\u5165\u8981\u67E5\u8BE2\u7684\u6C49\u5B57...';
+  } else if (mode === 'pinyin') {
+    el.textContent = '\u4F8B\u5982\uFF1A\u201Cai\u201D\u3001\u201Cbai\u201D';
+    input.placeholder = '\u8BF7\u8F93\u5165\u62FC\u97F3...';
+  } else {
+    el.textContent = '\u4F8B\u5982\uFF1A\u201C3\u201D\u3001\u201C8\u201D';
+    input.placeholder = '\u8BF7\u8F93\u5165\u7B14\u753B\u6570...';
+  }
+}
+
+function buildLetterIndex() {
+  var container = document.getElementById('letterIndex');
+  var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  var html = '';
+  for (var i = 0; i < letters.length; i++) {
+    html += '<button class="letter-btn" data-letter="' + letters[i] + '">' + letters[i] + '</button>';
+  }
+  container.innerHTML = html;
+  container.addEventListener('click', function(e) {
+    var btn = e.target.closest('.letter-btn');
+    if (!btn) return;
+    var letter = btn.getAttribute('data-letter');
+    // toggle
+    if (activeLetter === letter) {
+      activeLetter = '';
+    } else {
+      activeLetter = letter;
+    }
+    updateLetterActive();
+    currentPage = 1;
+    if (activeLetter) {
+      filteredIdioms = IDIOMS.filter(function(item) { return item.l === activeLetter; });
+    } else {
+      filteredIdioms = IDIOMS.slice();
+    }
+    document.getElementById('queryInput').value = '';
+    renderResults();
+  });
+}
+
+function updateLetterActive() {
+  var btns = document.querySelectorAll('.letter-btn');
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].classList.toggle('active', btns[i].getAttribute('data-letter') === activeLetter);
+  }
+}
+
+function doSearch() {
+  var query = document.getElementById('queryInput').value.trim();
+  var mode = getMode();
+  activeLetter = '';
+  updateLetterActive();
+  currentPage = 1;
+
+  if (!query) {
+    filteredIdioms = IDIOMS.slice();
+    renderResults();
+    return;
+  }
+
+  if (mode === 'char') {
+    filteredIdioms = IDIOMS.filter(function(item) {
+      return item.w.indexOf(query) !== -1;
+    });
+  } else if (mode === 'pinyin') {
+    var q = query.toLowerCase();
+    filteredIdioms = IDIOMS.filter(function(item) {
+      return item.p.toLowerCase().indexOf(q) !== -1;
+    });
+  } else {
+    var num = parseInt(query);
+    if (isNaN(num)) {
+      filteredIdioms = [];
+    } else {
+      filteredIdioms = IDIOMS.filter(function(item) {
+        return item.s === num;
+      });
+    }
+  }
+  renderResults();
+}
+
+function renderResults() {
+  var totalCount = filteredIdioms.length;
+  var header = document.getElementById('resultsHeader');
+  var list = document.getElementById('idiomList');
+  var pag = document.getElementById('pagination');
+
+  document.getElementById('totalCount').textContent = totalCount;
+  header.style.display = totalCount > 0 ? 'flex' : 'none';
+
+  if (totalCount === 0) {
+    list.innerHTML = '<div class="no-results"><div class="nr-icon">&#x1F50D;</div><div>\u6CA1\u6709\u627E\u5230\u5339\u914D\u7684\u6210\u8BED\uFF0C\u8BF7\u5C1D\u8BD5\u5176\u4ED6\u5173\u952E\u8BCD</div></div>';
+    pag.innerHTML = '';
+    return;
+  }
+
+  var totalPages = Math.ceil(totalCount / PAGE_SIZE);
+  if (currentPage > totalPages) currentPage = totalPages;
+  var start = (currentPage - 1) * PAGE_SIZE;
+  var end = Math.min(start + PAGE_SIZE, totalCount);
+  var pageItems = filteredIdioms.slice(start, end);
+
+  var html = '';
+  for (var i = 0; i < pageItems.length; i++) {
+    var item = pageItems[i];
+    html += '<div class="idiom-card">' +
+      '<div class="idiom-name">' + escHtml(item.w) + '</div>' +
+      '<div class="idiom-pinyin">' + escHtml(item.p) + '</div>' +
+      '<div class="idiom-meaning"><em>\u91CA\u4E49\uFF1A</em>' + escHtml(item.m) + '</div>' +
+      '<div class="idiom-example">\u4F8B\u53E5\uFF1A' + escHtml(item.e) + '</div>' +
+      '</div>';
+  }
+  list.innerHTML = html;
+
+  // Pagination
+  if (totalPages <= 1) { pag.innerHTML = ''; return; }
+  var pagHtml = '';
+  pagHtml += '<button class="page-btn' + (currentPage === 1 ? ' disabled' : '') + '" data-page="prev">&laquo;</button>';
+  var pages = getPagination(currentPage, totalPages);
+  for (var j = 0; j < pages.length; j++) {
+    if (pages[j] === '...') {
+      pagHtml += '<span class="page-btn disabled">...</span>';
+    } else {
+      pagHtml += '<button class="page-btn' + (pages[j] === currentPage ? ' active' : '') + '" data-page="' + pages[j] + '">' + pages[j] + '</button>';
+    }
+  }
+  pagHtml += '<button class="page-btn' + (currentPage === totalPages ? ' disabled' : '') + '" data-page="next">&raquo;</button>';
+  pag.innerHTML = pagHtml;
+
+  pag.onclick = function(e) {
+    var btn = e.target.closest('.page-btn');
+    if (!btn || btn.classList.contains('disabled') || btn.classList.contains('active')) return;
+    var p = btn.getAttribute('data-page');
+    if (p === 'prev') currentPage--;
+    else if (p === 'next') currentPage++;
+    else currentPage = parseInt(p);
+    renderResults();
+    document.querySelector('.tool-main').scrollIntoView({ behavior: 'smooth' });
+  };
+}
+
+function getPagination(cur, total) {
+  if (total <= 7) {
+    var arr = [];
+    for (var i = 1; i <= total; i++) arr.push(i);
+    return arr;
+  }
+  var pages = [1];
+  if (cur > 3) pages.push('...');
+  for (var j = Math.max(2, cur - 1); j <= Math.min(total - 1, cur + 1); j++) pages.push(j);
+  if (cur < total - 2) pages.push('...');
+  pages.push(total);
+  return pages;
+}
+
+function escHtml(s) {
+  var d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+</script>
+</body>
+</html>

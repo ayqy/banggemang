@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="歇后语,歇后语大全,帮小忙,腾讯QQ浏览器,在线工具箱,教育工具">
+  <meta name="description" content="歇后语查询工具，输入关键词即可查找对应歇后语。帮小忙，腾讯QQ浏览器在线工具箱。">
+  <title>歇后语-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .allegory-results {
+      margin-top: 20px;
+    }
+    .allegory-results .result-title {
+      font-size: 14px;
+      color: #8f8f8f;
+      margin-bottom: 12px;
+    }
+    .allegory-results .result-title b {
+      color: #136ce9;
+      font-weight: 600;
+    }
+    .allegory-card {
+      background: #f6f7fa;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: #242424;
+      line-height: 1.7;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .allegory-card:hover {
+      border-left-color: #136ce9;
+      background: #f0f0ff;
+    }
+    .allegory-card .al-front {
+      font-weight: 600;
+    }
+    .allegory-card .al-sep {
+      color: #136ce9;
+      margin: 0 6px;
+    }
+    .allegory-card .al-back {
+      color: #666;
+    }
+    .allegory-empty {
+      text-align: center;
+      padding: 40px 0;
+      color: #b3b3b3;
+      font-size: 14px;
+    }
+    .allegory-hint {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: #fff8e6;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #b8860b;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯QQ浏览器在线工具箱</span>
+      </div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png">
+            <span>全部</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=img" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png">
+            <span>图片工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=pdf" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png">
+            <span>PDF转换工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=data" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png">
+            <span>数据换算工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=life" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png">
+            <span>生活娱乐工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=education" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png">
+            <span>教育工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=text" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png">
+            <span>文本工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=doc" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png">
+            <span>文档转换工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=develop" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png">
+            <span>开发工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=video" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png">
+            <span>视频工具</span>
+          </a>
+        </li>
+        <li class="category-entry-wrapper">
+          <a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png">
+            <span>浏览器插件</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item">
+      <a class="nav-backtop" href="javascript:void(0)">
+        <img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png">
+      </a>
+    </div>
+    <div class="nav-button-item">
+      <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank">
+        <img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png">
+      </a>
+      <div class="qqgroup-tip">QQ群：459317399</div>
+    </div>
+    <div class="nav-button-item">
+      <a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank">
+        <div class="nav-button-text">共建</div>
+      </a>
+    </div>
+    <div class="nav-button-item">
+      <a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank">
+        <div class="nav-button-text">反馈</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Search Bar -->
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Area -->
+    <div class="tool-page-container">
+      <div class="tool-page-title">歇后语</div>
+      <div class="tool-main">
+        <h2>歇后语查询</h2>
+        <div class="input-group">
+          <label>歇后语</label>
+          <input type="text" id="allegoryInput" placeholder="请输入需要查询歇后语">
+          <button class="btn-primary" id="allegoryBtn">歇后语查询</button>
+        </div>
+        <div class="allegory-hint" id="allegoryHint">提示：可输入歇后语的前半句、后半句或关键词进行模糊搜索。</div>
+        <div class="allegory-results" id="allegoryResults">
+          <div class="allegory-empty">请输入关键词查询歇后语</div>
+        </div>
+      </div>
+
+      <!-- Tool Introduction -->
+      <div class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <p>歇后语工具可以帮助您查找和学习各种歇后语。歇后语是中国劳动人民在日常生活中创造的一种特殊语言形式，它由前后两部分组成，前半部分是形象的比喻，后半部分是解释和说明。</p>
+        <p style="margin-top:10px"><strong>使用方法：</strong></p>
+        <p style="margin-top:6px">1. 在输入框中输入歇后语的前半部分或关键词。</p>
+        <p>2. 点击"歇后语查询"按钮或按回车键。</p>
+        <p>3. 工具将显示所有匹配的歇后语结果。</p>
+        <p>4. 支持模糊搜索，输入任意关键词即可查找相关歇后语。</p>
+      </div>
+
+      <!-- More Recommendations -->
+      <div class="more-recommend">
+        <h3>更多推荐</h3>
+        <div class="recommend-list">
+          <a class="recommend-item" href="dynasties.html" target="_blank">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_M4UejcjNNLA.png" alt="历史朝代查询">
+            <div>
+              <div class="rec-name">历史朝代查询</div>
+              <div class="rec-desc">快速查询各个历史朝代的相关信息</div>
+            </div>
+          </a>
+          <a class="recommend-item" href="capital.html" target="_blank">
+            <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_jdB6qNUoFvz.png" alt="各国首都">
+            <div>
+              <div class="rec-name">各国首都</div>
+              <div class="rec-desc">查询世界各国首都信息</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc">
+              <span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span>
+            </div>
+          </div>
+          <div class="qrcode">
+            <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+(function() {
+  // 200+ common 歇后语 data [front, back]
+  var data = [
+    ["八仙过海","各显神通"],
+    ["泥菩萨过河","自身难保"],
+    ["蚕豆开花","黑心"],
+    ["孔夫子搬家","净是输（书）"],
+    ["打破砂锅","问到底"],
+    ["和尚打伞","无法无天"],
+    ["虎落平阳","被犬欺"],
+    ["画蛇添足","多此一举"],
+    ["箭在弦上","不得不发"],
+    ["井底青蛙","目光短浅"],
+    ["大海捞针","没处寻"],
+    ["竹篮打水","一场空"],
+    ["十五个吊桶打水","七上八下"],
+    ["黄鼠狼给鸡拜年","没安好心"],
+    ["哑巴吃黄连","有苦说不出"],
+    ["铁打的公鸡","一毛不拔"],
+    ["外甥打灯笼","照旧（舅）"],
+    ["猪八戒照镜子","里外不是人"],
+    ["放风筝断了线","没指望了"],
+    ["池塘里的风波","大不了"],
+    ["谈心不点灯","说黑话"],
+    ["顶风顶水划船","硬撑"],
+    ["八仙聚会","神聊"],
+    ["霸王敬酒","不干也得干"],
+    ["板上订钉","跑不了"],
+    ["背鼓上门","讨打"],
+    ["被窝里不见了针","不是婆婆就是孙"],
+    ["冰糖煮黄连","同甘共苦"],
+    ["不入虎穴","焉得虎子"],
+    ["曹操吃鸡肋","食之无味，弃之可惜"],
+    ["茶壶里煮饺子","倒不出来"],
+    ["拆了的破庙","没神"],
+    ["搭起戏台卖豆腐","买卖不大架子大"],
+    ["大姑娘坐花轿","头一回"],
+    ["大水冲了龙王庙","自家人不认自家人"],
+    ["到火神庙求雨","找错了门"],
+    ["冬天的蟋蟀","不知春秋"],
+    ["肚子里撑船","内行（航）"],
+    ["对牛弹琴","白费劲"],
+    ["飞蛾扑火","自取灭亡"],
+    ["粪坑关刀","文（闻）也不能，武（舞）也不能"],
+    ["擀面杖吹火","一窍不通"],
+    ["高射炮打蚊子","大材小用"],
+    ["狗拿耗子","多管闲事"],
+    ["狗咬吕洞宾","不识好人心"],
+    ["挂羊头卖狗肉","言行不一"],
+    ["关公走麦城","骄必败"],
+    ["鬼门关里打秋千","命里挣扎"],
+    ["韩信点兵","多多益善"],
+    ["好泥巴打好灶","好心讨不到好报"],
+    ["耗子掉到水缸里","时髦（湿毛）"],
+    ["河边洗黄莲","何（河）苦"],
+    ["猴子捞月亮","空忙一场"],
+    ["花盆里长树","成不了材"],
+    ["黄连树下弹琵琶","苦中作乐"],
+    ["鸡蛋碰石头","不自量力"],
+    ["姜太公钓鱼","愿者上钩"],
+    ["脚踏两只船","摇摆不定"],
+    ["孔夫子的嘴巴","出口成章"],
+    ["癞蛤蟆想吃天鹅肉","异想天开"],
+    ["老虎屁股","摸不得"],
+    ["老鼠过街","人人喊打"],
+    ["老鼠钻进书箱里","咬文嚼字"],
+    ["梁山的军师","无（吴）用"],
+    ["六月飞霜","怪事一桩"],
+    ["鲁班门前耍大斧","自不量力"],
+    ["萝卜白菜","各有所爱"],
+    ["马尾穿豆腐","提不起来"],
+    ["卖布不带尺","存心不良（量）"],
+    ["盲人骑瞎马","乱闯"],
+    ["猫哭老鼠","假慈悲"],
+    ["门缝里看人","把人看扁了"],
+    ["庙里的和尚","无牵无挂"],
+    ["泥牛入海","无消息"],
+    ["牛角抹油","又尖又滑"],
+    ["骑驴看唱本","走着瞧"],
+    ["千里送鹅毛","礼轻情意重"],
+    ["墙上茅草","随风两边倒"],
+    ["秋后的蚂蚱","蹦跶不了几天"],
+    ["热锅上的蚂蚁","团团转"],
+    ["肉包子打狗","有去无回"],
+    ["三个臭皮匠","顶个诸葛亮"],
+    ["三十六计","走为上策"],
+    ["砂锅里煮驴头","脑袋也得烂"],
+    ["上鞋不用锥子","针（真）行"],
+    ["十二月的白菜","动（冻）了心"],
+    ["石头里蹦出来的","没爹没妈"],
+    ["司马昭之心","路人皆知"],
+    ["孙猴子的脸","说变就变"],
+    ["铁公鸡","一毛不拔"],
+    ["兔子尾巴","长不了"],
+    ["歪嘴讲故事","邪（斜）说"],
+    ["王八吃秤砣","铁了心"],
+    ["王婆卖瓜","自卖自夸"],
+    ["窝里斗的麻雀","鸟气"],
+    ["蜗牛赛跑","慢慢来"],
+    ["乌鸦嘴","说人坏话"],
+    ["武大郎开豆腐店","人软货也软"],
+    ["秀才遇到兵","有理说不清"],
+    ["哑巴吃饺子","心里有数"],
+    ["哑巴打官司","有口难言"],
+    ["阎王爷贴告示","鬼话连篇"],
+    ["杨柳的枝叶","分外青（亲）"],
+    ["一口吃个胖子","心太急"],
+    ["有借有还","再借不难"],
+    ["芝麻开花","节节高"],
+    ["猪鼻子里插葱","装象（相）"],
+    ["竹筒倒豆子","直来直去"],
+    ["瞎子点灯","白费蜡"],
+    ["小葱拌豆腐","一清二白"],
+    ["秀才造反","三年不成"],
+    ["徐庶进曹营","一言不发"],
+    ["丈二和尚","摸不着头脑"],
+    ["张飞穿针","大眼瞪小眼"],
+    ["张飞吃豆芽","小菜一碟"],
+    ["诸葛亮借箭","有借无还"],
+    ["诸葛亮弹琴","计上心来"],
+    ["诸葛亮用兵","神出鬼没"],
+    ["猪八戒吃人参果","不知其味"],
+    ["做一天和尚撞一天钟","得过且过"],
+    ["曹操杀华佗","讳疾忌医"],
+    ["曹操用计","又奸又滑"],
+    ["嫦娥下凡","美不胜收"],
+    ["唱戏的穿龙袍","成不了皇帝"],
+    ["吃了秤砣","铁了心"],
+    ["程咬金的斧头","就那三下子"],
+    ["出洞的老鼠","东张西望"],
+    ["穿着棉袄洗澡","包袱太重"],
+    ["刺猬抱在一起","扎手"],
+    ["打翻了五味瓶","酸甜苦辣咸"],
+    ["打雷不下雨","虚张声势"],
+    ["灯草拐杖","做不了主（柱）"],
+    ["滴水穿石","非一日之功"],
+    ["电线杆上绑鸡毛","好大的胆（掸）子"],
+    ["丢了西瓜捡芝麻","因小失大"],
+    ["东吴招亲","弄假成真"],
+    ["豆腐掉进灰堆里","吹不得打不得"],
+    ["肚里能撑船","宰相肚里能撑船"],
+    ["断了线的风筝","有去无回"],
+    ["扶着桥栏杆过河","生怕掉下去"],
+    ["赶鸭子上架","强人所难"],
+    ["刚出锅的铁","趁热打"],
+    ["关公面前耍大刀","自不量力"],
+    ["过了这个村","没这个店"],
+    ["过年娶媳妇","双喜临门"],
+    ["旱鸭子过河","吃力"],
+    ["河里摸鱼","找不着门道"],
+    ["猴子骑马","一跃上鞍"],
+    ["胡萝卜就酒","嚼（叫）着来"],
+    ["皇帝的女儿","不愁嫁"],
+    ["火烧赤壁","万事俱备只欠东风"],
+    ["鸡飞蛋打","两头空"],
+    ["尖担两头挑","左右为难"],
+    ["捡了芝麻丢了西瓜","因小失大"],
+    ["见了骆驼说马肿","少见多怪"],
+    ["脚踩两只船","两头落空"],
+    ["叫花子看戏","穷开心"],
+    ["拉磨的驴","团团转"],
+    ["老虎拉车","没人敢（赶）"],
+    ["老九的弟弟","老实（十）"],
+    ["林冲上梁山","官逼民反"],
+    ["刘备借荆州","有借无还"],
+    ["刘备摔孩子","收买人心"],
+    ["鸡蛋里面挑骨头","故意找茬"],
+    ["卢沟桥的狮子","数不清"],
+    ["落水的凤凰","不如鸡"],
+    ["麻雀虽小","五脏俱全"],
+    ["蚂蚁搬泰山","下了狠心"],
+    ["卖了儿子买担架","舍本逐末"],
+    ["盲人摸象","以偏概全"],
+    ["眉毛胡子一把抓","分不清主次"],
+    ["木匠戴枷","自作自受"],
+    ["哪吒闹海","惊天动地"],
+    ["泥菩萨过江","自身难保"],
+    ["螃蟹过河","七手八脚"],
+    ["跑了和尚","跑不了庙"],
+    ["皮球抛上天","空欢喜"],
+    ["七窍通了六窍","一窍不通"],
+    ["骑马找马","得寸进尺"],
+    ["起重机吊鸡毛","大材小用"],
+    ["千里马长了双翅膀","日行万里"],
+    ["敲锣卖糖","各干各行"],
+    ["三天打鱼两天晒网","没恒心"],
+    ["沙滩上盖楼房","基础不稳"],
+    ["山中无老虎","猴子称大王"],
+    ["生姜还是老的辣","经验丰富"],
+    ["树大自然直","放心吧"],
+    ["水中月镜中花","虚幻一场"],
+    ["太岁头上动土","胆子太大"],
+    ["铁棒磨成针","功到自然成"],
+    ["偷鸡不成","反蚀把米"],
+    ["兔子的尾巴","长不了"],
+    ["脱了裤子放屁","多此一举"],
+    ["万事俱备","只欠东风"],
+    ["围着火炉吃西瓜","心里甜丝丝的"],
+    ["乌龟爬旗杆","难上加难"],
+    ["武松打虎","英雄本色"],
+    ["瞎子背瘸子","互相利用"],
+    ["咸菜蘸酱","太严（盐）重了"],
+    ["新官上任","三把火"],
+    ["胸口放磨盘","压力太大"],
+    ["秀才不出门","能知天下事"],
+    ["唐僧取经","千辛万苦"],
+    ["唐僧的肉","人人想吃"],
+    ["鹦鹉学舌","人云亦云"],
+    ["一根筷子吃藕","专挑眼"],
+    ["周瑜打黄盖","一个愿打一个愿挨"],
+    ["猪八戒啃猪蹄","自残骨肉"],
+    ["砖头砌墙","后来居上"],
+    ["纸上谈兵","不切实际"],
+    ["纸老虎","一戳就破"],
+    ["孙悟空大闹天宫","慌了神"],
+    ["孙悟空的金箍棒","能大能小"],
+    ["孙悟空翻跟头","十万八千里"],
+    ["老太太上鸡窝","笨蛋（奔蛋）"],
+    ["蜻蜓点水","浅尝辄止"],
+    ["端午节卖历（粽）子","过时货"],
+    ["八月十五的月亮","正大光明"],
+    ["白水煮冬瓜","没什么味道"],
+    ["半空中放爆竹","想（响）得高"],
+    ["扁担挑水","心挂两头"],
+    ["菜刀切豆腐","两面光"],
+    ["拆了茅房盖楼房","臭底子"],
+    ["船头上跑马","走投无路"],
+    ["大炮打蚊子","小题大做"],
+    ["地里的萝卜","上清下不清"],
+    ["掉进染缸里","浑身都是彩"],
+    ["斗大的字不识一箩筐","大老粗"],
+    ["二十一天不出鸡","坏蛋"],
+    ["房顶上的冬瓜","两边滚"],
+    ["粉刷的墙壁","好看不耐久"],
+    ["蛤蟆跳井","不懂（扑通）"]
+  ];
+
+  var inputEl = document.getElementById('allegoryInput');
+  var btn = document.getElementById('allegoryBtn');
+  var resultsEl = document.getElementById('allegoryResults');
+  var hintEl = document.getElementById('allegoryHint');
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  function highlightText(text, keyword) {
+    if (!keyword) return escapeHtml(text);
+    var escaped = escapeHtml(text);
+    var kw = escapeHtml(keyword);
+    var regex = new RegExp('(' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    return escaped.replace(regex, '<span style="color:#136ce9;font-weight:600;">$1</span>');
+  }
+
+  function doSearch() {
+    var keyword = inputEl.value.trim();
+    if (!keyword) {
+      resultsEl.innerHTML = '<div class="allegory-empty">请输入关键词查询歇后语</div>';
+      hintEl.style.display = 'none';
+      return;
+    }
+
+    var matches = data.filter(function(item) {
+      return item[0].indexOf(keyword) !== -1 || item[1].indexOf(keyword) !== -1;
+    });
+
+    if (matches.length === 0) {
+      resultsEl.innerHTML = '<div class="allegory-empty">未找到与"' + escapeHtml(keyword) + '"相关的歇后语，请换个关键词试试</div>';
+      hintEl.style.display = 'block';
+      return;
+    }
+
+    hintEl.style.display = 'none';
+    var html = '<div class="result-title">找到 <b>' + matches.length + '</b> 条相关歇后语</div>';
+    matches.forEach(function(item) {
+      html += '<div class="allegory-card">'
+        + '<span class="al-front">' + highlightText(item[0], keyword) + '</span>'
+        + '<span class="al-sep">——</span>'
+        + '<span class="al-back">' + highlightText(item[1], keyword) + '</span>'
+        + '</div>';
+    });
+    resultsEl.innerHTML = html;
+  }
+
+  btn.addEventListener('click', doSearch);
+  inputEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doSearch();
+  });
+})();
+</script>
+</body>
+</html>

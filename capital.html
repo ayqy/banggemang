@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="各国首都,世界首都查询,帮小忙,腾讯QQ浏览器,在线工具箱">
+  <meta name="description" content="各国首都查询工具，快速查询世界各国首都信息。">
+  <title>各国首都-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .capital-filters { display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+    .continent-tabs { display:flex; gap:8px; flex-wrap:wrap; }
+    .continent-tab { padding:6px 18px; border-radius:20px; border:1px solid #ddd; background:#fff; font-size:14px; color:#666; cursor:pointer; transition:all .2s; white-space:nowrap; }
+    .continent-tab:hover { border-color:#136ce9; color:#136ce9; }
+    .continent-tab.active { background:linear-gradient(135deg,#136ce9,#6c8fff); color:#fff; border-color:transparent; }
+    .capital-search { flex:1; min-width:200px; height:38px; border:1px solid #ddd; border-radius:8px; padding:0 12px; font-size:14px; outline:none; transition:border-color .2s; }
+    .capital-search:focus { border-color:#136ce9; }
+    .capital-table { width:100%; border-collapse:collapse; margin-top:10px; }
+    .capital-table th { background:#f6f7fa; font-size:14px; font-weight:600; color:#242424; padding:12px 16px; text-align:left; border-bottom:2px solid #e8e8fd; position:sticky; top:0; z-index:1; }
+    .capital-table td { font-size:14px; color:#444; padding:10px 16px; border-bottom:1px solid #f0f0f0; }
+    .capital-table tr:hover td { background:#f9f9ff; }
+    .continent-badge { display:inline-block; padding:2px 10px; border-radius:10px; font-size:12px; color:#fff; }
+    .continent-badge.asia { background:#ff6b6b; }
+    .continent-badge.europe { background:#4ecdc4; }
+    .continent-badge.africa { background:#f9a825; }
+    .continent-badge.namerica { background:#42a5f5; }
+    .continent-badge.samerica { background:#ab47bc; }
+    .continent-badge.oceania { background:#66bb6a; }
+    .table-wrapper { max-height:600px; overflow-y:auto; border:1px solid #f0f0f0; border-radius:8px; }
+    .result-count { font-size:13px; color:#8f8f8f; margin:10px 0; }
+    .no-result { text-align:center; padding:40px; color:#b3b3b3; font-size:14px; }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯QQ浏览器在线工具箱</span>
+      </div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png"><span>全部</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=img" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png"><span>图片工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pdf" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png"><span>PDF转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=data" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png"><span>数据换算工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=life" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png"><span>生活娱乐工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=education" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png"><span>教育工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=text" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png"><span>文本工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=doc" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png"><span>文档转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=develop" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png"><span>开发工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=video" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png"><span>视频工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png"><span>浏览器插件</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item"><a class="nav-backtop" href="javascript:void(0)"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png"></a></div>
+    <div class="nav-button-item"><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png"></a><div class="qqgroup-tip">QQ群：459317399</div></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">共建</div></a></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">反馈</div></a></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Search Bar -->
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Content -->
+    <div class="tool-main">
+      <h2>各国首都</h2>
+      <div class="capital-filters">
+        <div class="continent-tabs" id="continentTabs">
+          <span class="continent-tab active" data-continent="all">全部</span>
+          <span class="continent-tab" data-continent="亚洲">亚洲</span>
+          <span class="continent-tab" data-continent="欧洲">欧洲</span>
+          <span class="continent-tab" data-continent="非洲">非洲</span>
+          <span class="continent-tab" data-continent="北美洲">北美洲</span>
+          <span class="continent-tab" data-continent="南美洲">南美洲</span>
+          <span class="continent-tab" data-continent="大洋洲">大洋洲</span>
+        </div>
+        <input type="text" class="capital-search" id="capitalSearch" placeholder="输入国家或首都名称搜索...">
+      </div>
+      <div class="result-count" id="resultCount"></div>
+      <div class="table-wrapper">
+        <table class="capital-table">
+          <thead><tr><th style="width:30%">国家</th><th style="width:30%">首都</th><th style="width:20%">所属洲</th></tr></thead>
+          <tbody id="capitalTableBody"></tbody>
+        </table>
+      </div>
+      <div class="no-result" id="noResult" style="display:none">没有找到匹配的结果</div>
+    </div>
+
+    <!-- Tool Introduction -->
+    <div class="tool-intro-section">
+      <h3>工具介绍及使用方法</h3>
+      <p>各国首都查询是一款实用的在线工具，专为帮助用户快速查询世界各国首都而设计。通过这款工具，您可以轻松获取各个国家的首都信息，帮助您更好地了解世界地理知识，满足学习、工作和旅行等需求。</p>
+      <p style="margin-top:10px"><strong>使用方法：</strong>您可以通过顶部的大洲标签筛选特定大洲的国家，也可以直接在搜索框中输入国家名称或首都名称进行模糊搜索。表格会实时显示符合条件的结果，方便快速定位目标国家。</p>
+    </div>
+
+    <!-- More Recommendations -->
+    <div class="more-recommend">
+      <h3>更多推荐</h3>
+      <div class="recommend-list">
+        <a class="recommend-item" href="dynasties.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_M4UejcjNNLA.png" alt="历史朝代查询">
+          <div><div class="rec-name">历史朝代查询</div><div class="rec-desc">查询中国各个历史朝代的详细信息</div></div>
+        </a>
+        <a class="recommend-item" href="school.html" target="_blank">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_aI87pFy9qgC.png" alt="高校查询">
+          <div><div class="rec-name">高校查询</div><div class="rec-desc">查询中国知名大学的详细信息</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc"><span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span></div>
+          </div>
+          <div class="qrcode"><img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+var capitalData=[
+// 亚洲
+{country:"中国",capital:"北京",continent:"亚洲"},{country:"日本",capital:"东京",continent:"亚洲"},{country:"韩国",capital:"首尔",continent:"亚洲"},{country:"朝鲜",capital:"平壤",continent:"亚洲"},{country:"蒙古",capital:"乌兰巴托",continent:"亚洲"},{country:"越南",capital:"河内",continent:"亚洲"},{country:"老挝",capital:"万象",continent:"亚洲"},{country:"柬埔寨",capital:"金边",continent:"亚洲"},{country:"缅甸",capital:"内比都",continent:"亚洲"},{country:"泰国",capital:"曼谷",continent:"亚洲"},{country:"马来西亚",capital:"吉隆坡",continent:"亚洲"},{country:"新加坡",capital:"新加坡",continent:"亚洲"},{country:"印度尼西亚",capital:"雅加达",continent:"亚洲"},{country:"菲律宾",capital:"马尼拉",continent:"亚洲"},{country:"文莱",capital:"斯里巴加湾",continent:"亚洲"},{country:"东帝汶",capital:"帝力",continent:"亚洲"},{country:"印度",capital:"新德里",continent:"亚洲"},{country:"巴基斯坦",capital:"伊斯兰堡",continent:"亚洲"},{country:"孟加拉国",capital:"达卡",continent:"亚洲"},{country:"斯里兰卡",capital:"科伦坡",continent:"亚洲"},{country:"马尔代夫",capital:"马累",continent:"亚洲"},{country:"尼泊尔",capital:"加德满都",continent:"亚洲"},{country:"不丹",capital:"廷布",continent:"亚洲"},{country:"阿富汗",capital:"喀布尔",continent:"亚洲"},{country:"伊朗",capital:"德黑兰",continent:"亚洲"},{country:"伊拉克",capital:"巴格达",continent:"亚洲"},{country:"叙利亚",capital:"大马士革",continent:"亚洲"},{country:"约旦",capital:"安曼",continent:"亚洲"},{country:"黎巴嫩",capital:"贝鲁特",continent:"亚洲"},{country:"以色列",capital:"耶路撒冷",continent:"亚洲"},{country:"巴勒斯坦",capital:"拉姆安拉",continent:"亚洲"},{country:"沙特阿拉伯",capital:"利雅得",continent:"亚洲"},{country:"也门",capital:"萨那",continent:"亚洲"},{country:"阿曼",capital:"马斯喀特",continent:"亚洲"},{country:"阿联酋",capital:"阿布扎比",continent:"亚洲"},{country:"卡塔尔",capital:"多哈",continent:"亚洲"},{country:"巴林",capital:"麦纳麦",continent:"亚洲"},{country:"科威特",capital:"科威特城",continent:"亚洲"},{country:"土耳其",capital:"安卡拉",continent:"亚洲"},{country:"塞浦路斯",capital:"尼科西亚",continent:"亚洲"},{country:"格鲁吉亚",capital:"第比利斯",continent:"亚洲"},{country:"亚美尼亚",capital:"埃里温",continent:"亚洲"},{country:"阿塞拜疆",capital:"巴库",continent:"亚洲"},{country:"哈萨克斯坦",capital:"阿斯塔纳",continent:"亚洲"},{country:"乌兹别克斯坦",capital:"塔什干",continent:"亚洲"},{country:"土库曼斯坦",capital:"阿什哈巴德",continent:"亚洲"},{country:"吉尔吉斯斯坦",capital:"比什凯克",continent:"亚洲"},{country:"塔吉克斯坦",capital:"杜尚别",continent:"亚洲"},
+// 欧洲
+{country:"英国",capital:"伦敦",continent:"欧洲"},{country:"法国",capital:"巴黎",continent:"欧洲"},{country:"德国",capital:"柏林",continent:"欧洲"},{country:"意大利",capital:"罗马",continent:"欧洲"},{country:"西班牙",capital:"马德里",continent:"欧洲"},{country:"葡萄牙",capital:"里斯本",continent:"欧洲"},{country:"荷兰",capital:"阿姆斯特丹",continent:"欧洲"},{country:"比利时",capital:"布鲁塞尔",continent:"欧洲"},{country:"卢森堡",capital:"卢森堡市",continent:"欧洲"},{country:"瑞士",capital:"伯尔尼",continent:"欧洲"},{country:"奥地利",capital:"维也纳",continent:"欧洲"},{country:"爱尔兰",capital:"都柏林",continent:"欧洲"},{country:"冰岛",capital:"雷克雅未克",continent:"欧洲"},{country:"丹麦",capital:"哥本哈根",continent:"欧洲"},{country:"挪威",capital:"奥斯陆",continent:"欧洲"},{country:"瑞典",capital:"斯德哥尔摩",continent:"欧洲"},{country:"芬兰",capital:"赫尔辛基",continent:"欧洲"},{country:"俄罗斯",capital:"莫斯科",continent:"欧洲"},{country:"波兰",capital:"华沙",continent:"欧洲"},{country:"捷克",capital:"布拉格",continent:"欧洲"},{country:"斯洛伐克",capital:"布拉迪斯拉发",continent:"欧洲"},{country:"匈牙利",capital:"布达佩斯",continent:"欧洲"},{country:"罗马尼亚",capital:"布加勒斯特",continent:"欧洲"},{country:"保加利亚",capital:"索非亚",continent:"欧洲"},{country:"希腊",capital:"雅典",continent:"欧洲"},{country:"塞尔维亚",capital:"贝尔格莱德",continent:"欧洲"},{country:"克罗地亚",capital:"萨格勒布",continent:"欧洲"},{country:"斯洛文尼亚",capital:"卢布尔雅那",continent:"欧洲"},{country:"波黑",capital:"萨拉热窝",continent:"欧洲"},{country:"黑山",capital:"波德戈里察",continent:"欧洲"},{country:"北马其顿",capital:"斯科普里",continent:"欧洲"},{country:"阿尔巴尼亚",capital:"地拉那",continent:"欧洲"},{country:"乌克兰",capital:"基辅",continent:"欧洲"},{country:"白俄罗斯",capital:"明斯克",continent:"欧洲"},{country:"摩尔多瓦",capital:"基希讷乌",continent:"欧洲"},{country:"立陶宛",capital:"维尔纽斯",continent:"欧洲"},{country:"拉脱维亚",capital:"里加",continent:"欧洲"},{country:"爱沙尼亚",capital:"塔林",continent:"欧洲"},{country:"马耳他",capital:"瓦莱塔",continent:"欧洲"},{country:"摩纳哥",capital:"摩纳哥城",continent:"欧洲"},{country:"列支敦士登",capital:"瓦杜兹",continent:"欧洲"},{country:"安道尔",capital:"安道尔城",continent:"欧洲"},{country:"圣马力诺",capital:"圣马力诺",continent:"欧洲"},{country:"梵蒂冈",capital:"梵蒂冈城",continent:"欧洲"},{country:"科索沃",capital:"普里什蒂纳",continent:"欧洲"},
+// 非洲
+{country:"埃及",capital:"开罗",continent:"非洲"},{country:"利比亚",capital:"的黎波里",continent:"非洲"},{country:"突尼斯",capital:"突尼斯市",continent:"非洲"},{country:"阿尔及利亚",capital:"阿尔及尔",continent:"非洲"},{country:"摩洛哥",capital:"拉巴特",continent:"非洲"},{country:"苏丹",capital:"喀土穆",continent:"非洲"},{country:"南苏丹",capital:"朱巴",continent:"非洲"},{country:"埃塞俄比亚",capital:"亚的斯亚贝巴",continent:"非洲"},{country:"厄立特里亚",capital:"阿斯马拉",continent:"非洲"},{country:"吉布提",capital:"吉布提市",continent:"非洲"},{country:"索马里",capital:"摩加迪沙",continent:"非洲"},{country:"肯尼亚",capital:"内罗毕",continent:"非洲"},{country:"坦桑尼亚",capital:"多多马",continent:"非洲"},{country:"乌干达",capital:"坎帕拉",continent:"非洲"},{country:"卢旺达",capital:"基加利",continent:"非洲"},{country:"布隆迪",capital:"基特加",continent:"非洲"},{country:"刚果(金)",capital:"金沙萨",continent:"非洲"},{country:"刚果(布)",capital:"布拉柴维尔",continent:"非洲"},{country:"中非",capital:"班吉",continent:"非洲"},{country:"喀麦隆",capital:"雅温得",continent:"非洲"},{country:"赤道几内亚",capital:"马拉博",continent:"非洲"},{country:"加蓬",capital:"利伯维尔",continent:"非洲"},{country:"乍得",capital:"恩贾梅纳",continent:"非洲"},{country:"尼日尔",capital:"尼亚美",continent:"非洲"},{country:"尼日利亚",capital:"阿布贾",continent:"非洲"},{country:"加纳",capital:"阿克拉",continent:"非洲"},{country:"科特迪瓦",capital:"亚穆苏克罗",continent:"非洲"},{country:"利比里亚",capital:"蒙罗维亚",continent:"非洲"},{country:"塞拉利昂",capital:"弗里敦",continent:"非洲"},{country:"几内亚",capital:"科纳克里",continent:"非洲"},{country:"几内亚比绍",capital:"比绍",continent:"非洲"},{country:"塞内加尔",capital:"达喀尔",continent:"非洲"},{country:"冈比亚",capital:"班珠尔",continent:"非洲"},{country:"马里",capital:"巴马科",continent:"非洲"},{country:"布基纳法索",capital:"瓦加杜古",continent:"非洲"},{country:"多哥",capital:"洛美",continent:"非洲"},{country:"贝宁",capital:"波多诺伏",continent:"非洲"},{country:"毛里塔尼亚",capital:"努瓦克肖特",continent:"非洲"},{country:"南非",capital:"比勒陀利亚",continent:"非洲"},{country:"纳米比亚",capital:"温得和克",continent:"非洲"},{country:"博茨瓦纳",capital:"哈博罗内",continent:"非洲"},{country:"津巴布韦",capital:"哈拉雷",continent:"非洲"},{country:"赞比亚",capital:"卢萨卡",continent:"非洲"},{country:"马拉维",capital:"利隆圭",continent:"非洲"},{country:"莫桑比克",capital:"马普托",continent:"非洲"},{country:"马达加斯加",capital:"塔那那利佛",continent:"非洲"},{country:"毛里求斯",capital:"路易港",continent:"非洲"},{country:"科摩罗",capital:"莫罗尼",continent:"非洲"},{country:"塞舌尔",capital:"维多利亚",continent:"非洲"},{country:"安哥拉",capital:"罗安达",continent:"非洲"},{country:"斯威士兰",capital:"姆巴巴纳",continent:"非洲"},{country:"莱索托",capital:"马塞卢",continent:"非洲"},{country:"佛得角",capital:"普拉亚",continent:"非洲"},{country:"圣多美和普林西比",capital:"圣多美",continent:"非洲"},
+// 北美洲
+{country:"美国",capital:"华盛顿",continent:"北美洲"},{country:"加拿大",capital:"渥太华",continent:"北美洲"},{country:"墨西哥",capital:"墨西哥城",continent:"北美洲"},{country:"危地马拉",capital:"危地马拉城",continent:"北美洲"},{country:"伯利兹",capital:"贝尔莫潘",continent:"北美洲"},{country:"萨尔瓦多",capital:"圣萨尔瓦多",continent:"北美洲"},{country:"洪都拉斯",capital:"特古西加尔巴",continent:"北美洲"},{country:"尼加拉瓜",capital:"马那瓜",continent:"北美洲"},{country:"哥斯达黎加",capital:"圣何塞",continent:"北美洲"},{country:"巴拿马",capital:"巴拿马城",continent:"北美洲"},{country:"古巴",capital:"哈瓦那",continent:"北美洲"},{country:"牙买加",capital:"金斯敦",continent:"北美洲"},{country:"海地",capital:"太子港",continent:"北美洲"},{country:"多米尼加",capital:"圣多明各",continent:"北美洲"},{country:"巴哈马",capital:"拿骚",continent:"北美洲"},{country:"特立尼达和多巴哥",capital:"西班牙港",continent:"北美洲"},{country:"巴巴多斯",capital:"布里奇顿",continent:"北美洲"},{country:"圣卢西亚",capital:"卡斯特里",continent:"北美洲"},{country:"格林纳达",capital:"圣乔治",continent:"北美洲"},{country:"圣文森特和格林纳丁斯",capital:"金斯敦",continent:"北美洲"},{country:"安提瓜和巴布达",capital:"圣约翰",continent:"北美洲"},{country:"多米尼克",capital:"罗索",continent:"北美洲"},{country:"圣基茨和尼维斯",capital:"巴斯特尔",continent:"北美洲"},
+// 南美洲
+{country:"巴西",capital:"巴西利亚",continent:"南美洲"},{country:"阿根廷",capital:"布宜诺斯艾利斯",continent:"南美洲"},{country:"智利",capital:"圣地亚哥",continent:"南美洲"},{country:"秘鲁",capital:"利马",continent:"南美洲"},{country:"哥伦比亚",capital:"波哥大",continent:"南美洲"},{country:"委内瑞拉",capital:"加拉加斯",continent:"南美洲"},{country:"厄瓜多尔",capital:"基多",continent:"南美洲"},{country:"玻利维亚",capital:"苏克雷",continent:"南美洲"},{country:"巴拉圭",capital:"亚松森",continent:"南美洲"},{country:"乌拉圭",capital:"蒙得维的亚",continent:"南美洲"},{country:"圭亚那",capital:"乔治敦",continent:"南美洲"},{country:"苏里南",capital:"帕拉马里博",continent:"南美洲"},
+// 大洋洲
+{country:"澳大利亚",capital:"堪培拉",continent:"大洋洲"},{country:"新西兰",capital:"惠灵顿",continent:"大洋洲"},{country:"巴布亚新几内亚",capital:"莫尔兹比港",continent:"大洋洲"},{country:"斐济",capital:"苏瓦",continent:"大洋洲"},{country:"萨摩亚",capital:"阿皮亚",continent:"大洋洲"},{country:"汤加",capital:"努库阿洛法",continent:"大洋洲"},{country:"瓦努阿图",capital:"维拉港",continent:"大洋洲"},{country:"所罗门群岛",capital:"霍尼亚拉",continent:"大洋洲"},{country:"基里巴斯",capital:"塔拉瓦",continent:"大洋洲"},{country:"图瓦卢",capital:"富纳富提",continent:"大洋洲"},{country:"瑙鲁",capital:"亚伦",continent:"大洋洲"},{country:"密克罗尼西亚联邦",capital:"帕利基尔",continent:"大洋洲"},{country:"马绍尔群岛",capital:"马朱罗",continent:"大洋洲"},{country:"帕劳",capital:"恩吉鲁穆德",continent:"大洋洲"}
+];
+
+var continentClassMap={"亚洲":"asia","欧洲":"europe","非洲":"africa","北美洲":"namerica","南美洲":"samerica","大洋洲":"oceania"};
+var currentContinent="all";
+
+function renderTable(data){
+  var tb=document.getElementById("capitalTableBody");
+  var nr=document.getElementById("noResult");
+  var rc=document.getElementById("resultCount");
+  if(!data.length){tb.innerHTML="";nr.style.display="block";rc.textContent="共找到 0 条结果";return;}
+  nr.style.display="none";
+  rc.textContent="共找到 "+data.length+" 条结果";
+  var html="";
+  for(var i=0;i<data.length;i++){
+    var d=data[i],cls=continentClassMap[d.continent]||"asia";
+    html+='<tr><td>'+d.country+'</td><td>'+d.capital+'</td><td><span class="continent-badge '+cls+'">'+d.continent+'</span></td></tr>';
+  }
+  tb.innerHTML=html;
+}
+
+function filterData(){
+  var keyword=document.getElementById("capitalSearch").value.trim().toLowerCase();
+  var filtered=capitalData.filter(function(d){
+    var matchContinent=currentContinent==="all"||d.continent===currentContinent;
+    var matchKeyword=!keyword||d.country.toLowerCase().indexOf(keyword)>-1||d.capital.toLowerCase().indexOf(keyword)>-1;
+    return matchContinent&&matchKeyword;
+  });
+  renderTable(filtered);
+}
+
+document.getElementById("continentTabs").addEventListener("click",function(e){
+  var tab=e.target.closest(".continent-tab");
+  if(!tab)return;
+  document.querySelectorAll(".continent-tab").forEach(function(t){t.classList.remove("active");});
+  tab.classList.add("active");
+  currentContinent=tab.getAttribute("data-continent");
+  filterData();
+});
+
+document.getElementById("capitalSearch").addEventListener("input",filterData);
+
+renderTable(capitalData);
+</script>
+</body>
+</html>

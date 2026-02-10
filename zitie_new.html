@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="keywords" content="字帖生成,帮小忙,腾讯QQ浏览器,在线工具箱">
+  <meta name="description" content="字帖生成-帮小忙，腾讯QQ浏览器在线工具箱。在线生成个性化练字字帖，支持小学各年级汉字。">
+  <title>字帖生成-帮小忙，腾讯QQ浏览器在线工具箱</title>
+  <link rel="icon" href="https://tool.browser.qq.com/favicon.ico">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    .zt-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+    .zt-controls select,.zt-controls button{height:40px;border-radius:8px;font-size:14px;padding:0 16px;cursor:pointer}
+    .zt-controls select{border:1px solid #ddd;background:#fff;outline:none;min-width:180px}
+    .zt-controls select:focus{border-color:#136ce9}
+    .zt-textarea{width:100%;min-height:120px;border:1px solid #ddd;border-radius:8px;padding:12px;font-size:16px;outline:none;resize:vertical;font-family:inherit;line-height:2;letter-spacing:4px;transition:border-color .2s}
+    .zt-textarea:focus{border-color:#136ce9}
+    .zt-grid-wrap{margin-top:24px;border:1px solid #e5eafb;border-radius:12px;overflow:hidden;background:#fff}
+    .zt-grid-header{padding:12px 16px;font-size:14px;font-weight:600;color:#242424;background:#f6f7fa;border-bottom:1px solid #e5eafb;display:flex;align-items:center;justify-content:space-between}
+    .zt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:0;padding:0}
+    .zt-cell{aspect-ratio:1;border:1px solid #e0e0e0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:#fff}
+    .zt-cell::before,.zt-cell::after{content:'';position:absolute;background:#f0d0d0}
+    .zt-cell::before{top:50%;left:0;right:0;height:1px;transform:translateY(-50%)}
+    .zt-cell::after{left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%)}
+    .zt-cell .char-main{font-size:42px;color:#333;z-index:1;line-height:1;font-weight:400}
+    .zt-cell .char-pinyin{font-size:11px;color:#999;position:absolute;top:4px;z-index:1}
+    .zt-cell-a{background:linear-gradient(45deg,transparent 49.5%,#f0d0d0 49.5%,#f0d0d0 50.5%,transparent 50.5%),linear-gradient(-45deg,transparent 49.5%,#f0d0d0 49.5%,#f0d0d0 50.5%,transparent 50.5%)}
+    .zt-cell-b{background:repeating-linear-gradient(0deg,transparent,transparent 24%,#f0d0d0 24%,#f0d0d0 25%,transparent 25%,transparent 49%,#f0d0d0 49%,#f0d0d0 51%,transparent 51%,transparent 74%,#f0d0d0 74%,#f0d0d0 75%,transparent 75%),repeating-linear-gradient(90deg,transparent,transparent 24%,#f0d0d0 24%,#f0d0d0 25%,transparent 25%,transparent 49%,#f0d0d0 49%,#f0d0d0 51%,transparent 51%,transparent 74%,#f0d0d0 74%,#f0d0d0 75%,transparent 75%)}
+    @media print{
+      .left-nav,.left-nav-placeholder,.nav-button-wrap,.top-content,.tool-intro-section,.more-recommend,.footer-container,.zt-controls,.zt-grid-header,.tool-main>h2,.zt-textarea{display:none!important}
+      .main-content{margin-left:0!important;padding:0!important}
+      .tool-main{margin:0!important;padding:10px!important;border:none!important;box-shadow:none!important}
+      .zt-grid-wrap{border:none!important;border-radius:0!important}
+      .zt-grid{grid-template-columns:repeat(8,1fr)!important}
+      .zt-cell{border:1px solid #ccc!important}
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Left Navigation -->
+  <div class="left-nav">
+    <a class="logo-container" href="index.html">
+      <img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯QQ浏览器在线工具箱</span></div>
+    </a>
+    <div class="left-nav-inner">
+      <ul class="category-container">
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png"><span>全部</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=img" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png"><span>图片工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pdf" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png"><span>PDF转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=data" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png"><span>数据换算工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=life" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png"><span>生活娱乐工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=education" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png"><span>教育工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=text" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png"><span>文本工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=doc" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png"><span>文档转换工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=develop" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png"><span>开发工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=video" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png"><span>视频工具</span></a></li>
+        <li class="category-entry-wrapper"><a class="category-entry-item" href="index.html?cat=pc_plugin" data-actived="false"><img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png"><span>浏览器插件</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="left-nav-placeholder"></div>
+
+  <!-- Right Floating Navigation -->
+  <div class="nav-button-wrap">
+    <div class="nav-button-item"><a class="nav-backtop" href="javascript:void(0)"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png"></a></div>
+    <div class="nav-button-item"><a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399" target="_blank"><img class="nav-button-img" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png"></a><div class="qqgroup-tip">QQ群：459317399</div></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">共建</div></a></div>
+    <div class="nav-button-item"><a href="https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/" target="_blank"><div class="nav-button-text">反馈</div></a></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="top-content">
+      <div class="search-wrapper">
+        <div class="search-container">
+          <div class="search-area">
+            <img class="search-icon" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png" alt="搜索按钮">
+            <input class="search-input" type="text" autocomplete="off" placeholder="搜索工具...">
+            <div class="statistics-container">工具箱已累计帮助了 <b class="count-up-container">365853165</b> 人次</div>
+          </div>
+          <div class="search-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Content -->
+    <div class="tool-main">
+      <h2>字帖生成</h2>
+      <div class="zt-controls">
+        <select id="gradeSelect">
+          <option value="">从小学字帖中选择</option>
+          <option value="1a" selected>小学一年级（上）</option>
+          <option value="1b">小学一年级（下）</option>
+          <option value="2a">小学二年级（上）</option>
+          <option value="2b">小学二年级（下）</option>
+          <option value="3a">小学三年级（上）</option>
+          <option value="3b">小学三年级（下）</option>
+          <option value="4a">小学四年级（上）</option>
+          <option value="4b">小学四年级（下）</option>
+          <option value="5a">小学五年级（上）</option>
+          <option value="5b">小学五年级（下）</option>
+          <option value="6a">小学六年级（上）</option>
+          <option value="6b">小学六年级（下）</option>
+        </select>
+        <select id="templateSelect">
+          <option value="a">字帖模板：模板A（米字格）</option>
+          <option value="b">字帖模板：模板B（田字格）</option>
+        </select>
+        <button class="btn-primary" id="btnReset">重置</button>
+        <button class="btn-primary" id="btnPrint" style="background:linear-gradient(135deg,#36b37e,#57d9a3)">打印</button>
+      </div>
+      <textarea class="zt-textarea" id="charInput" placeholder="请输入要练习的汉字，每个字之间用空格分隔..."></textarea>
+      <div class="zt-grid-wrap">
+        <div class="zt-grid-header"><span>字帖预览</span><span id="charCount" style="font-weight:400;color:#8f8f8f;font-size:13px"></span></div>
+        <div class="zt-grid" id="ztGrid"></div>
+      </div>
+    </div>
+
+    <!-- Tool Introduction -->
+    <div class="tool-intro-section">
+      <h3>工具介绍及使用方法</h3>
+      <p>字帖生成是一款在线工具，专为生成个性化字帖而设计。使用方法：1. 从下拉菜单中选择年级，自动加载对应年级的汉字列表；2. 您也可以在文本框中自行输入需要练习的汉字；3. 选择字帖模板（模板A为米字格，模板B为田字格）；4. 预览区域会实时显示字帖效果；5. 点击"打印"按钮即可打印字帖进行练习。支持小学一至六年级所有必学汉字，帮助学生规范书写，提高书写水平。</p>
+    </div>
+
+    <!-- More Recommendations -->
+    <div class="more-recommend">
+      <h3>更多推荐</h3>
+      <div class="recommend-list">
+        <a class="recommend-item" href="periodic.html">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_zmxsNOQj-Ex.png" alt="元素周期表">
+          <div><div class="rec-name">元素周期表</div><div class="rec-desc">快速查阅化学元素详细信息</div></div>
+        </a>
+        <a class="recommend-item" href="handwriting_erasure.html">
+          <img src="https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_PLIH-GtGXkL.png" alt="去手写">
+          <div><div class="rec-name">去手写</div><div class="rec-desc">智能去除文件中手写笔迹</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-container">
+      <div class="footer-pc">
+        <div class="line"></div>
+        <div class="footer-infor">
+          <img class="logo" src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png">
+          <div>
+            <div class="footer-introduce">轻松办公，工具助你一臂之力</div>
+            <div class="license-pc">
+              <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank">隐私政策</a>
+              <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank">数据处理规则及免责声明</a>
+            </div>
+            <div class="copyright-pc"><span>Copyright &copy; 1998 - 2026 Tencent. All Rights Reserved.</span></div>
+          </div>
+          <div class="qrcode"><img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+(function(){
+  var gradeData = {
+    '1a': '一 二 三 十 木 禾 上 下 土 个 八 入 大 天 人 火 文 六 七 儿 九 无 口 日 中 了 子 门 月 不 开 四 五 目 耳 头 米 见 白 田 电 也 长 山 出 飞 马 鸟 云 公 车 牛 羊 小 少 巾 牙 尺 毛 卜 又 心 风 力 手 水',
+    '1b': '春 冬 雪 花 飞 入 姓 什 么 双 国 王 方 青 清 气 晴 情 请 生 字 左 右 红 时 动 万 吃 叫 主 江 住 没 以 会 走 北 京 门 广 过 各 种 样 伙 伴 这 太 阳 校 金 秋 因 为 他 河 说 也 地 听 哥 单 居 招 呼 快 乐',
+    '2a': '两 就 哪 宽 顶 眼 睛 肚 皮 跳 孩 全 奇 妙 却 精 赛 关 掉 完 换 员 写 音 蚁 房 粮 食 作 场 极 海 洋 片 棵 给 带 法 如 已 纷 好 娃 她 它 毛 更 知 识 称 柱 底 杆 秤 做 岁 站 船 然 画 幅 评 奖 纸 报 另 及 拿 并 封 信 今 圆 笔 灯 句 电 影',
+    '2b': '诗 村 童 碧 妆 绿 丝 剪 冲 寻 姑 娘 吐 柳 荡 桃 杏 鲜 邮 递 员 先 原 大 鹿 慢 积 鼻 脑 袋 怪 推 辆 筷 膊 像 景 恋 舍 补 拔 功 助 取 所 信 沿 抬 际 蛙 错 答 还 言 每 治 棵 挂 哇 怎 思 穿 弯 比 服 浅 漂 啦 啊 夫 表 示 号 汗 伤 吸 极',
+    '3a': '晨 绒 球 汉 艳 服 装 扮 读 静 停 粗 影 坝 扬 摔 跤 凤 洁 假 朝 霞 夕 蝶 蜂 碎 摇 铃 鸠 奏 管 催 丰 趣 匙 仰 咦 察 提 委 级 练 操 场 响 班 欣 默 落 深 荒 却 将 纷 连 蜡 烛 晶 暗 闲 旧 铺 泥 晶 紧 院 印 排 列 规 则 棕 迟 渐 暖 柿',
+    '3b': '鸳 鸯 惠 崇 芦 芽 梅 溪 泛 减 绸 昆 蝇 蚊 蝴 蚂 蚁 运 搬 蜻 蜓 蝌 蚪 鼓 裁 创 剃 辫 碰 甲 搓 携 篮 寿 县 柜 墟 棒 袖 栽 梧 桐 阴 拼 搭 逗 积 激 谦 虚 提 懦 弱 尘 模 型 赵 翻 铅 迈 毫 梳 妆 辫 曲 斑 夺 蹈 序 芬 芳 内 醒 寿 佳',
+    '4a': '潮 据 堤 阔 笼 罩 盼 滚 顿 逐 渐 犹 崩 震 霎 余 漫 恢 涨 雾 昂 沸 贯 旧 灿 烂 紫 盈 百 株 龟 缝 隙 耀 梢 沿 透 厅 添 宣 弧 际 径 畅 磨 浸 暗 缓 慢 坠 毁 壮 推 旅 静 嫩 触 枝 铺 残 蟀 振 雄 歇 潮 选 宅 隐 毫 掘 搜 倾 骤 扒 趴',
+    '4b': '纯 锐 拱 导 弧 疑 惑 益 宅 蔽 慎 挖 搜 倾 扒 抛 健 康 胃 管 罩 饿 需 联 硬 固 沟 勤 荤 素 扰 欲 屈 茎 柄 触 痕 逐 叠 瓣 幕 临 燥 暴 季 劣 贸 芒 适 占 仪 陶 齿 衰 副 产 铁 厉 砍 柴 煤 粮 钢 培 模 矿 厂 脉 例 航 模 质 误 遵 序 式',
+    '5a': '蝉 萤 锄 篱 蜻 陂 莲 辍 诲 窃 腋 贪 惧 饥 充 檐 皱 碗 酸 撑 柜 唤 脊 寺 偿 哺 罕 鲸 猎 崭 陷 繁 殖 乳 胎 卵 哺 鲸 肺 滤 矮 幕 嫌 抛 腻 袭 贡 滩 侵 澎 湃 凛 篇 荐 慈 祥 稀 褐 袍 魁 梧 敛 眷 迁 庇 龛 坠 峻 攀 崖 鸿 浩 魄 抱 焰',
+    '5b': '昼 耘 供 稚 漪 谙 燕 窠 倭 疆 驰 辩 拘 窖 嫂 侄 郊 频 朴 墓 慕 瞻 懈 凿 巩 馅 揉 搓 盈 剥 匀 适 稍 茎 柄 蚕 桑 昼 蜻 蜓 倭 脊 拨 浸 嫩 蛙 鉴 惑 阶 贪 腐 殖 胖 捶 僧 毯 袄 袍 傅 徒 芝 柄 赴 踏 蹈 衡 拂 骚 瀑 叛 谗 兼 吟 讽',
+    '6a': '缀 幽 雅 伏 案 旬 悟 盈 瀑 挪 蒸 熬 揪 秧 翡 朗 俯 瞰 恍 倦 凄 寇 绊 旷 怅 庸 篝 噩 搁 填 怨 掀 唯 耸 橡 弥 栏 橱 赁 翁 曝 墅 兰 幢 绰 障 僻 轿 辗 缕 幽 葬 愁 腮 甫 彼 浮 躁 艰 辛 崇 鼎 碌 怠 迹 蓦 惶 膝 颤 搀 瘦 偶 窝 纤',
+    '6b': '挪 蒸 秧 萎 番 锻 雅 勃 腔 堪 绷 倚 吭 竭 沮 悬 浆 搅 颓 唐 憋 疙 瘩 磕 绊 绞 膝 覆 舅 津 斟 酌 糟 嫌 兼 圃 爹 嘱 毡 卸 咀 嚼 驼 寞 袍 傻 胚 赋 淘 妨 岂 绞 汁 厘 愧 疚 懊 沛 馈 捐 譬 鼎 旺 媒 蔗 榨 煲 憧 憬 谐 饶 峻 寐 陡'
+  };
+
+  var pinyinMap = {"一":"yī","二":"èr","三":"sān","十":"shí","木":"mù","禾":"hé","上":"shàng","下":"xià","土":"tǔ","个":"gè","八":"bā","入":"rù","大":"dà","天":"tiān","人":"rén","火":"huǒ","文":"wén","六":"liù","七":"qī","儿":"ér","九":"jiǔ","无":"wú","口":"kǒu","日":"rì","中":"zhōng","了":"le","子":"zǐ","门":"mén","月":"yuè","不":"bù","开":"kāi","四":"sì","五":"wǔ","目":"mù","耳":"ěr","头":"tóu","米":"mǐ","见":"jiàn","白":"bái","田":"tián","电":"diàn","也":"yě","长":"cháng","山":"shān","出":"chū","飞":"fēi","马":"mǎ","鸟":"niǎo","云":"yún","公":"gōng","车":"chē","牛":"niú","羊":"yáng","小":"xiǎo","少":"shǎo","巾":"jīn","牙":"yá","尺":"chǐ","毛":"máo","卜":"bǔ","又":"yòu","心":"xīn","风":"fēng","力":"lì","手":"shǒu","水":"shuǐ","春":"chūn","冬":"dōng","雪":"xuě","花":"huā","姓":"xìng","什":"shén","么":"me","双":"shuāng","国":"guó","王":"wáng","方":"fāng","青":"qīng","清":"qīng","气":"qì","晴":"qíng","情":"qíng","请":"qǐng","生":"shēng","字":"zì","左":"zuǒ","右":"yòu","红":"hóng","时":"shí","动":"dòng","万":"wàn","吃":"chī","叫":"jiào","主":"zhǔ","江":"jiāng","住":"zhù","没":"méi","以":"yǐ","会":"huì","走":"zǒu","北":"běi","京":"jīng","广":"guǎng","过":"guò","各":"gè","种":"zhǒng","样":"yàng","伙":"huǒ","伴":"bàn","这":"zhè","太":"tài","阳":"yáng","校":"xiào","金":"jīn","秋":"qiū","因":"yīn","为":"wéi","他":"tā","河":"hé","说":"shuō","地":"dì","听":"tīng","哥":"gē","单":"dān","居":"jū","招":"zhāo","呼":"hū","快":"kuài","乐":"lè"};
+
+  var charInput = document.getElementById('charInput');
+  var gradeSelect = document.getElementById('gradeSelect');
+  var templateSelect = document.getElementById('templateSelect');
+  var ztGrid = document.getElementById('ztGrid');
+  var charCount = document.getElementById('charCount');
+
+  function loadGrade(key){
+    if(gradeData[key]){
+      charInput.value = gradeData[key];
+      renderGrid();
+    }
+  }
+
+  function renderGrid(){
+    var chars = charInput.value.replace(/\s+/g,' ').trim().split(' ').filter(function(c){ return c.length > 0; });
+    var tmpl = templateSelect.value;
+    ztGrid.innerHTML = '';
+    charCount.textContent = '共 ' + chars.length + ' 个字';
+    chars.forEach(function(ch){
+      var cell = document.createElement('div');
+      cell.className = 'zt-cell ' + (tmpl === 'a' ? 'zt-cell-a' : 'zt-cell-b');
+      var py = pinyinMap[ch] || '';
+      if(py){
+        var pySpan = document.createElement('span');
+        pySpan.className = 'char-pinyin';
+        pySpan.textContent = py;
+        cell.appendChild(pySpan);
+      }
+      var charSpan = document.createElement('span');
+      charSpan.className = 'char-main';
+      charSpan.textContent = ch;
+      cell.appendChild(charSpan);
+      ztGrid.appendChild(cell);
+    });
+  }
+
+  gradeSelect.addEventListener('change', function(){ loadGrade(this.value); });
+  templateSelect.addEventListener('change', renderGrid);
+  charInput.addEventListener('input', renderGrid);
+  document.getElementById('btnReset').addEventListener('click', function(){
+    gradeSelect.value = '1a';
+    templateSelect.value = 'a';
+    loadGrade('1a');
+  });
+  document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
+
+  loadGrade('1a');
+})();
+</script>
+</body>
+</html>
