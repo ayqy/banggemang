@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高校查询-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #6C5CE7;">🏫</div>
+                    <h1 class="tool-title">高校查询</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="filter-tabs" id="filterTabs">
+                        <span class="filter-tab active" data-filter="all">全部</span>
+                        <span class="filter-tab" data-filter="985">985</span>
+                        <span class="filter-tab" data-filter="211">211</span>
+                        <span class="filter-tab" data-filter="双一流A">双一流A</span>
+                        <span class="filter-tab" data-filter="双一流B">双一流B</span>
+                        <span class="filter-tab" data-filter="一流学科">一流学科</span>
+                    </div>
+                    <table class="data-table" id="schoolTable">
+                        <thead>
+                            <tr>
+                                <th>学校名称</th>
+                                <th>985</th>
+                                <th>211</th>
+                                <th>双一流</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>高校查询可以快速找到中国境内知名大学的相关信息，应用汇聚了全国各地的知名大学，包括清华大学、北京大学、南京大学、浙江大学、复旦大学、上海交通大学等等。能够帮助高考学生和家长们更好的选择学校。</p>
+                    <p>1、您可以选择查看985、211、一流学科等类别。</p>
+                    <p>2、系统将为您跳转对应的高校。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="dynasties.html" class="recommend-item">
+                            <div class="recommend-item-icon">🏛️</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">历史朝代查询</div>
+                                <div class="recommend-item-desc">历史朝代查询是一款教育性和实用性兼备的在线工具。</div>
+                            </div>
+                        </a>
+                        <a href="capital.html" class="recommend-item">
+                            <div class="recommend-item-icon">🌍</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">各国首都</div>
+                                <div class="recommend-item-desc">各国首都查询是一款实用的在线工具。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        const UNIVERSITIES = [
+            {name:'清华大学',is985:true,is211:true,level:'双一流A'},{name:'北京大学',is985:true,is211:true,level:'双一流A'},
+            {name:'中国人民大学',is985:true,is211:true,level:'双一流A'},{name:'北京工业大学',is985:false,is211:true,level:'一流学科'},
+            {name:'北京理工大学',is985:true,is211:true,level:'双一流A'},{name:'北京航空航天大学',is985:true,is211:true,level:'双一流A'},
+            {name:'北京化工大学',is985:false,is211:true,level:'一流学科'},{name:'北京邮电大学',is985:false,is211:true,level:'一流学科'},
+            {name:'对外经济贸易大学',is985:false,is211:true,level:'一流学科'},{name:'中国传媒大学',is985:false,is211:true,level:'一流学科'},
+            {name:'中央民族大学',is985:true,is211:true,level:'双一流A'},{name:'中央财经大学',is985:false,is211:true,level:'一流学科'},
+            {name:'中国政法大学',is985:false,is211:true,level:'一流学科'},{name:'北京外国语大学',is985:false,is211:true,level:'一流学科'},
+            {name:'北京交通大学',is985:false,is211:true,level:'一流学科'},{name:'北京科技大学',is985:false,is211:true,level:'一流学科'},
+            {name:'北京林业大学',is985:false,is211:true,level:'一流学科'},{name:'中国农业大学',is985:true,is211:true,level:'双一流A'},
+            {name:'北京师范大学',is985:true,is211:true,level:'双一流A'},{name:'复旦大学',is985:true,is211:true,level:'双一流A'},
+            {name:'华东师范大学',is985:true,is211:true,level:'双一流A'},{name:'上海外国语大学',is985:false,is211:true,level:'一流学科'},
+            {name:'上海大学',is985:false,is211:true,level:'一流学科'},{name:'同济大学',is985:true,is211:true,level:'双一流A'},
+            {name:'华东理工大学',is985:false,is211:true,level:'一流学科'},{name:'上海财经大学',is985:false,is211:true,level:'一流学科'},
+            {name:'上海交通大学',is985:true,is211:true,level:'双一流A'},{name:'南开大学',is985:true,is211:true,level:'双一流A'},
+            {name:'天津大学',is985:true,is211:true,level:'双一流A'},{name:'重庆大学',is985:true,is211:true,level:'双一流A'},
+            {name:'大连理工大学',is985:true,is211:true,level:'双一流A'},{name:'东北大学',is985:true,is211:true,level:'双一流B'},
+            {name:'吉林大学',is985:true,is211:true,level:'双一流A'},{name:'哈尔滨工业大学',is985:true,is211:true,level:'双一流A'},
+            {name:'南京大学',is985:true,is211:true,level:'双一流A'},{name:'东南大学',is985:true,is211:true,level:'双一流A'},
+            {name:'南京理工大学',is985:false,is211:true,level:'一流学科'},{name:'南京航空航天大学',is985:false,is211:true,level:'一流学科'},
+            {name:'浙江大学',is985:true,is211:true,level:'双一流A'},{name:'中国科学技术大学',is985:true,is211:true,level:'双一流A'},
+            {name:'厦门大学',is985:true,is211:true,level:'双一流A'},{name:'山东大学',is985:true,is211:true,level:'双一流A'},
+            {name:'中国海洋大学',is985:true,is211:true,level:'双一流A'},{name:'郑州大学',is985:false,is211:true,level:'双一流B'},
+            {name:'武汉大学',is985:true,is211:true,level:'双一流A'},{name:'华中科技大学',is985:true,is211:true,level:'双一流A'},
+            {name:'湖南大学',is985:true,is211:true,level:'双一流B'},{name:'中南大学',is985:true,is211:true,level:'双一流A'},
+            {name:'中山大学',is985:true,is211:true,level:'双一流A'},{name:'华南理工大学',is985:true,is211:true,level:'双一流A'},
+            {name:'四川大学',is985:true,is211:true,level:'双一流A'},{name:'电子科技大学',is985:true,is211:true,level:'双一流A'},
+            {name:'云南大学',is985:false,is211:true,level:'双一流B'},{name:'西安交通大学',is985:true,is211:true,level:'双一流A'},
+            {name:'西北工业大学',is985:true,is211:true,level:'双一流A'},{name:'西北农林科技大学',is985:true,is211:true,level:'双一流B'},
+            {name:'兰州大学',is985:true,is211:true,level:'双一流A'},{name:'新疆大学',is985:false,is211:true,level:'双一流B'},
+            {name:'国防科技大学',is985:true,is211:true,level:'双一流A'},{name:'北京协和医学院',is985:false,is211:false,level:'一流学科'},
+            {name:'首都师范大学',is985:false,is211:false,level:'一流学科'},{name:'外交学院',is985:false,is211:false,level:'一流学科'},
+            {name:'上海中医药大学',is985:false,is211:false,level:'一流学科'},{name:'南京邮电大学',is985:false,is211:false,level:'一流学科'},
+            {name:'宁波大学',is985:false,is211:false,level:'一流学科'},{name:'中国科学院大学',is985:false,is211:false,level:'一流学科'}
+        ];
+
+        let currentFilter = 'all';
+
+        function renderSchools() {
+            let filtered = UNIVERSITIES;
+            if (currentFilter === '985') {
+                filtered = UNIVERSITIES.filter(u => u.is985);
+            } else if (currentFilter === '211') {
+                filtered = UNIVERSITIES.filter(u => u.is211);
+            } else if (currentFilter !== 'all') {
+                filtered = UNIVERSITIES.filter(u => u.level === currentFilter);
+            }
+
+            const tbody = document.querySelector('#schoolTable tbody');
+            tbody.innerHTML = filtered.map(u => `
+                <tr>
+                    <td>${u.name}</td>
+                    <td>${u.is985 ? '是' : '否'}</td>
+                    <td>${u.is211 ? '是' : '否'}</td>
+                    <td>${u.level}</td>
+                </tr>
+            `).join('');
+        }
+
+        function initFilters() {
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentFilter = tab.dataset.filter;
+                    renderSchools();
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSchools();
+            initFilters();
+        });
+    </script>
+</body>
+</html>

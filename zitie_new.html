@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字帖生成-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .zitie-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .zitie-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .form-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-item label {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        .form-item select,
+        .form-item input {
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .template-select {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .template-item {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.2s;
+            background: #fff;
+        }
+        .template-item:hover {
+            border-color: var(--primary-color);
+        }
+        .template-item.active {
+            border-color: var(--primary-color);
+            background: rgba(108, 92, 231, 0.1);
+        }
+        .template-item.tianzi {
+            background-image: 
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px),
+                linear-gradient(45deg, #eee 45%, transparent 45%, transparent 55%, #eee 55%),
+                linear-gradient(-45deg, #eee 45%, transparent 45%, transparent 55%, #eee 55%);
+            background-size: 50% 50%, 50% 50%, 100% 100%, 100% 100%;
+        }
+        .template-item.miwen {
+            background-image: 
+                linear-gradient(45deg, #eee 45%, transparent 45%, transparent 55%, #eee 55%),
+                linear-gradient(-45deg, #eee 45%, transparent 45%, transparent 55%, #eee 55%);
+            background-size: 20px 20px;
+        }
+        .template-item.fangge {
+            background-image: 
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 50% 50%;
+        }
+        .preview-area {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            background: #fff;
+            min-height: 300px;
+        }
+        .preview-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: var(--text-primary);
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 4px;
+        }
+        .preview-cell {
+            aspect-ratio: 1;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            position: relative;
+            background: #fff;
+        }
+        .preview-cell.tianzi::before,
+        .preview-cell.tianzi::after {
+            content: '';
+            position: absolute;
+            background: #f0f0f0;
+        }
+        .preview-cell.tianzi::before {
+            width: 1px;
+            height: 100%;
+            left: 50%;
+        }
+        .preview-cell.tianzi::after {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+        }
+        .preview-cell.miwen::before,
+        .preview-cell.miwen::after {
+            content: '';
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            border: 1px dashed #ddd;
+        }
+        .preview-cell.fangge::before {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            left: 50%;
+            background: #f0f0f0;
+        }
+        .preview-cell.huiwen::before,
+        .preview-cell.huiwen::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+        }
+        .preview-cell.huiwen::before {
+            width: 90%;
+            height: 90%;
+        }
+        .preview-cell.huiwen::after {
+            width: 50%;
+            height: 50%;
+        }
+        .print-btn {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .print-btn:hover {
+            opacity: 0.9;
+        }
+        .action-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        @media print {
+            .header, .sidebar, .footer, .tool-intro, .more-recommend, .zitie-form, .template-select, .action-row {
+                display: none !important;
+            }
+            .main-content {
+                margin-left: 0 !important;
+            }
+            .preview-area {
+                border: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #9B59B6;">📝</div>
+                    <h1 class="tool-title">字帖生成</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="zitie-container">
+                        <div class="zitie-form">
+                            <div class="form-item">
+                                <label>输入汉字</label>
+                                <input type="text" id="charInput" placeholder="请输入要练习的汉字" maxlength="50" value="天地人和">
+                            </div>
+                            <div class="form-item">
+                                <label>年级选择</label>
+                                <select id="gradeSelect">
+                                    <option value="1">一年级</option>
+                                    <option value="2">二年级</option>
+                                    <option value="3">三年级</option>
+                                    <option value="4">四年级</option>
+                                    <option value="5">五年级</option>
+                                    <option value="6">六年级</option>
+                                </select>
+                            </div>
+                            <div class="form-item">
+                                <label>每行字数</label>
+                                <select id="colSelect">
+                                    <option value="6">6个字</option>
+                                    <option value="8" selected>8个字</option>
+                                    <option value="10">10个字</option>
+                                    <option value="12">12个字</option>
+                                </select>
+                            </div>
+                            <div class="form-item">
+                                <label>重复次数</label>
+                                <select id="repeatSelect">
+                                    <option value="1">1次</option>
+                                    <option value="2">2次</option>
+                                    <option value="3" selected>3次</option>
+                                    <option value="5">5次</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="template-select">
+                            <div class="template-item tianzi active" data-template="tianzi" title="田字格"></div>
+                            <div class="template-item miwen" data-template="miwen" title="米字格"></div>
+                            <div class="template-item fangge" data-template="fangge" title="方格"></div>
+                            <div class="template-item huiwen" data-template="huiwen" title="回字格"></div>
+                        </div>
+
+                        <div class="action-row">
+                            <button class="btn btn-primary" onclick="generatePreview()">生成预览</button>
+                            <button class="print-btn" onclick="printZitie()">🖨️ 打印字帖</button>
+                        </div>
+
+                        <div class="preview-area" id="previewArea">
+                            <div class="preview-title">字帖预览</div>
+                            <div class="preview-grid" id="previewGrid">
+                                <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">点击"生成预览"按钮查看字帖效果</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>字帖生成工具可以帮助您生成个性化的练字字帖。输入想要练习的汉字，选择年级和模板样式，即可生成专业的字帖进行打印。支持田字格、米字格、方格等多种模板，适合不同阶段的书法练习需求。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="hanzifayin.html" class="recommend-item">
+                            <div class="recommend-item-icon">🔊</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">汉字标准发音</div>
+                                <div class="recommend-item-desc">查询汉字的拼音和标准发音。</div>
+                            </div>
+                        </a>
+                        <a href="radical.html" class="recommend-item">
+                            <div class="recommend-item-icon">📖</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">汉字偏旁</div>
+                                <div class="recommend-item-desc">查询汉字的偏旁部首信息。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        let currentTemplate = 'tianzi';
+
+        // 模板选择
+        document.querySelectorAll('.template-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.template-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                currentTemplate = this.dataset.template;
+            });
+        });
+
+        function generatePreview() {
+            const chars = document.getElementById('charInput').value.trim();
+            const cols = parseInt(document.getElementById('colSelect').value);
+            const repeat = parseInt(document.getElementById('repeatSelect').value);
+            const grid = document.getElementById('previewGrid');
+
+            if (!chars) {
+                alert('请输入要练习的汉字');
+                return;
+            }
+
+            let html = '';
+            for (let i = 0; i < chars.length; i++) {
+                const char = chars[i];
+                if (char.match(/[\u4e00-\u9fa5]/)) {
+                    // 每个字重复多次
+                    for (let j = 0; j < repeat; j++) {
+                        const showChar = j === 0 ? char : '';
+                        html += `<div class="preview-cell ${currentTemplate}" style="font-size: 28px; color: ${j === 0 ? '#333' : '#ccc'}">${showChar}</div>`;
+                    }
+                }
+            }
+
+            grid.innerHTML = html;
+            grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+        }
+
+        function printZitie() {
+            const chars = document.getElementById('charInput').value.trim();
+            if (!chars) {
+                alert('请输入要练习的汉字');
+                return;
+            }
+            generatePreview();
+            window.print();
+        }
+
+        // 初始生成
+        generatePreview();
+    </script>
+</body>
+</html>

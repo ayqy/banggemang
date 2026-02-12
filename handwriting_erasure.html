@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>去手写-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .eraser-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--background-color);
+        }
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(108, 92, 231, 0.05);
+        }
+        .upload-area.drag-over {
+            border-color: var(--primary-color);
+            background: rgba(108, 92, 231, 0.1);
+        }
+        .upload-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        .upload-title {
+            font-size: 18px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .upload-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+        .upload-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .file-info {
+            display: none;
+            background: var(--background-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+            align-items: center;
+            gap: 16px;
+        }
+        .file-info.show {
+            display: flex;
+        }
+        .file-icon {
+            font-size: 40px;
+        }
+        .file-details {
+            flex: 1;
+        }
+        .file-name {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .file-size {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .file-remove {
+            padding: 8px 16px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .file-remove:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .preview-section {
+            display: none;
+            margin-top: 24px;
+        }
+        .preview-section.show {
+            display: block;
+        }
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .preview-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        .preview-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .action-btn.primary {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+        }
+        .action-btn.secondary {
+            background: #fff;
+            border: 1px solid var(--border-color);
+        }
+        .preview-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 768px) {
+            .preview-compare {
+                grid-template-columns: 1fr;
+            }
+        }
+        .preview-box {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .preview-label {
+            background: var(--background-color);
+            padding: 10px 16px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+        .preview-image {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            color: var(--text-muted);
+        }
+        .preview-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .progress-bar {
+            display: none;
+            margin-top: 20px;
+        }
+        .progress-bar.show {
+            display: block;
+        }
+        .progress-track {
+            height: 8px;
+            background: var(--background-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .progress-text {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .tips-section {
+            background: #e8f4fd;
+            border: 1px solid #b8daff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 24px;
+        }
+        .tips-title {
+            font-weight: 500;
+            color: #004085;
+            margin-bottom: 8px;
+        }
+        .tips-list {
+            margin: 0;
+            padding-left: 20px;
+            color: #004085;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #8E44AD;">✨</div>
+                    <h1 class="tool-title">去手写</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="eraser-container">
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">📄</div>
+                            <div class="upload-title">拖拽上传或点击上传文件</div>
+                            <div class="upload-desc">支持PDF格式，文件大小不超过8M</div>
+                            <div class="upload-btn">选择文件</div>
+                            <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                        </div>
+
+                        <div class="file-info" id="fileInfo">
+                            <div class="file-icon">📄</div>
+                            <div class="file-details">
+                                <div class="file-name" id="fileName">文件名.pdf</div>
+                                <div class="file-size" id="fileSize">0 KB</div>
+                            </div>
+                            <button class="file-remove" onclick="removeFile()">移除</button>
+                        </div>
+
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-track">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="progress-text" id="progressText">正在处理中...</div>
+                        </div>
+
+                        <div class="preview-section" id="previewSection">
+                            <div class="preview-header">
+                                <div class="preview-title">处理结果预览</div>
+                                <div class="preview-actions">
+                                    <button class="action-btn secondary" onclick="downloadResult()">📥 下载结果</button>
+                                    <button class="action-btn primary" onclick="processAgain()">🔄 重新处理</button>
+                                </div>
+                            </div>
+                            <div class="preview-compare">
+                                <div class="preview-box">
+                                    <div class="preview-label">原始文件</div>
+                                    <div class="preview-image" id="originalPreview">原文件预览</div>
+                                </div>
+                                <div class="preview-box">
+                                    <div class="preview-label">去手写后</div>
+                                    <div class="preview-image" id="resultPreview">处理结果</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tips-section">
+                            <div class="tips-title">💡 使用提示</div>
+                            <ul class="tips-list">
+                                <li>支持上传PDF格式的文件，文件大小不超过8M</li>
+                                <li>工具会自动识别并抹除手写笔迹，保留印刷内容</li>
+                                <li>处理完成后可下载结果文件</li>
+                                <li>建议上传清晰、对比度高的文件以获得最佳效果</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>去手写工具可以智能识别并抹除PDF文件中的手写笔迹，保留原有的印刷内容。适用于试卷、作业、合同等需要清除手写痕迹的场景，让文档焕然一新。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="zitie_new.html" class="recommend-item">
+                            <div class="recommend-item-icon">📝</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">字帖生成</div>
+                                <div class="recommend-item-desc">生成个性化练字字帖。</div>
+                            </div>
+                        </a>
+                        <a href="markmap.html" class="recommend-item">
+                            <div class="recommend-item-icon">🧠</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">便捷思维导图</div>
+                                <div class="recommend-item-desc">使用Markdown语法快速创建思维导图。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const previewSection = document.getElementById('previewSection');
+
+        // 点击上传
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        // 拖拽上传
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        // 文件选择
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            // 验证文件类型
+            if (file.type !== 'application/pdf') {
+                alert('请上传PDF格式的文件');
+                return;
+            }
+
+            // 验证文件大小
+            if (file.size > 8 * 1024 * 1024) {
+                alert('文件大小不能超过8M');
+                return;
+            }
+
+            // 显示文件信息
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = formatFileSize(file.size);
+            fileInfo.classList.add('show');
+
+            // 开始处理
+            processFile(file);
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function processFile(file) {
+            // 显示进度条
+            progressBar.classList.add('show');
+            previewSection.classList.remove('show');
+
+            // 模拟处理过程
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    setTimeout(() => {
+                        progressBar.classList.remove('show');
+                        showResult(file);
+                    }, 500);
+                }
+                progressFill.style.width = progress + '%';
+                progressText.textContent = progress < 30 ? '正在分析文件...' : 
+                                          progress < 60 ? '正在识别手写笔迹...' :
+                                          progress < 90 ? '正在抹除手写...' : '处理完成！';
+            }, 200);
+        }
+
+        function showResult(file) {
+            previewSection.classList.add('show');
+            
+            // 显示模拟预览
+            document.getElementById('originalPreview').innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">📄</div>
+                    <div style="color: var(--text-primary); font-weight: 500;">${file.name}</div>
+                    <div style="color: var(--text-secondary); font-size: 13px; margin-top: 8px;">原始PDF文件</div>
+                </div>
+            `;
+            
+            document.getElementById('resultPreview').innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">✨</div>
+                    <div style="color: var(--primary-color); font-weight: 500;">处理完成</div>
+                    <div style="color: var(--text-secondary); font-size: 13px; margin-top: 8px;">手写笔迹已清除</div>
+                </div>
+            `;
+        }
+
+        function removeFile() {
+            fileInput.value = '';
+            fileInfo.classList.remove('show');
+            progressBar.classList.remove('show');
+            previewSection.classList.remove('show');
+            progressFill.style.width = '0%';
+        }
+
+        function downloadResult() {
+            alert('由于这是一个演示版本，实际下载功能需要后端服务支持。\n\n在完整版本中，点击此按钮将下载处理后的PDF文件。');
+        }
+
+        function processAgain() {
+            // 重新处理当前文件
+            if (fileInput.files.length > 0) {
+                processFile(fileInput.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>

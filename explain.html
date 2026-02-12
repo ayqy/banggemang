@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词语注解-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .explain-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .explain-input-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .explain-input-area input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .explain-input-area button {
+            padding: 14px 28px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .word-result {
+            display: none;
+        }
+        .word-result.show {
+            display: block;
+        }
+        .result-header {
+            background: linear-gradient(135deg, var(--primary-color), #8B7CF7);
+            border-radius: 12px;
+            padding: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .result-word {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .result-pinyin {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .result-body {
+            background: var(--background-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .result-row {
+            display: flex;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .result-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .result-label {
+            width: 80px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .result-content {
+            flex: 1;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        .word-type {
+            display: inline-block;
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-right: 8px;
+        }
+        .example-sentence {
+            background: #fff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            border-left: 3px solid var(--primary-color);
+        }
+        .synonyms, .antonyms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .syn-tag, .ant-tag {
+            background: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+        .syn-tag:hover, .ant-tag:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .ant-tag {
+            border-color: var(--accent-color);
+        }
+        .ant-tag:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .no-result {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #2ECC71;">📚</div>
+                    <h1 class="tool-title">词语注解</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="explain-container">
+                        <div class="explain-input-area">
+                            <input type="text" id="wordInput" placeholder="请输入要查询的词语" value="勤奋">
+                            <button onclick="queryWord()">查询</button>
+                        </div>
+
+                        <div class="word-result" id="wordResult">
+                            <div class="result-header">
+                                <div class="result-word" id="resultWord">勤奋</div>
+                                <div class="result-pinyin" id="resultPinyin">qín fèn</div>
+                            </div>
+                            <div class="result-body">
+                                <div class="result-row">
+                                    <div class="result-label">词性</div>
+                                    <div class="result-content" id="resultType">
+                                        <span class="word-type">形容词</span>
+                                    </div>
+                                </div>
+                                <div class="result-row">
+                                    <div class="result-label">释义</div>
+                                    <div class="result-content" id="resultMeaning">努力工作或学习，不懈怠。</div>
+                                </div>
+                                <div class="result-row">
+                                    <div class="result-label">例句</div>
+                                    <div class="result-content">
+                                        <div class="example-sentence" id="resultExample">他学习非常勤奋，成绩一直名列前茅。</div>
+                                    </div>
+                                </div>
+                                <div class="result-row">
+                                    <div class="result-label">近义词</div>
+                                    <div class="result-content">
+                                        <div class="synonyms" id="resultSynonyms"></div>
+                                    </div>
+                                </div>
+                                <div class="result-row">
+                                    <div class="result-label">反义词</div>
+                                    <div class="result-content">
+                                        <div class="antonyms" id="resultAntonyms"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>词语注解工具可以帮助您查询词语的详细解释。输入任意词语，即可查看其拼音、词性、释义、例句、近义词和反义词等详细信息，适用于语文学习、写作参考、词汇积累等场景。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="allegory.html" class="recommend-item">
+                            <div class="recommend-item-icon">💬</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">歇后语</div>
+                                <div class="recommend-item-desc">歇后语工具可以帮助您查找和学习各种歇后语。</div>
+                            </div>
+                        </a>
+                        <a href="chengyujielong.html" class="recommend-item">
+                            <div class="recommend-item-icon">📖</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">成语大全</div>
+                                <div class="recommend-item-desc">成语大全查询是一款免费的中国传统文化知识工具。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        // 词语数据
+        const WORD_DATA = {
+            '勤奋': {
+                pinyin: 'qín fèn',
+                type: '形容词',
+                meaning: '努力工作或学习，不懈怠。',
+                example: '他学习非常勤奋，成绩一直名列前茅。',
+                synonyms: ['勤勉', '刻苦', '努力', '勤劳', '用功'],
+                antonyms: ['懒惰', '怠惰', '懒散']
+            },
+            '美丽': {
+                pinyin: 'měi lì',
+                type: '形容词',
+                meaning: '使人看着舒服、产生美感。',
+                example: '这座城市的风景非常美丽，吸引了众多游客。',
+                synonyms: ['漂亮', '好看', '秀丽', '俊俏', '艳丽'],
+                antonyms: ['丑陋', '难看', '丑怪']
+            },
+            '快乐': {
+                pinyin: 'kuài lè',
+                type: '形容词/名词',
+                meaning: '感到幸福或满意。',
+                example: '和家人在一起，我感到非常快乐。',
+                synonyms: ['高兴', '开心', '愉悦', '欢喜', '幸福'],
+                antonyms: ['悲伤', '痛苦', '忧愁', '难过']
+            },
+            '聪明': {
+                pinyin: 'cōng ming',
+                type: '形容词',
+                meaning: '智力发达，记忆和理解能力强。',
+                example: '这个孩子很聪明，学什么都很快。',
+                synonyms: ['机灵', '智慧', '伶俐', '聪慧', '机智'],
+                antonyms: ['愚笨', '愚蠢', '迟钝', '笨拙']
+            },
+            '勇敢': {
+                pinyin: 'yǒng gǎn',
+                type: '形容词',
+                meaning: '不怕危险和困难，有胆量。',
+                example: '他勇敢地冲上前去救那个落水的孩子。',
+                synonyms: ['英勇', '无畏', '大胆', '果敢'],
+                antonyms: ['胆怯', '懦弱', '怯懦', '胆小']
+            },
+            '善良': {
+                pinyin: 'shàn liáng',
+                type: '形容词',
+                meaning: '心地纯洁，没有恶意。',
+                example: '她是一个善良的人，总是乐于帮助别人。',
+                synonyms: ['仁慈', '和善', '慈祥', '好心'],
+                antonyms: ['凶恶', '残忍', '狠毒', '邪恶']
+            },
+            '坚持': {
+                pinyin: 'jiān chí',
+                type: '动词/名词',
+                meaning: '坚决保持、维护或进行。',
+                example: '只要坚持下去，就一定能成功。',
+                synonyms: ['坚守', '保持', '维持', '执着'],
+                antonyms: ['放弃', '妥协', '动摇']
+            },
+            '努力': {
+                pinyin: 'nǔ lì',
+                type: '动词/形容词',
+                meaning: '把力量尽量使出来。',
+                example: '只有努力工作，才能取得好成绩。',
+                synonyms: ['奋斗', '拼搏', '竭力', '尽力'],
+                antonyms: ['懈怠', '懒散', '放松']
+            },
+            '认真': {
+                pinyin: 'rèn zhēn',
+                type: '形容词',
+                meaning: '严肃对待，不马虎。',
+                example: '他做事非常认真，从不敷衍了事。',
+                synonyms: ['仔细', '严谨', '负责', '细心'],
+                antonyms: ['马虎', '敷衍', '草率', '粗心']
+            },
+            '友谊': {
+                pinyin: 'yǒu yì',
+                type: '名词',
+                meaning: '朋友间的交情。',
+                example: '他们之间的友谊已经持续了三十年。',
+                synonyms: ['友情', '交情', '情谊', '友爱'],
+                antonyms: ['敌意', '仇恨', '敌对']
+            },
+            '知识': {
+                pinyin: 'zhī shi',
+                type: '名词',
+                meaning: '人们在改造世界的实践中所获得的认识和经验的总和。',
+                example: '知识就是力量，学习能让人进步。',
+                synonyms: ['学识', '学问', '才学'],
+                antonyms: ['无知', '愚昧']
+            },
+            '希望': {
+                pinyin: 'xī wàng',
+                type: '动词/名词',
+                meaning: '心里想着达到某种目的或出现某种情况。',
+                example: '我希望明天是个好天气。',
+                synonyms: ['盼望', '期待', '期望', '渴望'],
+                antonyms: ['失望', '绝望', '灰心']
+            },
+            '幸福': {
+                pinyin: 'xìng fú',
+                type: '形容词/名词',
+                meaning: '生活、境遇称心如意。',
+                example: '一家人健康快乐地生活在一起就是最大的幸福。',
+                synonyms: ['美满', '快乐', '安康', '温馨'],
+                antonyms: ['痛苦', '不幸', '悲惨', '苦难']
+            },
+            '成功': {
+                pinyin: 'chéng gōng',
+                type: '动词/形容词',
+                meaning: '获得预期的结果。',
+                example: '经过多年的努力，他终于成功了。',
+                synonyms: ['胜利', '成就', '圆满'],
+                antonyms: ['失败', '挫折', '落败']
+            },
+            '困难': {
+                pinyin: 'kùn nan',
+                type: '形容词/名词',
+                meaning: '事情复杂，阻碍多。',
+                example: '无论遇到什么困难，都不要放弃。',
+                synonyms: ['艰难', '艰辛', '棘手', '艰巨'],
+                antonyms: ['容易', '简单', '顺利']
+            }
+        };
+
+        function queryWord() {
+            const word = document.getElementById('wordInput').value.trim();
+            const resultDiv = document.getElementById('wordResult');
+
+            if (!word) {
+                alert('请输入要查询的词语');
+                return;
+            }
+
+            const data = WORD_DATA[word];
+
+            if (!data) {
+                // 显示默认提示
+                document.getElementById('resultWord').textContent = word;
+                document.getElementById('resultPinyin').textContent = '暂无数据';
+                document.getElementById('resultType').innerHTML = '<span class="word-type">未知</span>';
+                document.getElementById('resultMeaning').textContent = '暂无该词语的详细解释，请尝试其他词语。';
+                document.getElementById('resultExample').textContent = '';
+                document.getElementById('resultSynonyms').innerHTML = '';
+                document.getElementById('resultAntonyms').innerHTML = '';
+                resultDiv.classList.add('show');
+                return;
+            }
+
+            // 更新显示
+            document.getElementById('resultWord').textContent = word;
+            document.getElementById('resultPinyin').textContent = data.pinyin;
+            document.getElementById('resultType').innerHTML = `<span class="word-type">${data.type}</span>`;
+            document.getElementById('resultMeaning').textContent = data.meaning;
+            document.getElementById('resultExample').textContent = data.example;
+
+            // 近义词
+            document.getElementById('resultSynonyms').innerHTML = data.synonyms
+                .map(s => `<span class="syn-tag" onclick="searchWord('${s}')">${s}</span>`)
+                .join('');
+
+            // 反义词
+            document.getElementById('resultAntonyms').innerHTML = data.antonyms
+                .map(a => `<span class="ant-tag" onclick="searchWord('${a}')">${a}</span>`)
+                .join('');
+
+            resultDiv.classList.add('show');
+        }
+
+        function searchWord(word) {
+            document.getElementById('wordInput').value = word;
+            queryWord();
+        }
+
+        // 回车键查询
+        document.getElementById('wordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                queryWord();
+            }
+        });
+
+        // 初始查询
+        queryWord();
+    </script>
+</body>
+</html>

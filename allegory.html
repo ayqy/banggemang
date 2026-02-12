@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歇后语-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .allegory-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .allegory-input-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .allegory-input-area input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .allegory-input-area button {
+            padding: 14px 28px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .allegory-results {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .allegory-item {
+            background: var(--background-color);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+        .allegory-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.1);
+        }
+        .allegory-front {
+            font-size: 18px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .allegory-answer {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .allegory-answer-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .allegory-meaning {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+            line-height: 1.6;
+        }
+        .random-btn {
+            background: #fff;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 12px;
+        }
+        .random-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .hot-tags {
+            margin-bottom: 20px;
+        }
+        .hot-tags-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        .hot-tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .hot-tag {
+            background: var(--background-color);
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            color: var(--text-primary);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .hot-tag:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .no-result {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #E67E22;">💬</div>
+                    <h1 class="tool-title">歇后语</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="allegory-container">
+                        <div class="allegory-input-area">
+                            <input type="text" id="searchInput" placeholder="输入歇后语前半句或关键词搜索">
+                            <button onclick="searchAllegory()">搜索</button>
+                            <button class="random-btn" onclick="getRandomAllegory()">随机推荐</button>
+                        </div>
+
+                        <div class="hot-tags">
+                            <div class="hot-tags-title">热门搜索：</div>
+                            <div class="hot-tags-list">
+                                <span class="hot-tag" onclick="searchByTag('诸葛亮')">诸葛亮</span>
+                                <span class="hot-tag" onclick="searchByTag('关羽')">关羽</span>
+                                <span class="hot-tag" onclick="searchByTag('张飞')">张飞</span>
+                                <span class="hot-tag" onclick="searchByTag('曹操')">曹操</span>
+                                <span class="hot-tag" onclick="searchByTag('猪八戒')">猪八戒</span>
+                                <span class="hot-tag" onclick="searchByTag('孙悟空')">孙悟空</span>
+                                <span class="hot-tag" onclick="searchByTag('老鼠')">老鼠</span>
+                                <span class="hot-tag" onclick="searchByTag('黄鼠狼')">黄鼠狼</span>
+                            </div>
+                        </div>
+
+                        <div class="allegory-results" id="resultsArea">
+                            <div class="no-result">请输入关键词搜索歇后语</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>歇后语工具可以帮助您查找和学习各种歇后语。歇后语是中国传统文化中一种独特的语言形式，由前后两部分组成：前一部分是引子，后一部分是谜底。输入关键词或歇后语前半句，即可查询完整的歇后语及其含义。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="jielong.html" class="recommend-item">
+                            <div class="recommend-item-icon">🐉</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">成语接龙</div>
+                                <div class="recommend-item-desc">成语接龙游戏，提升汉语词汇量。</div>
+                            </div>
+                        </a>
+                        <a href="chengyujielong.html" class="recommend-item">
+                            <div class="recommend-item-icon">📖</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">成语大全</div>
+                                <div class="recommend-item-desc">成语大全查询是一款免费的中国传统文化知识工具。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        // 歇后语数据
+        const ALLEGORY_DATA = [
+            { front: '诸葛亮借箭', answer: '有借无还', meaning: '比喻借东西不还，或者只索取不付出。' },
+            { front: '诸葛亮弹琴', answer: '想（响）都不想（响）', meaning: '比喻根本不考虑，或者完全不放在心上。' },
+            { front: '诸葛亮用空城计', answer: '不得己', meaning: '比喻在没有办法的情况下，采取的一种应急措施。' },
+            { front: '诸葛亮三气周瑜', answer: '略施小技', meaning: '形容只用了一点小手段就达到目的。' },
+            { front: '诸葛亮草船借箭', answer: '满载而归', meaning: '比喻收获很大，或者做事情很成功。' },
+            { front: '关羽开刀铺', answer: '人强货硬', meaning: '比喻人厉害，货物质量也好。' },
+            { front: '关羽走麦城', answer: '骄兵必败', meaning: '比喻骄傲自大的人一定会失败。' },
+            { front: '关羽失荆州', answer: '骄兵必败', meaning: '比喻因骄傲轻敌而失败。' },
+            { front: '张飞穿针', answer: '粗中有细', meaning: '比喻表面粗鲁的人，也有细致的一面。' },
+            { front: '张飞吃豆芽', answer: '小菜一碟', meaning: '比喻事情很容易做。' },
+            { front: '张飞战关羽', answer: '忘了旧情', meaning: '比喻忘记了以前的交情。' },
+            { front: '张飞扔鸡毛', answer: '有劲难使', meaning: '比喻有力气但用不上。' },
+            { front: '曹操吃鸡肋', answer: '食之无味，弃之可惜', meaning: '比喻东西没有什么价值，但扔掉又觉得可惜。' },
+            { front: '曹操杀华佗', answer: '讳疾忌医', meaning: '比喻掩饰缺点，不愿改正。' },
+            { front: '曹操下江南', answer: '来得凶，败得惨', meaning: '比喻来势汹汹，但最后失败得很惨。' },
+            { front: '猪八戒照镜子', answer: '里外不是人', meaning: '比喻两方面都不讨好，处境尴尬。' },
+            { front: '猪八戒的后脊梁', answer: '无能之辈（悟能之背）', meaning: '谐音歇后语，指没有能力的人。' },
+            { front: '猪八戒戴花', answer: '自作多情', meaning: '比喻自己以为自己很了不起。' },
+            { front: '猪八戒吃人参果', answer: '全不知滋味', meaning: '比喻吃东西不细嚼慢咽，不知味道。' },
+            { front: '孙悟空的金箍棒', answer: '能大能小', meaning: '比喻灵活变通，可以根据情况调整。' },
+            { front: '孙悟空大闹天宫', answer: '慌了神', meaning: '比喻不知道该怎么办了。' },
+            { front: '孙悟空七十二变', answer: '花样多', meaning: '比喻变化多端，手段多样。' },
+            { front: '孙悟空借芭蕉扇', answer: '一物降一物', meaning: '比喻一种事物总有另一种事物可以克制它。' },
+            { front: '老鼠过街', answer: '人人喊打', meaning: '比喻坏人受到大家的唾弃和打击。' },
+            { front: '老鼠钻风箱', answer: '两头受气', meaning: '比喻两头都不讨好，受夹板气。' },
+            { front: '老鼠爬秤钩', answer: '自称自', meaning: '比喻自己称赞自己。' },
+            { front: '老鼠掉进书箱里', answer: '咬文嚼字', meaning: '比喻过分斟酌字句，或者卖弄文字。' },
+            { front: '黄鼠狼给鸡拜年', answer: '没安好心', meaning: '比喻坏人装出好心，实际上心怀恶意。' },
+            { front: '黄鼠狼钻风箱', answer: '两头受气', meaning: '比喻两头都不讨好。' },
+            { front: '黄鼠狼下崽', answer: '一窝不如一窝', meaning: '比喻一代不如一代。' },
+            { front: '狗咬吕洞宾', answer: '不识好人心', meaning: '比喻好心被人误解。' },
+            { front: '狗拿耗子', answer: '多管闲事', meaning: '比喻做不该做的事，管不该管的事。' },
+            { front: '狗咬刺猬', answer: '无处下口', meaning: '比喻无从下手。' },
+            { front: '狗掀门帘', answer: '全仗一张嘴', meaning: '比喻只会说，不会做。' },
+            { front: '肉包子打狗', answer: '有去无回', meaning: '比喻东西一去不复返。' },
+            { front: '盲人骑瞎马', answer: '乱闯', meaning: '比喻盲目行事，很危险。' },
+            { front: '盲人摸象', answer: '不识大体', meaning: '比喻只了解一部分，不了解全局。' },
+            { front: '泥菩萨过河', answer: '自身难保', meaning: '比喻连自己都保护不了，更别说帮助别人。' },
+            { front: '王婆卖瓜', answer: '自卖自夸', meaning: '比喻自己称赞自己的东西。' },
+            { front: '姜太公钓鱼', answer: '愿者上钩', meaning: '比喻心甘情愿地上当或受骗。' },
+            { front: '杞人忧天', answer: '庸人自扰', meaning: '比喻不必要的担忧。' },
+            { front: '哑巴吃黄连', answer: '有苦说不出', meaning: '比喻有苦衷无法诉说。' },
+            { front: '兔子尾巴', answer: '长不了', meaning: '比喻时间不会长久。' },
+            { front: '竹篮打水', answer: '一场空', meaning: '比喻白费力气，一无所获。' },
+            { front: '大海捞针', answer: '无处寻', meaning: '比喻很难找到。' },
+            { front: '小葱拌豆腐', answer: '一清（青）二白', meaning: '比喻清清楚楚，明明白白。' },
+            { front: '热锅上的蚂蚁', answer: '团团转', meaning: '比喻非常焦急。' },
+            { front: '丈二和尚', answer: '摸不着头脑', meaning: '比喻弄不清楚情况，不明所以。' },
+            { front: '千里送鹅毛', answer: '礼轻情意重', meaning: '比喻礼物虽轻，但情意很深。' },
+            { front: '塞翁失马', answer: '焉知非福', meaning: '比喻坏事可能变成好事。' },
+            { front: '司马昭之心', answer: '路人皆知', meaning: '比喻野心非常明显，大家都知道。' },
+            { front: '画蛇添足', answer: '多此一举', meaning: '比喻做多余的事，反而不好。' },
+            { front: '井底之蛙', answer: '目光短浅', meaning: '比喻眼界狭窄，见识浅薄。' },
+            { front: '对牛弹琴', answer: '白费口舌', meaning: '比喻对不懂道理的人讲道理，白费力气。' },
+            { front: '叶公好龙', answer: '口是心非', meaning: '比喻表面喜欢，实际上害怕或不喜欢。' },
+            { front: '守株待兔', answer: '坐享其成', meaning: '比喻不主动努力，而存万一的侥幸心理。' },
+            { front: '鹬蚌相争', answer: '渔翁得利', meaning: '比喻双方争执不下，第三者得利。' },
+            { front: '亡羊补牢', answer: '为时未晚', meaning: '比喻出了问题及时补救，还不算晚。' }
+        ];
+
+        function searchAllegory() {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsArea = document.getElementById('resultsArea');
+
+            if (!keyword) {
+                resultsArea.innerHTML = '<div class="no-result">请输入关键词搜索歇后语</div>';
+                return;
+            }
+
+            const results = ALLEGORY_DATA.filter(item => 
+                item.front.toLowerCase().includes(keyword) || 
+                item.answer.toLowerCase().includes(keyword)
+            );
+
+            if (results.length === 0) {
+                resultsArea.innerHTML = '<div class="no-result">没有找到相关歇后语，试试其他关键词</div>';
+                return;
+            }
+
+            resultsArea.innerHTML = results.map(item => `
+                <div class="allegory-item">
+                    <div class="allegory-front">${item.front}</div>
+                    <div class="allegory-answer">
+                        <span class="allegory-answer-label">答案：</span>
+                        <span>${item.answer}</span>
+                    </div>
+                    <div class="allegory-meaning">💡 ${item.meaning}</div>
+                </div>
+            `).join('');
+        }
+
+        function getRandomAllegory() {
+            const resultsArea = document.getElementById('resultsArea');
+            const randomIndex = Math.floor(Math.random() * ALLEGORY_DATA.length);
+            const item = ALLEGORY_DATA[randomIndex];
+
+            resultsArea.innerHTML = `
+                <div class="allegory-item">
+                    <div class="allegory-front">${item.front}</div>
+                    <div class="allegory-answer">
+                        <span class="allegory-answer-label">答案：</span>
+                        <span>${item.answer}</span>
+                    </div>
+                    <div class="allegory-meaning">💡 ${item.meaning}</div>
+                </div>
+            `;
+        }
+
+        function searchByTag(tag) {
+            document.getElementById('searchInput').value = tag;
+            searchAllegory();
+        }
+
+        // 回车键搜索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchAllegory();
+            }
+        });
+
+        // 初始显示随机推荐
+        getRandomAllegory();
+    </script>
+</body>
+</html>

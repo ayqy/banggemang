@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翻译-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .translate-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .translate-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .translate-tab {
+            padding: 10px 24px;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px 8px 0 0;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .translate-tab:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .translate-tab.active {
+            background: #fff;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        .translate-content {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .translate-panel {
+            display: none;
+        }
+        .translate-panel.active {
+            display: block;
+        }
+        .simple-translate {
+            padding: 20px;
+        }
+        .lang-select {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .lang-select select {
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+            min-width: 120px;
+        }
+        .swap-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border-color);
+            background: var(--background-color);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .swap-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .translate-boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 768px) {
+            .translate-boxes {
+                grid-template-columns: 1fr;
+            }
+        }
+        .translate-box {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .box-header {
+            background: var(--background-color);
+            padding: 10px 16px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .box-content {
+            padding: 16px;
+        }
+        .box-content textarea {
+            width: 100%;
+            height: 200px;
+            border: none;
+            resize: none;
+            font-size: 16px;
+            line-height: 1.6;
+            outline: none;
+        }
+        .result-text {
+            min-height: 200px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+        .translate-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .primary-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+        }
+        .secondary-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            background: #fff;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .notice-bar {
+            background: #fff8e6;
+            border: 1px solid #f0ad4e;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #8a6d3b;
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #16A085;">🌐</div>
+                    <h1 class="tool-title">翻译</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="translate-container">
+                        <div class="translate-tabs">
+                            <button class="translate-tab active" data-tab="simple">简易翻译</button>
+                            <button class="translate-tab" data-tab="google">谷歌翻译</button>
+                            <button class="translate-tab" data-tab="baidu">百度翻译</button>
+                            <button class="translate-tab" data-tab="youdao">有道翻译</button>
+                        </div>
+
+                        <div class="translate-content">
+                            <div class="translate-panel active" id="panel-simple">
+                                <div class="simple-translate">
+                                    <div class="notice-bar">💡 提示：简易翻译功能为本地词典翻译，支持常用词汇。更多专业翻译请使用第三方翻译服务。</div>
+                                    <div class="lang-select">
+                                        <select id="fromLang">
+                                            <option value="zh">中文</option>
+                                            <option value="en">英语</option>
+                                            <option value="ja">日语</option>
+                                            <option value="ko">韩语</option>
+                                        </select>
+                                        <button class="swap-btn" onclick="swapLang()">⇄</button>
+                                        <select id="toLang">
+                                            <option value="en">英语</option>
+                                            <option value="zh">中文</option>
+                                            <option value="ja">日语</option>
+                                            <option value="ko">韩语</option>
+                                        </select>
+                                    </div>
+                                    <div class="translate-boxes">
+                                        <div class="translate-box">
+                                            <div class="box-header">原文</div>
+                                            <div class="box-content">
+                                                <textarea id="sourceText" placeholder="请输入要翻译的内容">你好，世界</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="translate-box">
+                                            <div class="box-header">译文</div>
+                                            <div class="box-content">
+                                                <div class="result-text" id="resultText">Hello, world</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="translate-actions">
+                                        <button class="primary-btn" onclick="doTranslate()">翻译</button>
+                                        <button class="secondary-btn" onclick="copyResult()">复制结果</button>
+                                        <button class="secondary-btn" onclick="clearText()">清空</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="translate-panel" id="panel-google">
+                                <div class="iframe-container">
+                                    <iframe src="https://translate.google.com/?hl=zh-CN" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+                                </div>
+                            </div>
+
+                            <div class="translate-panel" id="panel-baidu">
+                                <div class="iframe-container">
+                                    <iframe src="https://fanyi.baidu.com/" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+                                </div>
+                            </div>
+
+                            <div class="translate-panel" id="panel-youdao">
+                                <div class="iframe-container">
+                                    <iframe src="https://fanyi.youdao.com/" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>翻译工具提供多语言翻译服务，支持中文、英语、日语、韩语等多种语言互译。简易翻译功能适合常用词汇翻译，如需更专业的翻译服务，可切换到谷歌翻译、百度翻译或有道翻译。适用于文档翻译、学习交流等场景。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="wordcount.html" class="recommend-item">
+                            <div class="recommend-item-icon">📝</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">字数计算</div>
+                                <div class="recommend-item-desc">统计文本的中文字数、字符数、英文单词数。</div>
+                            </div>
+                        </a>
+                        <a href="markmap.html" class="recommend-item">
+                            <div class="recommend-item-icon">🧠</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">便捷思维导图</div>
+                                <div class="recommend-item-desc">使用Markdown语法快速创建思维导图。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        // Tab切换
+        document.querySelectorAll('.translate-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                document.querySelectorAll('.translate-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.translate-panel').forEach(p => p.classList.remove('active'));
+                document.getElementById('panel-' + tabId).classList.add('active');
+            });
+        });
+
+        // 简易词典
+        const DICTIONARY = {
+            'zh-en': {
+                '你好': 'Hello', '世界': 'world', '谢谢': 'Thank you', '再见': 'Goodbye',
+                '早上好': 'Good morning', '晚上好': 'Good evening', '晚安': 'Good night',
+                '中国': 'China', '北京': 'Beijing', '上海': 'Shanghai',
+                '你好，世界': 'Hello, world', '我爱你': 'I love you', '朋友': 'friend'
+            },
+            'en-zh': {
+                'hello': '你好', 'world': '世界', 'thank you': '谢谢', 'goodbye': '再见',
+                'good morning': '早上好', 'good evening': '晚上好', 'good night': '晚安',
+                'china': '中国', 'beijing': '北京', 'shanghai': '上海',
+                'hello, world': '你好，世界', 'i love you': '我爱你', 'friend': '朋友'
+            },
+            'zh-ja': {
+                '你好': 'こんにちは', '世界': '世界', '谢谢': 'ありがとう', '再见': 'さようなら',
+                '中国': '中国', '北京': '北京'
+            },
+            'ja-zh': {
+                'こんにちは': '你好', '世界': '世界', 'ありがとう': '谢谢', 'さようなら': '再见'
+            },
+            'zh-ko': {
+                '你好': '안녕하세요', '世界': '세계', '谢谢': '감사합니다', '再见': '안녕히 가세요'
+            },
+            'ko-zh': {
+                '안녕하세요': '你好', '세계': '世界', '감사합니다': '谢谢', '안녕히 가세요': '再见'
+            }
+        };
+
+        function swapLang() {
+            const fromLang = document.getElementById('fromLang');
+            const toLang = document.getElementById('toLang');
+            const temp = fromLang.value;
+            fromLang.value = toLang.value;
+            toLang.value = temp;
+        }
+
+        function doTranslate() {
+            const sourceText = document.getElementById('sourceText').value.trim();
+            const fromLang = document.getElementById('fromLang').value;
+            const toLang = document.getElementById('toLang').value;
+            const resultText = document.getElementById('resultText');
+
+            if (!sourceText) {
+                resultText.textContent = '请输入要翻译的内容';
+                return;
+            }
+
+            const dictKey = fromLang + '-' + toLang;
+            const dict = DICTIONARY[dictKey] || {};
+
+            // 尝试精确匹配
+            let result = dict[sourceText] || dict[sourceText.toLowerCase()];
+
+            // 尝试部分匹配
+            if (!result) {
+                let translated = sourceText;
+                for (const key in dict) {
+                    if (translated.includes(key)) {
+                        translated = translated.replace(new RegExp(key, 'g'), dict[key]);
+                    }
+                }
+                if (translated !== sourceText) {
+                    result = translated;
+                }
+            }
+
+            // 如果没有找到，使用提示
+            if (!result) {
+                result = '[词典暂无此翻译] ' + sourceText + '\n\n建议使用谷歌翻译或百度翻译获取更准确的结果。';
+            }
+
+            resultText.textContent = result;
+        }
+
+        function copyResult() {
+            const result = document.getElementById('resultText').textContent;
+            navigator.clipboard.writeText(result).then(() => {
+                alert('复制成功！');
+            }).catch(() => {
+                alert('复制失败，请手动复制');
+            });
+        }
+
+        function clearText() {
+            document.getElementById('sourceText').value = '';
+            document.getElementById('resultText').textContent = '';
+        }
+    </script>
+</body>
+</html>

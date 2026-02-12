@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>亲戚关系计算-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .relative-calc {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .calc-options {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .calc-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .calc-option input[type="checkbox"],
+        .calc-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .relation-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .relation-btn {
+            min-width: 60px;
+            height: 44px;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .relation-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .relation-btn.delete-btn {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+        }
+        .relation-btn.delete-btn:hover {
+            opacity: 0.9;
+        }
+        .relation-chain {
+            background: var(--background-color);
+            padding: 16px;
+            border-radius: 8px;
+            min-height: 50px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .chain-item {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 14px;
+        }
+        .chain-arrow {
+            color: var(--text-muted);
+        }
+        .result-display {
+            background: linear-gradient(135deg, var(--primary-color), #8B7CF7);
+            color: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .result-title {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        .result-value {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .result-reverse {
+            margin-top: 12px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #E74C3C;">👨‍👩‍👧‍👦</div>
+                    <h1 class="tool-title">亲戚关系计算</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="relative-calc">
+                        <div class="calc-options">
+                            <label class="calc-option">
+                                <input type="checkbox" id="reverseMode">
+                                <span>对方称呼我</span>
+                            </label>
+                            <div class="calc-option">
+                                <span>我的性别：</span>
+                                <label class="calc-option">
+                                    <input type="radio" name="gender" value="male" checked>
+                                    <span>男</span>
+                                </label>
+                                <label class="calc-option">
+                                    <input type="radio" name="gender" value="female">
+                                    <span>女</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="relation-buttons">
+                            <button class="relation-btn" onclick="addRelation('父')">父</button>
+                            <button class="relation-btn" onclick="addRelation('母')">母</button>
+                            <button class="relation-btn" onclick="addRelation('夫')">夫</button>
+                            <button class="relation-btn" onclick="addRelation('妻')">妻</button>
+                            <button class="relation-btn" onclick="addRelation('子')">子</button>
+                            <button class="relation-btn" onclick="addRelation('女')">女</button>
+                            <button class="relation-btn" onclick="addRelation('兄')">兄</button>
+                            <button class="relation-btn" onclick="addRelation('弟')">弟</button>
+                            <button class="relation-btn" onclick="addRelation('姐')">姐</button>
+                            <button class="relation-btn" onclick="addRelation('妹')">妹</button>
+                            <button class="relation-btn delete-btn" onclick="deleteLast()">←</button>
+                        </div>
+
+                        <div class="relation-chain" id="relationChain">
+                            <span style="color: var(--text-muted);">请点击上方按钮添加关系</span>
+                        </div>
+
+                        <div class="result-display">
+                            <div class="result-title" id="resultTitle">我称呼对方</div>
+                            <div class="result-value" id="resultValue">请选择关系</div>
+                            <div class="result-reverse" id="resultReverse"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>亲戚关系计算器可以帮助您快速计算复杂的亲戚关系称谓。只需依次点击关系按钮，系统会自动计算出正确的称呼方式。支持计算"我称呼对方"和"对方称呼我"两种模式，适用于各种家庭聚会、走亲访友等场景。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="allegory.html" class="recommend-item">
+                            <div class="recommend-item-icon">💬</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">歇后语</div>
+                                <div class="recommend-item-desc">歇后语工具可以帮助您查找和学习各种歇后语。</div>
+                            </div>
+                        </a>
+                        <a href="explain.html" class="recommend-item">
+                            <div class="recommend-item-icon">📚</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">词语注解</div>
+                                <div class="recommend-item-desc">查询词语的详细解释、拼音、词性和例句。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        let relationChain = [];
+
+        // 亲戚关系映射表
+        const RELATION_MAP = {
+            '父': { male: '父亲', female: '父亲' },
+            '母': { male: '母亲', female: '母亲' },
+            '夫': { male: '丈夫', female: '丈夫' },
+            '妻': { male: '妻子', female: '妻子' },
+            '子': { male: '儿子', female: '儿子' },
+            '女': { male: '女儿', female: '女儿' },
+            '兄': { male: '哥哥', female: '哥哥' },
+            '弟': { male: '弟弟', female: '弟弟' },
+            '姐': { male: '姐姐', female: '姐姐' },
+            '妹': { male: '妹妹', female: '妹妹' }
+        };
+
+        // 复合关系计算
+        const COMPOUND_RELATIONS = {
+            '父父': '爷爷', '母父': '外公', '父母': '奶奶', '母母': '外婆',
+            '父兄': '伯父', '父弟': '叔叔', '父姐': '姑姑', '父妹': '姑姑',
+            '母兄': '舅舅', '母弟': '舅舅', '母姐': '姨妈', '母妹': '姨妈',
+            '兄子': '侄子', '弟子': '侄子', '姐子': '外甥', '妹子': '外甥',
+            '兄女': '侄女', '弟女': '侄女', '姐女': '外甥女', '妹女': '外甥女',
+            '子子': '孙子', '子女': '孙女', '女子': '外孙', '女女': '外孙女',
+            '夫父': '公公', '夫母': '婆婆', '妻父': '岳父', '妻母': '岳母',
+            '父兄妻': '伯母', '父弟妻': '婶婶', '母兄妻': '舅妈', '母姐夫': '姨父',
+            '姐夫': '姐夫', '妹夫': '妹夫', '兄妻': '嫂子', '弟妻': '弟妹',
+            '子妻': '儿媳', '女夫': '女婿',
+            '父父父': '曾祖父', '父父母': '曾祖母', '母父父': '外曾祖父', '母父母': '外曾祖母',
+            '父兄子': '堂哥', '父弟子': '堂弟', '父姐子': '表哥', '父妹子': '表弟',
+            '母兄子': '表哥', '母弟子': '表弟', '母姐子': '表哥', '母妹子': '表弟',
+            '父兄女': '堂姐', '父弟女': '堂妹', '父姐女': '表姐', '父妹女': '表妹',
+            '母兄女': '表姐', '母弟女': '表妹', '母姐女': '表姐', '母妹女': '表妹'
+        };
+
+        // 反向关系
+        const REVERSE_RELATIONS = {
+            '爷爷': '孙子', '奶奶': '孙女', '外公': '外孙', '外婆': '外孙女',
+            '伯父': '侄子/侄女', '叔叔': '侄子/侄女', '姑姑': '侄子/侄女',
+            '舅舅': '外甥/外甥女', '姨妈': '外甥/外甥女',
+            '哥哥': '弟弟/妹妹', '弟弟': '哥哥/姐姐', '姐姐': '弟弟/妹妹', '妹妹': '哥哥/姐姐',
+            '侄子': '伯父/叔叔', '侄女': '伯父/叔叔', '外甥': '舅舅/姨妈', '外甥女': '舅舅/姨妈',
+            '孙子': '爷爷/奶奶', '孙女': '爷爷/奶奶', '外孙': '外公/外婆', '外孙女': '外公/外婆',
+            '公公': '儿媳', '婆婆': '儿媳', '岳父': '女婿', '岳母': '女婿',
+            '儿媳': '公公/婆婆', '女婿': '岳父/岳母',
+            '堂哥': '堂弟/堂妹', '堂弟': '堂哥/堂姐', '表哥': '表弟/表妹', '表弟': '表哥/表姐'
+        };
+
+        function addRelation(relation) {
+            relationChain.push(relation);
+            updateDisplay();
+        }
+
+        function deleteLast() {
+            if (relationChain.length > 0) {
+                relationChain.pop();
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            const chainEl = document.getElementById('relationChain');
+            const resultValue = document.getElementById('resultValue');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultReverse = document.getElementById('resultReverse');
+            const isReverse = document.getElementById('reverseMode').checked;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+
+            // 更新关系链显示
+            if (relationChain.length === 0) {
+                chainEl.innerHTML = '<span style="color: var(--text-muted);">请点击上方按钮添加关系</span>';
+                resultValue.textContent = '请选择关系';
+                resultReverse.textContent = '';
+                return;
+            }
+
+            let chainHtml = '<span class="chain-item">我</span>';
+            relationChain.forEach((rel, index) => {
+                chainHtml += '<span class="chain-arrow">→</span>';
+                chainHtml += `<span class="chain-item">${RELATION_MAP[rel][gender]}</span>`;
+            });
+            chainEl.innerHTML = chainHtml;
+
+            // 计算关系称谓
+            const chainStr = relationChain.join('');
+            let result = COMPOUND_RELATIONS[chainStr];
+
+            if (!result) {
+                // 尝试逐步匹配
+                for (let i = chainStr.length; i > 0; i--) {
+                    const subStr = chainStr.substring(0, i);
+                    if (COMPOUND_RELATIONS[subStr]) {
+                        result = COMPOUND_RELATIONS[subStr];
+                        if (i < chainStr.length) {
+                            result += '的' + calculateSimpleRelation(chainStr.substring(i), gender);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (!result) {
+                result = calculateSimpleRelation(chainStr, gender);
+            }
+
+            // 显示结果
+            resultTitle.textContent = isReverse ? '对方称呼我' : '我称呼对方';
+            
+            if (isReverse) {
+                const reverseResult = REVERSE_RELATIONS[result] || result;
+                resultValue.textContent = reverseResult;
+                resultReverse.textContent = `我称呼对方：${result}`;
+            } else {
+                resultValue.textContent = result;
+                const reverseResult = REVERSE_RELATIONS[result] || result;
+                resultReverse.textContent = `对方称呼我：${reverseResult}`;
+            }
+        }
+
+        function calculateSimpleRelation(chain, gender) {
+            if (chain.length === 1) {
+                return RELATION_MAP[chain][gender];
+            }
+            // 简化处理，返回基本关系描述
+            const relations = chain.split('').map(r => RELATION_MAP[r][gender]);
+            return relations.join('的');
+        }
+
+        // 监听选项变化
+        document.getElementById('reverseMode').addEventListener('change', updateDisplay);
+        document.querySelectorAll('input[name="gender"]').forEach(radio => {
+            radio.addEventListener('change', updateDisplay);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>便捷思维导图-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .markmap-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .markmap-toolbar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .toolbar-btn {
+            padding: 8px 16px;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .toolbar-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .toolbar-btn.primary {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+        .markmap-workspace {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            min-height: 500px;
+        }
+        @media (max-width: 1024px) {
+            .markmap-workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+        .editor-panel {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .panel-header {
+            background: var(--background-color);
+            padding: 12px 16px;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .editor-area {
+            flex: 1;
+            padding: 16px;
+        }
+        .editor-area textarea {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+            resize: none;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            outline: none;
+        }
+        .preview-panel {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .preview-area {
+            flex: 1;
+            padding: 20px;
+            overflow: auto;
+            background: #fff;
+        }
+        .mindmap-root {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .mindmap-node {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .mindmap-node .node-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mindmap-node .node-text {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+        }
+        .mindmap-node.level-2 .node-text {
+            background: #8B7CF7;
+        }
+        .mindmap-node.level-3 .node-text {
+            background: #A29BFE;
+        }
+        .mindmap-node.level-4 .node-text {
+            background: #DDD6FE;
+            color: var(--text-primary);
+        }
+        .mindmap-children {
+            margin-left: 32px;
+            padding-left: 16px;
+            border-left: 2px solid var(--border-color);
+        }
+        .template-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .template-btn {
+            padding: 6px 12px;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .template-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #F39C12;">🧠</div>
+                    <h1 class="tool-title">便捷思维导图</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="markmap-container">
+                        <div class="markmap-toolbar">
+                            <div class="template-list">
+                                <span style="font-size: 14px; color: var(--text-secondary); margin-right: 8px;">模板：</span>
+                                <button class="template-btn" onclick="loadTemplate('default')">默认模板</button>
+                                <button class="template-btn" onclick="loadTemplate('project')">项目计划</button>
+                                <button class="template-btn" onclick="loadTemplate('study')">学习笔记</button>
+                                <button class="template-btn" onclick="loadTemplate('meeting')">会议记录</button>
+                            </div>
+                            <button class="toolbar-btn primary" onclick="exportImage()">📥 导出图片</button>
+                            <button class="toolbar-btn" onclick="clearEditor()">🗑️ 清空</button>
+                        </div>
+
+                        <div class="markmap-workspace">
+                            <div class="editor-panel">
+                                <div class="panel-header">📝 Markdown 编辑器</div>
+                                <div class="editor-area">
+                                    <textarea id="markdownInput" placeholder="输入Markdown格式的思维导图内容..."># 中心主题
+
+## 分支一
+- 子项1
+- 子项2
+
+## 分支二
+- 子项1
+- 子项2
+  - 细节1
+  - 细节2
+
+## 分支三
+- 子项1
+- 子项2</textarea>
+                                </div>
+                            </div>
+
+                            <div class="preview-panel">
+                                <div class="panel-header">👁️ 思维导图预览</div>
+                                <div class="preview-area" id="previewArea">
+                                    <div class="mindmap-root" id="mindmapRoot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>便捷思维导图工具可以帮助您快速创建和编辑思维导图。使用Markdown格式的简单语法，即可实时生成思维导图预览。支持多种预设模板，适用于项目规划、学习笔记、会议记录等场景。编辑完成后可导出为图片保存。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="wordcount.html" class="recommend-item">
+                            <div class="recommend-item-icon">📝</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">字数计算</div>
+                                <div class="recommend-item-desc">统计文本的中文字数、字符数、英文单词数。</div>
+                            </div>
+                        </a>
+                        <a href="translate.html" class="recommend-item">
+                            <div class="recommend-item-icon">🌐</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">翻译</div>
+                                <div class="recommend-item-desc">多语言翻译工具，支持多种语言互译。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        // 模板数据
+        const TEMPLATES = {
+            default: `# 中心主题
+
+## 分支一
+- 子项1
+- 子项2
+
+## 分支二
+- 子项1
+- 子项2
+  - 细节1
+  - 细节2
+
+## 分支三
+- 子项1
+- 子项2`,
+            project: `# 项目计划
+
+## 需求分析
+- 用户调研
+- 需求文档
+- 原型设计
+
+## 开发阶段
+- 前端开发
+- 后端开发
+- 数据库设计
+
+## 测试上线
+- 功能测试
+- 性能测试
+- 上线部署
+
+## 项目总结
+- 经验总结
+- 文档归档`,
+            study: `# 学习笔记
+
+## 第一章 概述
+- 基本概念
+- 发展历史
+- 应用场景
+
+## 第二章 核心内容
+- 理论基础
+- 实践方法
+- 案例分析
+
+## 第三章 进阶知识
+- 高级技巧
+- 常见问题
+- 解决方案
+
+## 复习要点
+- 重点内容
+- 易错点
+- 扩展阅读`,
+            meeting: `# 会议记录
+
+## 会议信息
+- 时间：2024年1月1日
+- 地点：会议室A
+- 参会人员：全员
+
+## 议题一
+- 讨论内容
+- 决议结果
+- 责任人
+
+## 议题二
+- 讨论内容
+- 决议结果
+- 责任人
+
+## 待办事项
+- 事项1 @负责人
+- 事项2 @负责人
+- 事项3 @负责人`
+        };
+
+        // 解析Markdown生成思维导图
+        function parseMarkdown(markdown) {
+            const lines = markdown.trim().split('\n');
+            const root = { text: '', children: [], level: 0 };
+            const stack = [root];
+
+            lines.forEach(line => {
+                const trimmed = line.trim();
+                if (!trimmed) return;
+
+                let level = 0;
+                let text = trimmed;
+
+                // 计算缩进层级
+                if (trimmed.startsWith('- ')) {
+                    level = line.search(/\S/) / 2 + 1;
+                    text = trimmed.substring(2);
+                } else if (trimmed.match(/^#{1,6}\s/)) {
+                    const match = trimmed.match(/^(#{1,6})\s/);
+                    level = match[1].length;
+                    text = trimmed.substring(match[0].length);
+                } else {
+                    return;
+                }
+
+                const node = { text, children: [], level };
+
+                // 找到正确的父节点
+                while (stack.length > 1 && stack[stack.length - 1].level >= level) {
+                    stack.pop();
+                }
+
+                stack[stack.length - 1].children.push(node);
+                stack.push(node);
+            });
+
+            return root.children.length > 0 ? root.children : [root];
+        }
+
+        // 渲染思维导图
+        function renderMindmap(nodes, container, level = 1) {
+            if (!nodes || nodes.length === 0) return '';
+
+            let html = '<div class="mindmap-children">';
+            nodes.forEach(node => {
+                html += `
+                    <div class="mindmap-node level-${level}">
+                        <div class="node-content">
+                            <span class="node-text">${escapeHtml(node.text)}</span>
+                        </div>
+                    </div>
+                `;
+                if (node.children && node.children.length > 0) {
+                    html += renderMindmap(node.children, container, level + 1);
+                }
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 更新预览
+        function updatePreview() {
+            const markdown = document.getElementById('markdownInput').value;
+            const nodes = parseMarkdown(markdown);
+            const root = document.getElementById('mindmapRoot');
+
+            if (nodes.length > 0) {
+                let html = '';
+                nodes.forEach((node, index) => {
+                    html += `
+                        <div class="mindmap-node level-1">
+                            <div class="node-content">
+                                <span class="node-text">${escapeHtml(node.text)}</span>
+                            </div>
+                        </div>
+                    `;
+                    if (node.children && node.children.length > 0) {
+                        html += renderMindmap(node.children, null, 2);
+                    }
+                });
+                root.innerHTML = html;
+            } else {
+                root.innerHTML = '<p style="color: var(--text-muted);">请输入Markdown内容生成思维导图</p>';
+            }
+        }
+
+        function loadTemplate(name) {
+            document.getElementById('markdownInput').value = TEMPLATES[name] || '';
+            updatePreview();
+        }
+
+        function clearEditor() {
+            if (confirm('确定要清空编辑器内容吗？')) {
+                document.getElementById('markdownInput').value = '';
+                updatePreview();
+            }
+        }
+
+        function exportImage() {
+            alert('图片导出功能需要引入额外的库支持，当前版本暂不支持。\n\n您可以使用浏览器截图功能（如Chrome的开发者工具）来保存思维导图。');
+        }
+
+        // 监听输入变化
+        document.getElementById('markdownInput').addEventListener('input', updatePreview);
+
+        // 初始化
+        updatePreview();
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字数计算-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #F39C12;">📝</div>
+                    <h1 class="tool-title">字数计算</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="alert">
+                        <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <span class="alert-text">空格、换行不计入字数</span>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input form-textarea" id="inputText" placeholder="请输入文本内容"></textarea>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="countText()">确认</button>
+                        <button class="btn btn-secondary" onclick="clearText()">清空</button>
+                    </div>
+                    <div class="result-area" id="resultArea">
+                        <div class="result-text" id="resultText">请输入文本内容后点击确认</div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>字数计算专为快速计算文本中的字数、字符数、单词数和句子数而设计。无论您是需要统计文章的字数、检查字符限制，还是进行文本分析，这款工具都能帮助您高效完成任务。</p>
+                    <p>1、在文本输入框中输入或粘贴您需要计算的文本内容。</p>
+                    <p>2、工具会自动计算并显示文本的字数、字符数。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="dynasties.html" class="recommend-item">
+                            <div class="recommend-item-icon">🏛️</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">历史朝代查询</div>
+                                <div class="recommend-item-desc">历史朝代查询是一款教育性和实用性兼备的在线工具。</div>
+                            </div>
+                        </a>
+                        <a href="capital.html" class="recommend-item">
+                            <div class="recommend-item-icon">🌍</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">各国首都</div>
+                                <div class="recommend-item-desc">各国首都查询是一款实用的在线工具。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        function countText() {
+            const text = document.getElementById('inputText').value;
+            const result = countWords(text);
+            document.getElementById('resultText').innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; text-align: center;">
+                    <div><strong style="font-size: 24px; color: var(--primary-color);">${result.chinese}</strong><br>中文字数</div>
+                    <div><strong style="font-size: 24px; color: var(--primary-color);">${result.chars}</strong><br>字符数(不含空格)</div>
+                    <div><strong style="font-size: 24px; color: var(--primary-color);">${result.charsAll}</strong><br>总字符数</div>
+                    <div><strong style="font-size: 24px; color: var(--primary-color);">${result.words}</strong><br>英文单词数</div>
+                    <div><strong style="font-size: 24px; color: var(--primary-color);">${result.sentences}</strong><br>句子数</div>
+                    <div><strong style="font-size: 24px; color: var(--primary-color);">${result.paragraphs}</strong><br>段落数</div>
+                </div>
+            `;
+        }
+
+        function clearText() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('resultText').textContent = '请输入文本内容后点击确认';
+        }
+
+        function countWords(text) {
+            const result = { chars: 0, charsAll: 0, chinese: 0, words: 0, sentences: 0, paragraphs: 0 };
+            if (!text) return result;
+            result.charsAll = text.length;
+            result.chars = text.replace(/\s/g, '').length;
+            result.chinese = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
+            result.words = (text.match(/[a-zA-Z]+/g) || []).length;
+            result.sentences = (text.match(/[。！？.!?]/g) || []).length;
+            result.paragraphs = text.split(/\n\s*\n/).filter(p => p.trim()).length || 1;
+            return result;
+        }
+
+        // 实时计算
+        document.getElementById('inputText').addEventListener('input', function() {
+            countText();
+        });
+    </script>
+</body>
+</html>
