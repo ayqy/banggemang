@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成语接龙-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #E67E22;">🐉</div>
+                    <h1 class="tool-title">成语接龙</h1>
+                </div>
+
+                <div class="tool-main">
+                    <p style="margin-bottom: 16px; color: var(--text-secondary);">输入成语，开始接龙</p>
+                    <div class="form-group">
+                        <input type="text" class="form-input" id="idiomInput" placeholder="输入成语" value="开天辟地">
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="startJielong()">开始接龙</button>
+                        <button class="btn btn-secondary" onclick="changeIdiom()">换一换</button>
+                    </div>
+                    <div class="result-area" id="resultArea">
+                        <div id="jielongChain">暂无结果</div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>成语接龙工具可以帮助您进行成语接龙游戏，提升您的汉语词汇量和语言表达能力。通过这款工具，您可以输入一个成语，工具会自动生成下一个接龙成语，帮助您继续游戏，适用于学习、娱乐和语言训练等场景。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="chengyujielong.html" class="recommend-item">
+                            <div class="recommend-item-icon">📖</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">成语大全</div>
+                                <div class="recommend-item-desc">成语大全查询是一款免费的中国传统文化知识工具。</div>
+                            </div>
+                        </a>
+                        <a href="allegory.html" class="recommend-item">
+                            <div class="recommend-item-icon">💬</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">歇后语</div>
+                                <div class="recommend-item-desc">歇后语工具可以帮助您查找和学习各种歇后语。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        const IDIOMS = [
+            '开天辟地', '地大物博', '博学多才', '才高八斗', '斗转星移', '移花接木', '木已成舟',
+            '舟车劳顿', '顿开茅塞', '塞翁失马', '马到成功', '功成名就', '就事论事', '事半功倍',
+            '倍道而行', '行云流水', '水滴石穿', '穿针引线', '争分夺秒', '妙不可言', '言简意赅',
+            '墨守成规', '规行矩步', '步步为营', '营私舞弊', '弊绝风清', '清正廉洁', '洁身自好',
+            '好高骛远', '远见卓识', '识文断字', '字里行间', '间不容发', '发扬光大', '大公无私',
+            '念念不忘', '忘恩负义', '义无反顾', '顾全大局', '局促不安', '安居乐业', '业精于勤',
+            '勤能补拙', '手到擒来', '来日方长', '长驱直入', '入木三分', '争先恐后', '后来居上',
+            '手舞足蹈', '出类拔萃', '堂堂正正', '正大光明', '明察秋毫', '毫发不爽', '爽心悦目',
+            '目瞪口呆', '呆若木鸡', '鸡飞蛋打', '打草惊蛇', '蛇口蜂针', '针锋相对', '对答如流',
+            '流连忘返', '返老还童', '童叟无欺', '欺世盗名', '名垂青史', '史无前例', '例行公事'
+        ];
+
+        let chain = [];
+
+        function findNextIdiom(lastChar) {
+            const matches = IDIOMS.filter(idiom => idiom.charAt(0) === lastChar && !chain.includes(idiom));
+            if (matches.length > 0) {
+                return matches[Math.floor(Math.random() * matches.length)];
+            }
+            return null;
+        }
+
+        function getRandomIdiom() {
+            return IDIOMS[Math.floor(Math.random() * IDIOMS.length)];
+        }
+
+        function startJielong() {
+            const input = document.getElementById('idiomInput').value.trim();
+            if (!input || input.length !== 4) {
+                alert('请输入一个四字成语');
+                return;
+            }
+
+            chain = [input];
+            let current = input;
+            let html = `<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">`;
+            html += `<span style="background: var(--primary-color); color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: bold;">${current}</span>`;
+
+            // 生成接龙链
+            for (let i = 0; i < 10; i++) {
+                const next = findNextIdiom(current.charAt(current.length - 1));
+                if (next) {
+                    html += `<span style="color: var(--text-muted);">→</span>`;
+                    html += `<span style="background: var(--background-color); padding: 8px 16px; border-radius: 20px;">${next}</span>`;
+                    chain.push(next);
+                    current = next;
+                } else {
+                    html += `<span style="color: var(--text-muted);">→</span>`;
+                    html += `<span style="color: var(--accent-color);">无法继续</span>`;
+                    break;
+                }
+            }
+            html += '</div>';
+            document.getElementById('jielongChain').innerHTML = html;
+        }
+
+        function changeIdiom() {
+            document.getElementById('idiomInput').value = getRandomIdiom();
+        }
+    </script>
+</body>
+</html>

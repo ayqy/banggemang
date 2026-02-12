@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史朝代查询-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-category="education">
+    <!-- 顶部Logo区域 -->
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <!-- 页面容器 -->
+    <div class="page-container">
+        <!-- 左侧导航栏 -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav"></nav>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="tool-page">
+                <!-- 工具标题 -->
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #9B59B6;">🏛️</div>
+                    <h1 class="tool-title">历史朝代查询</h1>
+                </div>
+
+                <!-- 主要内容 -->
+                <div class="tool-main">
+                    <table class="data-table" id="dynastiesTable">
+                        <thead>
+                            <tr>
+                                <th>朝代</th>
+                                <th>起讫</th>
+                                <th>都城</th>
+                                <th>今地</th>
+                                <th>创建者</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div id="dynastyNotes" style="margin-top: 20px; font-size: 12px; color: var(--text-secondary); line-height: 1.8;"></div>
+                </div>
+
+                <!-- 工具介绍 -->
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>历史朝代查询是一款教育性和实用性兼备的在线工具，专为帮助用户快速查询和了解各个历史朝代的相关信息而设计。通过这款工具，您可以轻松获取各个朝代的起止时间、重要事件、著名人物等信息，帮助您更好地学习和理解历史。</p>
+                </div>
+
+                <!-- 更多推荐 -->
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="capital.html" class="recommend-item">
+                            <div class="recommend-item-icon">🌍</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">各国首都</div>
+                                <div class="recommend-item-desc">各国首都查询是一款实用的在线工具，专为帮助用户快速查询世界各国首都而设计。</div>
+                            </div>
+                        </a>
+                        <a href="school.html" class="recommend-item">
+                            <div class="recommend-item-icon">🏫</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">高校查询</div>
+                                <div class="recommend-item-desc">高校查询可以快速找到中国境内知名大学的相关信息。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 底部版权信息 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span>🔧</span>
+                <span class="footer-text">轻松办公，工具助你一臂之力</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        // 历史朝代数据
+        const DYNASTIES = [
+            { name: '夏朝', period: '公元前2070-公元前1600', capital: '阳城、阳翟、老丘、斟𬩽、西河', location: '河南登封、陈留、偃师、安阳等', founder: '禹' },
+            { name: '①商朝', period: '公元前1600-公元前1046', capital: '亳、西毫、奄、殷', location: '河南商丘、偃师、郑州、安阳', founder: '汤' },
+            { name: '周朝 - ②西周', period: '公元前1046-公元前771', capital: '镐京', location: '陕西西安', founder: '周武王姬发' },
+            { name: '周朝 - 东周', period: '公元前770-公元前256', capital: '洛邑', location: '河南洛阳', founder: '周平王姬宜臼' },
+            { name: '秦朝', period: '公元前221-公元前207', capital: '咸阳', location: '陕西咸阳', founder: '秦始皇帝嬴政' },
+            { name: '汉朝 - ③西汉', period: '公元前202-8', capital: '长安', location: '陕西西安', founder: '汉高祖刘邦' },
+            { name: '汉朝 - 东汉', period: '25-220', capital: '洛阳', location: '河南洛阳', founder: '光武帝刘秀' },
+            { name: '三国 - 魏', period: '220-266', capital: '洛阳', location: '河南洛阳', founder: '魏文帝曹丕' },
+            { name: '三国 - 蜀', period: '221-263', capital: '成都', location: '四川成都', founder: '昭烈帝刘备' },
+            { name: '三国 - 吴', period: '222-280', capital: '建业', location: '江苏南京', founder: '吴大帝孙权' },
+            { name: '晋朝 - 西晋', period: '266-316', capital: '洛阳、长安', location: '河南洛阳、陕西西安', founder: '晋武帝司马炎' },
+            { name: '晋朝 - 东晋', period: '317-420', capital: '建康', location: '江苏南京', founder: '晋元帝司马睿' },
+            { name: '④十六国', period: '304-439', capital: '-', location: '-', founder: '-' },
+            { name: '北朝 - 北魏', period: '386-557', capital: '平城、洛阳', location: '山西大同、河南洛阳', founder: '道武帝拓跋圭' },
+            { name: '北朝 - 东魏', period: '534-550', capital: '邺城', location: '河南安阳', founder: '魏静帝元善见' },
+            { name: '北朝 - 北齐', period: '550-577', capital: '邺城', location: '河南安阳', founder: '齐文宣帝高洋' },
+            { name: '北朝 - 西魏', period: '535-557', capital: '长安', location: '陕西西安', founder: '魏文帝元宝炬' },
+            { name: '北朝 - 北周', period: '557-581', capital: '长安', location: '陕西西安', founder: '周明帝宇文毓' },
+            { name: '南朝 - 宋', period: '420-479', capital: '建康', location: '江苏南京', founder: '宋武帝刘裕' },
+            { name: '南朝 - 齐', period: '479-502', capital: '建康', location: '江苏南京', founder: '齐高帝萧道成' },
+            { name: '南朝 - 梁', period: '502-557', capital: '建康', location: '江苏南京', founder: '梁武帝萧衍' },
+            { name: '南朝 - 陈', period: '557-589', capital: '建康', location: '江苏南京', founder: '陈武帝陈霸先' },
+            { name: '隋朝', period: '581-618', capital: '大兴', location: '陕西西安', founder: '隋文帝杨坚' },
+            { name: '唐朝', period: '618-907', capital: '长安', location: '陕西西安', founder: '唐高祖李渊' },
+            { name: '五代 - 后梁', period: '907-923', capital: '开封', location: '河南开封', founder: '梁太祖朱温' },
+            { name: '五代 - 后唐', period: '923-936', capital: '洛阳', location: '河南洛阳', founder: '唐庄宗李存勖' },
+            { name: '五代 - 后晋', period: '936-947', capital: '开封', location: '河南开封', founder: '晋高祖石敬瑭' },
+            { name: '五代 - 后汉', period: '947-951', capital: '开封', location: '河南开封', founder: '汉高祖刘知远' },
+            { name: '五代 - 后周', period: '951-960', capital: '开封', location: '河南开封', founder: '周太祖郭威' },
+            { name: '⑤十国', period: '907-979', capital: '-', location: '-', founder: '-' },
+            { name: '辽朝', period: '907-1125', capital: '上京', location: '巴林左旗', founder: '耶律阿保机' },
+            { name: '宋朝 - 北宋', period: '960-1127', capital: '开封', location: '河南开封', founder: '宋太祖赵匡胤' },
+            { name: '宋朝 - 南宋', period: '1127-1279', capital: '应天、临安', location: '江苏南京、浙江杭州', founder: '宋高宗赵构' },
+            { name: '西夏', period: '1038-1227', capital: '兴庆府', location: '宁夏银川市', founder: '李元昊' },
+            { name: '金朝', period: '1115-1234', capital: '中都、汴京', location: '山东省汶上县', founder: '完颜阿骨打' },
+            { name: '元朝', period: '1271-1368', capital: '大都', location: '北京', founder: '元太祖铁木真' },
+            { name: '明朝', period: '1368-1644', capital: '应天府、顺天府', location: '江苏南京、北京', founder: '明太祖朱元璋' },
+            { name: '清朝', period: '1636-1911', capital: '奉天府、顺天府', location: '辽宁沈阳、北京', founder: '清太祖努尔哈赤' },
+            { name: '中华民国', period: '1912-1949', capital: '北平、南京', location: '北京、南京', founder: '孙中山' }
+        ];
+
+        const DYNASTY_NOTES = [
+            '① 约公元前14世纪盘庚迁都于殷，此后商也称为殷。',
+            '② 公元前841年(西周共和元年)为中国历史确切纪年的开始。',
+            '③ 包括王莽建立的【新】王朝(公元8年—23年)。王莽时期，爆发大规模的农民起义，建立了农民政权。公元23年，新王莽政权灭亡。公元25年，东汉王朝建立。',
+            '④ 这时期，在我国北方，先后存在过一些封建政权，其中有：汉(前赵)、成(成汉)、前凉、后赵(魏)、前燕、前秦、后燕、后秦、西秦、后凉、南凉、北凉、南燕、西凉、北燕、夏等国，历史上叫做【十六国】。',
+            '⑤ 这时期，除后梁、后唐、后晋、后汉、后周外，还先后存在过一些封建政权，其中有：吴、前蜀、吴越、楚、闽、南汉、荆南(南平)、后蜀、南唐、北汉等国，历史上叫做【十国】。'
+        ];
+
+        // 渲染朝代表格
+        function renderDynasties() {
+            const tbody = document.querySelector('#dynastiesTable tbody');
+            tbody.innerHTML = DYNASTIES.map(d => `
+                <tr>
+                    <td>${d.name}</td>
+                    <td>${d.period}</td>
+                    <td>${d.capital}</td>
+                    <td>${d.location}</td>
+                    <td>${d.founder}</td>
+                </tr>
+            `).join('');
+
+            // 渲染注释
+            const notesDiv = document.getElementById('dynastyNotes');
+            notesDiv.innerHTML = '<p><strong>附注：</strong></p>' + DYNASTY_NOTES.map(n => `<p>${n}</p>`).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderDynasties);
+    </script>
+</body>
+</html>

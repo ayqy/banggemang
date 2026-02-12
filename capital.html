@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>各国首都-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #E74C3C;">🌍</div>
+                    <h1 class="tool-title">各国首都</h1>
+                </div>
+
+                <div class="tool-main">
+                    <table class="data-table" id="capitalTable">
+                        <thead>
+                            <tr>
+                                <th>国家名称</th>
+                                <th>首都</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>各国首都查询是一款实用的在线工具，专为帮助用户快速查询世界各国首都而设计。通过这款工具，您可以轻松获取各个国家的首都信息，帮助您更好地了解世界地理知识，满足学习、工作和旅行等需求。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="dynasties.html" class="recommend-item">
+                            <div class="recommend-item-icon">🏛️</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">历史朝代查询</div>
+                                <div class="recommend-item-desc">历史朝代查询是一款教育性和实用性兼备的在线工具。</div>
+                            </div>
+                        </a>
+                        <a href="school.html" class="recommend-item">
+                            <div class="recommend-item-icon">🏫</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">高校查询</div>
+                                <div class="recommend-item-desc">高校查询可以快速找到中国境内知名大学的相关信息。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        const COUNTRIES = [
+            {country:'中国',capital:'北京'},{country:'蒙古',capital:'乌兰巴托'},{country:'朝鲜',capital:'平壤'},
+            {country:'韩国',capital:'首尔'},{country:'日本',capital:'东京'},{country:'菲律宾',capital:'马尼拉'},
+            {country:'印度尼西亚',capital:'雅加达'},{country:'文莱',capital:'斯里巴加湾市'},{country:'新加坡',capital:'新加坡'},
+            {country:'泰国',capital:'曼谷'},{country:'马来西亚',capital:'吉隆坡'},{country:'越南',capital:'河内'},
+            {country:'老挝',capital:'万象'},{country:'柬埔寨',capital:'金边'},{country:'缅甸',capital:'内比都'},
+            {country:'不丹',capital:'廷布'},{country:'东帝汶',capital:'帝力'},{country:'尼泊尔',capital:'加德满都'},
+            {country:'印度',capital:'新德里'},{country:'孟加拉国',capital:'达卡'},{country:'斯里兰卡',capital:'科伦坡'},
+            {country:'马尔代夫',capital:'马累'},{country:'巴基斯坦',capital:'伊斯兰堡'},{country:'阿富汗',capital:'喀布尔'},
+            {country:'塔吉克斯坦',capital:'杜尚别'},{country:'吉尔吉斯斯坦',capital:'比什凯克'},{country:'哈萨克斯坦',capital:'阿斯塔纳'},
+            {country:'乌兹别克斯坦',capital:'塔什干'},{country:'土库曼斯坦',capital:'阿什哈巴德'},{country:'伊朗',capital:'德黑兰'},
+            {country:'伊拉克',capital:'巴格达'},{country:'科威特',capital:'科威特城'},{country:'卡塔尔',capital:'多哈'},
+            {country:'阿联酋',capital:'阿布扎比'},{country:'巴林',capital:'麦纳麦'},{country:'阿曼',capital:'马斯喀特'},
+            {country:'也门',capital:'萨那'},{country:'沙特阿拉伯',capital:'利雅得'},{country:'约旦',capital:'安曼'},
+            {country:'巴勒斯坦',capital:'耶路撒冷'},{country:'以色列',capital:'耶路撒冷'},{country:'叙利亚',capital:'大马士革'},
+            {country:'黎巴嫩',capital:'贝鲁特'},{country:'塞浦路斯',capital:'尼科西亚'},{country:'土耳其',capital:'安卡拉'},
+            {country:'阿塞拜疆',capital:'巴库'},{country:'格鲁吉亚',capital:'第比利斯'},{country:'亚美尼亚',capital:'埃里温'},
+            {country:'挪威',capital:'奥斯陆'},{country:'冰岛',capital:'雷克雅未克'},{country:'瑞典',capital:'斯德哥尔摩'},
+            {country:'芬兰',capital:'赫尔辛基'},{country:'爱沙尼亚',capital:'塔林'},{country:'拉脱维亚',capital:'里加'},
+            {country:'立陶宛',capital:'维尔纽斯'},{country:'白俄罗斯',capital:'明斯克'},{country:'俄罗斯',capital:'莫斯科'},
+            {country:'乌克兰',capital:'基辅'},{country:'摩尔多瓦',capital:'基希讷乌'},{country:'波兰',capital:'华沙'},
+            {country:'捷克',capital:'布拉格'},{country:'斯洛伐克',capital:'布拉提斯拉发'},{country:'匈牙利',capital:'布达佩斯'},
+            {country:'德国',capital:'柏林'},{country:'英国',capital:'伦敦'},{country:'爱尔兰',capital:'都柏林'},
+            {country:'丹麦',capital:'哥本哈根'},{country:'荷兰',capital:'阿姆斯特丹'},{country:'摩纳哥',capital:'摩纳哥'},
+            {country:'法国',capital:'巴黎'},{country:'比利时',capital:'布鲁塞尔'},{country:'卢森堡',capital:'卢森堡'},
+            {country:'奥地利',capital:'维也纳'},{country:'瑞士',capital:'伯尔尼'},{country:'列支敦士登',capital:'瓦杜兹'},
+            {country:'西班牙',capital:'马德里'},{country:'安道尔',capital:'安道尔'},{country:'葡萄牙',capital:'里斯本'},
+            {country:'意大利',capital:'罗马'},{country:'马耳他',capital:'瓦莱塔'},{country:'圣马力诺',capital:'圣马力诺'},
+            {country:'梵蒂冈',capital:'梵蒂冈城'},{country:'斯洛文尼亚',capital:'卢布尔雅那'},{country:'克罗地亚',capital:'萨格勒布'},
+            {country:'波黑',capital:'萨拉热窝'},{country:'塞尔维亚',capital:'贝尔格莱德'},{country:'北马其顿',capital:'斯科普里'},
+            {country:'阿尔巴尼亚',capital:'地拉那'},{country:'罗马尼亚',capital:'布加勒斯特'},{country:'保加利亚',capital:'索非亚'},
+            {country:'希腊',capital:'雅典'},{country:'埃及',capital:'开罗'},{country:'苏丹',capital:'喀土穆'},
+            {country:'埃塞俄比亚',capital:'亚的斯亚贝巴'},{country:'厄立特里亚',capital:'阿斯马拉'},{country:'吉布提',capital:'吉布提'},
+            {country:'索马里',capital:'摩加迪沙'},{country:'利比亚',capital:'的黎波里'},{country:'阿尔及利亚',capital:'阿尔及尔'},
+            {country:'突尼斯',capital:'突尼斯'},{country:'摩洛哥',capital:'拉巴特'},{country:'毛里塔尼亚',capital:'努瓦克肖特'},
+            {country:'马里',capital:'巴马科'},{country:'塞内加尔',capital:'达喀尔'},{country:'冈比亚',capital:'班珠尔'},
+            {country:'几内亚',capital:'科纳克里'},{country:'塞拉利昂',capital:'弗里敦'},{country:'利比里亚',capital:'蒙罗维亚'},
+            {country:'科特迪瓦',capital:'亚穆苏克罗'},{country:'加纳',capital:'阿克拉'},{country:'多哥',capital:'洛美'},
+            {country:'贝宁',capital:'波多诺伏'},{country:'尼日尔',capital:'尼亚美'},{country:'尼日利亚',capital:'阿布贾'},
+            {country:'喀麦隆',capital:'雅温得'},{country:'刚果(布)',capital:'布拉柴维尔'},{country:'刚果(金)',capital:'金沙萨'},
+            {country:'乌干达',capital:'坎帕拉'},{country:'肯尼亚',capital:'内罗毕'},{country:'坦桑尼亚',capital:'多多马'},
+            {country:'卢旺达',capital:'基加利'},{country:'布隆迪',capital:'布琼布拉'},{country:'安哥拉',capital:'罗安达'},
+            {country:'赞比亚',capital:'卢萨卡'},{country:'马拉维',capital:'利隆圭'},{country:'莫桑比克',capital:'马普托'},
+            {country:'马达加斯加',capital:'塔那那利佛'},{country:'毛里求斯',capital:'路易港'},{country:'津巴布韦',capital:'哈拉雷'},
+            {country:'博茨瓦纳',capital:'哈博罗内'},{country:'纳米比亚',capital:'温得和克'},{country:'南非',capital:'比勒陀利亚'},
+            {country:'澳大利亚',capital:'堪培拉'},{country:'新西兰',capital:'惠灵顿'},{country:'加拿大',capital:'渥太华'},
+            {country:'美国',capital:'华盛顿'},{country:'墨西哥',capital:'墨西哥城'},{country:'巴西',capital:'巴西利亚'},
+            {country:'阿根廷',capital:'布宜诺斯艾利斯'},{country:'智利',capital:'圣地亚哥'},{country:'秘鲁',capital:'利马'},
+            {country:'哥伦比亚',capital:'波哥大'}
+        ];
+
+        function renderCapitals() {
+            const tbody = document.querySelector('#capitalTable tbody');
+            tbody.innerHTML = COUNTRIES.map(c => `<tr><td>${c.country}</td><td>${c.capital}</td></tr>`).join('');
+        }
+        document.addEventListener('DOMContentLoaded', renderCapitals);
+    </script>
+</body>
+</html>

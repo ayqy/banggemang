@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉字偏旁-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .radical-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .radical-input-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .radical-input-area input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .radical-input-area button {
+            padding: 14px 28px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .radical-result {
+            display: none;
+        }
+        .radical-result.show {
+            display: block;
+        }
+        .result-main {
+            display: flex;
+            gap: 24px;
+            padding: 24px;
+            background: var(--background-color);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .result-char {
+            font-size: 80px;
+            line-height: 1;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .result-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .info-label {
+            width: 80px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .info-value {
+            font-size: 18px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .radical-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+        .stroke-count {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+        .similar-chars {
+            margin-top: 20px;
+        }
+        .similar-title {
+            font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .similar-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .similar-item {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: var(--background-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .similar-item:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .radical-explanation {
+            padding: 16px;
+            background: #fff8e6;
+            border-radius: 8px;
+            border-left: 4px solid #f0ad4e;
+        }
+        .radical-explanation h4 {
+            margin: 0 0 8px 0;
+            color: #8a6d3b;
+        }
+        .radical-explanation p {
+            margin: 0;
+            color: #8a6d3b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #3498DB;">📖</div>
+                    <h1 class="tool-title">汉字偏旁</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="radical-container">
+                        <div class="radical-input-area">
+                            <input type="text" id="charInput" placeholder="请输入汉字" maxlength="1" value="河">
+                            <button onclick="queryRadical()">查询偏旁</button>
+                        </div>
+
+                        <div class="radical-result" id="radicalResult">
+                            <div class="result-main">
+                                <div class="result-char" id="resultChar">河</div>
+                                <div class="result-info">
+                                    <div class="info-row">
+                                        <span class="info-label">偏旁部首</span>
+                                        <span class="info-value">
+                                            <span class="radical-tag" id="radicalTag">氵</span>
+                                        </span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span class="info-label">部首名称</span>
+                                        <span class="info-value" id="radicalName">三点水</span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span class="info-label">总笔画</span>
+                                        <span class="info-value">
+                                            <span class="stroke-count" id="strokeCount">8画</span>
+                                        </span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span class="info-label">部首笔画</span>
+                                        <span class="info-value" id="radicalStroke">3画</span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span class="info-label">结构</span>
+                                        <span class="info-value" id="structure">左右结构</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="radical-explanation">
+                                <h4>💡 偏旁含义</h4>
+                                <p id="radicalMeaning">"氵"即"水"的变形，表示与水、液体、河流等相关。带"氵"旁的字多与水有关，如：江、河、湖、海、洋等。</p>
+                            </div>
+
+                            <div class="similar-chars">
+                                <div class="similar-title">相同偏旁的汉字</div>
+                                <div class="similar-list" id="similarList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>汉字偏旁工具可以帮助您查询汉字的偏旁部首信息。输入任意汉字，即可查看其偏旁部首、笔画数、字形结构等详细信息，同时显示相同偏旁的其他汉字，适用于汉字学习、书法练习等场景。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="hanzifayin.html" class="recommend-item">
+                            <div class="recommend-item-icon">🔊</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">汉字标准发音</div>
+                                <div class="recommend-item-desc">查询汉字的拼音和标准发音。</div>
+                            </div>
+                        </a>
+                        <a href="zitie_new.html" class="recommend-item">
+                            <div class="recommend-item-icon">📝</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">字帖生成</div>
+                                <div class="recommend-item-desc">生成个性化练字字帖。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        // 汉字偏旁数据
+        const RADICAL_DATA = {
+            '河': { radical: '氵', name: '三点水', strokes: 8, radicalStrokes: 3, structure: '左右结构', meaning: '"氵"即"水"的变形，表示与水、液体、河流等相关。带"氵"旁的字多与水有关，如：江、河、湖、海、洋等。' },
+            '江': { radical: '氵', name: '三点水', strokes: 6, radicalStrokes: 3, structure: '左右结构', meaning: '"氵"即"水"的变形，表示与水、液体、河流等相关。带"氵"旁的字多与水有关，如：江、河、湖、海、洋等。' },
+            '湖': { radical: '氵', name: '三点水', strokes: 12, radicalStrokes: 3, structure: '左右结构', meaning: '"氵"即"水"的变形，表示与水、液体、河流等相关。带"氵"旁的字多与水有关，如：江、河、湖、海、洋等。' },
+            '海': { radical: '氵', name: '三点水', strokes: 10, radicalStrokes: 3, structure: '左右结构', meaning: '"氵"即"水"的变形，表示与水、液体、河流等相关。带"氵"旁的字多与水有关，如：江、河、湖、海、洋等。' },
+            '洋': { radical: '氵', name: '三点水', strokes: 9, radicalStrokes: 3, structure: '左右结构', meaning: '"氵"即"水"的变形，表示与水、液体、河流等相关。带"氵"旁的字多与水有关，如：江、河、湖、海、洋等。' },
+            '林': { radical: '木', name: '木字旁', strokes: 8, radicalStrokes: 4, structure: '左右结构', meaning: '"木"表示树木、木材。带"木"旁的字多与树木、木材相关，如：林、森、树、枝、材等。' },
+            '森': { radical: '木', name: '木字旁', strokes: 12, radicalStrokes: 4, structure: '品字结构', meaning: '"木"表示树木、木材。带"木"旁的字多与树木、木材相关，如：林、森、树、枝、材等。' },
+            '树': { radical: '木', name: '木字旁', strokes: 9, radicalStrokes: 4, structure: '左右结构', meaning: '"木"表示树木、木材。带"木"旁的字多与树木、木材相关，如：林、森、树、枝、材等。' },
+            '花': { radical: '艹', name: '草字头', strokes: 7, radicalStrokes: 3, structure: '上下结构', meaning: '"艹"是"草"的变形，表示与植物、花草相关。带"艹"头的字多与植物有关，如：花、草、茶、药、菜等。' },
+            '草': { radical: '艹', name: '草字头', strokes: 9, radicalStrokes: 3, structure: '上下结构', meaning: '"艹"是"草"的变形，表示与植物、花草相关。带"艹"头的字多与植物有关，如：花、草、茶、药、菜等。' },
+            '茶': { radical: '艹', name: '草字头', strokes: 9, radicalStrokes: 3, structure: '上下结构', meaning: '"艹"是"草"的变形，表示与植物、花草相关。带"艹"头的字多与植物有关，如：花、草、茶、药、菜等。' },
+            '说': { radical: '讠', name: '言字旁', strokes: 9, radicalStrokes: 2, structure: '左右结构', meaning: '"讠"是"言"的变形，表示与说话、语言相关。带"讠"旁的字多与说话有关，如：说、话、语、读、讲等。' },
+            '话': { radical: '讠', name: '言字旁', strokes: 8, radicalStrokes: 2, structure: '左右结构', meaning: '"讠"是"言"的变形，表示与说话、语言相关。带"讠"旁的字多与说话有关，如：说、话、语、读、讲等。' },
+            '语': { radical: '讠', name: '言字旁', strokes: 9, radicalStrokes: 2, structure: '左右结构', meaning: '"讠"是"言"的变形，表示与说话、语言相关。带"讠"旁的字多与说话有关，如：说、话、语、读、讲等。' },
+            '跑': { radical: '⻊', name: '足字旁', strokes: 12, radicalStrokes: 7, structure: '左右结构', meaning: '"⻊"是"足"的变形，表示与脚、行走相关。带"⻊"旁的字多与脚的动作有关，如：跑、跳、踢、踩、踏等。' },
+            '跳': { radical: '⻊', name: '足字旁', strokes: 13, radicalStrokes: 7, structure: '左右结构', meaning: '"⻊"是"足"的变形，表示与脚、行走相关。带"⻊"旁的字多与脚的动作有关，如：跑、跳、踢、踩、踏等。' },
+            '踢': { radical: '⻊', name: '足字旁', strokes: 15, radicalStrokes: 7, structure: '左右结构', meaning: '"⻊"是"足"的变形，表示与脚、行走相关。带"⻊"旁的字多与脚的动作有关，如：跑、跳、踢、踩、踏等。' },
+            '打': { radical: '扌', name: '提手旁', strokes: 5, radicalStrokes: 3, structure: '左右结构', meaning: '"扌"是"手"的变形，表示与手的动作相关。带"扌"旁的字多与手的动作有关，如：打、拍、提、拉、推等。' },
+            '拍': { radical: '扌', name: '提手旁', strokes: 8, radicalStrokes: 3, structure: '左右结构', meaning: '"扌"是"手"的变形，表示与手的动作相关。带"扌"旁的字多与手的动作有关，如：打、拍、提、拉、推等。' },
+            '提': { radical: '扌', name: '提手旁', strokes: 12, radicalStrokes: 3, structure: '左右结构', meaning: '"扌"是"手"的变形，表示与手的动作相关。带"扌"旁的字多与手的动作有关，如：打、拍、提、拉、推等。' },
+            '快': { radical: '忄', name: '竖心旁', strokes: 7, radicalStrokes: 3, structure: '左右结构', meaning: '"忄"是"心"的变形，表示与心理、情感相关。带"忄"旁的字多与心情有关，如：快、慢、情、恨、忆等。' },
+            '情': { radical: '忄', name: '竖心旁', strokes: 11, radicalStrokes: 3, structure: '左右结构', meaning: '"忄"是"心"的变形，表示与心理、情感相关。带"忄"旁的字多与心情有关，如：快、慢、情、恨、忆等。' },
+            '恨': { radical: '忄', name: '竖心旁', strokes: 9, radicalStrokes: 3, structure: '左右结构', meaning: '"忄"是"心"的变形，表示与心理、情感相关。带"忄"旁的字多与心情有关，如：快、慢、情、恨、忆等。' },
+            '明': { radical: '日', name: '日字旁', strokes: 8, radicalStrokes: 4, structure: '左右结构', meaning: '"日"表示太阳、时间。带"日"旁的字多与太阳或时间有关，如：明、晴、晒、暖、晨等。' },
+            '晴': { radical: '日', name: '日字旁', strokes: 12, radicalStrokes: 4, structure: '左右结构', meaning: '"日"表示太阳、时间。带"日"旁的字多与太阳或时间有关，如：明、晴、晒、暖、晨等。' },
+            '阳': { radical: '阝', name: '左耳旁', strokes: 6, radicalStrokes: 2, structure: '左右结构', meaning: '"阝"在左边表示"阜"，与山丘、地形相关；在右边表示"邑"，与城市、地方相关。如：阳、阴、陈、都、郊等。' },
+            '院': { radical: '阝', name: '右耳旁', strokes: 9, radicalStrokes: 2, structure: '左右结构', meaning: '"阝"在左边表示"阜"，与山丘、地形相关；在右边表示"邑"，与城市、地方相关。如：阳、阴、陈、都、郊等。' },
+            '国': { radical: '囗', name: '国字框', strokes: 8, radicalStrokes: 3, structure: '全包围结构', meaning: '"囗"表示围困、界限。带"囗"框的字表示被围住或界限内的事物，如：国、园、困、图、因等。' },
+            '园': { radical: '囗', name: '国字框', strokes: 7, radicalStrokes: 3, structure: '全包围结构', meaning: '"囗"表示围困、界限。带"囗"框的字表示被围住或界限内的事物，如：国、园、困、图、因等。' },
+            '字': { radical: '宀', name: '宝盖头', strokes: 6, radicalStrokes: 3, structure: '上下结构', meaning: '"宀"表示房屋、屋顶。带"宀"头的字多与房屋、建筑相关，如：字、家、室、宫、宁等。' },
+            '家': { radical: '宀', name: '宝盖头', strokes: 10, radicalStrokes: 3, structure: '上下结构', meaning: '"宀"表示房屋、屋顶。带"宀"头的字多与房屋、建筑相关，如：字、家、室、宫、宁等。' },
+            '思': { radical: '心', name: '心字底', strokes: 9, radicalStrokes: 4, structure: '上下结构', meaning: '"心"表示心脏、思想。带"心"底的字多与心理活动有关，如：思、想、念、忘、恐等。' },
+            '想': { radical: '心', name: '心字底', strokes: 13, radicalStrokes: 4, structure: '上下结构', meaning: '"心"表示心脏、思想。带"心"底的字多与心理活动有关，如：思、想、念、忘、恐等。' },
+            '中': { radical: '丨', name: '竖', strokes: 4, radicalStrokes: 1, structure: '独体字', meaning: '"丨"是基本笔画之一，表示竖直的方向。' },
+            '人': { radical: '人', name: '人字头', strokes: 2, radicalStrokes: 2, structure: '独体字', meaning: '"人"表示人类。带"人"的字多与人相关，如：众、从、令、今等。' },
+            '大': { radical: '大', name: '大字头', strokes: 3, radicalStrokes: 3, structure: '独体字', meaning: '"大"表示大小。带"大"的字多与大小或人张开双臂的形象相关。' },
+            '小': { radical: '小', name: '小字头', strokes: 3, radicalStrokes: 3, structure: '独体字', meaning: '"小"表示大小。带"小"的字多与细小事物相关。' }
+        };
+
+        // 按偏旁分组的汉字
+        const RADICAL_CHARS = {
+            '氵': ['河', '江', '湖', '海', '洋', '波', '浪', '池', '溪', '清'],
+            '木': ['林', '森', '树', '枝', '材', '板', '桥', '楼', '棋', '根'],
+            '艹': ['花', '草', '茶', '药', '菜', '蓝', '荷', '菊', '菲', '芳'],
+            '讠': ['说', '话', '语', '读', '讲', '让', '认', '识', '论', '议'],
+            '⻊': ['跑', '跳', '踢', '踩', '踏', '蹲', '跃', '跌', '距', '跟'],
+            '扌': ['打', '拍', '提', '拉', '推', '抓', '扔', '找', '扫', '捡'],
+            '忄': ['快', '情', '恨', '忆', '怕', '惊', '忙', '怪', '惜', '悔'],
+            '日': ['明', '晴', '晒', '暖', '晨', '晚', '昏', '晓', '曜', '暑'],
+            '阝': ['阳', '院', '陈', '都', '郊', '邻', '郭', '郡', '鄙', '邦'],
+            '囗': ['国', '园', '困', '图', '因', '围', '圈', '固', '圆', '困'],
+            '宀': ['字', '家', '室', '宫', '宁', '安', '定', '宜', '宙', '容'],
+            '心': ['思', '想', '念', '忘', '恐', '思', '急', '怨', '恩', '怒']
+        };
+
+        function queryRadical() {
+            const input = document.getElementById('charInput').value.trim();
+            const resultDiv = document.getElementById('radicalResult');
+
+            if (!input || !input.match(/[\u4e00-\u9fa5]/)) {
+                alert('请输入一个有效汉字');
+                return;
+            }
+
+            const char = input[0];
+            const data = RADICAL_DATA[char];
+
+            if (!data) {
+                // 显示默认信息
+                document.getElementById('resultChar').textContent = char;
+                document.getElementById('radicalTag').textContent = '?';
+                document.getElementById('radicalName').textContent = '暂无数据';
+                document.getElementById('strokeCount').textContent = '?画';
+                document.getElementById('radicalStroke').textContent = '?画';
+                document.getElementById('structure').textContent = '未知';
+                document.getElementById('radicalMeaning').textContent = '暂无该汉字的偏旁数据。';
+                document.getElementById('similarList').innerHTML = '';
+                resultDiv.classList.add('show');
+                return;
+            }
+
+            // 更新显示
+            document.getElementById('resultChar').textContent = char;
+            document.getElementById('radicalTag').textContent = data.radical;
+            document.getElementById('radicalName').textContent = data.name;
+            document.getElementById('strokeCount').textContent = data.strokes + '画';
+            document.getElementById('radicalStroke').textContent = data.radicalStrokes + '画';
+            document.getElementById('structure').textContent = data.structure;
+            document.getElementById('radicalMeaning').textContent = data.meaning;
+
+            // 显示同偏旁汉字
+            const similarChars = RADICAL_CHARS[data.radical] || [];
+            const similarList = document.getElementById('similarList');
+            similarList.innerHTML = similarChars
+                .filter(c => c !== char)
+                .slice(0, 10)
+                .map(c => `<div class="similar-item" onclick="selectChar('${c}')">${c}</div>`)
+                .join('');
+
+            resultDiv.classList.add('show');
+        }
+
+        function selectChar(char) {
+            document.getElementById('charInput').value = char;
+            queryRadical();
+        }
+
+        // 回车键查询
+        document.getElementById('charInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                queryRadical();
+            }
+        });
+
+        // 初始查询
+        queryRadical();
+    </script>
+</body>
+</html>

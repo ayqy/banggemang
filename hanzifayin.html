@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉字标准发音-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pinyin-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .pinyin-input-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .pinyin-input-area input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .pinyin-input-area button {
+            padding: 14px 28px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .pinyin-input-area button:hover {
+            opacity: 0.9;
+        }
+        .result-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .pinyin-card {
+            background: var(--background-color);
+            border-radius: 12px;
+            padding: 20px;
+            min-width: 120px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .pinyin-char {
+            font-size: 48px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        .pinyin-text {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .pinyin-tone {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        .play-btn {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .play-btn:hover {
+            opacity: 0.9;
+        }
+        .multi-result {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+        }
+        .multi-pinyin {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .multi-pinyin-item {
+            background: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--primary-color);
+            cursor: pointer;
+            border: 1px solid var(--primary-color);
+        }
+        .multi-pinyin-item:hover,
+        .multi-pinyin-item.active {
+            background: var(--primary-color);
+            color: #fff;
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #1ABC9C;">🔊</div>
+                    <h1 class="tool-title">汉字标准发音</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="pinyin-container">
+                        <div class="pinyin-input-area">
+                            <input type="text" id="charInput" placeholder="请输入汉字" maxlength="20" value="中国">
+                            <button onclick="queryPinyin()">查询发音</button>
+                        </div>
+
+                        <div class="result-cards" id="resultCards">
+                            <p style="color: var(--text-muted);">输入汉字后点击查询按钮查看发音</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>汉字标准发音工具可以帮助您查询汉字的拼音和标准发音。支持单个汉字或多个汉字的批量查询，显示带声调的拼音标注，并可点击播放标准发音音频，适用于汉字学习、普通话练习等场景。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="radical.html" class="recommend-item">
+                            <div class="recommend-item-icon">📖</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">汉字偏旁</div>
+                                <div class="recommend-item-desc">查询汉字的偏旁部首信息。</div>
+                            </div>
+                        </a>
+                        <a href="zitie_new.html" class="recommend-item">
+                            <div class="recommend-item-icon">📝</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">字帖生成</div>
+                                <div class="recommend-item-desc">生成个性化练字字帖。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        // 汉字拼音数据（常用字）
+        const PINYIN_DATA = {
+            '中': ['zhōng', 'zhòng'], '国': ['guó'], '人': ['rén'], '大': ['dà', 'dài'], '小': ['xiǎo'],
+            '上': ['shàng', 'shǎng'], '下': ['xià'], '左': ['zuǒ'], '右': ['yòu'], '天': ['tiān'],
+            '地': ['dì', 'de'], '日': ['rì'], '月': ['yuè'], '年': ['nián'], '时': ['shí'],
+            '分': ['fēn', 'fèn'], '秒': ['miǎo'], '一': ['yī'], '二': ['èr'], '三': ['sān'],
+            '四': ['sì'], '五': ['wǔ'], '六': ['liù', 'lù'], '七': ['qī'], '八': ['bā'],
+            '九': ['jiǔ'], '十': ['shí'], '百': ['bǎi'], '千': ['qiān'], '万': ['wàn'],
+            '亿': ['yì'], '个': ['gè', 'ge'], '只': ['zhī', 'zhǐ'], '条': ['tiáo', 'tiāo'],
+            '件': ['jiàn'], '本': ['běn'], '书': ['shū'], '笔': ['bǐ'], '纸': ['zhǐ'],
+            '学': ['xué'], '习': ['xí'], '教': ['jiāo', 'jiào'], '育': ['yù'], '校': ['xiào'],
+            '班': ['bān'], '级': ['jí'], '老': ['lǎo'], '师': ['shī'], '生': ['shēng'],
+            '父': ['fù', 'fǔ'], '母': ['mǔ'], '子': ['zǐ'], '女': ['nǚ', 'rǔ'], '男': ['nán'],
+            '儿': ['ér', 'er'], '孩': ['hái'], '朋': ['péng'], '友': ['yǒu'], '爱': ['ài'],
+            '心': ['xīn'], '情': ['qíng'], '思': ['sī', 'sāi'], '想': ['xiǎng'], '念': ['niàn'],
+            '说': ['shuō', 'shuì', 'yuè'], '话': ['huà'], '听': ['tīng', 'tìng'], '看': ['kàn', 'kān'],
+            '读': ['dú', 'dòu'], '写': ['xiě'], '字': ['zì'], '文': ['wén'], '章': ['zhāng'],
+            '词': ['cí'], '句': ['jù', 'gōu'], '语': ['yǔ', 'yù'], '音': ['yīn'], '声': ['shēng'],
+            '风': ['fēng', 'fěng', 'fèng'], '雨': ['yǔ', 'yù'], '雪': ['xuě'], '云': ['yún'],
+            '水': ['shuǐ'], '火': ['huǒ'], '山': ['shān'], '河': ['hé'], '海': ['hǎi'],
+            '湖': ['hú'], '江': ['jiāng'], '花': ['huā'], '草': ['cǎo'], '树': ['shù'],
+            '林': ['lín'], '森': ['sēn'], '鸟': ['niǎo', 'diǎo'], '鱼': ['yú'], '虫': ['chóng', 'huǐ'],
+            '马': ['mǎ'], '牛': ['niú'], '羊': ['yáng', 'xiáng'], '猪': ['zhū'], '狗': ['gǒu'],
+            '猫': ['māo', 'máo'], '鸡': ['jī'], '鸭': ['yā'], '鹅': ['é'], '虎': ['hǔ'],
+            '龙': ['lóng'], '蛇': ['shé', 'yí'], '兔': ['tù'], '鼠': ['shǔ'], '猴': ['hóu'],
+            '春': ['chūn'], '夏': ['xià'], '秋': ['qiū'], '冬': ['dōng'], '东': ['dōng'],
+            '西': ['xī'], '南': ['nán'], '北': ['běi', 'bèi'], '前': ['qián'], '后': ['hòu'],
+            '里': ['lǐ', 'li'], '外': ['wài'], '内': ['nèi', 'nà'], '间': ['jiān', 'jiàn'],
+            '高': ['gāo'], '低': ['dī'], '长': ['cháng', 'zhǎng'], '短': ['duǎn'], '宽': ['kuān'],
+            '窄': ['zhǎi'], '深': ['shēn'], '浅': ['qiǎn', 'jiān'], '厚': ['hòu'], '薄': ['báo', 'bó', 'bò'],
+            '重': ['zhòng', 'chóng', 'tóng'], '轻': ['qīng'], '快': ['kuài'], '慢': ['màn'],
+            '早': ['zǎo'], '晚': ['wǎn'], '今': ['jīn'], '明': ['míng'], '昨': ['zuó'],
+            '起': ['qǐ'], '止': ['zhǐ'], '开': ['kāi'], '关': ['guān'], '进': ['jìn'],
+            '出': ['chū'], '来': ['lái'], '去': ['qù'], '到': ['dào'], '过': ['guò', 'guo', 'guō'],
+            '走': ['zǒu'], '跑': ['pǎo'], '跳': ['tiào', 'táo'], '飞': ['fēi'], '坐': ['zuò'],
+            '站': ['zhàn'], '睡': ['shuì'], '醒': ['xǐng'], '吃': ['chī'], '喝': ['hē'],
+            '穿': ['chuān'], '戴': ['dài'], '住': ['zhù'], '行': ['xíng', 'háng', 'hàng', 'héng'],
+            '做': ['zuò'], '作': ['zuò', 'zuō'], '用': ['yòng'], '买': ['mǎi'], '卖': ['mài'],
+            '得': ['dé', 'de', 'děi'], '失': ['shī'], '成': ['chéng'], '败': ['bài'],
+            '好': ['hǎo', 'hào'], '坏': ['huài', 'pē', 'pī'], '对': ['duì'], '错': ['cuò'],
+            '真': ['zhēn'], '假': ['jiǎ', 'jià'], '美': ['měi'], '丑': ['chǒu'], '善': ['shàn'],
+            '恶': ['è', 'wù', 'ě', 'wū'], '喜': ['xǐ'], '怒': ['nù'], '哀': ['āi'], '乐': ['lè', 'yuè'],
+            '红': ['hóng', 'gōng'], '橙': ['chéng'], '黄': ['huáng'], '绿': ['lǜ', 'lù'],
+            '青': ['qīng'], '蓝': ['lán'], '紫': ['zǐ'], '白': ['bái'], '黑': ['hēi'],
+            '金': ['jīn'], '银': ['yín'], '铜': ['tóng'], '铁': ['tiě'], '石': ['shí', 'dàn'],
+            '木': ['mù'], '土': ['tǔ'], '气': ['qì'], '光': ['guāng'], '电': ['diàn'],
+            '家': ['jiā', 'gū'], '庭': ['tíng'], '房': ['fáng'], '屋': ['wū'], '门': ['mén'],
+            '窗': ['chuāng'], '床': ['chuáng', 'chuāng'], '桌': ['zhuō'], '椅': ['yǐ', 'yī'],
+            '灯': ['dēng'], '钟': ['zhōng'], '表': ['biǎo'], '镜': ['jìng'], '伞': ['sǎn'],
+            '衣': ['yī', 'yì'], '服': ['fú', 'fù'], '鞋': ['xié'], '帽': ['mào'],
+            '饭': ['fàn'], '菜': ['cài'], '肉': ['ròu'], '蛋': ['dàn'], '奶': ['nǎi'],
+            '茶': ['chá'], '酒': ['jiǔ'], '糖': ['táng'], '盐': ['yán'], '油': ['yóu'],
+            '米': ['mǐ'], '面': ['miàn'], '包': ['bāo'], '果': ['guǒ'], '瓜': ['guā'],
+            '车': ['chē', 'jū'], '船': ['chuán'], '机': ['jī'], '路': ['lù'], '街': ['jiē'],
+            '城': ['chéng'], '村': ['cūn'], '省': ['shěng', 'xǐng'], '县': ['xiàn', 'xuán'],
+            '州': ['zhōu'], '市': ['shì'], '区': ['qū', 'ōu'], '乡': ['xiāng', 'xiàng'],
+            '店': ['diàn'], '铺': ['pù', 'pū'], '厂': ['chǎng', 'ān', 'hǎn'], '场': ['chǎng', 'cháng'],
+            '公': ['gōng'], '司': ['sī'], '法': ['fǎ'], '院': ['yuàn'], '局': ['jú'],
+            '部': ['bù'], '科': ['kē'], '室': ['shì'], '处': ['chǔ', 'chù'], '所': ['suǒ'],
+            '工': ['gōng'], '农': ['nóng'], '商': ['shāng'], '兵': ['bīng'], '军': ['jūn'],
+            '医': ['yī'], '护': ['hù'], '病': ['bìng'], '药': ['yào'], '健': ['jiàn'],
+            '康': ['kāng'], '命': ['mìng'], '运': ['yùn'], '福': ['fú'], '祸': ['huò'],
+            '财': ['cái'], '富': ['fù'], '贫': ['pín'], '穷': ['qióng'], '贵': ['guì'],
+            '贱': ['jiàn'], '荣': ['róng'], '华': ['huá', 'huà', 'huā'], '权': ['quán', 'guǎn'],
+            '力': ['lì'], '势': ['shì'], '利': ['lì'], '害': ['hài', 'hé'], '益': ['yì'],
+            '业': ['yè'], '职': ['zhí'], '工': ['gōng'], '作': ['zuò', 'zuō'], '事': ['shì'],
+            '活': ['huó'], '死': ['sǐ'], '存': ['cún'], '亡': ['wáng', 'wú'], '生': ['shēng']
+        };
+
+        // 声调说明
+        const TONE_NAMES = {
+            'ˉ': '第一声(阴平)', 'ˊ': '第二声(阳平)', 'ˇ': '第三声(上声)', 'ˋ': '第四声(去声)'
+        };
+
+        function queryPinyin() {
+            const input = document.getElementById('charInput').value.trim();
+            const resultArea = document.getElementById('resultCards');
+
+            if (!input) {
+                resultArea.innerHTML = '<p style="color: var(--text-muted);">请输入汉字</p>';
+                return;
+            }
+
+            let html = '';
+            for (let i = 0; i < input.length; i++) {
+                const char = input[i];
+                if (char.match(/[\u4e00-\u9fa5]/)) {
+                    const pinyins = PINYIN_DATA[char] || ['(未知)'];
+                    const mainPinyin = pinyins[0];
+                    const tone = getTone(mainPinyin);
+                    const toneName = getToneName(mainPinyin);
+
+                    html += `
+                        <div class="pinyin-card">
+                            <div class="pinyin-char">${char}</div>
+                            <div class="pinyin-text">${mainPinyin}</div>
+                            <div class="pinyin-tone">${toneName}</div>
+                            <button class="play-btn" onclick="playSound('${mainPinyin}')">🔊 播放</button>
+                            ${pinyins.length > 1 ? `
+                                <div class="multi-result">
+                                    <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">多音字</div>
+                                    <div class="multi-pinyin">
+                                        ${pinyins.map((p, idx) => `<span class="multi-pinyin-item ${idx === 0 ? 'active' : ''}" onclick="selectPinyin(this, '${char}', '${p}')">${p}</span>`).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }
+            }
+
+            resultArea.innerHTML = html || '<p style="color: var(--text-muted);">未找到有效汉字</p>';
+        }
+
+        function getTone(pinyin) {
+            const tones = ['ā', 'á', 'ǎ', 'à', 'ē', 'é', 'ě', 'è', 'ī', 'í', 'ǐ', 'ì', 'ō', 'ó', 'ǒ', 'ò', 'ū', 'ú', 'ǔ', 'ù', 'ǖ', 'ǘ', 'ǚ', 'ǜ'];
+            for (let i = 0; i < pinyin.length; i++) {
+                if (tones.includes(pinyin[i])) {
+                    const idx = tones.indexOf(pinyin[i]);
+                    return (idx % 4) + 1;
+                }
+            }
+            return 0;
+        }
+
+        function getToneName(pinyin) {
+            const tone = getTone(pinyin);
+            const names = ['轻声', '第一声(阴平)', '第二声(阳平)', '第三声(上声)', '第四声(去声)'];
+            return names[tone] || '轻声';
+        }
+
+        function selectPinyin(el, char, pinyin) {
+            el.parentElement.querySelectorAll('.multi-pinyin-item').forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+            const card = el.closest('.pinyin-card');
+            card.querySelector('.pinyin-text').textContent = pinyin;
+            card.querySelector('.pinyin-tone').textContent = getToneName(pinyin);
+            card.querySelector('.play-btn').onclick = () => playSound(pinyin);
+        }
+
+        function playSound(pinyin) {
+            // 使用浏览器内置的语音合成API
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(pinyin);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.5;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('您的浏览器不支持语音播放');
+            }
+        }
+
+        // 回车键查询
+        document.getElementById('charInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                queryPinyin();
+            }
+        });
+
+        // 初始查询
+        queryPinyin();
+    </script>
+</body>
+</html>

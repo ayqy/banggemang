@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成语大全-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .chengyu-container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .chengyu-input-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .chengyu-input-area input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .chengyu-input-area button {
+            padding: 14px 28px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .chengyu-result {
+            display: none;
+        }
+        .chengyu-result.show {
+            display: block;
+        }
+        .result-main {
+            background: linear-gradient(135deg, var(--primary-color), #8B7CF7);
+            border-radius: 12px;
+            padding: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .chengyu-word {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .chengyu-pinyin {
+            font-size: 18px;
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+        .chengyu-meaning {
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 16px;
+            line-height: 1.6;
+        }
+        .result-section {
+            background: var(--background-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-content {
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+        .jielong-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .jielong-item {
+            background: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+        .jielong-item:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .related-chengyu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .related-item {
+            background: #fff;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+        .related-item:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .hot-chengyu {
+            margin-bottom: 20px;
+        }
+        .hot-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        .hot-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .hot-item {
+            background: var(--background-color);
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .hot-item:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .no-result {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body data-category="education">
+    <header class="header">
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-icon">🔧</span>
+            <div class="header-logo-text">
+                <span class="header-logo-title">帮小忙</span>
+                <span class="header-logo-subtitle">腾讯QQ浏览器在线工具箱</span>
+            </div>
+        </a>
+    </header>
+
+    <div class="page-container">
+        <aside class="sidebar"><nav class="sidebar-nav"></nav></aside>
+
+        <main class="main-content">
+            <div class="tool-page">
+                <div class="tool-header">
+                    <div class="tool-icon" style="background: #E74C3C;">📖</div>
+                    <h1 class="tool-title">成语大全</h1>
+                </div>
+
+                <div class="tool-main">
+                    <div class="chengyu-container">
+                        <div class="chengyu-input-area">
+                            <input type="text" id="chengyuInput" placeholder="请输入成语" value="画龙点睛">
+                            <button onclick="queryChengyu()">查询</button>
+                        </div>
+
+                        <div class="hot-chengyu">
+                            <div class="hot-title">热门成语：</div>
+                            <div class="hot-list">
+                                <span class="hot-item" onclick="searchChengyu('画龙点睛')">画龙点睛</span>
+                                <span class="hot-item" onclick="searchChengyu('守株待兔')">守株待兔</span>
+                                <span class="hot-item" onclick="searchChengyu('刻舟求剑')">刻舟求剑</span>
+                                <span class="hot-item" onclick="searchChengyu('掩耳盗铃')">掩耳盗铃</span>
+                                <span class="hot-item" onclick="searchChengyu('望梅止渴')">望梅止渴</span>
+                                <span class="hot-item" onclick="searchChengyu('卧薪尝胆')">卧薪尝胆</span>
+                            </div>
+                        </div>
+
+                        <div class="chengyu-result" id="chengyuResult">
+                            <div class="result-main">
+                                <div class="chengyu-word" id="chengyuWord">画龙点睛</div>
+                                <div class="chengyu-pinyin" id="chengyuPinyin">huà lóng diǎn jīng</div>
+                                <div class="chengyu-meaning" id="chengyuMeaning">比喻说话或做事在关键处用几句话点明实质，使内容更加生动有力。</div>
+                            </div>
+
+                            <div class="result-section">
+                                <div class="section-title">📝 成语释义</div>
+                                <div class="section-content" id="chengyuDetail">
+                                    <p><strong>出处：</strong>唐·张彦远《历代名画记·张僧繇》</p>
+                                    <p><strong>解释：</strong>原形容梁代画家张僧繇作画的神妙。后比喻写文章或讲话时，在关键处用几句话点明实质，使内容更加生动有力。</p>
+                                    <p><strong>近义词：</strong>点睛之笔、锦上添花</p>
+                                    <p><strong>反义词：</strong>画蛇添足、节外生枝</p>
+                                </div>
+                            </div>
+
+                            <div class="result-section">
+                                <div class="section-title">🐉 成语接龙</div>
+                                <div class="jielong-list" id="jielongList"></div>
+                            </div>
+
+                            <div class="result-section">
+                                <div class="section-title">📚 相关成语</div>
+                                <div class="related-chengyu" id="relatedChengyu"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-intro">
+                    <h3>工具介绍及使用方法</h3>
+                    <p>成语大全工具可以帮助您查询成语的详细解释、出处、近义词、反义词等信息，同时提供成语接龙推荐功能。输入任意成语，即可获得完整的成语知识和相关推荐，适用于语文学习、写作参考、成语游戏等场景。</p>
+                </div>
+
+                <div class="more-recommend">
+                    <h3 class="more-recommend-title">更多推荐</h3>
+                    <div class="recommend-list">
+                        <a href="jielong.html" class="recommend-item">
+                            <div class="recommend-item-icon">🐉</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">成语接龙</div>
+                                <div class="recommend-item-desc">成语接龙游戏，提升汉语词汇量。</div>
+                            </div>
+                        </a>
+                        <a href="allegory.html" class="recommend-item">
+                            <div class="recommend-item-icon">💬</div>
+                            <div class="recommend-item-content">
+                                <div class="recommend-item-title">歇后语</div>
+                                <div class="recommend-item-desc">歇后语工具可以帮助您查找和学习各种歇后语。</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo"><span>🔧</span><span class="footer-text">轻松办公，工具助你一臂之力</span></div>
+            <div class="footer-links">
+                <a href="https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75" target="_blank" class="footer-link">隐私政策</a>
+                <a href="https://static.res.qq.com/nav/qbtool/qbtool-license.html" target="_blank" class="footer-link">数据处理规则及免责声明</a>
+            </div>
+            <div class="footer-copyright">Copyright © 1998 - 2026 Tencent. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script>
+        // 成语数据
+        const CHENGYU_DATA = {
+            '画龙点睛': {
+                pinyin: 'huà lóng diǎn jīng',
+                meaning: '比喻说话或做事在关键处用几句话点明实质，使内容更加生动有力。',
+                source: '唐·张彦远《历代名画记·张僧繇》',
+                detail: '原形容梁代画家张僧繇作画的神妙。后比喻写文章或讲话时，在关键处用几句话点明实质，使内容更加生动有力。',
+                synonyms: ['点睛之笔', '锦上添花'],
+                antonyms: ['画蛇添足', '节外生枝'],
+                related: ['妙笔生花', '一针见血', '恰到好处', '神来之笔']
+            },
+            '守株待兔': {
+                pinyin: 'shǒu zhū dài tù',
+                meaning: '比喻不主动努力，而存万一的侥幸心理，希望得到意外的收获。',
+                source: '《韩非子·五蠹》',
+                detail: '相传战国时期宋国有一个农民，看见一只兔子撞在田边的树桩上死了，他便放下农具守在树桩旁，希望再捡到撞死的兔子。',
+                synonyms: ['坐享其成', '不劳而获'],
+                antonyms: ['主动出击', '积极进取'],
+                related: ['刻舟求剑', '掩耳盗铃', '自欺欺人', '墨守成规']
+            },
+            '刻舟求剑': {
+                pinyin: 'kè zhōu qiú jiàn',
+                meaning: '比喻不懂事物已发展变化而仍静止地看问题。',
+                source: '《吕氏春秋·察今》',
+                detail: '楚国有个人过江时把剑掉在水里，他在船边剑落的地方刻上记号，等船停了，从刻记号的地方下水寻找剑。',
+                synonyms: ['按图索骥', '生搬硬套'],
+                antonyms: ['见机行事', '随机应变'],
+                related: ['守株待兔', '墨守成规', '故步自封', '因循守旧']
+            },
+            '掩耳盗铃': {
+                pinyin: 'yǎn ěr dào líng',
+                meaning: '比喻自己欺骗自己，明明掩盖不住的事情偏要想法子掩盖。',
+                source: '《吕氏春秋·自知》',
+                detail: '春秋时期，有个小偷想偷一口大钟，但钟太重背不动。他想把钟敲碎后一块块搬走，可一砸钟就发出响声。他怕别人听见，就捂住自己的耳朵。',
+                synonyms: ['自欺欺人', '弄巧成拙'],
+                antonyms: ['开诚布公', '光明磊落'],
+                related: ['自作聪明', '自以为是', '画蛇添足', '弄巧成拙']
+            },
+            '望梅止渴': {
+                pinyin: 'wàng méi zhǐ kě',
+                meaning: '比喻愿望无法实现，用空想安慰自己。',
+                source: '南朝宋·刘义庆《世说新语·假谲》',
+                detail: '曹操带兵行军途中，士兵口渴难耐。曹操骗士兵说前面有一片梅林，士兵听了流出口水，解了口渴。',
+                synonyms: ['画饼充饥', '空中楼阁'],
+                antonyms: ['脚踏实地', '实事求是'],
+                related: ['画饼充饥', '纸上谈兵', '空中楼阁', '想入非非']
+            },
+            '卧薪尝胆': {
+                pinyin: 'wò xīn cháng dǎn',
+                meaning: '形容人刻苦自励，发奋图强。',
+                source: '《史记·越王勾践世家》',
+                detail: '春秋时期，越王勾践被吴王夫差打败后，在吴国做了三年奴仆。回国后，他睡觉睡在柴草上，吃饭睡觉前都要尝一尝苦胆，以此激励自己不忘报仇雪耻。',
+                synonyms: ['发愤图强', '励精图治'],
+                antonyms: ['苟且偷生', '自暴自弃'],
+                related: ['忍辱负重', '发奋图强', '坚韧不拔', '百折不挠']
+            },
+            '一心一意': {
+                pinyin: 'yī xīn yī yì',
+                meaning: '心思、意念专一。',
+                source: '《三国志·魏志·杜恕传》',
+                detail: '形容专心致志，心思集中，没有其他杂念。',
+                synonyms: ['全心全意', '专心致志'],
+                antonyms: ['三心二意', '心猿意马'],
+                related: ['聚精会神', '全神贯注', '专心致志', '一心不二']
+            },
+            '一鸣惊人': {
+                pinyin: 'yī míng jīng rén',
+                meaning: '比喻平时没有突出的表现，一下子做出惊人的成绩。',
+                source: '《韩非子·喻老》',
+                detail: '楚庄王即位三年，不理政事。大臣问他："有只鸟三年不飞不叫，是什么鸟？"楚庄王说："三年不飞，一飞冲天；三年不鸣，一鸣惊人。"',
+                synonyms: ['一举成名', '一炮而红'],
+                antonyms: ['默默无闻', '屡战屡败'],
+                related: ['一飞冲天', '脱颖而出', '名震一时', '声名鹊起']
+            },
+            '马到成功': {
+                pinyin: 'mǎ dào chéng gōng',
+                meaning: '形容工作刚开始就取得成功。',
+                source: '元·郑廷玉《楚昭公》',
+                detail: '原指战马一到，立刻战胜敌人。后形容事情顺利，一开始就取得成功。',
+                synonyms: ['旗开得胜', '首战告捷'],
+                antonyms: ['出师不利', '屡战屡败'],
+                related: ['一举成功', '旗开得胜', '水到渠成', '顺理成章']
+            },
+            '画蛇添足': {
+                pinyin: 'huà shé tiān zú',
+                meaning: '比喻做了多余的事，非但无益，反而不合适。',
+                source: '《战国策·齐策二》',
+                detail: '楚国有人祭祀后，赏给门客一壶酒。门客们觉得酒少人多，就画蛇比赛，先画完的人喝酒。有个人先画完了，又给蛇添上脚，结果输了。',
+                synonyms: ['多此一举', '弄巧成拙'],
+                antonyms: ['画龙点睛', '恰到好处'],
+                related: ['多此一举', '弄巧成拙', '节外生枝', '画蛇著足']
+            }
+        };
+
+        // 所有成语列表（用于接龙）
+        const ALL_CHENGYU = [
+            '画龙点睛', '精益求精', '精打细算', '算无遗策', '策马扬鞭', '鞭长莫及',
+            '及时行乐', '乐此不疲', '疲于奔命', '命中注定', '定国安邦', '邦家之光',
+            '光明磊落', '落花流水', '水落石出', '出人头地', '地大物博', '博学多才',
+            '才高八斗', '斗志昂扬', '扬眉吐气', '气壮山河', '河清海晏', '晏安酖毒',
+            '毒蛇猛兽', '兽聚鸟散', '散兵游勇', '勇往直前', '前功尽弃', '弃暗投明',
+            '明辨是非', '非同小可', '可歌可泣', '泣不成声', '声色俱厉', '厉兵秣马',
+            '马到成功', '功成名就', '就事论事', '事半功倍', '倍道而行', '行云流水',
+            '水滴石穿', '穿针引线', '线断风筝', '争分夺秒', '妙不可言', '言简意赅',
+            '一心一意', '一鸣惊人', '人山人海', '海阔天空', '空前绝后', '后来居上',
+            '上善若水', '水到渠成', '成竹在胸', '胸有成竹', '竹报平安', '安居乐业',
+            '业精于勤', '勤能补拙', '拙嘴笨舌', '舌战群儒', '儒雅风流', '流连忘返',
+            '返老还童', '童叟无欺', '欺世盗名', '名垂青史', '史无前例', '例行公事'
+        ];
+
+        function queryChengyu() {
+            const input = document.getElementById('chengyuInput').value.trim();
+            const resultDiv = document.getElementById('chengyuResult');
+
+            if (!input) {
+                alert('请输入成语');
+                return;
+            }
+
+            const data = CHENGYU_DATA[input];
+
+            if (!data) {
+                document.getElementById('chengyuWord').textContent = input;
+                document.getElementById('chengyuPinyin').textContent = '暂无数据';
+                document.getElementById('chengyuMeaning').textContent = '暂无该成语的详细解释，请尝试其他成语。';
+                document.getElementById('chengyuDetail').innerHTML = '<p>暂无详细数据。</p>';
+                document.getElementById('jielongList').innerHTML = '';
+                document.getElementById('relatedChengyu').innerHTML = '';
+                resultDiv.classList.add('show');
+                return;
+            }
+
+            // 更新显示
+            document.getElementById('chengyuWord').textContent = input;
+            document.getElementById('chengyuPinyin').textContent = data.pinyin;
+            document.getElementById('chengyuMeaning').textContent = data.meaning;
+            document.getElementById('chengyuDetail').innerHTML = `
+                <p><strong>出处：</strong>${data.source}</p>
+                <p><strong>解释：</strong>${data.detail}</p>
+                <p><strong>近义词：</strong>${data.synonyms.join('、')}</p>
+                <p><strong>反义词：</strong>${data.antonyms.join('、')}</p>
+            `;
+
+            // 接龙推荐
+            const lastChar = input.charAt(input.length - 1);
+            const jielongItems = ALL_CHENGYU.filter(c => c.charAt(0) === lastChar && c !== input);
+            document.getElementById('jielongList').innerHTML = jielongItems
+                .slice(0, 8)
+                .map(c => `<span class="jielong-item" onclick="searchChengyu('${c}')">${c}</span>`)
+                .join('') || '<span style="color: var(--text-muted);">暂无接龙推荐</span>';
+
+            // 相关成语
+            document.getElementById('relatedChengyu').innerHTML = data.related
+                .map(c => `<span class="related-item" onclick="searchChengyu('${c}')">${c}</span>`)
+                .join('');
+
+            resultDiv.classList.add('show');
+        }
+
+        function searchChengyu(chengyu) {
+            document.getElementById('chengyuInput').value = chengyu;
+            queryChengyu();
+        }
+
+        // 回车键查询
+        document.getElementById('chengyuInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                queryChengyu();
+            }
+        });
+
+        // 初始查询
+        queryChengyu();
+    </script>
+</body>
+</html>
