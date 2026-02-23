@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>去手写 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="去手写，手写擦除，图片处理">
+  <meta name="description" content="去手写是一款专为处理文件中的手写笔迹而设计的在线工具。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/handwriting_erasure.png" alt="去手写">
+        <h1 class="tool-title">去手写</h1>
+      </section>
+      <section class="tool-workspace">
+        <div style="padding: 40px; text-align: center; color: var(--text-secondary);">
+          <p style="font-size: 16px; margin-bottom: 16px;">该工具正在开发中...</p>
+          <p>上传带有手写的图片，智能擦除手写内容</p>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>去手写是一款专为处理文件中的手写笔迹而设计的在线工具。它能够智能识别并抹除文件中的手写内容，如笔记、标注和答案，从而还原干净的试卷或文档，方便用户重新练习或使用。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>上传带有手写内容的图片或文档。</li>
+            <li>等待系统智能识别并擦除手写内容。</li>
+            <li>下载处理后的干净文档。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'handwriting_erasure').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+    });
+  </script>
+</body>
+</html>

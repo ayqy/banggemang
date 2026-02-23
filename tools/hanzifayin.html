@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>汉字标准发音 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/hanzifayin.png" alt="汉字标准发音">
+        <h1 class="tool-title">汉字标准发音</h1>
+      </section>
+      <section class="tool-workspace">
+        <input type="text" id="charInput" class="text-input-area" placeholder="请输入汉字或词语..." style="min-height: 50px; text-align: center; font-size: 24px;">
+        <div class="button-group">
+          <button class="btn btn-primary" id="searchBtn">查询</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+          <button class="btn btn-primary" id="playBtn" disabled>播放发音</button>
+        </div>
+        <div id="result" style="margin-top: 16px; padding: 16px; background: var(--bg-secondary); border-radius: 8px; display: none;">
+          <div style="text-align: center;">
+            <div id="charDisplay" style="font-size: 48px; color: var(--primary-color); margin-bottom: 8px;"></div>
+            <div id="pinyinDisplay" style="font-size: 24px; color: var(--text-secondary);"></div>
+            <div id="infoDisplay" style="margin-top: 16px; color: var(--text-secondary);"></div>
+          </div>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>汉字标准发音工具可以帮助您学习和掌握汉字的标准发音。通过这款工具，您可以输入任意汉字或词语，工具会自动提供标准的拼音和发音。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在输入框中输入汉字或词语。</li>
+            <li>点击"查询"按钮查看拼音和发音。</li>
+            <li>点击"播放发音"按钮听标准发音。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    const charData = {
+      '一': { pinyin: 'yī', info: '数词，最小的正整数。' },
+      '二': { pinyin: 'èr', info: '数词，一加一所得。' },
+      '三': { pinyin: 'sān', info: '数词，二加一所得。' },
+      '四': { pinyin: 'sì', info: '数词，三加一所得。' },
+      '五': { pinyin: 'wǔ', info: '数词，四加一所得。' },
+      '六': { pinyin: 'liù', info: '数词，五加一所得。' },
+      '七': { pinyin: 'qī', info: '数词，六加一所得。' },
+      '八': { pinyin: 'bā', info: '数词，七加一所得。' },
+      '九': { pinyin: 'jiǔ', info: '数词，八加一所得。' },
+      '十': { pinyin: 'shí', info: '数词，九加一所得。' },
+      '百': { pinyin: 'bǎi', info: '数词，十个十。' },
+      '千': { pinyin: 'qiān', info: '数词，十个百。' },
+      '万': { pinyin: 'wàn', info: '数词，十个千。' },
+      '人': { pinyin: 'rén', info: '能制造工具并使用工具进行劳动的高等动物。' },
+      '口': { pinyin: 'kǒu', info: '人和动物进食和发声的器官。' },
+      '手': { pinyin: 'shǒu', info: '人体上肢前端能拿东西的部分。' },
+      '足': { pinyin: 'zú', info: '脚。' },
+      '日': { pinyin: 'rì', info: '太阳。' },
+      '月': { pinyin: 'yuè', info: '月球；月亮。' },
+      '水': { pinyin: 'shuǐ', info: '一种无色、无臭、透明的液体。' },
+      '火': { pinyin: 'huǒ', info: '燃烧时发出的光和热。' },
+      '木': { pinyin: 'mù', info: '树木。' },
+      '金': { pinyin: 'jīn', info: '金属。' },
+      '土': { pinyin: 'tǔ', info: '地面上的泥沙混合物。' },
+      '天': { pinyin: 'tiān', info: '在地面以上的高空。' },
+      '地': { pinyin: 'dì', info: '人类生长活动的所在。' },
+      '大': { pinyin: 'dà', info: '指面积、体积、容量、数量等超过一般。' },
+      '小': { pinyin: 'xiǎo', info: '指面积、体积、容量、数量等不及一般。' },
+      '多': { pinyin: 'duō', info: '数量大。' },
+      '少': { pinyin: 'shǎo', info: '数量小。' },
+      '上': { pinyin: 'shàng', info: '位置在高处的。' },
+      '下': { pinyin: 'xià', info: '位置在低处的。' },
+      '中': { pinyin: 'zhōng', info: '和四方、上下或两端距离同等的地位。' },
+      '国': { pinyin: 'guó', info: '有共同文化的人民集体。' },
+      '家': { pinyin: 'jiā', info: '共同生活的眷属和他们所住的地方。' },
+      '学': { pinyin: 'xué', info: '效法，钻研知识，获得知识。' },
+      '校': { pinyin: 'xiào', info: '学堂，专门进行教育的机构。' },
+      '老': { pinyin: 'lǎo', info: '年纪大。' },
+      '师': { pinyin: 'shī', info: '教人的人。' },
+      '爸': { pinyin: 'bà', info: '父亲。' },
+      '妈': { pinyin: 'mā', info: '母亲。' },
+      '哥': { pinyin: 'gē', info: '兄。' },
+      '姐': { pinyin: 'jiě', info: '同父母比自己年纪大的女子。' },
+      '弟': { pinyin: 'dì', info: '同父母比自己年纪小的男子。' },
+      '妹': { pinyin: 'mèi', info: '同父母比自己年纪小的女子。' },
+      '你': { pinyin: 'nǐ', info: '称对方。' },
+      '我': { pinyin: 'wǒ', info: '称自己。' },
+      '他': { pinyin: 'tā', info: '称你、我以外的第三人。' },
+      '她': { pinyin: 'tā', info: '称你、我以外的第三人（女性）。' },
+      '好': { pinyin: 'hǎo', info: '优点多或使人满意的。' },
+      '不': { pinyin: 'bù', info: '副词，表示否定。' },
+      '是': { pinyin: 'shì', info: '表示解释或分类。' },
+      '有': { pinyin: 'yǒu', info: '存在。' },
+      '在': { pinyin: 'zài', info: '存，居。' },
+      '这': { pinyin: 'zhè', info: '此，指较近的时间、地方或事物。' },
+      '那': { pinyin: 'nà', info: '指较远的时间、地方或事物。' },
+      '什': { pinyin: 'shén', info: '疑问代词。' },
+      '么': { pinyin: 'me', info: '助词。' },
+      '的': { pinyin: 'de', info: '助词，用在词或词组后表明形容词性。' },
+      '了': { pinyin: 'le', info: '助词，用在动词或形容词后表示完成。' },
+      '和': { pinyin: 'hé', info: '相安，谐调。' },
+      '与': { pinyin: 'yǔ', info: '和，跟。' },
+      '来': { pinyin: 'lái', info: '由另一方面到这一方面。' },
+      '去': { pinyin: 'qù', info: '离开所在的地方到别处。' },
+      '吃': { pinyin: 'chī', info: '把东西送进口中咽下。' },
+      '喝': { pinyin: 'hē', info: '把液体饮料或流质东西咽下去。' },
+      '睡': { pinyin: 'shuì', info: '闭目安息，大脑皮质处于休息状态。' },
+      '觉': { pinyin: 'jiào', info: '睡眠。' },
+      '走': { pinyin: 'zǒu', info: '行走。' },
+      '跑': { pinyin: 'pǎo', info: '奔，两脚交互向前迅速跃进。' },
+      '跳': { pinyin: 'tiào', info: '两脚离地全身向上或向前的动作。' },
+      '飞': { pinyin: 'fēi', info: '鸟类或虫类等用翅膀在空中往来活动。' },
+      '看': { pinyin: 'kàn', info: '使视线接触人或物。' },
+      '见': { pinyin: 'jiàn', info: '看到。' },
+      '听': { pinyin: 'tīng', info: '用耳朵接受声音。' },
+      '说': { pinyin: 'shuō', info: '用话来表达意思。' },
+      '话': { pinyin: 'huà', info: '说出来的能表达思想感情的声音。' },
+      '读': { pinyin: 'dú', info: '依照文字念。' },
+      '写': { pinyin: 'xiě', info: '用笔作字。' },
+      '做': { pinyin: 'zuò', info: '进行工作或活动。' },
+      '作': { pinyin: 'zuò', info: '起，兴起。' },
+      '干': { pinyin: 'gàn', info: '做。' },
+      '活': { pinyin: 'huó', info: '生存，有生命的。' },
+      '生': { pinyin: 'shēng', info: '一切可以发育的物体在一定条件下具有了最初的体积和特征。' },
+      '死': { pinyin: 'sǐ', info: '丧失生命。' },
+      '开': { pinyin: 'kāi', info: '启，张，把关闭的东西打开。' },
+      '关': { pinyin: 'guān', info: '闭，合拢。' },
+      '门': { pinyin: 'mén', info: '建筑物的出入口。' },
+      '窗': { pinyin: 'chuāng', info: '房屋通风透气采光的装置。' },
+      '桌': { pinyin: 'zhuō', info: '几案，可用于饮食、读书、写字。' },
+      '椅': { pinyin: 'yǐ', info: '有靠背的坐具。' },
+      '床': { pinyin: 'chuáng', info: '供人躺在上面睡觉的家具。' },
+      '衣': { pinyin: 'yī', info: '人穿在身上用以蔽体的东西。' },
+      '食': { pinyin: 'shí', info: '吃。' },
+      '住': { pinyin: 'zhù', info: '长期居留或暂时歇息。' },
+      '行': { pinyin: 'xíng', info: '走。' },
+      '车': { pinyin: 'chē', info: '陆地上有轮子的交通工具。' },
+      '船': { pinyin: 'chuán', info: '水上交通工具。' },
+      '飞': { pinyin: 'fēi', info: '航空器。' },
+      '东': { pinyin: 'dōng', info: '方向，太阳出升的一边。' },
+      '南': { pinyin: 'nán', info: '方向，早晨面对太阳右手的一边。' },
+      '西': { pinyin: 'xī', info: '方向，太阳落下的一边。' },
+      '北': { pinyin: 'běi', info: '方向，早晨面对太阳左手的一边。' }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'hanzifayin').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const charInput = document.getElementById('charInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const playBtn = document.getElementById('playBtn');
+      const result = document.getElementById('result');
+      const charDisplay = document.getElementById('charDisplay');
+      const pinyinDisplay = document.getElementById('pinyinDisplay');
+      const infoDisplay = document.getElementById('infoDisplay');
+      
+      let currentPinyin = '';
+      
+      function searchChar(char) {
+        if (!char || char.length === 0) return null;
+        // 支持单字查询
+        const firstChar = char[0];
+        return charData[firstChar] || null;
+      }
+      
+      function displayResult(char, data) {
+        if (!data) {
+          result.style.display = 'none';
+          playBtn.disabled = true;
+          alert('暂不支持该字的查询');
+          return;
+        }
+        
+        charDisplay.textContent = char;
+        pinyinDisplay.textContent = data.pinyin;
+        infoDisplay.textContent = data.info;
+        result.style.display = 'block';
+        currentPinyin = data.pinyin;
+        playBtn.disabled = false;
+      }
+      
+      function speak() {
+        if (!currentPinyin) return;
+        
+        // 使用浏览器语音合成
+        if ('speechSynthesis' in window) {
+          const utterance = new SpeechSynthesisUtterance(currentPinyin);
+          utterance.lang = 'zh-CN';
+          utterance.rate = 0.8;
+          speechSynthesis.speak(utterance);
+        } else {
+          alert('您的浏览器不支持语音播放');
+        }
+      }
+      
+      searchBtn.addEventListener('click', () => {
+        const char = charInput.value.trim();
+        const data = searchChar(char);
+        displayResult(char[0], data);
+      });
+      
+      charInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const char = charInput.value.trim();
+          const data = searchChar(char);
+          displayResult(char[0], data);
+        }
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        charInput.value = '';
+        result.style.display = 'none';
+        playBtn.disabled = true;
+        currentPinyin = '';
+        charInput.focus();
+      });
+      
+      playBtn.addEventListener('click', speak);
+    });
+  </script>
+</body>
+</html>

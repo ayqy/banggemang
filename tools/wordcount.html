@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字数计算 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="字数计算，字符统计，文本分析，在线工具">
+  <meta name="description" content="字数计算专为快速计算文本中的字数、字符数、单词数和句子数而设计。无论您是需要统计文章的字数、检查字符限制，还是进行文本分析，这款工具都能帮助您高效完成任务。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <!-- 左侧导航栏 -->
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯 QQ 浏览器在线工具箱</span>
+      </div>
+    </a>
+    <ul class="category-container">
+      <!-- 由 JS 动态生成 -->
+    </ul>
+  </nav>
+
+  <!-- 左侧导航占位 -->
+  <div class="left-nav-placeholder"></div>
+
+  <!-- 主内容区 -->
+  <div class="category-page">
+    <!-- 顶部搜索区域 -->
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享">
+          <img src="/assets/icons/share.png" alt="分享">
+        </a>
+      </div>
+    </header>
+
+    <!-- 工具页面内容 -->
+    <main class="tool-page-container">
+      <!-- 工具头部信息 -->
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/wordcount.png" alt="字数计算">
+        <h1 class="tool-title">字数计算</h1>
+      </section>
+
+      <!-- 工具操作区域 -->
+      <section class="tool-workspace">
+        <div class="tip-box">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D46B08'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E" alt="提示">
+          <span>空格、换行不计入字数</span>
+        </div>
+        
+        <textarea 
+          class="text-input-area" 
+          id="textInput" 
+          placeholder="请输入文本内容..."
+          rows="8"
+        ></textarea>
+        
+        <div class="button-group">
+          <button class="btn btn-primary" id="confirmBtn">确认</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        
+        <div class="statistics-result" id="statisticsResult">
+          <div class="stat-item">
+            <span class="stat-value" id="charCount">0</span>
+            <span class="stat-label">字符数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="wordCount">0</span>
+            <span class="stat-label">字数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="sentenceCount">0</span>
+            <span class="stat-label">句子数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="spaceCount">0</span>
+            <span class="stat-label">空格数</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 工具介绍 -->
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>字数计算专为快速计算文本中的字数、字符数、单词数和句子数而设计。无论您是需要统计文章的字数、检查字符限制，还是进行文本分析，这款工具都能帮助您高效完成任务。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在文本输入框中输入或粘贴您需要计算的文本内容。</li>
+            <li>工具会自动计算并显示文本的字数、字符数、句子数等统计信息。</li>
+            <li>点击"清空"按钮可以清除所有内容，重新开始。</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 更多推荐 -->
+      <section class="recommend-section">
+        <div class="section-header">
+          <h2 class="section-title">更多推荐</h2>
+        </div>
+        <div class="recommend-grid" id="recommendGrid">
+          <!-- 由 JS 动态生成 -->
+        </div>
+      </section>
+    </main>
+
+    <!-- 页脚 -->
+    <div class="footer-placeholder-pc"></div>
+  </div>
+
+  <!-- 引入数据文件 -->
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  
+  <script>
+    // 页面初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      // 渲染左侧导航（教育工具高亮）
+      renderLeftNav('education');
+      
+      // 渲染推荐工具
+      const recommendTools = educationTools.filter(t => t.id !== 'wordcount').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      // 字数计算功能
+      const textInput = document.getElementById('textInput');
+      const confirmBtn = document.getElementById('confirmBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      
+      // 统计函数
+      function countText(text) {
+        // 字符数（包含空格和换行）
+        const charCount = text.length;
+        
+        // 字数（不包含空格和换行）
+        const wordCount = text.replace(/[\s\n\r]/g, '').length;
+        
+        // 句子数（以。！？.!?结尾）
+        const sentenceCount = (text.match(/[。！？.!?]/g) || []).length;
+        
+        // 空格数
+        const spaceCount = (text.match(/\s/g) || []).length;
+        
+        return { charCount, wordCount, sentenceCount, spaceCount };
+      }
+      
+      // 更新显示
+      function updateStatistics(text) {
+        const stats = countText(text);
+        document.getElementById('charCount').textContent = stats.charCount;
+        document.getElementById('wordCount').textContent = stats.wordCount;
+        document.getElementById('sentenceCount').textContent = stats.sentenceCount;
+        document.getElementById('spaceCount').textContent = stats.spaceCount;
+      }
+      
+      // 实时统计
+      textInput.addEventListener('input', (e) => {
+        updateStatistics(e.target.value);
+      });
+      
+      // 确认按钮
+      confirmBtn.addEventListener('click', () => {
+        updateStatistics(textInput.value);
+      });
+      
+      // 清空按钮
+      clearBtn.addEventListener('click', () => {
+        textInput.value = '';
+        updateStatistics('');
+        textInput.focus();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>各国首都查询 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="各国首都，首都查询，地理工具，国家首都">
+  <meta name="description" content="各国首都查询是一款实用的在线工具，专为帮助用户快速查询世界各国首都而设计。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯 QQ 浏览器在线工具箱</span>
+      </div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+
+  <div class="left-nav-placeholder"></div>
+
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享">
+          <img src="/assets/icons/share.png" alt="分享">
+        </a>
+      </div>
+    </header>
+
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/capital.png" alt="各国首都">
+        <h1 class="tool-title">各国首都查询</h1>
+      </section>
+
+      <section class="tool-workspace">
+        <input type="text" class="text-input-area" id="searchInput" placeholder="输入国家名称，如：中国、美国、日本..." style="min-height: 50px;">
+        <div class="button-group">
+          <button class="btn btn-primary" id="searchBtn">查询</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        
+        <div id="result" style="margin-top: 16px; padding: 16px; background: var(--bg-secondary); border-radius: 8px; display: none;">
+          <h3 id="resultTitle" style="margin-bottom: 8px;"></h3>
+          <p id="resultInfo" style="color: var(--text-secondary); line-height: 1.8;"></p>
+        </div>
+      </section>
+
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>各国首都查询是一款实用的在线工具，专为帮助用户快速查询世界各国首都而设计。通过这款工具，您可以轻松获取各个国家的首都信息，帮助您更好地了解世界地理知识。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在搜索框中输入国家名称。</li>
+            <li>点击"查询"按钮，即可查看该国首都信息。</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="recommend-section">
+        <div class="section-header">
+          <h2 class="section-title">更多推荐</h2>
+        </div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+
+    <div class="footer-placeholder-pc"></div>
+  </div>
+
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  
+  <script>
+    const capitalsData = {
+      '中国': { capital: '北京', info: '中华人民共和国首都，政治、文化中心。' },
+      '美国': { capital: '华盛顿', info: '美利坚合众国首都，位于美国东海岸。' },
+      '日本': { capital: '东京', info: '日本国首都，世界最大都市圈之一。' },
+      '英国': { capital: '伦敦', info: '大不列颠及北爱尔兰联合王国首都，金融中心。' },
+      '法国': { capital: '巴黎', info: '法兰西共和国首都，艺术时尚之都。' },
+      '德国': { capital: '柏林', info: '德意志联邦共和国首都，历史文化名城。' },
+      '俄罗斯': { capital: '莫斯科', info: '俄罗斯联邦首都，最大城市。' },
+      '韩国': { capital: '首尔', info: '大韩民国首都，经济文化中心。' },
+      '印度': { capital: '新德里', info: '印度共和国首都，政治中心。' },
+      '巴西': { capital: '巴西利亚', info: '巴西联邦共和国首都，规划城市。' },
+      '澳大利亚': { capital: '堪培拉', info: '澳大利亚联邦首都，政治中心。' },
+      '加拿大': { capital: '渥太华', info: '加拿大首都，第四大城市。' },
+      '意大利': { capital: '罗马', info: '意大利共和国首都，历史文化名城。' },
+      '西班牙': { capital: '马德里', info: '西班牙王国首都，最大城市。' },
+      '泰国': { capital: '曼谷', info: '泰王国首都，最大城市。' },
+      '新加坡': { capital: '新加坡', info: '新加坡共和国首都，城市国家。' },
+      '越南': { capital: '河内', info: '越南社会主义共和国首都。' },
+      '马来西亚': { capital: '吉隆坡', info: '马来西亚首都，最大城市。' },
+      '印度尼西亚': { capital: '雅加达', info: '印度尼西亚共和国首都。' },
+      '菲律宾': { capital: '马尼拉', info: '菲律宾共和国首都。' }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'capital').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const result = document.getElementById('result');
+      
+      function searchCapital(name) {
+        if (!name) return null;
+        for (let key in capitalsData) {
+          if (name.includes(key)) {
+            return { country: key, ...capitalsData[key] };
+          }
+        }
+        return null;
+      }
+      
+      searchBtn.addEventListener('click', () => {
+        const result = searchCapital(searchInput.value);
+        if (result) {
+          document.getElementById('resultTitle').textContent = `${result.country} - ${result.capital}`;
+          document.getElementById('resultInfo').textContent = result.info;
+          document.getElementById('result').style.display = 'block';
+        } else {
+          alert('未找到相关国家信息');
+        }
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        result.style.display = 'none';
+        searchInput.focus();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>元素周期表 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="元素周期表，化学元素，原子序数，化学工具">
+  <meta name="description" content="元素周期表工具可以帮助您快速查阅和了解化学元素的详细信息。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <style>
+    .element-grid {
+      display: grid;
+      grid-template-columns: repeat(18, 1fr);
+      gap: 4px;
+      margin-top: 16px;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .element-item {
+      aspect-ratio: 1;
+      min-width: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 10px;
+      padding: 2px;
+    }
+    .element-item:hover {
+      background: var(--primary-light);
+      transform: scale(1.1);
+    }
+    .element-number { font-size: 8px; color: var(--text-secondary); }
+    .element-symbol { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .element-name { font-size: 8px; color: var(--text-secondary); }
+    .element-empty { visibility: hidden; }
+    .element-detail {
+      margin-top: 16px;
+      padding: 16px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      display: none;
+    }
+    .element-detail h3 { margin-bottom: 8px; }
+    .element-detail p { line-height: 1.8; color: var(--text-secondary); }
+    .search-row { display: flex; gap: 8px; margin-bottom: 16px; }
+    .search-row input { flex: 1; min-height: 50px; }
+  </style>
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/periodic.png" alt="元素周期表">
+        <h1 class="tool-title">元素周期表</h1>
+      </section>
+      <section class="tool-workspace">
+        <div class="search-row">
+          <input type="text" id="searchInput" placeholder="搜索元素名称、符号或原子序数..." style="min-height: 50px; flex: 1;">
+          <button class="btn btn-primary" id="searchBtn">搜索</button>
+        </div>
+        <div class="element-grid" id="elementGrid"></div>
+        <div class="element-detail" id="elementDetail">
+          <h3 id="detailTitle"></h3>
+          <p id="detailInfo"></p>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>元素周期表工具可以帮助您快速查阅和了解化学元素的详细信息，包括原子序数、符号、名称、原子量等信息。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>点击元素周期表中的任意元素查看详情。</li>
+            <li>或使用搜索框搜索特定元素。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    const elements = [
+      { num: 1, symbol: 'H', name: '氢', weight: '1.008', info: '最轻的元素，宇宙中最丰富的元素。' },
+      { num: 2, symbol: 'He', name: '氦', weight: '4.003', info: '惰性气体，用于气球和低温制冷。' },
+      { num: 3, symbol: 'Li', name: '锂', weight: '6.941', info: '最轻的金属，用于电池制造。' },
+      { num: 4, symbol: 'Be', name: '铍', weight: '9.012', info: '轻金属，用于航空航天材料。' },
+      { num: 5, symbol: 'B', name: '硼', weight: '10.81', info: '用于玻璃和陶瓷工业。' },
+      { num: 6, symbol: 'C', name: '碳', weight: '12.01', info: '生命的基础元素，有多种同素异形体。' },
+      { num: 7, symbol: 'N', name: '氮', weight: '14.01', info: '占空气体积的 78%，用于制造氨和硝酸。' },
+      { num: 8, symbol: 'O', name: '氧', weight: '16.00', info: '生命必需元素，占空气体积的 21%。' },
+      { num: 9, symbol: 'F', name: '氟', weight: '19.00', info: '最活泼的非金属元素。' },
+      { num: 10, symbol: 'Ne', name: '氖', weight: '20.18', info: '惰性气体，用于霓虹灯。' },
+      { num: 11, symbol: 'Na', name: '钠', weight: '22.99', info: '活泼金属，食盐的主要成分。' },
+      { num: 12, symbol: 'Mg', name: '镁', weight: '24.31', info: '轻金属，用于合金制造。' },
+      { num: 13, symbol: 'Al', name: '铝', weight: '26.98', info: '最常用的轻金属，用途广泛。' },
+      { num: 14, symbol: 'Si', name: '硅', weight: '28.09', info: '半导体材料，电子工业基础。' },
+      { num: 15, symbol: 'P', name: '磷', weight: '30.97', info: '生命必需元素，用于肥料。' },
+      { num: 16, symbol: 'S', name: '硫', weight: '32.07', info: '用于制造硫酸和橡胶硫化。' },
+      { num: 17, symbol: 'Cl', name: '氯', weight: '35.45', info: '用于消毒和制造 PVC。' },
+      { num: 18, symbol: 'Ar', name: '氩', weight: '39.95', info: '惰性气体，用于焊接保护气。' },
+      { num: 19, symbol: 'K', name: '钾', weight: '39.10', info: '活泼金属，植物营养元素。' },
+      { num: 20, symbol: 'Ca', name: '钙', weight: '40.08', info: '骨骼和牙齿的主要成分。' },
+      { num: 26, symbol: 'Fe', name: '铁', weight: '55.85', info: '最常用的金属，工业基础材料。' },
+      { num: 29, symbol: 'Cu', name: '铜', weight: '63.55', info: '优良导体，用于电线和管道。' },
+      { num: 30, symbol: 'Zn', name: '锌', weight: '65.38', info: '用于镀锌和电池。' },
+      { num: 47, symbol: 'Ag', name: '银', weight: '107.87', info: '贵金属，优良导体。' },
+      { num: 79, symbol: 'Au', name: '金', weight: '196.97', info: '贵金属，用于货币和珠宝。' },
+      { num: 80, symbol: 'Hg', name: '汞', weight: '200.59', info: '唯一液态金属，用于温度计。' },
+      { num: 82, symbol: 'Pb', name: '铅', weight: '207.2', info: '重金属，用于电池和辐射防护。' },
+      { num: 92, symbol: 'U', name: '铀', weight: '238.03', info: '放射性元素，核能燃料。' }
+    ];
+
+    const gridLayout = [
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+      [3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 6, 7, 8, 9, 10],
+      [11, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 14, 15, 16, 17, 18],
+      [19, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'periodic').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const grid = document.getElementById('elementGrid');
+      const detail = document.getElementById('elementDetail');
+      const detailTitle = document.getElementById('detailTitle');
+      const detailInfo = document.getElementById('detailInfo');
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      
+      const elementMap = {};
+      elements.forEach(e => elementMap[e.num] = e);
+      
+      function renderGrid() {
+        grid.innerHTML = '';
+        gridLayout.forEach(row => {
+          row.forEach(num => {
+            const cell = document.createElement('div');
+            if (num === 0) {
+              cell.className = 'element-empty';
+            } else {
+              const el = elementMap[num];
+              if (el) {
+                cell.className = 'element-item';
+                cell.innerHTML = `<span class="element-number">${el.num}</span><span class="element-symbol">${el.symbol}</span><span class="element-name">${el.name}</span>`;
+                cell.onclick = () => showDetail(el);
+              }
+            }
+            grid.appendChild(cell);
+          });
+          grid.appendChild(document.createElement('br'));
+        });
+      }
+      
+      function showDetail(el) {
+        detailTitle.textContent = `${el.num} ${el.symbol} ${el.name} (原子量：${el.weight})`;
+        detailInfo.textContent = el.info;
+        detail.style.display = 'block';
+      }
+      
+      searchBtn.addEventListener('click', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) return;
+        
+        const found = elements.find(e => 
+          e.name.toLowerCase().includes(query) || 
+          e.symbol.toLowerCase().includes(query) ||
+          e.num.toString() === query
+        );
+        
+        if (found) {
+          showDetail(found);
+        } else {
+          alert('未找到该元素');
+        }
+      });
+      
+      renderGrid();
+    });
+  </script>
+</body>
+</html>

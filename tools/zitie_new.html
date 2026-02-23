@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字帖生成 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="字帖生成，字帖打印，练字帖，田字格，拼音字母">
+  <meta name="description" content="字帖生成是一款在线工具，专为生成个性化字帖而设计。通过这款工具，您可以选择不同的模板、年级，快速生成适合练习书写的字帖。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <style>
+    .zitie-workspace { display: grid; grid-template-columns: 200px 1fr; gap: 16px; }
+    .zitie-sidebar { padding: 16px; background: var(--bg-secondary); border-radius: 8px; }
+    .zitie-sidebar label { display: block; margin-bottom: 8px; font-weight: 500; }
+    .zitie-sidebar select, .zitie-sidebar input { width: 100%; padding: 8px; margin-bottom: 16px; border: 1px solid var(--border-color); border-radius: 4px; }
+    .zitie-preview { padding: 16px; background: var(--bg-secondary); border-radius: 8px; min-height: 400px; }
+    .zitie-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; }
+    .zitie-cell { aspect-ratio: 1; border: 2px solid #333; display: flex; align-items: center; justify-content: center; font-size: 24px; background: #fff; position: relative; }
+    .zitie-cell.tian { background: linear-gradient(to bottom, transparent 49%, #ff6b6b 49%, #ff6b6b 51%, transparent 51%), linear-gradient(to right, transparent 49%, #ff6b6b 49%, #ff6b6b 51%, transparent 51%); }
+    .zitie-cell.mi { background: linear-gradient(to bottom, transparent 49%, #ddd 49%, #ddd 51%, transparent 51%), linear-gradient(to right, transparent 49%, #ddd 49%, #ddd 51%, transparent 51%); }
+    .zitie-actions { margin-top: 16px; display: flex; gap: 8px; }
+    @media print { .left-nav, .top-bar, .quick-nav, .tool-intro-section, .recommend-section, .zitie-sidebar, .zitie-actions { display: none !important; } .tool-page-container { max-width: 100%; padding: 0; } .zitie-preview { box-shadow: none; } }
+  </style>
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/zitie_new.png" alt="字帖生成">
+        <h1 class="tool-title">字帖生成</h1>
+      </section>
+      <section class="tool-workspace">
+        <div class="zitie-workspace">
+          <div class="zitie-sidebar">
+            <label>模板选择</label>
+            <select id="templateSelect">
+              <option value="tian">田字格</option>
+              <option value="mi">米字格</option>
+              <option value="fang">方格</option>
+            </select>
+            <label>年级选择</label>
+            <select id="gradeSelect">
+              <option value="1">一年级上册</option>
+              <option value="2">一年级下册</option>
+              <option value="3">二年级上册</option>
+              <option value="4">二年级下册</option>
+              <option value="5">三年级上册</option>
+              <option value="6">三年级下册</option>
+            </select>
+            <label>自定义文字</label>
+            <textarea id="customText" rows="3" placeholder="输入要生成的文字，最多 20 个字" maxlength="20" style="width:100%;padding:8px;border:1px solid var(--border-color);border-radius:4px;"></textarea>
+            <div class="zitie-actions">
+              <button class="btn btn-primary" id="generateBtn">生成字帖</button>
+              <button class="btn btn-secondary" id="printBtn">打印</button>
+            </div>
+          </div>
+          <div class="zitie-preview" id="zitiePreview">
+            <div class="zitie-grid" id="zitieGrid"></div>
+          </div>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>字帖生成是一款在线工具，专为生成个性化字帖而设计。通过这款工具，您可以选择不同的模板、年级，快速生成适合练习书写的字帖。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>选择您要生成字帖的模板（田字格、米字格、方格）。</li>
+            <li>选择年级或直接输入自定义文字。</li>
+            <li>点击"生成字帖"按钮生成预览。</li>
+            <li>点击"打印"按钮可将字帖打印下来。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    // 年级对应字库
+    const gradeWords = {
+      '1': '一二三四五六七八九十大小多少日月水火土人口手耳目足金石土木米面竹马牛羊鸟兔鱼虫刀戈弓矢车舟门户口耳舌牙齿皮毛风雨云雷电山川河流湖海天地人你我他爸妈哥姐弟妹爷奶叔伯舅姑姨',
+      '2': '春夏秋冬东南西北前后左右上下高低远近长短粗细轻重快慢早晚新旧好坏对错美丑善恶真假是非有无多少进出开关升降起落坐站走跑跳飞爬滚转摇晃',
+      '3': '花草树木枝叶根茎果实种子发芽开花结果枯萎凋零茂盛稀疏高大矮小粗壮纤细柔软坚硬光滑粗糙干燥湿润温暖寒冷炎热凉爽新鲜陈旧干净肮脏整齐凌乱',
+      '4': '爸爸妈妈爷爷奶奶哥哥姐姐弟弟妹妹叔叔阿姨伯伯舅舅姑姑姨妈外公外婆老师同学朋友邻居亲戚伙伴敌人英雄模范先进优秀良好一般较差糟糕糟糕',
+      '5': '太阳月亮星星天空云彩风雨雷电霜雪冰雹彩虹雾露水汽河流湖泊海洋溪泉瀑布池塘沼泽沙漠平原高原山地丘陵盆地岛屿半岛海峡海湾港湾码头',
+      '6': '读写听说说看闻摸品尝感觉思考想象记忆理解分析综合比较概括抽象判断推理假设验证结论问题解决发现创造发明改进优化设计规划组织管理领导协调合作竞争'
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'zitie_new').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const templateSelect = document.getElementById('templateSelect');
+      const gradeSelect = document.getElementById('gradeSelect');
+      const customText = document.getElementById('customText');
+      const generateBtn = document.getElementById('generateBtn');
+      const printBtn = document.getElementById('printBtn');
+      const zitieGrid = document.getElementById('zitieGrid');
+      
+      function generateZitie() {
+        const template = templateSelect.value;
+        const grade = gradeSelect.value;
+        const text = customText.value.trim() || gradeWords[grade] || gradeWords['1'];
+        
+        zitieGrid.innerHTML = '';
+        const className = template === 'tian' ? 'zitie-cell tian' : template === 'mi' ? 'zitie-cell mi' : 'zitie-cell';
+        
+        // 生成 10x10 的格子
+        for (let i = 0; i < 100; i++) {
+          const cell = document.createElement('div');
+          cell.className = className;
+          if (i < text.length) {
+            cell.textContent = text[i];
+          }
+          zitieGrid.appendChild(cell);
+        }
+      }
+      
+      generateBtn.addEventListener('click', generateZitie);
+      
+      printBtn.addEventListener('click', () => {
+        window.print();
+      });
+      
+      // 初始生成
+      generateZitie();
+    });
+  </script>
+</body>
+</html>

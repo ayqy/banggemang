@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>歇后语 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/allegory.png" alt="歇后语">
+        <h1 class="tool-title">歇后语</h1>
+      </section>
+      <section class="tool-workspace">
+        <input type="text" id="searchInput" class="text-input-area" placeholder="输入歇后语前半部分或关键词..." style="min-height: 50px;">
+        <div class="button-group">
+          <button class="btn btn-primary" id="searchBtn">查询</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        <div id="result" style="margin-top: 16px;"></div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>歇后语工具可以帮助您查找和学习各种歇后语。通过这款工具，您可以输入歇后语的前半部分或关键词，快速获取完整的歇后语及其解释。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在搜索框中输入歇后语的前半部分或关键词。</li>
+            <li>点击"查询"按钮查看匹配的歇后语。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    const allegoryData = [
+      { q: '八仙过海', a: '各显神通', exp: '比喻各自拿出本领或办法，互相竞赛。' },
+      { q: '泥菩萨过江', a: '自身难保', exp: '比喻连自己也保不住，怎么顾得上别人。' },
+      { q: '孔夫子搬家', a: '净是书（输）', exp: '比喻总是失败。' },
+      { q: '打破砂锅', a: '问到底', exp: '比喻追究事情的根底。' },
+      { q: '和尚打伞', a: '无法无天', exp: '指不顾国法和天理，任意干坏事。' },
+      { q: '画蛇添足', a: '多此一举', exp: '比喻做了多余的事，非但无益，反而不合适。' },
+      { q: '箭在弦上', a: '不得不发', exp: '比喻事情到了不得不做或话到了不得不说的时候。' },
+      { q: '井底之蛙', a: '目光短浅', exp: '比喻见识狭窄的人。' },
+      { q: '瞎子点灯', a: '白费蜡', exp: '比喻白费力气。' },
+      { q: '兔子尾巴', a: '长不了', exp: '比喻邪恶势力不会长久。' },
+      { q: '王婆卖瓜', a: '自卖自夸', exp: '比喻自己吹嘘自己。' },
+      { q: '老鼠过街', a: '人人喊打', exp: '比喻害人的东西，大家一致痛恨。' },
+      { q: '麻雀虽小', a: '五脏俱全', exp: '比喻事物虽然体积小，但应有的都有。' },
+      { q: '千里送鹅毛', a: '礼轻情意重', exp: '比喻礼物虽轻而情意深厚。' },
+      { q: '猪八戒照镜子', a: '里外不是人', exp: '比喻做事两面不讨好。' },
+      { q: '哑巴吃黄连', a: '有苦说不出', exp: '比喻有苦难言。' },
+      { q: '肉包子打狗', a: '有去无回', exp: '比喻有去无回或投入没有回报。' },
+      { q: '热锅上的蚂蚁', a: '团团转', exp: '比喻陷入了难以摆脱的困境，急得走来走去。' },
+      { q: '飞蛾扑火', a: '自取灭亡', exp: '比喻自取灭亡。' },
+      { q: '竹篮打水', a: '一场空', exp: '比喻白费力气，没有效果。' },
+      { q: '墙头草', a: '随风倒', exp: '比喻没有主见，随声附和的人。' },
+      { q: '狗咬吕洞宾', a: '不识好人心', exp: '比喻不识好歹。' },
+      { q: '黄鼠狼给鸡拜年', a: '没安好心', exp: '比喻伪装好意，实则别有用心。' },
+      { q: '骑驴看唱本', a: '走着瞧', exp: '比喻等着看事情的发展结果。' },
+      { q: '三个臭皮匠', a: '顶个诸葛亮', exp: '比喻人多智慧多。' },
+      { q: '大水冲了龙王庙', a: '一家人不认一家人', exp: '比喻自己人之间产生了误会。' },
+      { q: '老虎屁股', a: '摸不得', exp: '比喻自以为了不起，听不得批评意见。' },
+      { q: '小葱拌豆腐', a: '一清二白', exp: '比喻十分清白或十分清楚。' },
+      { q: '十五个吊桶打水', a: '七上八下', exp: '比喻心情不安。' },
+      { q: '和尚训道士', a: '管得宽', exp: '比喻管闲事。' },
+      { q: '刘备借荆州', a: '有借无还', exp: '比喻借东西不还。' },
+      { q: '关公面前耍大刀', a: '自不量力', exp: '比喻在行家面前卖弄本领。' },
+      { q: '司马昭之心', a: '路人皆知', exp: '比喻野心非常明显，人所共知。' },
+      { q: '周瑜打黄盖', a: '一个愿打一个愿挨', exp: '比喻双方自愿。' },
+      { q: '姜太公钓鱼', a: '愿者上钩', exp: '比喻心甘情愿地上当。' },
+      { q: '塞翁失马', a: '焉知非福', exp: '比喻一时虽然受到损失，也许反而因此能得到好处。' },
+      { q: '亡羊补牢', a: '为时未晚', exp: '比喻出了问题以后想办法补救，可以防止继续受损失。' },
+      { q: '守株待兔', a: '坐享其成', exp: '比喻不想努力，而希望通过侥幸获得成功。' },
+      { q: '掩耳盗铃', a: '自欺欺人', exp: '比喻自己欺骗自己。' },
+      { q: '拔苗助长', a: '欲速则不达', exp: '比喻违反事物的发展规律，急于求成，反而坏事。' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'allegory').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const result = document.getElementById('result');
+      
+      function searchAllegory(keyword) {
+        if (!keyword) return [];
+        return allegoryData.filter(item => 
+          item.q.includes(keyword) || item.a.includes(keyword)
+        );
+      }
+      
+      function displayResults(items) {
+        if (items.length === 0) {
+          result.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text-secondary);">未找到相关歇后语</div>';
+          return;
+        }
+        
+        result.innerHTML = items.map(item => `
+          <div style="padding:12px;margin-bottom:8px;background:var(--bg-secondary);border-radius:8px;">
+            <div style="font-weight:600;color:var(--text-primary);margin-bottom:4px;">${item.q} —— ${item.a}</div>
+            <div style="font-size:13px;color:var(--text-secondary);">${item.exp}</div>
+          </div>
+        `).join('');
+      }
+      
+      searchBtn.addEventListener('click', () => {
+        const results = searchAllegory(searchInput.value.trim());
+        displayResults(results);
+      });
+      
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const results = searchAllegory(searchInput.value.trim());
+          displayResults(results);
+        }
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        result.innerHTML = '';
+        searchInput.focus();
+      });
+      
+      // 随机显示一些
+      displayResults(allegoryData.slice(0, 5));
+    });
+  </script>
+</body>
+</html>

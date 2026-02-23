@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{TOOL_NAME} - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="{TOOL_NAME},在线工具">
+  <meta name="description" content="{TOOL_DESC}">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/{TOOL_ICON}" alt="{TOOL_NAME}">
+        <h1 class="tool-title">{TOOL_NAME}</h1>
+      </section>
+      <section class="tool-workspace">
+        <div style="padding: 40px; text-align: center; color: var(--text-secondary);">
+          <p style="font-size: 16px; margin-bottom: 16px;">该工具正在开发中...</p>
+          <p>敬请期待后续更新</p>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>{TOOL_DESC}</p>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const currentTool = '{TOOL_ID}';
+      const recommendTools = educationTools.filter(t => t.id !== currentTool).slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>亲戚关系计算 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="亲戚关系计算，亲戚称呼，家庭关系">
+  <meta name="description" content="亲戚关系计算可以帮助用户快速计算两个或多个对象之间复杂的亲戚关系。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/relatives_name.png" alt="亲戚关系计算">
+        <h1 class="tool-title">亲戚关系计算</h1>
+      </section>
+      <section class="tool-workspace">
+        <div style="display: grid; gap: 16px;">
+          <div>
+            <label style="display: block; margin-bottom: 8px;">我称呼他/她为：</label>
+            <input type="text" id="relationInput" class="text-input-area" placeholder="如：爸爸、妈妈、哥哥、姐姐、叔叔、阿姨等" style="min-height: 50px;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 8px;">他/她称呼那个人为：</label>
+            <input type="text" id="relationInput2" class="text-input-area" placeholder="如：爸爸、妈妈、哥哥、姐姐等" style="min-height: 50px;">
+          </div>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" id="calcBtn">计算关系</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        <div id="result" style="margin-top: 16px; padding: 16px; background: var(--primary-light); border-radius: 8px; display: none;">
+          <h3 id="resultTitle" style="margin-bottom: 8px; color: var(--primary-color);"></h3>
+          <p id="resultDesc" style="color: var(--text-secondary);"></p>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>亲戚关系计算可以帮助用户快速计算两个或多个对象之间复杂的亲戚关系。操作简单易用，只需要打开工具，选择需要计算的亲戚关系，点击"计算"按钮即可得到准确的计算结果。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>输入您称呼某个人的关系，如"爸爸"。</li>
+            <li>输入那个人称呼另一个人的关系，如"爸爸"。</li>
+            <li>点击"计算关系"按钮，即可知道您与另一个人的关系。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    const relations = {
+      '爸爸': { father: '爸爸', mother: '妈妈', brother: '哥哥/弟弟', sister: '姐姐/妹妹' },
+      '妈妈': { father: '外公', mother: '外婆', brother: '舅舅', sister: '姨妈' },
+      '爸爸': { father: '爷爷', mother: '奶奶', brother: '伯伯/叔叔', sister: '姑姑' },
+      '爷爷': { father: '太爷爷', mother: '太奶奶', brother: '叔祖父', sister: '姑奶奶' },
+      '奶奶': { father: '太外公', mother: '太外婆', brother: '舅爷爷', sister: '姑奶奶' },
+      '外公': { father: '太外公', mother: '太外婆', brother: '舅外公', sister: '姨外婆' },
+      '外婆': { father: '太外公', mother: '太外婆', brother: '舅外公', sister: '姨外婆' },
+      '哥哥': { father: '爸爸', mother: '妈妈', brother: '哥哥/弟弟', sister: '姐姐/妹妹', son: '侄子', daughter: '侄女' },
+      '姐姐': { father: '爸爸', mother: '妈妈', brother: '哥哥/弟弟', sister: '姐姐/妹妹', son: '外甥', daughter: '外甥女' },
+      '弟弟': { father: '爸爸', mother: '妈妈', brother: '哥哥/弟弟', sister: '姐姐/妹妹', son: '侄子', daughter: '侄女' },
+      '妹妹': { father: '爸爸', mother: '妈妈', brother: '哥哥/弟弟', sister: '姐姐/妹妹', son: '外甥', daughter: '外甥女' },
+      '叔叔': { father: '爷爷', mother: '奶奶', son: '堂兄/堂弟', daughter: '堂姐/堂妹' },
+      '伯伯': { father: '爷爷', mother: '奶奶', son: '堂兄/堂弟', daughter: '堂姐/堂妹' },
+      '姑姑': { father: '爷爷', mother: '奶奶', son: '表兄/表弟', daughter: '表姐/表妹' },
+      '舅舅': { father: '外公', mother: '外婆', son: '表兄/表弟', daughter: '表姐/表妹' },
+      '姨妈': { father: '外公', mother: '外婆', son: '表兄/表弟', daughter: '表姐/表妹' }
+    };
+
+    const resultMap = {
+      '爸爸爸爸': '爷爷',
+      '爸爸妈妈': '奶奶',
+      '妈妈爸爸': '外公',
+      '妈妈妈妈': '外婆',
+      '爸爸哥哥': '伯伯',
+      '爸爸弟弟': '叔叔',
+      '爸爸姐姐': '姑姑',
+      '妈妈哥哥': '舅舅',
+      '妈妈弟弟': '舅舅',
+      '妈妈姐姐': '姨妈',
+      '妈妈妹妹': '姨妈',
+      '爷爷爸爸': '太爷爷',
+      '爷爷妈妈': '太奶奶',
+      '奶奶爸爸': '太外公',
+      '奶奶妈妈': '太外婆',
+      '外公爸爸': '太外公',
+      '外公妈妈': '太外婆',
+      '外婆爸爸': '太外公',
+      '外婆妈妈': '太外婆'
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'relatives_name').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const relationInput = document.getElementById('relationInput');
+      const relationInput2 = document.getElementById('relationInput2');
+      const calcBtn = document.getElementById('calcBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const result = document.getElementById('result');
+      const resultTitle = document.getElementById('resultTitle');
+      const resultDesc = document.getElementById('resultDesc');
+      
+      calcBtn.addEventListener('click', () => {
+        const r1 = relationInput.value.trim();
+        const r2 = relationInput2.value.trim();
+        
+        if (!r1 || !r2) {
+          alert('请输入完整的亲戚关系');
+          return;
+        }
+        
+        const key = r1 + r2;
+        const resultText = resultMap[key];
+        
+        if (resultText) {
+          resultTitle.textContent = `您应该称呼他/她为：${resultText}`;
+          resultDesc.textContent = `${r1}的${r2}是${resultText}`;
+          result.style.display = 'block';
+        } else {
+          resultTitle.textContent = '暂不支持该关系计算';
+          resultDesc.textContent = '请输入常见的亲戚关系，如：爸爸、妈妈、哥哥、姐姐、叔叔、阿姨等';
+          result.style.display = 'block';
+        }
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        relationInput.value = '';
+        relationInput2.value = '';
+        result.style.display = 'none';
+        relationInput.focus();
+      });
+    });
+  </script>
+</body>
+</html>

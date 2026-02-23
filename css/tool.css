@@ -1,0 +1,310 @@
+/* 
+ * 帮小忙 - 工具页面通用样式
+ */
+
+/* ==================== 工具页面布局 ==================== */
+.tool-page-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.tool-page-layout .main-content {
+  flex: 1;
+  padding: 0;
+}
+
+.tool-page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* 工具头部信息 */
+.tool-info-section {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, #F5F6FA 0%, #E8E8FF 100%);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.tool-info-section .tool-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tool-info-section .tool-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 工具操作区域 */
+.tool-workspace {
+  background-color: var(--bg-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.tool-workspace .workspace-title {
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+/* 文本输入区域 */
+.text-input-area {
+  width: 100%;
+  min-height: 200px;
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.text-input-area:focus {
+  border-color: var(--primary-color);
+}
+
+.text-input-area::placeholder {
+  color: var(--text-secondary);
+}
+
+/* 按钮组 */
+.button-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.button-group .btn {
+  min-width: 80px;
+  padding: 10px 20px;
+}
+
+/* 统计结果 */
+.statistics-result {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary-color);
+  display: block;
+}
+
+.stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* 工具介绍区域 */
+.tool-intro-section {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.tool-intro-section h3 {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.tool-intro-section .intro-content {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.tool-intro-section .intro-content p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.tool-intro-section .intro-content ol,
+.tool-intro-section .intro-content ul {
+  padding-left: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+}
+
+.tool-intro-section .intro-content li {
+  margin-bottom: 4px;
+}
+
+/* 更多推荐区域 */
+.recommend-section {
+  margin-top: var(--spacing-xl);
+}
+
+.recommend-section .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.recommend-section .section-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.recommend-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+.recommend-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--bg-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.recommend-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.recommend-card .tool-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.recommend-card .tool-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.recommend-card .tool-name {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.recommend-card .tool-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 提示框 */
+.tip-box {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: #FFF7E6;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: #D46B08;
+}
+
+.tip-box img {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* 加载状态 */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) * 2;
+  color: var(--text-secondary);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacing-md);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 错误状态 */
+.error-state {
+  text-align: center;
+  padding: var(--spacing-xl) * 2;
+  color: var(--text-secondary);
+}
+
+.error-state img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: var(--spacing-md);
+  opacity: 0.5;
+}
+
+.error-state p {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-md);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .tool-page-container {
+    padding: var(--spacing-md);
+  }
+  
+  .tool-info-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .recommend-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .statistics-result {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

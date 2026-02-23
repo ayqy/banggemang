@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成语接龙 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="成语接龙，成语游戏，汉语学习，成语大全">
+  <meta name="description" content="成语接龙工具可以帮助您进行成语接龙游戏，提升您的汉语词汇量和语言表达能力。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/jielong.png" alt="成语接龙">
+        <h1 class="tool-title">成语接龙</h1>
+      </section>
+      <section class="tool-workspace">
+        <input type="text" class="text-input-area" id="inputIdiom" placeholder="请输入一个成语..." style="min-height: 50px;">
+        <div class="button-group">
+          <button class="btn btn-primary" id="startBtn">开始接龙</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        <div style="margin-top: 16px;">
+          <div style="margin-bottom: 8px; color: var(--text-secondary);">接龙结果：</div>
+          <div id="resultChain" style="min-height: 60px; padding: 12px; background: var(--bg-secondary); border-radius: 8px; line-height: 2;"></div>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>成语接龙工具可以帮助您进行成语接龙游戏，提升您的汉语词汇量和语言表达能力。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>输入一个成语作为起始。</li>
+            <li>点击"开始接龙"按钮，工具会自动生成接龙成语。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    // 简化版成语接龙数据
+    const idiomsDb = {
+      '一': ['一心一意', '一帆风顺', '一鸣惊人', '一举两得', '一箭双雕', '一石二鸟', '一视同仁', '一往无前'],
+      '心': ['心想事成', '心花怒放', '心旷神怡', '心直口快', '心满意足', '心惊胆战'],
+      '意': ['意气风发', '意味深长', '意想不到', '意兴盎然'],
+      '发': ['发扬光大', '发愤图强', '发人深省', '发号施令'],
+      '大': ['大智若愚', '大公无私', '大器晚成', '大显身手', '大张旗鼓', '大快人心'],
+      '成': ['成千上万', '成群结队', '成家立业', '成人之美', '成败得失'],
+      '万': ['万事如意', '万紫千红', '万无一失', '万众一心'],
+      '事': ['事半功倍', '事在人为', '事必躬亲', '事与愿违'],
+      '半': ['半途而废', '半信半疑', '半斤八两'],
+      '废': ['废寝忘食', '废然而返'],
+      '食': ['食言而肥', '食古不化', '食不果腹'],
+      '肥': ['肥头大耳', '肥马轻裘'],
+      '耳': ['耳濡目染', '耳熟能详', '耳听八方', '耳目一新'],
+      '新': ['新陈代谢', '欣欣向荣', '新婚燕尔', '新来乍到'],
+      '谢': ['谢天谢地', '谢绝参观'],
+      '地': ['地久天长', '地动山摇', '地大物博', '地利人和'],
+      '长': ['长治久安', '长驱直入', '长年累月', '长此以往'],
+      '安': ['安居乐业', '安分守己', '安然无恙', '安身立命'],
+      '业': ['业精于勤', '业峻鸿绩'],
+      '勤': ['勤能补拙', '勤勤恳恳', '勤俭持家'],
+      '人': ['人山人海', '人杰地灵', '人云亦云', '人定胜天', '人尽其才'],
+      '海': ['海阔天空', '海底捞月', '海枯石烂', '海市蜃楼'],
+      '空': ['空前绝后', '空穴来风', '空口无凭', '空谷足音'],
+      '后': ['后来居上', '后起之秀', '后顾之忧', '后患无穷'],
+      '上': ['上行下效', '上下其手', '上天入地', '上下同心'],
+      '天': ['天伦之乐', '天衣无缝', '天经地义', '天罗地网', '天翻地覆'],
+      '乐': ['乐不思蜀', '乐在其中', '乐此不疲', '乐善好施'],
+      '中': ['中流砥柱', '中西合璧', '中庸之道', '中原逐鹿'],
+      '柱': ['柱石之臣', '柱小倾大'],
+      '风': ['风和日丽', '风雨同舟', '风平浪静', '风调雨顺', '风云变幻'],
+      '丽': ['丽句清词', '丽质天成'],
+      '雨': ['雨后春笋', '雨过天晴', '雨露均沾'],
+      '顺': ['顺水推舟', '顺理成章', '顺手牵羊', '顺藤摸瓜'],
+      '舟': ['舟车劳顿', '舟中敌国'],
+      '龙': ['龙飞凤舞', '龙马精神', '龙腾虎跃', '龙盘虎踞', '龙凤呈祥'],
+      '虎': ['虎虎生威', '虎背熊腰', '虎头蛇尾', '虎口拔牙'],
+      '威': ['威风凛凛', '威武不屈', '威震天下'],
+      '神': ['神采飞扬', '神通广大', '神机妙算', '神清气爽'],
+      '扬': ['扬眉吐气', '扬长避短', '扬汤止沸'],
+      '气': ['气象万千', '气吞山河', '气宇轩昂', '气势磅礴'],
+      '千': ['千军万马', '千变万化', '千钧一发', '千载难逢'],
+      '马': ['马到成功', '马不停蹄', '马首是瞻', '马马虎虎'],
+      '功': ['功成名就', '功德无量', '功亏一篑', '功不可没'],
+      '就': ['就地取材', '就事论事', '就义成仁'],
+      '红': ['红红火火', '红颜薄命', '红光满面'],
+      '火': ['火树银花', '火烧眉毛', '火眼金睛', '火中取栗'],
+      '花': ['花好月圆', '花言巧语', '花团锦簇', '花枝招展'],
+      '圆': ['圆首方足', '圆孔方木'],
+      '月': ['月下老人', '月明星稀', '月圆花好', '月黑风高'],
+      '明': ['明察秋毫', '明知故问', '明辨是非', '明枪暗箭'],
+      '是': ['是非曲直', '是非分明', '是可忍孰不可忍'],
+      '直': ['直截了当', '直言不讳', '直抒己见'],
+      '当': ['当机立断', '当之无愧', '当仁不让', '当头一棒'],
+      '断': ['断章取义', '断断续续', '断井颓垣'],
+      '义': ['义不容辞', '义无反顾', '义正词严', '义薄云天']
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'jielong').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const inputIdiom = document.getElementById('inputIdiom');
+      const startBtn = document.getElementById('startBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const resultChain = document.getElementById('resultChain');
+      
+      function findNextIdiom(lastChar) {
+        return idiomsDb[lastChar] || null;
+      }
+      
+      function getFirstChar(idiom) {
+        return idiom.charAt(0);
+      }
+      
+      function getLastChar(idiom) {
+        return idiom.charAt(idiom.length - 1);
+      }
+      
+      startBtn.addEventListener('click', () => {
+        const input = inputIdiom.value.trim();
+        if (!input) {
+          alert('请输入一个成语');
+          return;
+        }
+        
+        const chain = [input];
+        let current = input;
+        
+        // 最多接龙 10 个
+        for (let i = 0; i < 10; i++) {
+          const lastChar = getLastChar(current);
+          const nextIdioms = findNextIdiom(lastChar);
+          if (nextIdioms && nextIdioms.length > 0) {
+            // 选择一个未使用过的成语
+            const nextIdiom = nextIdioms[Math.floor(Math.random() * nextIdioms.length)];
+            if (!chain.includes(nextIdiom)) {
+              chain.push(nextIdiom);
+              current = nextIdiom;
+            } else {
+              break;
+            }
+          } else {
+            break;
+          }
+        }
+        
+        resultChain.innerHTML = chain.join(' → ');
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        inputIdiom.value = '';
+        resultChain.innerHTML = '';
+        inputIdiom.focus();
+      });
+    });
+  </script>
+</body>
+</html>

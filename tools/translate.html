@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>翻译 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/translate.png" alt="翻译">
+        <h1 class="tool-title">翻译</h1>
+      </section>
+      <section class="tool-workspace">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <label style="display:block;margin-bottom:8px;">原文</label>
+            <textarea id="sourceText" class="text-input-area" placeholder="输入要翻译的文本..." rows="6"></textarea>
+          </div>
+          <div>
+            <label style="display:block;margin-bottom:8px;">译文</label>
+            <textarea id="targetText" class="text-input-area" placeholder="翻译结果..." rows="6" readonly style="background:var(--bg-secondary);"></textarea>
+          </div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:8px;align-items:center;">
+          <select id="langFrom" style="padding:8px;border:1px solid var(--border-color);border-radius:4px;">
+            <option value="zh">中文</option>
+            <option value="en">英语</option>
+          </select>
+          <span>→</span>
+          <select id="langTo" style="padding:8px;border:1px solid var(--border-color);border-radius:4px;">
+            <option value="en">英语</option>
+            <option value="zh">中文</option>
+          </select>
+          <button class="btn btn-primary" id="translateBtn">翻译</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>翻译工具可以帮助您将文本从一种语言翻译成另一种语言。通过这款工具，您可以轻松进行多语言翻译，满足学习、工作、旅行和日常交流等需求。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>输入要翻译的文本。</li>
+            <li>选择源语言和目标语言。</li>
+            <li>点击"翻译"按钮查看翻译结果。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    // 简易词典
+    const dictionary = {
+      'zh-en': {
+        '你好': 'Hello', '世界': 'World', '中国': 'China', '北京': 'Beijing',
+        '爱': 'Love', '和平': 'Peace', '友谊': 'Friendship', '快乐': 'Happy',
+        '学习': 'Study', '工作': 'Work', '生活': 'Life', '家庭': 'Family',
+        '朋友': 'Friend', '老师': 'Teacher', '学生': 'Student', '学校': 'School',
+        '书': 'Book', '电脑': 'Computer', '手机': 'Phone', '水': 'Water',
+        '饭': 'Rice', '茶': 'Tea', '猫': 'Cat', '狗': 'Dog',
+        '大': 'Big', '小': 'Small', '好': 'Good', '坏': 'Bad',
+        '高': 'Tall', '低': 'Low', '快': 'Fast', '慢': 'Slow',
+        '热': 'Hot', '冷': 'Cold', '多': 'Many', '少': 'Few',
+        '是': 'Be', '有': 'Have', '在': 'At', '去': 'Go', '来': 'Come'
+      },
+      'en-zh': {
+        'Hello': '你好', 'World': '世界', 'China': '中国', 'Beijing': '北京',
+        'Love': '爱', 'Peace': '和平', 'Friendship': '友谊', 'Happy': '快乐',
+        'Study': '学习', 'Work': '工作', 'Life': '生活', 'Family': '家庭',
+        'Friend': '朋友', 'Teacher': '老师', 'Student': '学生', 'School': '学校',
+        'Book': '书', 'Computer': '电脑', 'Phone': '手机', 'Water': '水',
+        'Rice': '饭', 'Tea': '茶', 'Cat': '猫', 'Dog': '狗',
+        'Big': '大', 'Small': '小', 'Good': '好', 'Bad': '坏',
+        'Tall': '高', 'Low': '低', 'Fast': '快', 'Slow': '慢',
+        'Hot': '热', 'Cold': '冷', 'Many': '多', 'Few': '少',
+        'Be': '是', 'Have': '有', 'At': '在', 'Go': '去', 'Come': '来'
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'translate').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const sourceText = document.getElementById('sourceText');
+      const targetText = document.getElementById('targetText');
+      const langFrom = document.getElementById('langFrom');
+      const langTo = document.getElementById('langTo');
+      const translateBtn = document.getElementById('translateBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      
+      function translate(text, from, to) {
+        if (!text) return '';
+        const dict = dictionary[`${from}-${to}`];
+        if (!dict) return text;
+        
+        // 简单分词翻译
+        const words = text.split(/([，。！？、；：""''（）()【】\s]+)/);
+        return words.map(word => {
+          if (dict[word]) return dict[word];
+          if (/[,.!?:;""''()\s]/.test(word)) return word;
+          return `[${word}]`;
+        }).join('');
+      }
+      
+      translateBtn.addEventListener('click', () => {
+        const text = sourceText.value.trim();
+        const from = langFrom.value;
+        const to = langTo.value;
+        targetText.value = translate(text, from, to);
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        sourceText.value = '';
+        targetText.value = '';
+        sourceText.focus();
+      });
+    });
+  </script>
+</body>
+</html>

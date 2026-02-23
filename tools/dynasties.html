@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>历史朝代查询 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="历史朝代查询，中国历史，朝代时间，历史工具">
+  <meta name="description" content="历史朝代查询是一款教育性和实用性兼备的在线工具，专为帮助用户快速查询和了解各个历史朝代的相关信息而设计。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <!-- 左侧导航栏 -->
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯 QQ 浏览器在线工具箱</span>
+      </div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+
+  <div class="left-nav-placeholder"></div>
+
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享">
+          <img src="/assets/icons/share.png" alt="分享">
+        </a>
+      </div>
+    </header>
+
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/dynasties.png" alt="历史朝代查询">
+        <h1 class="tool-title">历史朝代查询</h1>
+      </section>
+
+      <section class="tool-workspace">
+        <input type="text" class="text-input-area" id="searchInput" placeholder="输入朝代名称，如：唐、宋、明、清..." style="min-height: 50px;">
+        <div class="button-group">
+          <button class="btn btn-primary" id="searchBtn">查询</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        
+        <div id="result" style="margin-top: 16px; padding: 16px; background: var(--bg-secondary); border-radius: 8px; display: none;">
+          <h3 id="resultTitle" style="margin-bottom: 8px;"></h3>
+          <p id="resultInfo" style="color: var(--text-secondary); line-height: 1.8;"></p>
+        </div>
+      </section>
+
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>历史朝代查询是一款教育性和实用性兼备的在线工具，专为帮助用户快速查询和了解各个历史朝代的相关信息而设计。通过这款工具，您可以轻松获取各个朝代的起止时间、重要事件、著名人物等信息，帮助您更好地学习和理解历史。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在搜索框中输入朝代名称，如：唐、宋、明、清等。</li>
+            <li>点击"查询"按钮，即可查看该朝代的详细信息。</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="recommend-section">
+        <div class="section-header">
+          <h2 class="section-title">更多推荐</h2>
+        </div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+
+    <div class="footer-placeholder-pc"></div>
+  </div>
+
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  
+  <script>
+    // 历史朝代数据
+    const dynastiesData = {
+      '夏': { period: '约公元前 2070 年 - 约公元前 1600 年', info: '中国史书中记载的第一个世袭制朝代，建立者是大禹，定都阳城。' },
+      '商': { period: '约公元前 1600 年 - 约公元前 1046 年', info: '中国历史上第二个朝代，建立者是商汤，著名君主有武丁等，以青铜器和甲骨文闻名。' },
+      '周': { period: '约公元前 1046 年 - 公元前 256 年', info: '分为西周和东周，东周又分为春秋和战国时期。建立者是周武王，实行分封制。' },
+      '秦': { period: '公元前 221 年 - 公元前 207 年', info: '中国历史上第一个大一统帝国，建立者是秦始皇嬴政，统一文字、货币、度量衡，修筑长城。' },
+      '汉': { period: '公元前 202 年 - 公元 220 年', info: '分为西汉和东汉，建立者是刘邦（汉高祖）。汉武帝时期国力强盛，开辟丝绸之路。' },
+      '三国': { period: '公元 220 年 - 280 年', info: '分为魏、蜀、吴三个政权，著名人物有曹操、刘备、孙权、诸葛亮等。' },
+      '晋': { period: '公元 266 年 - 420 年', info: '分为西晋和东晋，西晋建立者是司马炎，实现了短暂统一。' },
+      '隋': { period: '公元 581 年 - 618 年', info: '建立者是隋文帝杨坚，开凿大运河，创立科举制度。' },
+      '唐': { period: '公元 618 年 - 907 年', info: '建立者是李渊（唐高祖），李世民（唐太宗）开创贞观之治，是中国历史上最强盛的朝代之一。' },
+      '宋': { period: '公元 960 年 - 1279 年', info: '分为北宋和南宋，建立者是赵匡胤（宋太祖），经济文化繁荣，四大发明中有三项在此时期发展成熟。' },
+      '元': { period: '公元 1271 年 - 1368 年', info: '建立者是忽必烈（元世祖），是中国历史上第一个由少数民族建立的大一统王朝。' },
+      '明': { period: '公元 1368 年 - 1644 年', info: '建立者是朱元璋（明太祖），郑和七下西洋，修筑明长城，编纂《永乐大典》。' },
+      '清': { period: '公元 1644 年 - 1912 年', info: '中国历史上最后一个封建王朝，建立者是努尔哈赤，康熙、乾隆时期达到鼎盛。' }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'dynasties').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const result = document.getElementById('result');
+      const resultTitle = document.getElementById('resultTitle');
+      const resultInfo = document.getElementById('resultInfo');
+      
+      function searchDynasty(name) {
+        if (!name) return null;
+        name = name.trim();
+        for (let key in dynastiesData) {
+          if (name.includes(key)) {
+            return { name, ...dynastiesData[key] };
+          }
+        }
+        return null;
+      }
+      
+      searchBtn.addEventListener('click', () => {
+        const result = searchDynasty(searchInput.value);
+        if (result) {
+          resultTitle.textContent = `${result.name}朝（${result.period}）`;
+          resultInfo.textContent = result.info;
+          document.getElementById('result').style.display = 'block';
+        } else {
+          alert('未找到相关朝代信息，请输入：夏、商、周、秦、汉、晋、隋、唐、宋、元、明、清');
+        }
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        result.style.display = 'none';
+        searchInput.focus();
+      });
+    });
+  </script>
+</body>
+</html>

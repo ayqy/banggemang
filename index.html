@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>帮小忙，腾讯 QQ 浏览器在线工具箱平台</title>
+  <meta name="keywords" content="在线工具，工具箱，PDF 转换，图片处理，教育工具，文本工具">
+  <meta name="description" content="帮小忙是腾讯 QQ 浏览器在线工具箱平台，提供 PDF 转换、图片处理、教育学习、文本处理等多种实用工具，已累计帮助了 3.6 亿人次。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/category.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <!-- 左侧导航栏 -->
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div>
+        <span class="title">帮小忙</span>
+        <span class="sub-title">腾讯 QQ 浏览器在线工具箱</span>
+      </div>
+    </a>
+    <ul class="category-container">
+      <!-- 由 JS 动态生成 -->
+    </ul>
+  </nav>
+
+  <!-- 左侧导航占位 -->
+  <div class="left-nav-placeholder"></div>
+
+  <!-- 主内容区 -->
+  <div class="category-page">
+    <!-- 顶部搜索区域 -->
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享">
+          <img src="/assets/icons/share.png" alt="分享">
+        </a>
+      </div>
+      <div class="statistics-text">工具箱已累计帮助了 366490000 人次</div>
+    </header>
+
+    <!-- 分类标题 -->
+    <div class="category-header">
+      <h1 class="category-title">全部工具</h1>
+      <p class="category-desc">腾讯 QQ 浏览器在线工具箱，提供多种实用在线工具</p>
+    </div>
+
+    <!-- 工具列表 -->
+    <main class="tool-list-container">
+      <div class="tool-grid" id="toolGrid">
+        <!-- 由 JS 动态生成 -->
+      </div>
+    </main>
+
+    <!-- 页脚 -->
+    <div class="footer-placeholder-pc"></div>
+  </div>
+
+  <!-- 引入数据文件 -->
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  
+  <script>
+    // 页面初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      // 渲染左侧导航（全部高亮）
+      renderLeftNav('all');
+      
+      // 渲染教育工具（首页只显示教育工具分类）
+      renderToolCards(educationTools, '#toolGrid');
+    });
+  </script>
+</body>
+</html>

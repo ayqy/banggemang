@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>便捷思维导图 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <style>
+    .mindmap-container { display: flex; gap: 16px; height: 400px; }
+    .mindmap-editor { flex: 1; }
+    .mindmap-editor textarea { width: 100%; height: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-family: monospace; resize: none; }
+    .mindmap-preview { flex: 1; background: var(--bg-secondary); border-radius: 8px; padding: 16px; overflow: auto; }
+    .mindmap-node { background: var(--primary-color); color: #fff; padding: 8px 16px; border-radius: 20px; display: inline-block; margin: 8px; }
+    .mindmap-node.child { background: var(--primary-light); color: var(--text-primary); font-size: 14px; }
+    .mindmap-node .children { margin-left: 20px; }
+    .mindmap-actions { margin-top: 16px; display: flex; gap: 8px; }
+    .help-text { font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
+  </style>
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/markmap.png" alt="便捷思维导图">
+        <h1 class="tool-title">便捷思维导图</h1>
+      </section>
+      <section class="tool-workspace">
+        <div class="mindmap-container">
+          <div class="mindmap-editor">
+            <textarea id="markdownInput" placeholder="输入 Markdown 格式的文本...
+
+例如：
+# 中心主题
+## 分支一
+### 子主题 1
+### 子主题 2
+## 分支二
+### 子主题 3"></textarea>
+            <div class="help-text">使用 # 表示层级：一个#是中心主题，两个#是一级分支，三个#是子主题</div>
+          </div>
+          <div class="mindmap-preview" id="mindmapPreview"></div>
+        </div>
+        <div class="mindmap-actions">
+          <button class="btn btn-primary" id="renderBtn">生成思维导图</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>便捷思维导图工具可以帮助您快速创建、编辑和分享思维导图，提升您的思维整理和信息管理能力。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在左侧输入框中输入 Markdown 格式的文本。</li>
+            <li>使用 # 表示层级关系。</li>
+            <li>点击"生成思维导图"按钮查看效果。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'markmap').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const markdownInput = document.getElementById('markdownInput');
+      const renderBtn = document.getElementById('renderBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const mindmapPreview = document.getElementById('mindmapPreview');
+      
+      function parseMarkdown(markdown) {
+        const lines = markdown.split('\n').filter(line => line.trim());
+        const nodes = [];
+        
+        lines.forEach(line => {
+          const match = line.match(/^(#+)\s*(.+)/);
+          if (match) {
+            nodes.push({
+              level: match[1].length,
+              text: match[2].trim()
+            });
+          }
+        });
+        
+        return nodes;
+      }
+      
+      function renderMindmap(nodes) {
+        if (nodes.length === 0) {
+          mindmapPreview.innerHTML = '<div style="color:var(--text-secondary);text-align:center;padding:40px;">请输入内容后生成思维导图</div>';
+          return;
+        }
+        
+        let html = '';
+        let currentLevel = 0;
+        
+        nodes.forEach((node, index) => {
+          const className = node.level === 1 ? 'mindmap-node' : 'mindmap-node child';
+          
+          if (node.level === 1) {
+            html += `<div class="${className}">${node.text}</div><div class="children">`;
+          } else if (node.level === 2) {
+            html += `<div class="${className}">${node.text}</div>`;
+          } else {
+            html += `<div style="margin-left:20px;" class="${className}">${node.text}</div>`;
+          }
+        });
+        
+        // 关闭所有未关闭的 div
+        html += '</div>'.repeat(nodes.filter(n => n.level === 1).length);
+        
+        mindmapPreview.innerHTML = html;
+      }
+      
+      renderBtn.addEventListener('click', () => {
+        const markdown = markdownInput.value;
+        const nodes = parseMarkdown(markdown);
+        renderMindmap(nodes);
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        markdownInput.value = '';
+        mindmapPreview.innerHTML = '';
+        markdownInput.focus();
+      });
+      
+      // 默认示例
+      markdownInput.value = `# 中心主题
+## 分支一
+### 子主题 1
+### 子主题 2
+## 分支二
+### 子主题 3
+### 子主题 4
+## 分支三
+### 子主题 5`;
+      renderBtn.click();
+    });
+  </script>
+</body>
+</html>

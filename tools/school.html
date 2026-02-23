@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高校查询 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="高校查询，大学查询，学校查询，高考志愿">
+  <meta name="description" content="高校查询可以快速找到中国境内知名大学的相关信息，包括清华大学、北京大学、南京大学等。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/school.png" alt="高校查询">
+        <h1 class="tool-title">高校查询</h1>
+      </section>
+      <section class="tool-workspace">
+        <input type="text" class="text-input-area" id="searchInput" placeholder="输入大学名称，如：清华、北大、浙大..." style="min-height: 50px;">
+        <div class="button-group">
+          <button class="btn btn-primary" id="searchBtn">查询</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        <div id="result" style="margin-top: 16px; padding: 16px; background: var(--bg-secondary); border-radius: 8px; display: none;">
+          <h3 id="resultTitle" style="margin-bottom: 8px;"></h3>
+          <p id="resultInfo" style="color: var(--text-secondary); line-height: 1.8;"></p>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>高校查询可以快速找到中国境内知名大学的相关信息，应用汇聚了全国各地的知名大学，包括清华大学、北京大学、南京大学、浙江大学、复旦大学、上海交通大学等等。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在搜索框中输入大学名称或关键词。</li>
+            <li>点击"查询"按钮查看详细信息。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    const schoolsData = {
+      '清华': { name: '清华大学', location: '北京', type: '985/211/双一流', info: '中国顶尖高等学府，以工科见长，综合实力位居全国前列。' },
+      '北大': { name: '北京大学', location: '北京', type: '985/211/双一流', info: '中国最高学府之一，文理医工综合性大学。' },
+      '浙大': { name: '浙江大学', location: '浙江杭州', type: '985/211/双一流', info: '历史悠久、声誉卓著的高等学府，学科门类齐全。' },
+      '复旦': { name: '复旦大学', location: '上海', type: '985/211/双一流', info: '中国顶尖综合性研究型大学，人文社科和自然科学并重。' },
+      '上海交通': { name: '上海交通大学', location: '上海', type: '985/211/双一流', info: '以工科见长的综合性大学，工程学科实力雄厚。' },
+      '南京': { name: '南京大学', location: '江苏南京', type: '985/211/双一流', info: '历史悠久的高等学府，文理学科优势明显。' },
+      '中科大': { name: '中国科学技术大学', location: '安徽合肥', type: '985/211/双一流', info: '以前沿科学和高新技术为主的综合性大学。' },
+      '武汉': { name: '武汉大学', location: '湖北武汉', type: '985/211/双一流', info: '中国著名高等学府，校园环境优美。' },
+      '华中科技': { name: '华中科技大学', location: '湖北武汉', type: '985/211/双一流', info: '以工科为主，医理工文管多学科协调发展。' },
+      '中山': { name: '中山大学', location: '广东广州', type: '985/211/双一流', info: '华南地区最高学府，综合性研究型大学。' },
+      '西安交通': { name: '西安交通大学', location: '陕西西安', type: '985/211/双一流', info: '中国最早兴办的高等学府之一，工科优势明显。' },
+      '哈尔滨工业': { name: '哈尔滨工业大学', location: '黑龙江哈尔滨', type: '985/211/双一流', info: '以工科为主，航天、机械等学科实力雄厚。' },
+      '北京航空': { name: '北京航空航天大学', location: '北京', type: '985/211/双一流', info: '以航空航天为特色的综合性大学。' },
+      '同济': { name: '同济大学', location: '上海', type: '985/211/双一流', info: '以土木建筑、城市规划为特色的综合性大学。' },
+      '南开': { name: '南开大学', location: '天津', type: '985/211/双一流', info: '著名高等学府，文理学科优势突出。' }
+    };
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'school').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      function searchSchool(name) {
+        if (!name) return null;
+        for (let key in schoolsData) {
+          if (name.includes(key)) {
+            return { key, ...schoolsData[key] };
+          }
+        }
+        return null;
+      }
+      searchBtn.addEventListener('click', () => {
+        const result = searchSchool(searchInput.value);
+        if (result) {
+          document.getElementById('resultTitle').textContent = `${result.name}（${result.location}）`;
+          document.getElementById('resultInfo').textContent = `${result.type}\n${result.info}`;
+          document.getElementById('result').style.display = 'block';
+        } else {
+          alert('未找到相关高校信息');
+        }
+      });
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        document.getElementById('result').style.display = 'none';
+        searchInput.focus();
+      });
+    });
+  </script>
+</body>
+</html>

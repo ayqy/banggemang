@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成语大全 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/chengyujielong.png" alt="成语大全">
+        <h1 class="tool-title">成语大全</h1>
+      </section>
+      <section class="tool-workspace">
+        <input type="text" id="searchInput" class="text-input-area" placeholder="输入成语或成语首字..." style="min-height: 50px;">
+        <div class="button-group">
+          <button class="btn btn-primary" id="searchBtn">查询</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        <div id="result" style="margin-top: 16px;"></div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>成语大全查询是一款免费的中国传统文化知识工具，它收录了上亿个成语能够对成成语首字符快速查询，是一款用心打造的成语故事查询工具。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在搜索框中输入成语或成语首字。</li>
+            <li>点击"查询"按钮查看成语解释。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    const chengyuData = [
+      { idiom: '一心一意', pinyin: 'yī xīn yī yì', meaning: '只有一个心眼儿，没有别的考虑。', example: '他一心一意地学习，终于考上了理想的大学。' },
+      { idiom: '一帆风顺', pinyin: 'yī fān fēng shùn', meaning: '船挂着满帆顺风行驶。比喻非常顺利，没有任何阻碍。', example: '祝你事业一帆风顺！' },
+      { idiom: '一鸣惊人', pinyin: 'yī míng jīng rén', meaning: '比喻平时没有突出的表现，一下子做出惊人的成绩。', example: '他在比赛中一鸣惊人，获得了冠军。' },
+      { idiom: '一举两得', pinyin: 'yī jǔ liǎng dé', meaning: '做一件事得到两方面的好处。', example: '骑自行车上班既锻炼身体又环保，真是一举两得。' },
+      { idiom: '一箭双雕', pinyin: 'yī jiàn shuāng diāo', meaning: '原指射箭技术高超，一箭射中两只雕。比喻做一件事达到两个目的。', example: '这个方案可以一箭双雕，既节约成本又提高效率。' },
+      { idiom: '马到成功', pinyin: 'mǎ dào chéng gōng', meaning: '形容工作刚开始就取得成功。', example: '祝你马到成功！' },
+      { idiom: '画龙点睛', pinyin: 'huà lóng diǎn jīng', meaning: '比喻作文或说话时在关键地方加上精辟的语句，使内容更加生动传神。', example: '这篇文章的结尾真是画龙点睛之笔。' },
+      { idiom: '画蛇添足', pinyin: 'huà shé tiān zú', meaning: '比喻做了多余的事，非但无益，反而不合适。', example: '你这样做是画蛇添足，反而把事情弄糟了。' },
+      { idiom: '守株待兔', pinyin: 'shǒu zhū dài tù', meaning: '比喻不想努力，而希望通过侥幸获得成功。', example: '我们不能守株待兔，要主动出击。' },
+      { idiom: '亡羊补牢', pinyin: 'wáng yáng bǔ láo', meaning: '比喻出了问题以后想办法补救，可以防止继续受损失。', example: '现在采取措施还来得及，亡羊补牢为时未晚。' },
+      { idiom: '掩耳盗铃', pinyin: 'yǎn ěr dào líng', meaning: '比喻自己欺骗自己。', example: '你这样做不过是掩耳盗铃罢了。' },
+      { idiom: '拔苗助长', pinyin: 'bá miáo zhù zhǎng', meaning: '比喻违反事物的发展规律，急于求成，反而坏事。', example: '教育孩子不能拔苗助长，要循序渐进。' },
+      { idiom: '井底之蛙', pinyin: 'jǐng dǐ zhī wā', meaning: '比喻见识狭窄的人。', example: '我们要多出去走走，不能做井底之蛙。' },
+      { idiom: '狐假虎威', pinyin: 'hú jiǎ hǔ wēi', meaning: '比喻依仗别人的势力欺压人。', example: '他就是狐假虎威，仗着老板的势力欺负人。' },
+      { idiom: '对牛弹琴', pinyin: 'duì niú tán qín', meaning: '比喻对不讲道理的人讲道理，对外行人说内行话。', example: '跟他说这些简直是对牛弹琴。' },
+      { idiom: '杯弓蛇影', pinyin: 'bēi gōng shé yǐng', meaning: '比喻疑神疑鬼，自相惊扰。', example: '你别杯弓蛇影，自己吓自己。' },
+      { idiom: '半途而废', pinyin: 'bàn tú ér fèi', meaning: '指做事不能坚持到底，中途停顿，有始无终。', example: '学习不能半途而废，要坚持到底。' },
+      { idiom: '班门弄斧', pinyin: 'bān mén nòng fǔ', meaning: '比喻在行家面前卖弄本领。', example: '我在专家面前不敢班门弄斧。' },
+      { idiom: '百折不挠', pinyin: 'bǎi zhé bù náo', meaning: '比喻意志坚强，无论受到多少次挫折，毫不动摇退缩。', example: '他百折不挠的精神值得我们学习。' },
+      { idiom: '笨鸟先飞', pinyin: 'bèn niǎo xiān fēi', meaning: '比喻能力差的人怕落后，做事比别人先动手。', example: '我知道自己笨，所以只能笨鸟先飞。' },
+      { idiom: '闭门造车', pinyin: 'bì mén zào chē', meaning: '比喻脱离实际，只凭主观办事。', example: '做调研不能闭门造车，要深入实际。' },
+      { idiom: '标新立异', pinyin: 'biāo xīn lì yì', meaning: '提出新奇的主张，表示与众不同。', example: '他的设计标新立异，很有创意。' },
+      { idiom: '冰冻三尺', pinyin: 'bīng dòng sān chǐ', meaning: '比喻一种情况的形成，是经过长时间的积累、酝酿的。', example: '冰冻三尺非一日之寒，他的成功是多年努力的结果。' },
+      { idiom: '兵不厌诈', pinyin: 'bīng bù yàn zhà', meaning: '作战时尽可能地用假象迷惑敌人以取得胜利。', example: '兵不厌诈，这是军事策略。' },
+      { idiom: '博古通今', pinyin: 'bó gǔ tōng jīn', meaning: '对古代的事知道得很多，对现代的事也了解得很透彻。', example: '他是一位博古通今的学者。' },
+      { idiom: '博大精深', pinyin: 'bó dà jīng shēn', meaning: '形容思想和学识广博高深。', example: '中国文化博大精深。' },
+      { idiom: '不屈不挠', pinyin: 'bù qū bù náo', meaning: '比喻在压力和困难面前不屈服，表现十分顽强。', example: '他不屈不挠地与病魔作斗争。' },
+      { idiom: '不可思议', pinyin: 'bù kě sī yì', meaning: '原有神秘奥妙的意思。现多指无法想象，难以理解。', example: '这简直是个不可思议的奇迹。' },
+      { idiom: '不劳而获', pinyin: 'bù láo ér huò', meaning: '自己不劳动而占有别人的劳动成果。', example: '他梦想不劳而获，结果一无所成。' },
+      { idiom: '不谋而合', pinyin: 'bù móu ér hé', meaning: '事先没有商量过，意见或行动却完全一致。', example: '我们的想法不谋而合。' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'chengyujielong').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const result = document.getElementById('result');
+      
+      function searchChengyu(keyword) {
+        if (!keyword) return [];
+        return chengyuData.filter(item => item.idiom.includes(keyword));
+      }
+      
+      function displayResults(items) {
+        if (items.length === 0) {
+          result.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text-secondary);">未找到相关成语</div>';
+          return;
+        }
+        
+        result.innerHTML = items.map(item => `
+          <div style="padding:16px;margin-bottom:12px;background:var(--bg-secondary);border-radius:8px;border-left:4px solid var(--primary-color);">
+            <div style="font-size:18px;font-weight:600;color:var(--primary-color);margin-bottom:8px;">${item.idiom}</div>
+            <div style="color:var(--text-secondary);margin-bottom:8px;">拼音：${item.pinyin}</div>
+            <div style="margin-bottom:8px;">释义：${item.meaning}</div>
+            <div style="color:var(--text-secondary);">例句：${item.example}</div>
+          </div>
+        `).join('');
+      }
+      
+      searchBtn.addEventListener('click', () => {
+        const results = searchChengyu(searchInput.value.trim());
+        displayResults(results);
+      });
+      
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const results = searchChengyu(searchInput.value.trim());
+          displayResults(results);
+        }
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        result.innerHTML = '';
+        searchInput.focus();
+      });
+      
+      // 随机显示一些
+      displayResults(chengyuData.slice(0, 5));
+    });
+  </script>
+</body>
+</html>

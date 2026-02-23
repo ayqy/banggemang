@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>分类工具 - 帮小忙</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/category.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索">
+        <input class="search-input" type="text" placeholder="搜索工具">
+      </div>
+    </header>
+    <div class="category-header">
+      <h1 class="category-title">分类工具</h1>
+    </div>
+    <main class="tool-list-container">
+      <div class="tool-grid"><div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-secondary);">该分类工具正在开发中...</div></div>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/common.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => { renderLeftNav(window.location.pathname.split('/')[2]); });</script>
+</body>
+</html>

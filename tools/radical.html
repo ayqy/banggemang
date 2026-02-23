@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>汉字偏旁 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <meta name="keywords" content="汉字偏旁，部首查询，汉字学习">
+  <meta name="description" content="汉字偏旁工具可以帮助您查找和学习汉字的偏旁部首。">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/radical.png" alt="汉字偏旁">
+        <h1 class="tool-title">汉字偏旁</h1>
+      </section>
+      <section class="tool-workspace">
+        <input type="text" id="charInput" class="text-input-area" placeholder="请输入一个汉字..." style="min-height: 50px; text-align: center; font-size: 24px;">
+        <div class="button-group">
+          <button class="btn btn-primary" id="searchBtn">查询</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        <div id="result" style="margin-top: 16px; padding: 16px; background: var(--bg-secondary); border-radius: 8px; display: none;">
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+            <div><strong>偏旁：</strong><span id="radicalResult"></span></div>
+            <div><strong>部首：</strong><span id="departmentResult"></span></div>
+            <div><strong>笔画：</strong><span id="strokeResult"></span></div>
+            <div><strong>结构：</strong><span id="structureResult"></span></div>
+          </div>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>汉字偏旁工具可以帮助您查找和学习汉字的偏旁部首。通过这款工具，您可以输入汉字，快速获取该汉字的偏旁部首信息，了解其构造和意义。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在输入框中输入一个汉字。</li>
+            <li>点击"查询"按钮查看偏旁部首信息。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    const charData = {
+      '水': { radical: '水', department: '水', stroke: 4, structure: '单一' },
+      '火': { radical: '火', department: '火', stroke: 4, structure: '单一' },
+      '木': { radical: '木', department: '木', stroke: 4, structure: '单一' },
+      '金': { radical: '金', department: '金', stroke: 8, structure: '上下' },
+      '土': { radical: '土', department: '土', stroke: 3, structure: '单一' },
+      '人': { radical: '人', department: '人', stroke: 2, structure: '单一' },
+      '口': { radical: '口', department: '口', stroke: 3, structure: '单一' },
+      '日': { radical: '日', department: '日', stroke: 4, structure: '单一' },
+      '月': { radical: '月', department: '月', stroke: 4, structure: '单一' },
+      '心': { radical: '心', department: '心', stroke: 4, structure: '单一' },
+      '手': { radical: '手', department: '手', stroke: 4, structure: '单一' },
+      '足': { radical: '足', department: '足', stroke: 7, structure: '上下' },
+      '言': { radical: '言', department: '言', stroke: 7, structure: '单一' },
+      '走': { radical: '走', department: '走', stroke: 7, structure: '上下' },
+      '车': { radical: '车', department: '车', stroke: 4, structure: '单一' },
+      '马': { radical: '马', department: '马', stroke: 3, structure: '单一' },
+      '鱼': { radical: '鱼', department: '鱼', stroke: 11, structure: '上下' },
+      '鸟': { radical: '鸟', department: '鸟', stroke: 5, structure: '单一' },
+      '虫': { radical: '虫', department: '虫', stroke: 6, structure: '单一' },
+      '草': { radical: '艹', department: '艸', stroke: 9, structure: '上下' },
+      '花': { radical: '艹', department: '艸', stroke: 7, structure: '上下' },
+      '树': { radical: '木', department: '木', stroke: 9, structure: '左中右' },
+      '林': { radical: '木', department: '木', stroke: 8, structure: '左右' },
+      '森': { radical: '木', department: '木', stroke: 12, structure: '品字' },
+      '明': { radical: '日', department: '日', stroke: 8, structure: '左右' },
+      '晴': { radical: '日', department: '日', stroke: 12, structure: '左右' },
+      '晚': { radical: '日', department: '日', stroke: 11, structure: '左右' },
+      '时': { radical: '日', department: '日', stroke: 7, structure: '左右' },
+      '江': { radical: '氵', department: '水', stroke: 6, structure: '左右' },
+      '河': { radical: '氵', department: '水', stroke: 8, structure: '左右' },
+      '海': { radical: '氵', department: '水', stroke: 10, structure: '左右' },
+      '湖': { radical: '氵', department: '水', stroke: 12, structure: '左中右' },
+      '好': { radical: '女', department: '女', stroke: 6, structure: '左右' },
+      '妈': { radical: '女', department: '女', stroke: 6, structure: '左右' },
+      '姐': { radical: '女', department: '女', stroke: 8, structure: '左右' },
+      '妹': { radical: '女', department: '女', stroke: 8, structure: '左右' },
+      '爸': { radical: '父', department: '父', stroke: 8, structure: '上下' },
+      '爷': { radical: '父', department: '父', stroke: 6, structure: '上下' },
+      '学': { radical: '子', department: '子', stroke: 8, structure: '上下' },
+      '校': { radical: '木', department: '木', stroke: 10, structure: '左右' },
+      '书': { radical: '乛', department: '乙', stroke: 4, structure: '单一' },
+      '本': { radical: '木', department: '木', stroke: 5, structure: '单一' },
+      '文': { radical: '文', department: '文', stroke: 4, structure: '单一' },
+      '字': { radical: '子', department: '子', stroke: 6, structure: '上下' },
+      '汉': { radical: '氵', department: '水', stroke: 5, structure: '左右' },
+      '语': { radical: '讠', department: '言', stroke: 9, structure: '左右' },
+      '说': { radical: '讠', department: '言', stroke: 9, structure: '左右' },
+      '话': { radical: '讠', department: '言', stroke: 8, structure: '左右' }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'radical').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const charInput = document.getElementById('charInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const result = document.getElementById('result');
+      
+      searchBtn.addEventListener('click', () => {
+        const char = charInput.value.trim();
+        if (!char || char.length !== 1) {
+          alert('请输入一个汉字');
+          return;
+        }
+        
+        const data = charData[char];
+        if (data) {
+          document.getElementById('radicalResult').textContent = data.radical;
+          document.getElementById('departmentResult').textContent = data.department;
+          document.getElementById('strokeResult').textContent = data.stroke;
+          document.getElementById('structureResult').textContent = data.structure;
+          result.style.display = 'block';
+        } else {
+          alert('暂不支持该字的查询');
+        }
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        charInput.value = '';
+        result.style.display = 'none';
+        charInput.focus();
+      });
+    });
+  </script>
+</body>
+</html>

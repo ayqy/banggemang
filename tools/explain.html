@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>词语注解 - 帮小忙，腾讯 QQ 浏览器在线工具箱</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <link rel="shortcut icon" href="/assets/icons/logo.png">
+</head>
+<body>
+  <nav class="left-nav">
+    <a class="logo-container" href="/">
+      <img src="/assets/icons/logo.png" alt="帮小忙">
+      <div><span class="title">帮小忙</span><span class="sub-title">腾讯 QQ 浏览器在线工具箱</span></div>
+    </a>
+    <ul class="category-container"></ul>
+  </nav>
+  <div class="left-nav-placeholder"></div>
+  <div class="category-page">
+    <header class="top-bar">
+      <div class="search-container">
+        <img class="search-icon" src="/assets/icons/search.png" alt="搜索按钮">
+        <input class="search-input" type="text" placeholder="搜索工具" autocomplete="off">
+        <a class="share-btn" title="分享"><img src="/assets/icons/share.png" alt="分享"></a>
+      </div>
+    </header>
+    <main class="tool-page-container">
+      <section class="tool-info-section">
+        <img class="tool-icon" src="/assets/images/tools/explain.png" alt="词语注解">
+        <h1 class="tool-title">词语注解</h1>
+      </section>
+      <section class="tool-workspace">
+        <input type="text" id="searchInput" class="text-input-area" placeholder="输入要查询的词语..." style="min-height: 50px;">
+        <div class="button-group">
+          <button class="btn btn-primary" id="searchBtn">查询</button>
+          <button class="btn btn-secondary" id="clearBtn">清空</button>
+        </div>
+        <div id="result" style="margin-top: 16px; padding: 16px; background: var(--bg-secondary); border-radius: 8px; display: none;">
+          <h3 id="wordTitle" style="margin-bottom: 8px; color: var(--primary-color);"></h3>
+          <div id="wordContent"></div>
+        </div>
+      </section>
+      <section class="tool-intro-section">
+        <h3>工具介绍及使用方法</h3>
+        <div class="intro-content">
+          <p>词语注解工具可以帮助您查找和学习词语的详细解释和用法。通过这款工具，您可以输入任意词语，快速获取该词语的注解、拼音、词性、例句等信息。</p>
+          <p><strong>使用方法：</strong></p>
+          <ol>
+            <li>在搜索框中输入要查询的词语。</li>
+            <li>点击"查询"按钮查看词语注解。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="recommend-section">
+        <div class="section-header"><h2 class="section-title">更多推荐</h2></div>
+        <div class="recommend-grid" id="recommendGrid"></div>
+      </section>
+    </main>
+    <div class="footer-placeholder-pc"></div>
+  </div>
+  <script src="/js/data/categories.js"></script>
+  <script src="/js/data/education-tools.js"></script>
+  <script src="/js/common.js"></script>
+  <script>
+    const wordData = {
+      '帮助': { pinyin: 'bāng zhù', pos: '动词', meaning: '替人出力、出主意或给以物质上、精神上的支援。', example: '同学们互相帮助，共同进步。' },
+      '美丽': { pinyin: 'měi lì', pos: '形容词', meaning: '好看；漂亮。', example: '这是一座美丽的城市。' },
+      '快乐': { pinyin: 'kuài lè', pos: '形容词', meaning: '感到幸福或满意。', example: '祝你生日快乐！' },
+      '认真': { pinyin: 'rèn zhēn', pos: '形容词', meaning: '信以为真；当真。严肃对待，不马虎。', example: '他学习很认真。' },
+      '努力': { pinyin: 'nǔ lì', pos: '形容词', meaning: '把力量尽量使出来。', example: '只要你努力，就一定能成功。' },
+      '勇敢': { pinyin: 'yǒng gǎn', pos: '形容词', meaning: '不怕危险和困难；有胆量。', example: '他是个勇敢的孩子。' },
+      '聪明': { pinyin: 'cōng ming', pos: '形容词', meaning: '智力发达，记忆和理解能力强。', example: '这孩子真聪明。' },
+      '善良': { pinyin: 'shàn liáng', pos: '形容词', meaning: '心地纯洁，没有恶意。', example: '她是个善良的人。' },
+      '友谊': { pinyin: 'yǒu yì', pos: '名词', meaning: '朋友间的交情。', example: '我们的友谊地久天长。' },
+      '成功': { pinyin: 'chéng gōng', pos: '名词/动词', meaning: '获得预期的结果。', example: '实验成功了！' },
+      '失败': { pinyin: 'shī bài', pos: '名词/动词', meaning: '在斗争或竞赛中被对方打败。工作没有达到预定的目的。', example: '失败是成功之母。' },
+      '希望': { pinyin: 'xī wàng', pos: '名词/动词', meaning: '心里想着达到某种目的或出现某种情况。', example: '我希望明天是个晴天。' },
+      '梦想': { pinyin: 'mèng xiǎng', pos: '名词', meaning: '梦中怀想；空想；理想。', example: '他的梦想是当一名科学家。' },
+      '未来': { pinyin: 'wèi lái', pos: '名词', meaning: '现在以后的时间；将来的光景。', example: '未来是美好的。' },
+      '现在': { pinyin: 'xiàn zài', pos: '名词', meaning: '这个时候，指说话的时候。', example: '我们现在出发吧。' },
+      '过去': { pinyin: 'guò qù', pos: '名词', meaning: '现在以前的时期。', example: '过去的事情就让它过去吧。' },
+      '时间': { pinyin: 'shí jiān', pos: '名词', meaning: '物质存在的一种客观形式，由过去、现在、将来构成的连绵不断的系统。', example: '时间过得真快。' },
+      '空间': { pinyin: 'kōng jiān', pos: '名词', meaning: '物质存在的一种客观形式，由长度、宽度、高度表现出来。', example: '这个房间空间很大。' },
+      '世界': { pinyin: 'shì jiè', pos: '名词', meaning: '地球上所有地方；社会领域。', example: '世界真大。' },
+      '国家': { pinyin: 'guó jiā', pos: '名词', meaning: '阶级统治的工具，是统治阶级对被统治阶级实行专政的暴力组织。', example: '我爱我的国家。' },
+      '人民': { pinyin: 'rén mín', pos: '名词', meaning: '以劳动群众为主体的社会基本成员。', example: '为人民服务。' },
+      '文化': { pinyin: 'wén huà', pos: '名词', meaning: '人类在社会历史发展过程中所创造的物质财富和精神财富的总和。', example: '中国文化博大精深。' },
+      '知识': { pinyin: 'zhī shi', pos: '名词', meaning: '人们在实践中获得的认识和经验。', example: '知识就是力量。' },
+      '学习': { pinyin: 'xué xí', pos: '动词', meaning: '从阅读、听讲、研究、实践中获得知识或技能。', example: '好好学习，天天向上。' },
+      '工作': { pinyin: 'gōng zuò', pos: '名词/动词', meaning: '从事体力或脑力劳动。', example: '他工作很努力。' },
+      '生活': { pinyin: 'shēng huó', pos: '名词/动词', meaning: '人或生物为了生存和发展而进行的各种活动。', example: '生活很美好。' },
+      '幸福': { pinyin: 'xìng fú', pos: '形容词', meaning: '使人心情舒畅的境遇和生活。', example: '我们生活得很幸福。' },
+      '健康': { pinyin: 'jiàn kāng', pos: '形容词', meaning: '人体生理机能正常，没有缺陷和疾病。', example: '身体健康最重要。' },
+      '安全': { pinyin: 'ān quán', pos: '形容词', meaning: '没有危险；不受威胁；不出事故。', example: '注意安全。' },
+      '和平': { pinyin: 'hé píng', pos: '名词', meaning: '指没有战争的状态。', example: '世界和平。' }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeftNav('education');
+      const recommendTools = educationTools.filter(t => t.id !== 'explain').slice(0, 4);
+      renderRecommendTools(recommendTools, '#recommendGrid');
+      
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const result = document.getElementById('result');
+      const wordTitle = document.getElementById('wordTitle');
+      const wordContent = document.getElementById('wordContent');
+      
+      function searchWord(word) {
+        if (!word) return null;
+        return wordData[word] || null;
+      }
+      
+      function displayResult(word, data) {
+        if (!data) {
+          result.style.display = 'none';
+          alert('未找到该词语的注解');
+          return;
+        }
+        
+        wordTitle.textContent = word;
+        wordContent.innerHTML = `
+          <div style="margin-bottom:8px;"><strong>拼音：</strong>${data.pinyin}</div>
+          <div style="margin-bottom:8px;"><strong>词性：</strong>${data.pos}</div>
+          <div style="margin-bottom:8px;"><strong>释义：</strong>${data.meaning}</div>
+          <div><strong>例句：</strong>${data.example}</div>
+        `;
+        result.style.display = 'block';
+      }
+      
+      searchBtn.addEventListener('click', () => {
+        const word = searchInput.value.trim();
+        const data = searchWord(word);
+        displayResult(word, data);
+      });
+      
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const word = searchInput.value.trim();
+          const data = searchWord(word);
+          displayResult(word, data);
+        }
+      });
+      
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        result.style.display = 'none';
+        searchInput.focus();
+      });
+    });
+  </script>
+</body>
+</html>
