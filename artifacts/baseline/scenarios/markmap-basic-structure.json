@@ -1,0 +1,18 @@
+{
+  "routeId": "markmap",
+  "routeName": "便捷思维导图",
+  "remotePath": "/markmap.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:39.837Z",
+  "expected": {
+    "pageTitle": "便捷思维导图-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "便捷思维导图",
+    "inputCount": 5,
+    "buttonTexts": [
+      "渲染导图",
+      "渲染导图"
+    ],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

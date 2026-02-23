@@ -1,0 +1,17 @@
+{
+  "routeId": "hanzifayin",
+  "routeName": "汉字标准发音",
+  "remotePath": "/hanzifayin.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:41.501Z",
+  "expected": {
+    "pageTitle": "汉字标准发音-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "汉字标准发音",
+    "inputCount": 3,
+    "buttonTexts": [
+      "标准发音"
+    ],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

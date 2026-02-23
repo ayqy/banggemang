@@ -1,0 +1,13 @@
+node_modules/
+.worktrees/
+
+# Playwright
+playwright-report/
+test-results/
+artifacts/test-results/
+
+# OS / editor
+.DS_Store
+
+# Local scratch files (do not commit)
+education-home-remote.png

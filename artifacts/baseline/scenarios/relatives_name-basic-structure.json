@@ -1,0 +1,22 @@
+{
+  "routeId": "relatives_name",
+  "routeName": "亲戚关系计算",
+  "remotePath": "/relatives_name.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:32.128Z",
+  "expected": {
+    "pageTitle": "亲戚关系计算-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "亲戚关系计算",
+    "inputCount": 5,
+    "buttonTexts": [
+      "父",
+      "母",
+      "夫",
+      "妻",
+      "子",
+      "女"
+    ],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "routeId": "periodic",
+  "routeName": "元素周期表",
+  "remotePath": "/periodic.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:42.422Z",
+  "expected": {
+    "pageTitle": "元素周期表-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "元素周期表",
+    "inputCount": 1,
+    "buttonTexts": [],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "routeId": "translate",
+  "routeName": "翻译",
+  "remotePath": "/translate.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:43.757Z",
+  "expected": {
+    "pageTitle": "翻译-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "翻译",
+    "inputCount": 1,
+    "buttonTexts": [],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

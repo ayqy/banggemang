@@ -1,0 +1,17 @@
+{
+  "routeId": "allegory",
+  "routeName": "歇后语",
+  "remotePath": "/allegory.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:45.692Z",
+  "expected": {
+    "pageTitle": "歇后语-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "歇后语",
+    "inputCount": 2,
+    "buttonTexts": [
+      "歇后语查询"
+    ],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

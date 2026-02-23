@@ -1,0 +1,15 @@
+{
+  "routeId": "handwriting_erasure",
+  "routeName": "去手写",
+  "remotePath": "/handwriting_erasure.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:29.697Z",
+  "expected": {
+    "pageTitle": "去手写-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "去手写",
+    "inputCount": 1,
+    "buttonTexts": [],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

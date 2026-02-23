@@ -1,0 +1,19 @@
+[
+  { "routeId": "handwriting_erasure", "name": "去手写", "href": "/handwriting_erasure.html" },
+  { "routeId": "zitie_new", "name": "字帖生成", "href": "/zitie_new.html" },
+  { "routeId": "relatives_name", "name": "亲戚关系计算", "href": "/relatives_name.html" },
+  { "routeId": "school", "name": "高校查询", "href": "/school.html" },
+  { "routeId": "wordcount", "name": "字数计算", "href": "/wordcount.html" },
+  { "routeId": "dynasties", "name": "历史朝代查询", "href": "/dynasties.html" },
+  { "routeId": "capital", "name": "各国首都", "href": "/capital.html" },
+  { "routeId": "jielong", "name": "成语接龙", "href": "/jielong.html" },
+  { "routeId": "markmap", "name": "便捷思维导图", "href": "/markmap.html" },
+  { "routeId": "hanzifayin", "name": "汉字标准发音", "href": "/hanzifayin.html" },
+  { "routeId": "periodic", "name": "元素周期表", "href": "/periodic.html" },
+  { "routeId": "translate", "name": "翻译", "href": "/translate.html" },
+  { "routeId": "radical", "name": "汉字偏旁", "href": "/radical.html" },
+  { "routeId": "allegory", "name": "歇后语", "href": "/allegory.html" },
+  { "routeId": "explain", "name": "词语注解", "href": "/explain.html" },
+  { "routeId": "chengyujielong", "name": "成语大全", "href": "/chengyujielong.html" }
+]
+

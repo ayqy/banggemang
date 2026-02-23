@@ -1,0 +1,15 @@
+{
+  "routeId": "school",
+  "routeName": "高校查询",
+  "remotePath": "/school.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:33.098Z",
+  "expected": {
+    "pageTitle": "高校查询-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "高校查询",
+    "inputCount": 7,
+    "buttonTexts": [],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}

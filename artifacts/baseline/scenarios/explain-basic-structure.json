@@ -1,0 +1,17 @@
+{
+  "routeId": "explain",
+  "routeName": "词语注解",
+  "remotePath": "/explain.html",
+  "caseId": "basic-structure",
+  "capturedAt": "2026-02-09T23:49:46.642Z",
+  "expected": {
+    "pageTitle": "词语注解-帮小忙，腾讯QQ浏览器在线工具箱",
+    "toolTitle": "词语注解",
+    "inputCount": 2,
+    "buttonTexts": [
+      "注解查询"
+    ],
+    "firstRecommend": "历史朝代查询",
+    "hasToolContainer": true
+  }
+}
