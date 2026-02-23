@@ -1,28 +1,27 @@
 # 自动测评评分
 
 分支：glm-5-qoder
-总分：10/100（通过 2/21）
+总分：12/100
+路由通过：2/17
+用例通过：3/18
 
-| Case | 结果 | 备注 |
-| --- | --- | --- |
-| education-home:basic-structure | FAILED | Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveTitle[2m([22m[32mexpected[39m[2m)[22m failed Expected: [32m"帮小忙，腾讯QQ浏览器在线工具箱[7m平台[27m"[39m Recei |
-| education-home:tool-links | PASS |  |
-| education-home:search-suggestion | PASS |  |
-| allegory:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| capital:basic-structure | FAILED | Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m Expected: [32m1[39m Received: [31m0[39m |
-| chengyujielong:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| dynasties:basic-structure | FAILED | Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m Expected: [32m1[39m Received: [31m0[39m |
-| explain:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| handwriting_erasure:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| hanzifayin:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| jielong:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| markmap:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| periodic:basic-structure | FAILED | Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m Expected: [32m1[39m Received: [31m0[39m |
-| radical:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| relatives_name:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| school:basic-structure | FAILED | Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m Expected: [32m7[39m Received: [31m0[39m |
-| translate:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('翻译', { exact: true }) Expected: visible Error: str |
-| zitie_new:basic-structure | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: getByText('历史朝代查询', { exact: true }) Expected: visible Timeou |
-| wordcount:calc-total | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: locator('main').first().getByText('总字数：5') Expected: visible  |
-| relatives_name:calc | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: locator('main').first().locator('input[type="text"], textarea |
-| jielong:start | FAILED | Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed Locator: locator('main').first().getByText('接龙', { exact: true }).firs |
+| Route | Case | 结果 | 备注 |
+| --- | --- | --- | --- |
+| education-home | education-home:tool-links | PASS |  |
+| education-home | education-home:search-suggestion | PASS |  |
+| handwriting_erasure | handwriting_erasure:upload-flow | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByText(/开始(去除|处理)/).first() Expected: visible Timeout: 5000ms Error: element(s)  |
+| zitie_new | zitie_new:render-on-input | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().locator('textarea').first() Expected: visible Timeout: 5000ms Error: element(s) not |
+| relatives_name | relatives_name:calc | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().locator('input[type="text"], textarea').first() Expected: visible Timeout: 5000ms E |
+| school | school:filter-985 | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('row', { name: /南京信息工程大学/ }).first() Expected: visible Timeout: 5000ms Er |
+| wordcount | wordcount:calc-total | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByText('总字数：5') Expected: visible Timeout: 5000ms Error: element(s) not found Ca |
+| dynasties | dynasties:contains-yuan | PASS |  |
+| capital | capital:contains-china-beijing | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('row', { name: /中华人民共和国/ }).first() Expected: visible Timeout: 5000ms Err |
+| jielong | jielong:chain-starts-with-last-char | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('table').first() Expected: visible Timeout: 5000ms Error: element(s) not  |
+| markmap | markmap:render-updates-preview | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('button', { name: '渲染导图' }).first() Expected: visible Timeout: 5000ms Err |
+| hanzifayin | hanzifayin:speak-or-audio | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('button', { name: /标准发音/ }).first() Expected: visible Timeout: 5000ms Err |
+| periodic | periodic:contains-hydrogen | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('cell', { name: /1\s*H\s*氢/ }).first() Expected: visible Timeout: 10000ms |
+| translate | translate:switch-provider | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().locator('iframe').first() Expected: visible Received: hidden Timeout: 5000ms Call l |
+| radical | radical:query | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('textbox', { name: /偏旁/ }).first() Expected: visible Timeout: 5000ms Erro |
+| allegory | allegory:query | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('button', { name: '歇后语查询' }).first() Expected: visible Timeout: 5000ms Er |
+| explain | explain:query | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('textbox', { name: /查询汉词/ }).first() Expected: visible Timeout: 5000ms Er |
+| chengyujielong | chengyujielong:query-hanzi | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('textbox', { name: '成语查询' }).first() Expected: visible Timeout: 5000ms Er |
