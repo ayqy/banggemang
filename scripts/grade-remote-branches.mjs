@@ -31,7 +31,13 @@ function listRemoteBranches() {
     .split('\n')
     .map((s) => s.trim())
     .filter(Boolean)
-    .filter((s) => s !== 'origin/HEAD' && s !== 'origin/main' && s !== 'origin/benchmark')
+    .filter(
+      (s) =>
+        s !== 'origin/HEAD' &&
+        s !== 'origin/main' &&
+        s !== 'origin/benchmark' &&
+        s !== 'origin/task'
+    )
     .map((s) => s.replace(/^origin\//, ''));
 }
 
