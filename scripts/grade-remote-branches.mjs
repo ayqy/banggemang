@@ -443,6 +443,7 @@ function writeMainLeaderboardAndPush({ results }) {
 
 async function main() {
   sh('git fetch origin --prune', { stdio: ['ignore', 'inherit', 'inherit'] });
+  sh('git worktree prune', { stdio: ['ignore', 'inherit', 'inherit'] });
 
   const branches = listRemoteBranches();
   if (branches.length === 0) {
