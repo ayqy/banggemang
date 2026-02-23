@@ -364,6 +364,83 @@ function writeReadmeAndPush({ worktreePath, branchName, readmeContent }) {
   sh(`git push origin "${branchName}"`, { cwd: worktreePath, stdio: ['ignore', 'inherit', 'inherit'] });
 }
 
+function nowTimestamp() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+
+function rankBadge(rank) {
+  if (rank === 1) return '🥇';
+  if (rank === 2) return '🥈';
+  if (rank === 3) return '🥉';
+  return String(rank);
+}
+
+function renderMainLeaderboardBlock(results) {
+  const lines = [];
+  lines.push('<!-- AUTO-GRADE:START -->');
+  lines.push('## 自动测评排行榜');
+  lines.push('');
+  lines.push(`更新时间：${nowTimestamp()}`);
+  lines.push('');
+  lines.push('| 排名 | 分支 | 分数 | 路由通过 | 用例通过 |');
+  lines.push('| --- | --- | --- | --- | --- |');
+
+  const sorted = [...results].sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return String(a.branchName).localeCompare(String(b.branchName));
+  });
+
+  for (let i = 0; i < sorted.length; i += 1) {
+    const r = sorted[i];
+    const rank = i + 1;
+    lines.push(
+      `| ${rankBadge(rank)} | ${r.branchName} | ${r.score}/100 | ${r.passedRoutes}/${r.totalRoutes} | ${r.passedCases}/${r.totalCases} |`
+    );
+  }
+
+  lines.push('');
+  lines.push('<!-- AUTO-GRADE:END -->');
+  return lines.join('\n');
+}
+
+function escapeRegExp(s) {
+  return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function upsertAutogradeBlock(existing, block) {
+  const start = '<!-- AUTO-GRADE:START -->';
+  const end = '<!-- AUTO-GRADE:END -->';
+  const re = new RegExp(`${escapeRegExp(start)}[\\s\\S]*?${escapeRegExp(end)}\\n*`, 'm');
+
+  if (re.test(existing)) {
+    return existing.replace(re, `${block}\n\n`);
+  }
+
+  return `${block}\n\n${String(existing || '').trimStart()}`;
+}
+
+function writeMainLeaderboardAndPush({ results }) {
+  const branchName = 'main';
+  const worktreePath = ensureWorktree(branchName);
+
+  const readmePath = path.join(worktreePath, 'README.md');
+  const oldContent = fs.existsSync(readmePath) ? fs.readFileSync(readmePath, 'utf8') : '';
+
+  const block = renderMainLeaderboardBlock(results);
+  const newContent = upsertAutogradeBlock(oldContent, block);
+  fs.writeFileSync(readmePath, newContent, 'utf8');
+
+  sh('git add README.md', { cwd: worktreePath });
+
+  const staged = sh('git diff --cached --name-only', { cwd: worktreePath });
+  if (!staged) return;
+
+  sh('git commit -m "chore: update grading leaderboard"', { cwd: worktreePath });
+  sh(`git push origin "${branchName}"`, { cwd: worktreePath, stdio: ['ignore', 'inherit', 'inherit'] });
+}
+
 async function main() {
   sh('git fetch origin --prune', { stdio: ['ignore', 'inherit', 'inherit'] });
 
@@ -374,6 +451,8 @@ async function main() {
   }
 
   console.log(`Branches to grade: ${branches.join(', ')}`);
+
+  const results = [];
 
   for (const branchName of branches) {
     console.log(`\n=== Grading ${branchName} ===`);
@@ -406,7 +485,19 @@ async function main() {
     console.log(
       `Score ${score}/100 (routes ${routeScore.passedRoutes}/${routeScore.totalRoutes}, cases ${passed}/${total})`
     );
+
+    results.push({
+      branchName,
+      score,
+      passedRoutes: routeScore.passedRoutes,
+      totalRoutes: routeScore.totalRoutes,
+      passedCases: passed,
+      totalCases: total
+    });
   }
+
+  console.log('\n=== Updating main leaderboard ===');
+  writeMainLeaderboardAndPush({ results });
 }
 
 await main();
