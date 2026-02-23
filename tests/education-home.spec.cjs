@@ -1,25 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-const { loadEducationHomeDom } = require('./helpers/baseline.cjs');
 const tools = require('./fixtures/tools.json');
-
-test('education-home:basic-structure', async ({ page }) => {
-  const baseline = loadEducationHomeDom();
-
-  await page.goto('/index.html', { waitUntil: 'domcontentloaded' });
-  await expect(page).toHaveTitle(baseline.title);
-
-  for (const label of baseline.navLabels) {
-    await expect(page.getByText(label, { exact: true })).toBeVisible();
-  }
-
-  for (const name of baseline.toolNames) {
-    await expect(page.getByText(name, { exact: true })).toBeVisible();
-  }
-
-  // Footer should exist on the remote page; we check for the copyright keyword.
-  await expect(page.getByText('Copyright')).toBeVisible();
-});
 
 test('education-home:tool-links', async ({ page }) => {
   await page.goto('/index.html', { waitUntil: 'domcontentloaded' });

@@ -181,21 +181,63 @@ function shortError(msg) {
     .slice(0, 160);
 }
 
-function renderReadme({ branchName, score, passed, total, cases }) {
+function routeIdFromTitle(title) {
+  const t = String(title || '');
+  const idx = t.indexOf(':');
+  if (idx <= 0) return 'misc';
+  return t.slice(0, idx);
+}
+
+function computeScoreByRoute(cases) {
+  const routes = new Map();
+  for (const c of cases) {
+    const routeId = routeIdFromTitle(c.title);
+    if (!routes.has(routeId)) routes.set(routeId, { passed: 0, total: 0 });
+    const r = routes.get(routeId);
+    r.total += 1;
+    if (c.status === 'passed') r.passed += 1;
+  }
+
+  const routeEntries = Array.from(routes.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+  const routeRates = routeEntries.map(([routeId, r]) => ({
+    routeId,
+    passed: r.passed,
+    total: r.total,
+    rate: r.total ? r.passed / r.total : 0
+  }));
+
+  const routeCount = routeRates.length || 1;
+  const avgRate =
+    routeRates.reduce((sum, r) => sum + r.rate, 0) / routeCount;
+
+  const score = Math.round(avgRate * 100);
+  const passedRoutes = routeRates.filter((r) => r.passed === r.total && r.total > 0).length;
+
+  return {
+    score,
+    routes: routeRates,
+    passedRoutes,
+    totalRoutes: routeCount
+  };
+}
+
+function renderReadme({ branchName, score, passedCases, totalCases, passedRoutes, totalRoutes, cases }) {
   const lines = [];
   lines.push('# 自动测评评分');
   lines.push('');
   lines.push(`分支：${branchName}`);
-  lines.push(`总分：${score}/100（通过 ${passed}/${total}）`);
+  lines.push(`总分：${score}/100`);
+  lines.push(`路由通过：${passedRoutes}/${totalRoutes}`);
+  lines.push(`用例通过：${passedCases}/${totalCases}`);
   lines.push('');
-  lines.push('| Case | 结果 | 备注 |');
-  lines.push('| --- | --- | --- |');
+  lines.push('| Route | Case | 结果 | 备注 |');
+  lines.push('| --- | --- | --- | --- |');
 
   for (const c of cases) {
     const ok = c.status === 'passed';
     const result = ok ? 'PASS' : c.status === 'skipped' ? 'SKIP' : 'FAILED';
     const note = ok ? '' : shortError(c.error);
-    lines.push(`| ${c.title} | ${result} | ${note} |`);
+    lines.push(`| ${routeIdFromTitle(c.title)} | ${c.title} | ${result} | ${note} |`);
   }
 
   lines.push('');
@@ -341,12 +383,23 @@ async function main() {
 
     const total = run.cases.length || 1;
     const passed = run.cases.filter((c) => c.status === 'passed').length;
-    const score = Math.round((passed / total) * 100);
+    const routeScore = computeScoreByRoute(run.cases);
+    const score = routeScore.score;
 
-    const readme = renderReadme({ branchName, score, passed, total, cases: run.cases });
+    const readme = renderReadme({
+      branchName,
+      score,
+      passedCases: passed,
+      totalCases: total,
+      passedRoutes: routeScore.passedRoutes,
+      totalRoutes: routeScore.totalRoutes,
+      cases: run.cases
+    });
     writeReadmeAndPush({ worktreePath, branchName, readmeContent: readme });
 
-    console.log(`Score ${score}/100 (${passed}/${total} passed)`);
+    console.log(
+      `Score ${score}/100 (routes ${routeScore.passedRoutes}/${routeScore.totalRoutes}, cases ${passed}/${total})`
+    );
   }
 }
 
