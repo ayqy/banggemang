@@ -5,3 +5,4 @@
 
 | Case | 结果 | 备注 |
 | --- | --- | --- |
+| runner:json-output | FAILED | No JSON output from Playwright |
