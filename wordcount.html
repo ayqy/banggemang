@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字数计算-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .app-container {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .textarea-box {
+            width: 100%;
+            height: 240px;
+            padding: 16px;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            font-size: 16px;
+            line-height: 1.6;
+            outline: none;
+            resize: vertical;
+            margin-bottom: 12px;
+        }
+        .textarea-box:focus {
+            border-color: #1a5cff;
+        }
+        .tip-text {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .btn {
+            height: 40px;
+            padding: 0 32px;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #1a5cff;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #1449cc;
+        }
+        .btn-default {
+            background: #fff;
+            border-color: #d9d9d9;
+            color: #333;
+        }
+        .btn-default:hover {
+            color: #1a5cff;
+            border-color: #1a5cff;
+        }
+        .result-panel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            background: #f8f9fb;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .result-item {
+            text-align: center;
+        }
+        .result-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .result-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a5cff;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">字数计算</h1>
+            </div>
+
+            <div class="app-container">
+                <textarea class="textarea-box" id="textInput" placeholder="请输入"></textarea>
+                <div class="tip-text">空格、换行不计入字数</div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="btnConfirm">确认</button>
+                    <button class="btn btn-default" id="btnClear">清空</button>
+                </div>
+
+                <div class="result-panel">
+                    <div class="result-item">
+                        <div class="result-label">总字数(不含空格换行)</div>
+                        <div class="result-value" id="resTotal">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">中文字符</div>
+                        <div class="result-value" id="resChinese">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">英文字符(含数字)</div>
+                        <div class="result-value" id="resEnglish">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">标点符号</div>
+                        <div class="result-value" id="resPunctuation">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>字数计算专为快速计算文本中的字数、字符数、单词数和句子数而设计。无论您是需要统计文章的字数、检查字符限制，还是进行文本分析，这款工具都能帮助您高效完成任务。</p>
+                <p>1、在文本输入框中输入或粘贴您需要计算的文本内容。</p>
+                <p>2、工具会自动计算并显示文本的字数、字符数。</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const btnConfirm = document.getElementById('btnConfirm');
+        const btnClear = document.getElementById('btnClear');
+        
+        const resTotal = document.getElementById('resTotal');
+        const resChinese = document.getElementById('resChinese');
+        const resEnglish = document.getElementById('resEnglish');
+        const resPunctuation = document.getElementById('resPunctuation');
+
+        function calculate() {
+            const text = textInput.value;
+            // 空格换行不计入总字数
+            const noSpaceText = text.replace(/[\s\n\r]/g, '');
+            resTotal.innerText = noSpaceText.length;
+
+            const zhMatch = text.match(/[\u4e00-\u9fa5]/g) || [];
+            resChinese.innerText = zhMatch.length;
+
+            const enMatch = text.match(/[a-zA-Z0-9]/g) || [];
+            resEnglish.innerText = enMatch.length;
+
+            // 剩下的大致算作标点符号（去除空格换行后减去中英数字）
+            resPunctuation.innerText = noSpaceText.length - zhMatch.length - enMatch.length;
+        }
+
+        btnConfirm.addEventListener('click', calculate);
+        
+        // 实时输入也可以绑定
+        textInput.addEventListener('input', calculate);
+
+        btnClear.addEventListener('click', () => {
+            textInput.value = '';
+            calculate();
+        });
+    </script>
+</body>
+</html>

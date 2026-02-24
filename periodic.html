@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元素周期表-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .periodic-table-wrapper {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+        .periodic-table {
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            gap: 4px;
+            min-width: 900px;
+        }
+        .element-box {
+            position: relative;
+            background: #f8f9fb;
+            border: 1px solid #e1e4e8;
+            border-radius: 4px;
+            padding: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .element-box:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #eef3ff;
+            border-color: #1a5cff;
+        }
+        .el-num {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            font-size: 10px;
+            color: #666;
+        }
+        .el-symbol {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 4px;
+        }
+        .el-name {
+            font-size: 12px;
+            color: #666;
+        }
+        .empty-box {
+            background: transparent;
+            border: none;
+        }
+        
+        .type-nonmetal { background: #e8f5e9; }
+        .type-alkali { background: #ffebee; }
+        .type-alkaline { background: #fff3e0; }
+        .type-transition { background: #e3f2fd; }
+        .type-noble { background: #f3e5f5; }
+
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">元素周期表</h1>
+            </div>
+
+            <div class="periodic-table-wrapper">
+                <div class="periodic-table" id="ptable">
+                    <!-- JS will populate -->
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>元素周期表工具可以帮助您快速查阅和了解化学元素的详细信息，您可以轻松找到每个元素的原子序数、符号、名称、原子量、电子排布等信息，适用于学习、教学和科学研究等场景。</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const elements = [
+            {n:1, sym:'H', name:'氢', r:1, c:1, t:'nonmetal'},
+            {n:2, sym:'He', name:'氦', r:1, c:18, t:'noble'},
+            {n:3, sym:'Li', name:'锂', r:2, c:1, t:'alkali'},
+            {n:4, sym:'Be', name:'铍', r:2, c:2, t:'alkaline'},
+            {n:5, sym:'B', name:'硼', r:2, c:13, t:'nonmetal'},
+            {n:6, sym:'C', name:'碳', r:2, c:14, t:'nonmetal'},
+            {n:7, sym:'N', name:'氮', r:2, c:15, t:'nonmetal'},
+            {n:8, sym:'O', name:'氧', r:2, c:16, t:'nonmetal'},
+            {n:9, sym:'F', name:'氟', r:2, c:17, t:'nonmetal'},
+            {n:10, sym:'Ne', name:'氖', r:2, c:18, t:'noble'},
+            // Truncated list for demonstration
+            {n:11, sym:'Na', name:'钠', r:3, c:1, t:'alkali'},
+            {n:12, sym:'Mg', name:'镁', r:3, c:2, t:'alkaline'},
+            {n:13, sym:'Al', name:'铝', r:3, c:13, t:'transition'},
+            {n:14, sym:'Si', name:'硅', r:3, c:14, t:'nonmetal'},
+            {n:15, sym:'P', name:'磷', r:3, c:15, t:'nonmetal'},
+            {n:16, sym:'S', name:'硫', r:3, c:16, t:'nonmetal'},
+            {n:17, sym:'Cl', name:'氯', r:3, c:17, t:'nonmetal'},
+            {n:18, sym:'Ar', name:'氩', r:3, c:18, t:'noble'}
+        ];
+
+        const container = document.getElementById('ptable');
+        
+        let grid = Array.from({length: 3}, () => Array(18).fill(null));
+
+        elements.forEach(e => {
+            if (e.r <= 3) {
+                grid[e.r-1][e.c-1] = e;
+            }
+        });
+
+        let html = '';
+        for (let r = 0; r < 3; r++) {
+            for (let c = 0; c < 18; c++) {
+                const e = grid[r][c];
+                if (e) {
+                    html += `
+                    <div class="element-box type-${e.t}">
+                        <span class="el-num">${e.n}</span>
+                        <span class="el-symbol">${e.sym}</span>
+                        <span class="el-name">${e.name}</span>
+                    </div>`;
+                } else {
+                    html += `<div class="empty-box"></div>`;
+                }
+            }
+        }
+        
+        container.innerHTML = html;
+    </script>
+</body>
+</html>

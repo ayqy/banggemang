@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史朝代查询-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .table-container {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+        .dynasty-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        .dynasty-table th, .dynasty-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        .dynasty-table th {
+            font-weight: 600;
+            color: #333;
+            background: #fafafa;
+        }
+        .dynasty-table tr:hover td {
+            background: #fcfcfc;
+        }
+        .notes-area {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #e1e4e8;
+        }
+        .notes-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .note-item {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">历史朝代查询</h1>
+            </div>
+
+            <div class="table-container">
+                <table class="dynasty-table">
+                    <thead>
+                        <tr>
+                            <th>朝代</th>
+                            <th>起讫</th>
+                            <th>都城</th>
+                            <th>今地</th>
+                            <th>创建者</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>夏朝</td>
+                            <td>公元前2070-公元前1600</td>
+                            <td>阳城、阳翟</td>
+                            <td>河南登封、偃师等</td>
+                            <td>禹</td>
+                        </tr>
+                        <tr>
+                            <td>①商朝</td>
+                            <td>公元前1600-公元前1046</td>
+                            <td>殷</td>
+                            <td>河南安阳</td>
+                            <td>汤</td>
+                        </tr>
+                        <tr>
+                            <td>周朝 - ②西周</td>
+                            <td>公元前1046-公元前771</td>
+                            <td>镐京</td>
+                            <td>陕西西安</td>
+                            <td>周武王姬发</td>
+                        </tr>
+                        <tr>
+                            <td>周朝 - 东周</td>
+                            <td>公元前770-公元前256</td>
+                            <td>洛邑</td>
+                            <td>河南洛阳</td>
+                            <td>周平王姬宜臼</td>
+                        </tr>
+                        <tr>
+                            <td>秦朝</td>
+                            <td>公元前221-公元前207</td>
+                            <td>咸阳</td>
+                            <td>陕西咸阳</td>
+                            <td>秦始皇帝嬴政</td>
+                        </tr>
+                        <tr>
+                            <td>汉朝 - ③西汉</td>
+                            <td>公元前202-8</td>
+                            <td>长安</td>
+                            <td>陕西西安</td>
+                            <td>汉高祖刘邦</td>
+                        </tr>
+                        <tr>
+                            <td>汉朝 - 东汉</td>
+                            <td>25-220</td>
+                            <td>洛阳</td>
+                            <td>河南洛阳</td>
+                            <td>光武帝刘秀</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="notes-area">
+                    <div class="notes-title">附注：</div>
+                    <div class="note-item">① 约公元前14世纪盘庚迁都于殷，此后商也称为殷。</div>
+                    <div class="note-item">② 公元前841年(西周共和元年)为中国历史确切纪年的开始。</div>
+                    <div class="note-item">③ 包括王莽建立的【新】王朝(公元8年—23年)。王莽时期，爆发大规模的农民起义，建立了农民政权。</div>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>历史朝代查询是一款教育性和实用性兼备的在线工具，专为帮助用户快速查询和了解各个历史朝代的相关信息而设计。通过这款工具，您可以轻松获取各个朝代的起止时间、重要事件、著名人物等信息，帮助您更好地学习和理解历史。</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

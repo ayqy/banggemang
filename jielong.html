@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成语接龙-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .jielong-container {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .input-group {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .input-box {
+            flex: 1;
+            height: 44px;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            padding: 0 16px;
+            font-size: 16px;
+            outline: none;
+        }
+        .input-box:focus {
+            border-color: #1a5cff;
+        }
+        .btn-start {
+            height: 44px;
+            padding: 0 32px;
+            background: #1a5cff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-start:hover {
+            background: #1449cc;
+        }
+        .btn-change {
+            height: 44px;
+            padding: 0 20px;
+            background: #fff;
+            color: #1a5cff;
+            border: 1px solid #1a5cff;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none; /* Initially hidden */
+        }
+        .btn-change:hover {
+            background: #f0f5ff;
+        }
+        .result-area {
+            display: none; /* Initially hidden */
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .chain-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .idiom-item {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: #333;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .idiom-arrow {
+            color: #ccc;
+            font-size: 18px;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">成语接龙</h1>
+            </div>
+
+            <div class="jielong-container">
+                <div class="input-group">
+                    <input type="text" class="input-box" id="idiomInput" placeholder="输入成语，开始接龙">
+                    <button class="btn-start" id="btnStart">开始接龙</button>
+                    <button class="btn-change" id="btnChange">换一换</button>
+                </div>
+
+                <div class="result-area" id="resultArea">
+                    <div class="chain-box" id="chainBox">
+                        <!-- JS renders here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>成语接龙工具可以帮助您进行成语接龙游戏，提升您的汉语词汇量和语言表达能力。通过这款工具，您可以输入一个成语，工具会自动生成下一个接龙成语，帮助您继续游戏，适用于学习、娱乐和语言训练等场景。</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const btnStart = document.getElementById('btnStart');
+        const btnChange = document.getElementById('btnChange');
+        const idiomInput = document.getElementById('idiomInput');
+        const resultArea = document.getElementById('resultArea');
+        const chainBox = document.getElementById('chainBox');
+
+        // Mock database
+        const idiomsDict = {
+            '一马当先': ['先见之明', '明知故问', '问心无愧', '愧不敢当', '当机立断'],
+            '一鸣惊人': ['人定胜天', '天长地久', '久别重逢', '逢凶化吉', '吉星高照'],
+            '默认': ['行云流水', '水落石出', '出生入死', '死里逃生', '生离死别']
+        };
+
+        function renderChain(startWord) {
+            resultArea.style.display = 'block';
+            btnChange.style.display = 'block';
+            
+            const chain = idiomsDict[startWord] || idiomsDict['默认'];
+            
+            let html = `<div class="idiom-item">${startWord || '默认成语'}</div>`;
+            chain.forEach(idiom => {
+                html += `
+                    <div class="idiom-arrow">➔</div>
+                    <div class="idiom-item">${idiom}</div>
+                `;
+            });
+            chainBox.innerHTML = html;
+        }
+
+        btnStart.addEventListener('click', () => {
+            const val = idiomInput.value.trim();
+            if(val) {
+                renderChain(val);
+            } else {
+                alert('请输入一个成语');
+            }
+        });
+
+        btnChange.addEventListener('click', () => {
+            // Mock changing logic by shuffling
+            const val = idiomInput.value.trim() || '随机成语';
+            const chain = [...(idiomsDict['默认'])].reverse();
+            
+            let html = `<div class="idiom-item">${val}</div>`;
+            chain.forEach(idiom => {
+                html += `
+                    <div class="idiom-arrow">➔</div>
+                    <div class="idiom-item">${idiom}</div>
+                `;
+            });
+            chainBox.innerHTML = html;
+        });
+    </script>
+</body>
+</html>

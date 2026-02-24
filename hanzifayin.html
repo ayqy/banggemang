@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉字标准发音-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .app-container {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 20px;
+        }
+        .input-panel, .output-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .textarea-box {
+            flex: 1;
+            min-height: 240px;
+            padding: 16px;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            font-size: 16px;
+            line-height: 1.6;
+            outline: none;
+            resize: none;
+            margin-bottom: 16px;
+        }
+        .textarea-box:focus {
+            border-color: #1a5cff;
+        }
+        .output-box {
+            background: #f8f9fb;
+            color: #555;
+        }
+        .btn-pronounce {
+            height: 44px;
+            padding: 0 32px;
+            background: #1a5cff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            align-self: flex-start;
+        }
+        .btn-pronounce:hover {
+            background: #1449cc;
+        }
+        .btn-pronounce:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">汉字标准发音</h1>
+            </div>
+
+            <div class="app-container">
+                <div class="input-panel">
+                    <textarea class="textarea-box" id="textInput" placeholder="请输入需要练习发音文字"></textarea>
+                    <button class="btn-pronounce" id="btnPronounce">标准发音</button>
+                </div>
+                <div class="output-panel">
+                    <textarea class="textarea-box output-box" id="textOutput" placeholder="发音结果展示" readonly></textarea>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>汉字标准发音工具可以帮助您学习和掌握汉字的标准发音。通过这款工具，您可以输入任意汉字或词语，工具会自动提供标准的拼音和发音，便于您进行语言学习、发音练习和教学辅助。</p>
+                <p>1、在框内输入您想要学习的文字。</p>
+                <p>2、点击“标准发音”按钮，工具会帮助您标准读取汉字。</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const btnPronounce = document.getElementById('btnPronounce');
+        const textInput = document.getElementById('textInput');
+        const textOutput = document.getElementById('textOutput');
+
+        btnPronounce.addEventListener('click', () => {
+            const text = textInput.value.trim();
+            if (!text) {
+                alert('请输入需要发音的文字');
+                return;
+            }
+
+            textOutput.value = "正在发音中...\n" + text;
+
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN'; // Set language to Chinese
+                utterance.rate = 1; // Normal speed
+                
+                utterance.onend = function() {
+                    textOutput.value = "发音结束。\n" + text;
+                };
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('抱歉，您的浏览器不支持语音朗读功能。');
+            }
+        });
+    </script>
+</body>
+</html>

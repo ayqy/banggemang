@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高校查询-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .table-container {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .filter-tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+        }
+        .filter-tab {
+            font-size: 15px;
+            color: #666;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .filter-tab:hover {
+            color: #1a5cff;
+            background: #f0f5ff;
+        }
+        .filter-tab.active {
+            color: #1a5cff;
+            font-weight: 500;
+            background: #eef3ff;
+        }
+        .school-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .school-table th, .school-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        .school-table th {
+            font-weight: 600;
+            color: #333;
+            background: #fafafa;
+        }
+        .school-table tr:hover td {
+            background: #fcfcfc;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">高校查询</h1>
+            </div>
+
+            <div class="table-container">
+                <div class="filter-tabs">
+                    <div class="filter-tab active">全部</div>
+                    <div class="filter-tab">985</div>
+                    <div class="filter-tab">211</div>
+                    <div class="filter-tab">双一流A</div>
+                    <div class="filter-tab">双一流B</div>
+                    <div class="filter-tab">一流学科</div>
+                </div>
+
+                <table class="school-table">
+                    <thead>
+                        <tr>
+                            <th>学校名称</th>
+                            <th>985</th>
+                            <th>211</th>
+                            <th>双一流</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>清华大学</td>
+                            <td>是</td>
+                            <td>是</td>
+                            <td>是</td>
+                        </tr>
+                        <tr>
+                            <td>北京大学</td>
+                            <td>是</td>
+                            <td>是</td>
+                            <td>是</td>
+                        </tr>
+                        <tr>
+                            <td>中国人民大学</td>
+                            <td>是</td>
+                            <td>是</td>
+                            <td>是</td>
+                        </tr>
+                        <tr>
+                            <td>北京工业大学</td>
+                            <td>否</td>
+                            <td>是</td>
+                            <td>是</td>
+                        </tr>
+                        <tr>
+                            <td>北京理工大学</td>
+                            <td>是</td>
+                            <td>是</td>
+                            <td>是</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>高校查询可以快速找到中国境内知名大学的相关信息， 应用汇聚了全国各地的知名大学，包括清华大学、北京大学、南京大学、浙江大学、复旦大学、上海交通大学等等。能够帮助高考学生和家长们更好的选择学校。</p>
+                <p>1、您可以选择查看985、211、一流学科等类别。</p>
+                <p>2、系统将为您跳转对应的高校。</p>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                e.target.classList.add('active');
+                // Normally this would trigger a data reload
+            });
+        });
+    </script>
+</body>
+</html>

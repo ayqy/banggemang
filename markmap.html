@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>便捷思维导图-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .markmap-app {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .editor-container {
+            display: flex;
+            gap: 20px;
+            height: 400px;
+        }
+        .markdown-input {
+            flex: 1;
+            padding: 16px;
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: none;
+            outline: none;
+        }
+        .markdown-input:focus {
+            border-color: #1a5cff;
+        }
+        .preview-area {
+            flex: 1;
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f8f9fb;
+            position: relative;
+        }
+        .preview-area svg {
+            width: 100%;
+            height: 100%;
+        }
+        .btn-render {
+            align-self: flex-start;
+            height: 40px;
+            padding: 0 32px;
+            background: #1a5cff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-render:hover {
+            background: #1449cc;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+    <!-- Use markmap libraries via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.15.4/dist/browser/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.4/dist/browser/index.js"></script>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">便捷思维导图</h1>
+            </div>
+
+            <div class="markmap-app">
+                <button class="btn-render" id="btnRender">渲染导图</button>
+                <div class="editor-container">
+                    <textarea class="markdown-input" id="mdInput">
+# 中心主题
+## 分支主题 1
+- 子节点 1.1
+- 子节点 1.2
+## 分支主题 2
+### 子分支 2.1
+- 细节 A
+- 细节 B
+                    </textarea>
+                    <div class="preview-area" id="previewArea">
+                        <svg id="markmapSvg"></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>便捷思维导图工具可以帮助您快速创建、编辑和分享思维导图，提升您的思维整理和信息管理能力。通过这款工具，您可以轻松将想法、计划和知识结构化地呈现出来，适用于学习、工作、项目管理和创意设计等多种场景。</p>
+                <p>1、根据左侧示例格式，可以复制您的工作或学习文档，您也可当场输入文字。</p>
+                <p>2、一级标题前面加#、二级标题前面加##、三级标题前面加###，正文前面加-，符号和文字之间有空格。</p>
+                <p>3、点击渲染导图，工具会将您输入的内容生成思维导图。</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const btnRender = document.getElementById('btnRender');
+        const mdInput = document.getElementById('mdInput');
+        
+        let mm = null;
+
+        function renderMap() {
+            try {
+                const { Transformer } = window.markmap;
+                const { Markmap, loadCSS, loadJS } = window.markmap;
+
+                const transformer = new Transformer();
+                const text = mdInput.value;
+                const { root, features } = transformer.transform(text);
+                const { styles, scripts } = transformer.getUsedAssets(features);
+                
+                if (styles) loadCSS(styles);
+                if (scripts) loadJS(scripts, { getMarkmap: () => window.markmap });
+
+                if (!mm) {
+                    mm = Markmap.create('#markmapSvg', null, root);
+                } else {
+                    mm.setData(root);
+                    mm.fit();
+                }
+            } catch (err) {
+                console.error("Markmap rendering error:", err);
+            }
+        }
+
+        // initial render
+        setTimeout(renderMap, 500);
+
+        btnRender.addEventListener('click', renderMap);
+    </script>
+</body>
+</html>

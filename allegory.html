@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歇后语-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .app-container {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .search-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .input-box {
+            flex: 1;
+            height: 48px;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            padding: 0 16px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-box:focus {
+            border-color: #1a5cff;
+        }
+        .btn-search {
+            height: 48px;
+            padding: 0 32px;
+            background: #1a5cff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-search:hover {
+            background: #1449cc;
+        }
+        .result-list {
+            list-style: none;
+        }
+        .result-item {
+            padding: 16px;
+            background: #f8f9fb;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #333;
+            border: 1px solid transparent;
+        }
+        .result-item:hover {
+            border-color: #1a5cff;
+            background: #f0f5ff;
+        }
+        .result-item .part2 {
+            color: #1a5cff;
+            font-weight: 500;
+        }
+        .no-result {
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            background: #f8f9fb;
+            border-radius: 8px;
+            display: none;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">歇后语</h1>
+            </div>
+
+            <div class="app-container">
+                <div class="search-row">
+                    <input type="text" class="input-box" id="keywordInput" placeholder="请输入需要查询歇后语">
+                    <button class="btn-search" id="btnSearch">歇后语查询</button>
+                </div>
+                
+                <div class="no-result" id="noResult">没有找到相关歇后语</div>
+                <ul class="result-list" id="resultList">
+                    <!-- Results rendered by JS -->
+                </ul>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>歇后语工具可以帮助您查找和学习各种歇后语。通过这款工具，您可以输入歇后语的前半部分或关键词，快速获取完整的歇后语及其解释，便于语言学习、文化了解和日常交流。</p>
+                <p>1、在输入框中输入您希望查询的歇后语的关键词或前半部分。例如，输入“猫哭耗子”或“猫”。</p>
+                <p>2、点击“歇后语查询”按钮，工具会自动检索并显示相关的歇后语及其解释。</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const btnSearch = document.getElementById('btnSearch');
+        const keywordInput = document.getElementById('keywordInput');
+        const resultList = document.getElementById('resultList');
+        const noResult = document.getElementById('noResult');
+
+        const db = [
+            {p1: '猫哭老鼠', p2: '假慈悲'},
+            {p1: '瞎子点灯', p2: '白费蜡'},
+            {p1: '竹篮打水', p2: '一场空'},
+            {p1: '老鼠过街', p2: '人人喊打'},
+            {p1: '黄鼠狼给鸡拜年', p2: '没安好心'},
+            {p1: '泥菩萨过江', p2: '自身难保'},
+            {p1: '打破砂锅', p2: '问到底'},
+            {p1: '狗拿耗子', p2: '多管闲事'}
+        ];
+
+        btnSearch.addEventListener('click', () => {
+            const kw = keywordInput.value.trim();
+            resultList.innerHTML = '';
+            
+            if(!kw) {
+                noResult.style.display = 'block';
+                return;
+            }
+
+            const matched = db.filter(item => item.p1.includes(kw) || item.p2.includes(kw));
+
+            if(matched.length === 0) {
+                noResult.style.display = 'block';
+            } else {
+                noResult.style.display = 'none';
+                matched.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'result-item';
+                    li.innerHTML = `${item.p1} —— <span class="part2">${item.p2}</span>`;
+                    resultList.appendChild(li);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

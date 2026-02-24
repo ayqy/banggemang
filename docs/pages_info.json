@@ -1,0 +1,50 @@
+{
+  "/handwriting_erasure.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/handwriting_erasure.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/zitie_new.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/zitie_new.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/relatives_name.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/relatives_name.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/school.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/school.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/wordcount.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/wordcount.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/dynasties.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/dynasties.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/capital.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/capital.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/jielong.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/jielong.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/markmap.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/markmap.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/hanzifayin.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/hanzifayin.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/periodic.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/periodic.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/translate.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/translate.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/radical.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/radical.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/allegory.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/allegory.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/explain.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/explain.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  },
+  "/chengyujielong.html": {
+    "error": "page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://tool.browser.qq.com/chengyujielong.html\", waiting until \"domcontentloaded\"\u001b[22m\n"
+  }
+}

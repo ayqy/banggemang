@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>亲戚关系计算-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .calc-app {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+        .gender-select, .reverse-select {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .radio-label, .checkbox-label {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            cursor: pointer;
+            color: #444;
+        }
+        .radio-label input, .checkbox-label input {
+            margin-right: 6px;
+            cursor: pointer;
+        }
+        .display-area {
+            background: #f8f9fb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .relation-chain {
+            font-size: 16px;
+            color: #666;
+            word-wrap: break-word;
+            margin-bottom: 10px;
+        }
+        .relation-result {
+            font-size: 32px;
+            font-weight: 600;
+            color: #1a5cff;
+            text-align: right;
+        }
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .key-btn {
+            height: 54px;
+            background: #f0f2f5;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .key-btn:hover {
+            background: #e4e6ea;
+        }
+        .key-btn:active {
+            background: #d9dce1;
+        }
+        .key-btn.action {
+            background: #ffe8e8;
+            color: #ff3b3b;
+        }
+        .key-btn.action:hover {
+            background: #ffd6d6;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">亲戚关系计算</h1>
+            </div>
+
+            <div class="calc-app">
+                <div class="controls">
+                    <div class="gender-select">
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="male" checked> 我是男的
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="female"> 我是女的
+                        </label>
+                    </div>
+                    <div class="reverse-select">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="reverseCall"> 对方称呼我
+                        </label>
+                    </div>
+                </div>
+
+                <div class="display-area">
+                    <div class="relation-chain" id="chainDisplay">我的...</div>
+                    <div class="relation-result" id="resultDisplay">自己</div>
+                </div>
+
+                <div class="keyboard" id="keyboard">
+                    <button class="key-btn" data-val="父">父</button>
+                    <button class="key-btn" data-val="母">母</button>
+                    <button class="key-btn" data-val="夫">夫</button>
+                    <button class="key-btn" data-val="妻">妻</button>
+                    <button class="key-btn" data-val="子">子</button>
+                    <button class="key-btn" data-val="女">女</button>
+                    <button class="key-btn" data-val="兄">兄</button>
+                    <button class="key-btn" data-val="弟">弟</button>
+                    <button class="key-btn" data-val="姐">姐</button>
+                    <button class="key-btn" data-val="妹">妹</button>
+                    <button class="key-btn action" id="btnBack">&lt;</button>
+                    <button class="key-btn action" id="btnClear">清空</button>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>亲戚关系计算可以帮助用户快速计算两个或多个对象之间复杂的亲戚关系。操作简单易用，只需要选择具体的亲戚关系链路，即可得到准确的称呼。</p>
+                <p>1、首先选择是否是对方称呼我，如选择系统会生成在这种亲戚关系中对方怎样称呼您，未选择即代表您要生成在这种亲戚关系中您怎样去称呼对方。</p>
+                <p>2、选择您的性别。</p>
+                <p>3、选择您要找的称谓，比如说“弟弟的老婆”，选择之后系统会自动计算称呼并且显示在底部。</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const chainDisplay = document.getElementById('chainDisplay');
+        const resultDisplay = document.getElementById('resultDisplay');
+        const btnBack = document.getElementById('btnBack');
+        const btnClear = document.getElementById('btnClear');
+        
+        let chain = [];
+
+        function updateDisplay() {
+            if (chain.length === 0) {
+                chainDisplay.innerText = "我的...";
+                resultDisplay.innerText = "自己";
+            } else {
+                chainDisplay.innerText = "我的 " + chain.map(c => "的" + c).join(" ").substring(1);
+                // Placeholder calculation logic
+                resultDisplay.innerText = chain[chain.length - 1] + "亲";
+            }
+        }
+
+        document.querySelectorAll('.keyboard .key-btn[data-val]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                chain.push(e.target.dataset.val);
+                updateDisplay();
+            });
+        });
+
+        btnBack.addEventListener('click', () => {
+            chain.pop();
+            updateDisplay();
+        });
+
+        btnClear.addEventListener('click', () => {
+            chain = [];
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字帖生成-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .config-area {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            gap: 16px;
+        }
+        .form-label {
+            font-size: 14px;
+            color: #333;
+            width: 80px;
+        }
+        .form-select, .form-input {
+            height: 36px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            padding: 0 12px;
+            font-size: 14px;
+            outline: none;
+            width: 200px;
+        }
+        .form-select:focus, .form-input:focus {
+            border-color: #1a5cff;
+        }
+        .textarea-wrapper {
+            margin-bottom: 16px;
+        }
+        .textarea-input {
+            width: 100%;
+            height: 120px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 14px;
+            outline: none;
+            resize: none;
+        }
+        .textarea-input:focus {
+            border-color: #1a5cff;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            height: 36px;
+            padding: 0 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .btn-default {
+            background: #fff;
+            border-color: #d9d9d9;
+            color: #333;
+        }
+        .btn-default:hover {
+            color: #1a5cff;
+            border-color: #1a5cff;
+        }
+        .btn-primary {
+            background: #1a5cff;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #1449cc;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">
+            帮小忙 - 腾讯QQ浏览器在线工具箱
+        </a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">字帖生成</h1>
+            </div>
+
+            <div class="config-area">
+                <div class="form-row">
+                    <span class="form-label">年级选择</span>
+                    <select class="form-select">
+                        <option value="1" selected>一年级</option>
+                        <option value="2">二年级</option>
+                        <option value="3">三年级</option>
+                        <option value="4">四年级</option>
+                        <option value="5">五年级</option>
+                        <option value="6">六年级</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <span class="form-label">模板选择</span>
+                    <select class="form-select">
+                        <option value="A" selected>模板A (带拼音)</option>
+                        <option value="B">模板B (纯田字格)</option>
+                        <option value="C">模板C (米字格)</option>
+                    </select>
+                </div>
+                <div class="textarea-wrapper">
+                    <textarea class="textarea-input" placeholder="请输入汉字，非汉字输入无效">一 二 三 十 木 禾 上 下 土 个 八 入 大 天 人 火 文 六 七 儿 九 无 口 日 中 了 子 门 月 不 开 四 五 目 耳 头 米 见 白 田 电 也 长 山 出 飞 马 鸟 云 公 车 牛 羊 小 少 巾 牙 尺 毛 卜 又 心 风 力 手 水 广 升 足 走 方 半 巴 业 本 平 书 自 已 东 西 回 片 皮 生 里 果 几 用 鱼 今 正 雨 两 瓜 衣 来 年 左 右</textarea>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-default" onclick="alert('重置成功')">重置</button>
+                    <button class="btn btn-primary" onclick="alert('生成预览字帖')">字帖</button>
+                    <button class="btn btn-primary" onclick="window.print()">打印</button>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>字帖生成是一款在线工具，专为生成个性化字帖而设计。通过这款工具，您可以选择不同的模板、年级，快速生成适合练习书写的字帖。</p>
+                <p>1、选择您要生成字帖的模板、年级</p>
+                <p>2、点击打印按钮可将字帖打印下来</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>去手写-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .upload-container {
+            border: 2px dashed #d9d9d9;
+            border-radius: 12px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fafafa;
+            transition: border-color 0.3s;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+        .upload-container:hover {
+            border-color: #1a5cff;
+        }
+        .upload-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        .upload-text {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .upload-subtext {
+            font-size: 14px;
+            color: #999;
+        }
+        .upload-btn {
+            margin-top: 16px;
+            padding: 0 24px;
+            height: 40px;
+            background: #1a5cff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .upload-btn:hover {
+            background: #1449cc;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">
+            帮小忙 - 腾讯QQ浏览器在线工具箱
+        </a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">去手写</h1>
+            </div>
+
+            <div class="upload-container" id="uploadArea">
+                <div class="upload-text">将文件拖拽到虚框内</div>
+                <div class="upload-subtext">或者</div>
+                <button class="upload-btn">上传文件</button>
+                <input type="file" id="fileInput" accept=".pdf,image/*" style="display:none;">
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>去手写是一款专为处理文件中的手写笔迹而设计的在线工具。它能够智能识别并抹除文件中的手写内容，如笔记、标注和答案，从而还原干净的试卷或文档，方便用户重新练习或使用。</p>
+                <p>1、点击“上传文件”按钮或将文件拖放到指定区域，以上传您需要处理的PDF或图片文件。</p>
+                <p>2、文件上传完成后，工具会自动开始识别文件中的手写笔迹。</p>
+                <p>3、点击“开始处理”按钮，工具将自动抹除选定的手写内容并还原干净的文档。</p>
+                <p>4、处理完成后，你可将擦除笔记后的文件保存到您的设备。</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadBtn = document.querySelector('.upload-btn');
+
+        uploadBtn.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('click', (e) => {
+            if (e.target !== uploadBtn) {
+                fileInput.click();
+            }
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#1a5cff';
+            uploadArea.style.backgroundColor = '#f0f5ff';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#d9d9d9';
+            uploadArea.style.backgroundColor = '#fafafa';
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#d9d9d9';
+            uploadArea.style.backgroundColor = '#fafafa';
+            
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                alert('已选择文件：' + e.dataTransfer.files[0].name);
+            }
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                alert('已选择文件：' + fileInput.files[0].name);
+            }
+        });
+    </script>
+</body>
+</html>

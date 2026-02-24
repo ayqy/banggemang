@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成语大全-帮小忙，腾讯QQ浏览器在线工具箱</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .tool-header {
+            margin-bottom: 24px;
+        }
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        .app-container {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .search-options {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .radio-label {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            cursor: pointer;
+            color: #444;
+        }
+        .radio-label input {
+            margin-right: 6px;
+            cursor: pointer;
+        }
+        .search-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .input-label {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+        .input-box {
+            flex: 1;
+            height: 48px;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            padding: 0 16px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-box:focus {
+            border-color: #1a5cff;
+        }
+        .btn-search {
+            height: 48px;
+            padding: 0 32px;
+            background: #1a5cff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-search:hover {
+            background: #1449cc;
+        }
+        .result-box {
+            display: none;
+            background: #f8f9fb;
+            border-radius: 8px;
+            padding: 24px;
+            border: 1px solid #e1e4e8;
+        }
+        .idiom-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .idiom-item {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #1a5cff;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .idiom-item:hover {
+            border-color: #1a5cff;
+            background: #eef3ff;
+        }
+        .no-result {
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            background: #f8f9fb;
+            border-radius: 8px;
+            display: none;
+        }
+        .instructions {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+        }
+        .instructions h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .instructions p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header-logo">帮小忙 - 腾讯QQ浏览器在线工具箱</a>
+    </header>
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a href="/" class="sidebar-link"><img src="assets/cat_all.png" alt="全部">全部</a></li>
+                <li class="sidebar-item"><a href="/category/img" class="sidebar-link"><img src="assets/cat__category_img.png" alt="图片工具">图片工具</a></li>
+                <li class="sidebar-item"><a href="/category/pdf" class="sidebar-link"><img src="assets/cat__category_pdf.png" alt="PDF转换工具">PDF转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/data" class="sidebar-link"><img src="assets/cat__category_data.png" alt="数据换算工具">数据换算工具</a></li>
+                <li class="sidebar-item"><a href="/category/life" class="sidebar-link"><img src="assets/cat__category_life.png" alt="生活娱乐工具">生活娱乐工具</a></li>
+                <li class="sidebar-item"><a href="/category/education" class="sidebar-link active"><img src="assets/cat__category_education.png" alt="教育工具">教育工具</a></li>
+                <li class="sidebar-item"><a href="/category/text" class="sidebar-link"><img src="assets/cat__category_text.png" alt="文本工具">文本工具</a></li>
+                <li class="sidebar-item"><a href="/category/doc" class="sidebar-link"><img src="assets/cat__category_doc.png" alt="文档转换工具">文档转换工具</a></li>
+                <li class="sidebar-item"><a href="/category/develop" class="sidebar-link"><img src="assets/cat__category_develop.png" alt="开发工具">开发工具</a></li>
+                <li class="sidebar-item"><a href="/category/video" class="sidebar-link"><img src="assets/cat__category_video.png" alt="视频工具">视频工具</a></li>
+                <li class="sidebar-item"><a href="/category/pc_plugin" class="sidebar-link"><img src="assets/cat__category_pc_plugin.png" alt="浏览器插件">浏览器插件</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="tool-header">
+                <h1 class="tool-title">成语大全</h1>
+            </div>
+
+            <div class="app-container">
+                <div class="search-options">
+                    <span class="input-label">成语查询：</span>
+                    <label class="radio-label">
+                        <input type="radio" name="queryType" value="hanzi" checked> 汉字
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="queryType" value="pinyin"> 拼音
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="queryType" value="strokes"> 笔画数
+                    </label>
+                </div>
+
+                <div class="search-area">
+                    <input type="text" class="input-box" id="keywordInput" placeholder="例如:“美”、“五十”">
+                    <button class="btn-search" id="btnSearch">查询</button>
+                </div>
+                
+                <div class="no-result" id="noResult">抱歉，未找到相关成语。</div>
+                
+                <div class="result-box" id="resultBox">
+                    <ul class="idiom-list" id="idiomList">
+                        <!-- JS renders here -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h3>工具介绍及使用方法</h3>
+                <p>成语大全查询是一款免费的中国传统文化知识工具，它收录了上亿个成语能够通过用户需求快速查询。</p>
+                <p>1、您可以选择查询方式，查询方式有：汉字、拼音、笔画数。</p>
+                <p>2、输入查询条件：</p>
+                <p>&nbsp;&nbsp;&nbsp;1）汉字查询方式：输入想要查询成语的首字</p>
+                <p>&nbsp;&nbsp;&nbsp;2）拼音查询方式：输入成语首字拼音和音调，例如输入”yi4“，工具会为您生成”易“、”议“同音字开头的成语</p>
+                <p>&nbsp;&nbsp;&nbsp;3）笔画查询方式：输入想要查询成语的笔画</p>
+                <p>3、选择查询方式并输入查询条件结束后，点击查询，工具会为您查询相应的成语。</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const btnSearch = document.getElementById('btnSearch');
+        const keywordInput = document.getElementById('keywordInput');
+        const resultBox = document.getElementById('resultBox');
+        const noResult = document.getElementById('noResult');
+        const idiomList = document.getElementById('idiomList');
+
+        const db = [
+            '美不胜收', '美轮美奂', '十全十美', '五颜六色', '五十步笑百步',
+            '一马当先', '一鸣惊人', '一帆风顺', '九牛一毛', '千军万马'
+        ];
+
+        btnSearch.addEventListener('click', () => {
+            const kw = keywordInput.value.trim();
+            if(!kw) return;
+
+            const matched = db.filter(item => item.includes(kw));
+
+            if(matched.length > 0) {
+                noResult.style.display = 'none';
+                resultBox.style.display = 'block';
+                
+                idiomList.innerHTML = '';
+                matched.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'idiom-item';
+                    li.innerText = item;
+                    idiomList.appendChild(li);
+                });
+            } else {
+                noResult.style.display = 'block';
+                resultBox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
