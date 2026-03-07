@@ -1,0 +1,202 @@
+[
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "帮小忙 腾讯QQ浏览器在线工具箱",
+    "href": "/",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "全部",
+    "href": "/",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "图片工具",
+    "href": "/category/img",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "PDF转换工具",
+    "href": "/category/pdf",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "数据换算工具",
+    "href": "/category/data",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "生活娱乐工具",
+    "href": "/category/life",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "教育工具",
+    "href": "/category/education",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "文本工具",
+    "href": "/category/text",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "文档转换工具",
+    "href": "/category/doc",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "开发工具",
+    "href": "/category/develop",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "视频工具",
+    "href": "/category/video",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "浏览器插件",
+    "href": "/category/pc_plugin",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "",
+    "href": "javascript:window.scrollTo({ top: 0, behavior: 'smooth' })",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "",
+    "href": "http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G8GZ1XGfQoypNSFz79BNmF06xOkhKt5h&authKey=6wQcUEbSlL9sHcNv4gtr7jS9Mmz03wjxUAEsLTh4KhOSECC4EpBaMe2nEW%2BZJoas&noverify=0&group_code=459317399",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "共建",
+    "href": "https://feedback.browser.qq.com/qbtool?dev=1&url=tool.browser.qq.com/",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "反馈",
+    "href": "https://feedback.browser.qq.com/qbtool?url=tool.browser.qq.com/",
+    "disabled": false
+  },
+  {
+    "tag": "input",
+    "role": "",
+    "type": "text",
+    "name": "",
+    "href": "",
+    "disabled": false
+  },
+  {
+    "tag": "label",
+    "role": "",
+    "type": "",
+    "name": "请输入查询汉词",
+    "href": "",
+    "disabled": false
+  },
+  {
+    "tag": "input",
+    "role": "",
+    "type": "text",
+    "name": "",
+    "href": "",
+    "disabled": false
+  },
+  {
+    "tag": "button",
+    "role": "",
+    "type": "button",
+    "name": "注解查询",
+    "href": "",
+    "disabled": false
+  },
+  {
+    "tag": "h3",
+    "role": "",
+    "type": "",
+    "name": "工具介绍及使用方法",
+    "href": "",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "历史朝代查询 历史朝代查询是一款教育性和实用性兼备的在线工具，专为帮助用户快速查询和了解各个历史朝代的相关信息而设计。通过这款工具，您可以轻松获取各个朝代的起止时间、重要事件、著名人物等信息，帮助您更好地学习和理解历史。",
+    "href": "/dynasties.html",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "各国首都 各国首都查询是一款实用的在线工具，专为帮助用户快速查询世界各国首都而设计。通过这款工具，您可以轻松获取各个国家的首都信息，帮助您更好地了解世界地理知识，满足学习、工作和旅行等需求。",
+    "href": "/capital.html",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "隐私政策",
+    "href": "https://rule.tencent.com/rule/preview/10c4538f-a3b6-4292-803d-5c8498657b75",
+    "disabled": false
+  },
+  {
+    "tag": "a",
+    "role": "",
+    "type": "",
+    "name": "数据处理规则及免责声明",
+    "href": "https://static.res.qq.com/nav/qbtool/qbtool-license.html",
+    "disabled": false
+  }
+]

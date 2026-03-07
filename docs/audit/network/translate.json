@@ -1,0 +1,590 @@
+[
+  {
+    "url": "https://tool.browser.qq.com/translate.html",
+    "method": "GET",
+    "resourceType": "document",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/qbtool-latest.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_hdtg75yhyui.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_2a8nx3hj8yp.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_1644201mmws.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_nblqv4ia9z4.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://static.res.qq.com/qbtool/manifest/manifest.5150f596.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_ds3wkxdvuua.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_y0lbjzlu59p.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_je2677qg5fb.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_o6yx66wdmgs.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_xv4ans9q0zn.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/20230406_yu36rbd9a5q.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_type/81ddfdd4_M1DGARwp9eH.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-top.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/nav-qqgroup.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/search_icon.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_evABSEpv1y-.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_M4UejcjNNLA.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_jdB6qNUoFvz.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-logo.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/footer-qrcode.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://www.googletagmanager.com/gtm.js?id=GTM-MDCQ2B2",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://static.res.qq.com/qbtool/js/vendors.0595b79a.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://static.res.qq.com/qbtool/css/translate.00b6f.css",
+    "method": "GET",
+    "resourceType": "stylesheet",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/share_icon.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://static.res.qq.com/qbtool/js/translate.9b946b39.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://m4.publicimg.browser.qq.com/publicimg/pcqb/qbtool/tool-share-link.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://www.googletagmanager.com/gtag/js?id=G-TPFW0KPXC1&cx=c&gtm=4e6341",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://jsapi.qq.com/get?api=app.getBrowserParam",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 204,
+    "postData": ""
+  },
+  {
+    "url": "https://tool.browser.qq.com/api/getToken",
+    "method": "GET",
+    "resourceType": "xhr",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF",
+    "method": "POST",
+    "resourceType": "fetch",
+    "status": 200,
+    "postData": "{\"appVersion\":\"\",\"sdkId\":\"js\",\"sdkVersion\":\"4.5.31-web\",\"mainAppKey\":\"00300EMEH839B0XF\",\"platformId\":3,\"common\":{\"A2\":\"YWACpNHdFMfecGQxp0DsRmdT4EadfPnW\",\"A8\":\"\",\"A12\":\"en-US\",\"A17\":\"1440*1200*1\",\"A23\":\"\",\"A50\":\"\",\"A76\":\"00300EMEH839B0XF_1772810258133\",\"A101\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36\",\"A102\":\"https://tool.browser.qq.com/translate.html\",\"A104\":\"\",\"A119\":\"\",\"A153\":\"\"},\"events\":[{\"eventCode\":\"rqd_js_init\",\"eventTime\":\"1772810281303\",\"mapValue\":{\"A99\":\"Y\",\"A100\":\"26\",\"A72\":\"4.5.31-web\",\"A88\":\"1772810258133\"}}]}"
+  },
+  {
+    "url": "https://tool.browser.qq.com/api/get_tool_list",
+    "method": "GET",
+    "resourceType": "xhr",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://tool.browser.qq.com/api/getLoginInfo?userInfo=%7B%22guid%22:%22aaaal0krgjhy9kymyxwdbpe8av7m88cb%22,%22qua2%22:%22PR%3DPC%26CO%3DWBK%26QV%3D3%26PL%3DMAC%26PB%3DGE%26PPVN%3D%26COVC%3D049400%26CHID%3D43653%26RL%3D2560*1440%26MO%3DQB%26VE%3DB1%26BIT%3D64%26OS%3D10.0.18362%22%7D",
+    "method": "GET",
+    "resourceType": "xhr",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://tool.browser.qq.com/cgi-bin/tools/get_statistics",
+    "method": "POST",
+    "resourceType": "xhr",
+    "status": 200,
+    "postData": "{\"userInfo\":{\"guid\":\"aaaal0krgjhy9kymyxwdbpe8av7m88cb\",\"qua2\":\"PR=PC&CO=WBK&QV=3&PL=MAC&PB=GE&PPVN=&COVC=049400&CHID=43653&RL=2560*1440&MO=QB&VE=B1&BIT=64&OS=10.0.18362\"}}"
+  },
+  {
+    "url": "https://tool.browser.qq.com/cgi-bin/tools/report",
+    "method": "POST",
+    "resourceType": "xhr",
+    "status": 200,
+    "postData": "{\"toolUrl\":\"https://tool.browser.qq.com/translate.html\",\"tabName\":\"education\",\"userInfo\":{\"guid\":\"aaaal0krgjhy9kymyxwdbpe8av7m88cb\",\"qua2\":\"PR=PC&CO=WBK&QV=3&PL=MAC&PB=GE&PPVN=&COVC=049400&CHID=43653&RL=2560*1440&MO=QB&VE=B1&BIT=64&OS=10.0.18362\"}}"
+  },
+  {
+    "url": "https://fanyi.sogou.com/text",
+    "method": "GET",
+    "resourceType": "document",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF",
+    "method": "POST",
+    "resourceType": "fetch",
+    "status": 200,
+    "postData": "{\"appVersion\":\"\",\"sdkId\":\"js\",\"sdkVersion\":\"4.5.31-web\",\"mainAppKey\":\"00300EMEH839B0XF\",\"platformId\":3,\"common\":{\"A2\":\"YWACpNHdFMfecGQxp0DsRmdT4EadfPnW\",\"A8\":\"\",\"A12\":\"en-US\",\"A17\":\"1440*1200*1\",\"A23\":\"\",\"A50\":\"\",\"A76\":\"00300EMEH839B0XF_1772810258133\",\"A101\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36\",\"A102\":\"https://tool.browser.qq.com/translate.html\",\"A104\":\"\",\"A119\":\"\",\"A153\":\"\"},\"events\":[{\"eventCode\":\"PC_OFFICE_EVENT\",\"eventTime\":\"1772810281444\",\"mapValue\":{\"eventname\":\"qbtool_pv\",\"guid\":\"aaaal0krgjhy9kymyxwdbpe8av7m88cb\",\"app_version\":\"\",\"extra\":\"{\\\"category\\\":\\\"education\\\",\\\"page\\\":\\\"translate\\\",\\\"callfrom\\\":\\\"\\\",\\\"is_pc\\\":1,\\\"qbid\\\":\\\"\\\",\\\"tguid\\\":\\\"\\\",\\\"machineid\\\":\\\"\\\",\\\"A3\\\":\\\"\\\"}\",\"A99\":\"Y\",\"A100\":\"27\",\"A72\":\"4.5.31-web\",\"A88\":\"1772810258133\"}}]}"
+  },
+  {
+    "url": "https://dlweb.sogoucdn.com/vs/static/js/vsbundle.3ed018b1.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=298b0b6803004c66694b8677e333aad8&topic=SDK-62c36261a5aaf49b42bf",
+    "method": "GET",
+    "resourceType": "xhr",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://tool.browser.qq.com/api/addToolPV",
+    "method": "POST",
+    "resourceType": "xhr",
+    "status": 200,
+    "postData": "{\"toolid\":\"translate\"}"
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/app.5a51c11d.css",
+    "method": "GET",
+    "resourceType": "stylesheet",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/0.3382dd17.css",
+    "method": "GET",
+    "resourceType": "stylesheet",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/app.ff8f4fb7.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/common.f34ebf8f.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/home.dbec9ab1.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/6.3cb7488a.css",
+    "method": "GET",
+    "resourceType": "stylesheet",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/vendors.4427dd60.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/10.bc778b43.css",
+    "method": "GET",
+    "resourceType": "stylesheet",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/12.7a0342b5.css",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/15.9d6461c8.css",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/16.a9dcb4cf.css",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/3.e674dfb6.css",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/text.a08c1da0.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/img/loading.71ca978.gif",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/img/sprite_common_translate.ed1fb14.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/1.93319a7c.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/15.37f62c8b.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/17.fc9970fa.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/favorite.e803a3eb.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/14.c4b68ace.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/docpreview.246d91e4.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/document.07e49069.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/picture.0bb65d79.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/privacyPC.a83e3719.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/8.c1092e98.css",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/tencentDocPreview.9a25ea15.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/writing.68be702b.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/5.8106975a.css",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/wapDocPreview.a45dfd7b.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/16.a0cc4a57.js",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/9.29fc9c62.css",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/css/13.0e433876.css",
+    "method": "GET",
+    "resourceType": "other",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/img/pic8.6faaa5c.png",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://search.sogoucdn.com/translate/pc/static/js/1.93319a7c.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://sa.gdt.qq.com/rpc/gdt.display.MobileInnerService.GetMobileInnerAds",
+    "method": "POST",
+    "resourceType": "xhr",
+    "status": 200,
+    "postData": "{\"ext\":{\"pos_context\":[{\"pos_id\":\"9053885243685045\",\"ad_count\":20}],\"req\":{\"login_info\":{}}}}"
+  },
+  {
+    "url": "https://pb.sogou.com/pv.gif?uigs_productid=vs_web&vstype=translate&snuid=null&pagetype=index&type=all&uuid=1f0c1ce2-0e2a-4bd6-a458-8c9390b1ae86&fr=default&terminal=web&onerror=true&wuid=1772810281711&overIe10=1&abtest=null&stype=normal&stage=loaded&l_query=0&t_hasQuery=0&_t=1772810281728&_r=351&uigs_st=0",
+    "method": "GET",
+    "resourceType": "image",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF",
+    "method": "POST",
+    "resourceType": "fetch",
+    "status": 200,
+    "postData": "{\"appVersion\":\"\",\"sdkId\":\"js\",\"sdkVersion\":\"4.5.31-web\",\"mainAppKey\":\"00300EMEH839B0XF\",\"platformId\":3,\"common\":{\"A2\":\"YWACpNHdFMfecGQxp0DsRmdT4EadfPnW\",\"A8\":\"\",\"A12\":\"en-US\",\"A17\":\"1440*1200*1\",\"A23\":\"\",\"A50\":\"\",\"A76\":\"00300EMEH839B0XF_1772810258133\",\"A101\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36\",\"A102\":\"https://tool.browser.qq.com/translate.html\",\"A104\":\"\",\"A119\":\"\",\"A153\":\"\"},\"events\":[{\"eventCode\":\"PC_OFFICE_EVENT\",\"eventTime\":\"1772810282393\",\"mapValue\":{\"eventname\":\"qbtool_click\",\"guid\":\"aaaal0krgjhy9kymyxwdbpe8av7m88cb\",\"app_version\":\"\",\"extra\":\"{\\\"eid\\\":null,\\\"page\\\":\\\"translate\\\",\\\"callfrom\\\":\\\"\\\",\\\"is_pc\\\":1,\\\"qbid\\\":\\\"\\\",\\\"tguid\\\":\\\"\\\",\\\"machineid\\\":\\\"\\\",\\\"A3\\\":\\\"\\\"}\",\"A99\":\"Y\",\"A100\":\"28\",\"A72\":\"4.5.31-web\",\"A88\":\"1772810258133\"}}]}"
+  },
+  {
+    "url": "https://fanyi.qq.com/",
+    "method": "GET",
+    "resourceType": "document",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://turing.captcha.qcloud.com/TCaptcha.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://fanyi.qq.com/static/css/main.c16b0f2a.css",
+    "method": "GET",
+    "resourceType": "stylesheet",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://fanyi.qq.com/static/js/main.b470f803.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://turing.captcha.gtimg.com/1/tcaptcha-frame.5bae14dd.js",
+    "method": "GET",
+    "resourceType": "script",
+    "status": 200,
+    "postData": ""
+  },
+  {
+    "url": "https://oth.str.beacon.qq.com/trpc.beacon.configserver.BeaconConfigService/QueryConfig",
+    "method": "POST",
+    "resourceType": "fetch",
+    "status": 200,
+    "postData": "{\"platformId\":\"3\",\"mainAppKey\":\"0WEB06FB3Y7OLHBA\",\"appVersion\":\"\",\"sdkVersion\":\"4.5.30-web\",\"osVersion\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36\",\"model\":\"\",\"packageName\":\"\",\"params\":{\"A3\":\"9w7Ay6fBstfFM32ejm31tQe4QEKkR7nh\"}}"
+  }
+]

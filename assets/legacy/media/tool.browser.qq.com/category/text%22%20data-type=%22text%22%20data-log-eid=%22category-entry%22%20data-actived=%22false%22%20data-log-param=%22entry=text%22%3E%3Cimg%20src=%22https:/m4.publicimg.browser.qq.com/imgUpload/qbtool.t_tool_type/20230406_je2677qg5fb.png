@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+	<title>帮小忙工具箱</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.tip {
+			width: 60%;
+			display: block;
+			margin: 0 auto;
+			max-width: 392px;
+		}
+		p {
+			margin-top: 20px;
+			color: #8F8F8F;
+			text-align: center;
+			font-size: 16px;
+		}
+		.btn {
+			display: block;
+			width: 136px;
+			height: 40px;
+			line-height: 40px;
+			text-decoration: none;
+			background: rgb(19, 108, 233, 0.08);
+			color: #136CE9;
+			text-align: center;
+			margin: 24px auto;
+			border-radius: 20px;
+		}
+		main {
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<img src="https://m4.publicimg.browser.qq.com/publicimg/nav/qbtool/wrong-platform-tip.png" class="tip">
+		<p>Not Found</p>
+		<a class='btn' href='https://tool.browser.qq.com'>返回首页</a>
+	</main>
+</body>
+</html>

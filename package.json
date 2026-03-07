@@ -1,0 +1,17 @@
+{
+  "name": "banggemang",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "recover:pages": "node scripts/recover-pages.mjs",
+    "audit:live": "node scripts/recover-pages.mjs --audit",
+    "mirror:assets": "node scripts/mirror-assets.mjs",
+    "extract:media": "node scripts/extract-media.mjs",
+    "fixtures:capture": "node scripts/capture-fixtures.mjs",
+    "beautify:bundles": "node scripts/beautify-bundles.mjs",
+    "build:local-pages": "node scripts/mirror-assets.mjs --render",
+    "build": "npm run recover:pages && npm run mirror:assets && npm run extract:media && npm run fixtures:capture && npm run beautify:bundles && npm run build:local-pages",
+    "test:e2e": "playwright test tests/e2e"
+  }
+}
