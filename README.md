@@ -1,9 +1,9 @@
 # 自动测评评分
 
 分支：gemini-3.1-pro-preview
-总分：18/100
-路由通过：3/17
-用例通过：4/18
+总分：24/100
+路由通过：4/17
+用例通过：5/18
 
 | Route | Case | 结果 | 备注 |
 | --- | --- | --- | --- |
@@ -17,7 +17,7 @@
 | dynasties | dynasties:contains-yuan | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('row', { name: /元朝/ }).first() Expected: visible Timeout: 5000ms Error: e |
 | capital | capital:contains-china-beijing | PASS |  |
 | jielong | jielong:chain-starts-with-last-char | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('table').first() Expected: visible Timeout: 5000ms Error: element(s) not  |
-| markmap | markmap:render-updates-preview | FAILED | TimeoutError: page.goto: Timeout 10000ms exceeded. Call log: - navigating to "http://127.0.0.1:54829/markmap.html", waiting until "domcontentloaded"  |
+| markmap | markmap:render-updates-preview | PASS |  |
 | hanzifayin | hanzifayin:speak-or-audio | PASS |  |
 | periodic | periodic:contains-hydrogen | FAILED | Error: expect(locator).toBeVisible() failed Locator: locator('main').first().getByRole('cell', { name: /1\s*H\s*氢/ }).first() Expected: visible Timeout: 10000ms |
 | translate | translate:switch-provider | FAILED | TimeoutError: locator.click: Timeout 10000ms exceeded. Call log: - waiting for locator('main').first().getByRole('link', { name: '有道翻译' })  |
