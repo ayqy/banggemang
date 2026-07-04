@@ -1,0 +1,85 @@
+{
+  "jielong": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect"
+    ]
+  },
+  "chengyujielong": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect",
+      "POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151706283&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1023342286.1783151696&frm=0&pscdl=noapi&rcb=9&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115938465~115938468~118395335~119027224~119576881~119576885~119576891~119576895&sid=1783151696&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fchengyujielong.html&dt=%E6%88%90%E8%AF%AD%E5%A4%A7%E5%85%A8-%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1&en=page_view&ep.=&tfd=6003"
+    ]
+  },
+  "allegory": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect",
+      "POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151712898&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1023342286.1783151696&frm=0&pscdl=noapi&rcb=9&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115938465~115938469~118395335~119027224~119576881~119576885~119576891~119576895&sid=1783151696&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fallegory.html&dt=%E6%AD%87%E5%90%8E%E8%AF%AD-%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1&en=page_view&ep.=&tfd=6302"
+    ]
+  },
+  "explain": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect",
+      "POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151719685&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1023342286.1783151696&frm=0&pscdl=noapi&rcb=2&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115938466~115938468~118395334~119027224~119576881~119576885~119576891~119576895&sid=1783151696&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fexplain.html&dt=%E8%AF%8D%E8%AF%AD%E6%B3%A8%E8%A7%A3-%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1&en=page_view&ep.=&tfd=6005"
+    ]
+  },
+  "radical": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect",
+      "POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151726168&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1023342286.1783151696&frm=0&pscdl=noapi&rcb=19&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115938466~115938469~118012007~118395335~119027224~119381664~119576881~119576885~119576891~119576895&sid=1783151696&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fradical.html&dt=%E6%B1%89%E5%AD%97%E5%81%8F%E6%97%81-%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1&en=page_view&ep.=&tfd=5737"
+    ]
+  },
+  "hanzifayin": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect",
+      "POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151732348&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1023342286.1783151696&frm=0&pscdl=noapi&rcb=18&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115616985~115938466~115938469~118395333~119027224~119576881~119576885~119576891~119576895&sid=1783151696&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fhanzifayin.html&dt=%E6%B1%89%E5%AD%97%E6%A0%87%E5%87%86%E5%8F%91%E9%9F%B3-%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1&en=page_view&ep.=&tfd=5846"
+    ]
+  },
+  "wordcount": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect",
+      "POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151742654&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1023342286.1783151696&frm=0&pscdl=noapi&rcb=18&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115938465~115938469~119027224~119348851~119576881~119576885~119576891~119576895&sid=1783151696&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fwordcount.html&dt=%E5%AD%97%E6%95%B0%E8%AE%A1%E7%AE%97-%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1&en=page_view&ep.=&tfd=5817"
+    ]
+  },
+  "periodic": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect",
+      "POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151785382&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1023342286.1783151696&frm=0&pscdl=noapi&rcb=12&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115616986~115938466~115938469~119027224~119576881~119576885~119576891~119576895&sid=1783151696&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fperiodic.html&dt=%E5%85%83%E7%B4%A0%E5%91%A8%E6%9C%9F%E8%A1%A8-%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1&en=page_view&ep.=&tfd=5943"
+    ]
+  },
+  "school": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect",
+      "POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151791928&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1023342286.1783151696&frm=0&pscdl=noapi&rcb=12&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115938466~115938468~119027224~119576881~119576885~119576891~119576895&sid=1783151696&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fschool.html&dt=%E9%AB%98%E6%A0%A1%E6%9F%A5%E8%AF%A2-%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1&en=page_view&ep.=&tfd=5531"
+    ]
+  },
+  "translate": {
+    "newReqs": [
+      "POST https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF",
+      "GET https://dict.youdao.com/login/acc/query/accountinfo",
+      "POST https://galileotelemetry.tencent.com/collect",
+      "GET https://luna-ai.youdao.com/translate_llm/secret?keyid=ai-translate-llm-pre&sign=50b56b6d06e5747b49f04121fe66cf62&client=fanyideskweb&product=webfanyi&appVersion=12.0.0&vendor=web&pointParam=client,mysticTime,product&mysticTime=1783151838247&keyfrom=fanyi.web&mid=1&screen=1&model=1&network=wifi&abtest=0&yduuid=41bc10ffafdbe936bde73e55e855baa5",
+      "POST https://backendmarket.youdao.com/collect/docreport",
+      "GET https://dict.youdao.com/vip/privilege/show/V2?bannerType=fanyiTop",
+      "GET https://api-overmind.youdao.com/openapi/get/luna/dict/luna-front/prod/langTypeWeb",
+      "GET https://doctrans-service.youdao.com/common/enums/list?key=domain&_=1783151838646",
+      "GET https://dict-subsidiary.youdao.com/aigc/entrance?keyid=minor-search-server&sign=1f64f740b8a174dcd856b429b17a35cd&client=fanyideskweb&product=webfanyi&appVersion=12.0.0&vendor=web&pointParam=client,mysticTime,product&mysticTime=1783151838648&keyfrom=fanyi.web&mid=1&screen=1&model=1&network=wifi&abtest=0&yduuid=abcdefg",
+      "GET https://luna-ai.youdao.com/translate_llm/v3/init?product=webfanyi&appVersion=12.0.0&client=web&mid=1&vendor=web&screen=1&model=1&imei=1&network=wifi&keyfrom=fanyi.web&keyid=ai-translate-llm&mysticTime=1783151838652&yduuid=abcdefg&abtest=0&token=0c8d3283128a4f12a4a08ee24a59c99a&sign=5f9b0ca365a3a15a2bbb00a837e18a26&pointParam=abtest,appVersion,client,imei,keyfrom,keyid,mid,model,mysticTime,network,product,screen,token,vendor,yduuid,key",
+      "GET https://luna-ai.youdao.com/translate_llm/userinfo?product=webfanyi&appVersion=12.0.0&client=web&mid=1&vendor=web&screen=1&model=1&imei=1&network=wifi&keyfrom=fanyi.web&keyid=ai-translate-llm&mysticTime=1783151838698&yduuid=41bc10ffafdbe936bde73e55e855baa5&abtest=0&token=0c8d3283128a4f12a4a08ee24a59c99a&sign=dcb96fdc27bf03392154c5823cbd5c2a&pointParam=abtest,appVersion,client,imei,keyfrom,keyid,mid,model,mysticTime,network,product,screen,token,vendor,yduuid,key",
+      "GET https://luna-ai.youdao.com/translate_llm/v3/history/list?product=webfanyi&appVersion=12.0.0&client=web&mid=1&vendor=web&screen=1&model=1&imei=1&network=wifi&keyfrom=fanyi.web&keyid=ai-translate-llm&mysticTime=1783151838700&yduuid=abcdefg&abtest=0&token=0c8d3283128a4f12a4a08ee24a59c99a&sign=72a0e1bd5442760ee50b0547d7914527&pointParam=abtest,appVersion,client,imei,keyfrom,keyid,mid,model,mysticTime,network,product,screen,token,vendor,yduuid,key",
+      "GET https://dict.youdao.com/vip/privilege/show/V2?product=webfanyi&appVersion=12.0.0&client=web&mid=1&vendor=web&screen=1&model=1&imei=1&network=wifi&keyfrom=fanyi.web&keyid=dict-vip&mysticTime=1783151838703&yduuid=abcdefg&abtest=0&bannerType=fanyiPagePopup&sign=36112326affd21eea170c1a3831c8128&pointParam=abtest,appVersion,bannerType,client,imei,keyfrom,keyid,mid,model,mysticTime,network,product,screen,vendor,yduuid,key",
+      "GET https://dict.youdao.com/profile/batch/get?content=%5B%22option_avatar%22%2C%22nickname%22%5D&testMode=false",
+      "POST https://dict.youdao.com/vip/user/status_s",
+      "POST https://dict.youdao.com/vip/user/status_s?product=webdict&appVersion=1&client=web&mid=1&vendor=web&screen=1&model=1&imei=1&network=wifi&keyid=dict_web_dictvip&mysticTime=1783151838721&yduuid=41bc10ffafdbe936bde73e55e855baa5&sign=ab21c183907a1b027763c726de5c9377&pointParam=appVersion,client,imei,keyid,mid,model,mysticTime,network,product,screen,vendor,yduuid,key",
+      "GET https://dict.youdao.com/login/acc/query/accountinfo?withCredentials=true",
+      "GET https://dict-subsidiary.youdao.com/aigc/style?keyid=minor-search-server&sign=1cc56e77a3f8ee97bcf9f06d198004cc&client=fanyideskweb&product=webfanyi&appVersion=12.0.0&vendor=web&pointParam=client,mysticTime,product&mysticTime=1783151838765&keyfrom=fanyi.web&mid=1&screen=1&model=1&network=wifi&abtest=0&yduuid=abcdefg",
+      "GET https://luna-ai.youdao.com/translate_llm/v3/uuid/generate?product=webfanyi&appVersion=12.0.0&client=web&mid=1&vendor=web&screen=1&model=1&imei=1&network=wifi&keyfrom=fanyi.web&keyid=ai-translate-llm&mysticTime=1783151838848&yduuid=41bc10ffafdbe936bde73e55e855baa5&abtest=0&token=0c8d3283128a4f12a4a08ee24a59c99a&sign=a9d7c6cbd244a4df0451e7a2e064d5ec&pointParam=abtest,appVersion,client,imei,keyfrom,keyid,mid,model,mysticTime,network,product,screen,token,vendor,yduuid,key",
+      "GET https://dict.youdao.com/message/official/unread?product=web&appVersion=1&client=web&mid=1&vendor=web&screen=1&model=1&imei=1&network=wifi&keyfrom=webdict&keyid=dict-message-center&mysticTime=1783151838900&yduuid=1&abtest=0&sign=b398709eaa71f66cf96ee756691bfc90&pointParam=abtest,appVersion,client,imei,keyfrom,keyid,mid,model,mysticTime,network,product,screen,vendor,yduuid,key&app=deskdict_bkd&type=msg&userType=nonVip&testMode=false"
+    ]
+  },
+  "index-search": {
+    "newReqs": [
+      "POST https://galileotelemetry.tencent.com/collect",
+      "POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151908685&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1023342286.1783151696&frm=0&pscdl=noapi&rcb=1&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115938466~115938468~119027224~119576881~119576885~119576891~119576895&sid=1783151696&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fcategory%2Feducation&dt=%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1%E5%B9%B3%E5%8F%B0&en=page_view&ep.=&tfd=5935"
+    ]
+  }
+}

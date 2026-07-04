@@ -1,0 +1,11 @@
+POST https://region1.google-analytics.com/g/collect?v=2&tid=G-TPFW0KPXC1&gtm=45je66u1v9130060941z89130026418za20gzb9130026418zd9130026418&_p=1783151416460&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAAQ&are=1&cid=1191081213.1783151400&frm=0&pscdl=noapi&rcb=14&sr=1440x900&uaa=x86&uab=64&uafvl=HeadlessChrome%3B149.0.7827.55%7CChromium%3B149.0.7827.55%7CNot)A%253BBrand%3B24.0.0.0&uam=&uamb=0&uap=Linux&uapv=&uaw=0&ul=zh-cn&_s=1&tag_exp=115938465~115938468~118395333~119027224~119576881~119576885~119576891~119576895&sid=1783151399&sct=1&seg=1&dl=https%3A%2F%2Ftool.browser.qq.com%2Fjielong.html&dt=%E6%88%90%E8%AF%AD%E6%8E%A5%E9%BE%99-%E5%B8%AE%E5%B0%8F%E5%BF%99%EF%BC%8C%E8%85%BE%E8%AE%AFQQ%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7%E7%AE%B1&en=page_view&ep.=&tfd=442
+GET https://tool.browser.qq.com/api/getToken
+POST https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF
+GET https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=f1957e3b2734d5ebf985a2934a9871a7&topic=SDK-62c36261a5aaf49b42bf
+GET https://tool.browser.qq.com/api/get_tool_list
+POST https://tool.browser.qq.com/api/addToolPV
+POST https://tool.browser.qq.com/cgi-bin/tools/get_statistics
+GET https://tool.browser.qq.com/api/getLoginInfo?userInfo=%7B%22guid%22:%22aaaaky2g78o42qru100ueg7gkmct88cb%22,%22qua2%22:%22PR%3DPC%26CO%3DWBK%26QV%3D3%26PL%3DWIN%26PB%3DGE%26PPVN%3D%26COVC%3D049400%26CHID%3D43653%26RL%3D2560*1440%26MO%3DQB%26VE%3DB1%26BIT%3D64%26OS%3D10.0.18362%22%7D
+POST https://tool.browser.qq.com/cgi-bin/tools/report
+POST https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF
+POST https://galileotelemetry.tencent.com/collect

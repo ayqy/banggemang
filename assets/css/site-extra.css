@@ -1,0 +1,31 @@
+/* 本地复刻补充样式：原站由 JS 运行时注入/控制的部分 */
+
+/* 分享面板 hover 显示（线上由 JS 控制 display） */
+.share-btn:hover .modal { display: block; }
+.share-btn .modal .channel-item { cursor: pointer; }
+.share-btn .modal .channel-item .text { text-align: center; font-size: 14px; color: #242424; margin-top: 6px; }
+
+/* MUI TouchRipple（emotion 按需注入，dump 中缺失，按 MUI v5 源补齐） */
+.MuiTouchRipple-root { overflow: hidden; pointer-events: none; position: absolute; z-index: 0; top: 0; right: 0; bottom: 0; left: 0; border-radius: inherit; }
+.MuiTouchRipple-ripple { opacity: 0; position: absolute; animation: mui-ripple-enter 550ms cubic-bezier(0.4, 0, 0.2, 1); }
+.MuiTouchRipple-rippleVisible { opacity: 0.3; transform: scale(1); animation-name: mui-ripple-enter; animation-duration: 550ms; animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+.MuiTouchRipple-child { opacity: 1; display: block; width: 100%; height: 100%; border-radius: 50%; background-color: currentColor; }
+.MuiTouchRipple-childLeaving { opacity: 0; animation: mui-ripple-exit 550ms cubic-bezier(0.4, 0, 0.2, 1); }
+@keyframes mui-ripple-enter { 0% { transform: scale(0); opacity: 0.1; } 100% { transform: scale(1); opacity: 0.3; } }
+@keyframes mui-ripple-exit { 0% { opacity: 1; } 100% { opacity: 0; } }
+
+/* 轻提示 toast */
+.bxm-toast { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.75); color: #fff; padding: 8px 18px; border-radius: 4px; font-size: 14px; z-index: 9999; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.bxm-toast.show { opacity: 1; }
+
+/* 去手写：本地模式错误提示条 */
+.bxm-error-tip { margin: 12px 0; padding: 10px 14px; background: #fff3f3; border: 1px solid #ffb4b4; color: #e74c3c; border-radius: 4px; font-size: 14px; line-height: 22px; }
+
+/* 去手写：结果/预览图 */
+.bxm-preview-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+/* file:// 下 javascript: 回顶链接兼容由 JS 接管，去掉默认跳动 */
+.nav-backtop { cursor: pointer; }
+
+/* 搜索面板空态（结构与线上一致，类名取自 pchome.css） */
+.search-panel .search-panel-empty { text-decoration: none; }

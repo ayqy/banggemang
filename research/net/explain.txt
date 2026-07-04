@@ -1,0 +1,10 @@
+GET https://tool.browser.qq.com/api/getToken
+POST https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF
+GET https://galileotelemetry.tencent.com/aegiscontrol/whitelist?uid=f1957e3b2734d5ebf985a2934a9871a7&topic=SDK-62c36261a5aaf49b42bf
+GET https://tool.browser.qq.com/api/get_tool_list
+POST https://tool.browser.qq.com/api/addToolPV
+POST https://tool.browser.qq.com/cgi-bin/tools/get_statistics
+GET https://tool.browser.qq.com/api/getLoginInfo?userInfo=%7B%22guid%22:%22aaaaky2g78o42qru100ueg7gkmct88cb%22,%22qua2%22:%22PR%3DPC%26CO%3DWBK%26QV%3D3%26PL%3DWIN%26PB%3DGE%26PPVN%3D%26COVC%3D049400%26CHID%3D43653%26RL%3D2560*1440%26MO%3DQB%26VE%3DB1%26BIT%3D64%26OS%3D10.0.18362%22%7D
+POST https://tool.browser.qq.com/cgi-bin/tools/report
+POST https://otheve.beacon.qq.com/analytics/v2_upload?appkey=00300EMEH839B0XF
+POST https://galileotelemetry.tencent.com/collect

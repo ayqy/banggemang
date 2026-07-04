@@ -1,0 +1,18 @@
+
+### 200 https://tool.browser.qq.com/api/getToken
+{"ret":0,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBpZCI6InNtYWxsX3Rvb2xzIiwiU2VjcmV0S2V5IjoiVXhVb2xtOFhpVExrT2tMUSIsImV4cCI6MTc4MzE1NTI5Ny4yNjI5OTI5fQ.KiR1KYqAvfyz8K3qrxJkk9Y_rI_2FcnXzQr1eSd_goA"}
+
+### 200 https://tool.browser.qq.com/api/getLoginInfo?userInfo=%7B%22guid%22:%22aaaafci7r6x8qksmea2sjwi7ujhs88cb%22,%22qua2%22:%22PR%3DPC%26CO%3DWBK%26QV%3D3%26PL%3DWIN%26PB%3DGE%26PPVN%3D%26COVC%3D049400%26CHID%3D43653%26RL%3D2560*1440%26MO%3DQB%26VE%3DB1%26BIT%3D64%26OS%3D10.0.18362%22%7D
+{"ret":0,"data":{"logo":"","nick_name":"","qbid":""}}
+
+### 200 https://tool.browser.qq.com/cgi-bin/tools/report
+{"header":{"retCode":0,"reason":""}}
+
+### 200 https://tool.browser.qq.com/api/get_tool_list
+{"ret":0,"msg":"succ","data":[{"icon":"https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_xZTks4xOtEs.png","name":"图片压缩","path":"imgcompress","url":"","keyword":"图片|压缩|png|在线","update_time":"2026-03-04T03:22:26.000Z"},{"icon":"https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_PicDW76zOu0.png","name":"证件照生成","path":"id_photo","url":"","keyword":"证件照生成|在线制作证件照|证件照制作|制作证件照|证件照换底色|证件照模板|证件照尺寸|证件照美化|证件照裁剪|公安部门|身份证|护照|文书|Passport Photo Maker|Passport Photo Creator|Photoshop Express|照片处理","update_time":"2026-03-04T03:22:24.000Z"},{"icon":"https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_W4ZZOk76VO4.png","name":"PDF转Word","path":"pdf_2_word","url":"","keyword":"在线pdf转word|pdf转换成word|pdf转word在线转换|免费PDF转Word|pdf怎么转换成word|Word|PDF|文档转换|Microsoft Word|原始PDF|图像|表格|内容保留|Adobe Acrobat|Adobe Reader|Uni PDF Converter","update_time":"2026-03-04T03:22:28.000Z"},{"icon":"https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_fArFtJcyH_q.png","name":"PDF转Excel","path":"pdf_2_excel","url":"","keyword":"excel格式转换|在线pdf转excel|pdf转换成excel|pdf转excel在线转换|免费PDF转Excel|pdf怎么转换成excel|Excel|PDF|内容转换|提取出原始数据|有效整理|节省时间|节省工作量|手动整理|工作变简单","update_time":"2026-03-04T03:22:28.000Z"},{"icon":"https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_ZCWRH1Nw0p8.png","name":"PDF转HTML","path":"pdf_2_html","url":"","keyword":"pdf转html|pdf转html转换器|在线pdf转html|pdf怎么转换成html|PDF转换|将pdf转换成html|内容转换|PowerPoint幻灯片|提取原始内容|阅读|展示形式|减少时间|释放内容|呈现内容","update_time":"2026-03-04T03:22:28.000Z"},{"icon":"https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_aCBqbrwMOPk.png","name":"PDF转图片","path":"pdf_2_png","url":"","keyword":"在线pdf转图片|pdf转换png|PDF转图片|免费PDF转PNG|PDF怎么转PNG|PDF转图片|PDF转长图|PDF转换|PNG|内容转换|PNG图像|减少数据传输量|文字|图形|原始外观|分享特定信息|打印|发送","update_time":"2026-03-04T03:22:28.000Z"},{"icon":"https://m4.publicimg.browser.qq.com/imgUpload/qbtool.t_tool_info/b91aa2df_pWw6a-OPw2q.png","name":"PDF转PPT","path"
+
+### 200 https://tool.browser.qq.com/cgi-bin/tools/get_statistics
+{"header":{"retCode":0,"reason":"suc"},"pvCount":"374158244"}
+
+### 200 https://tool.browser.qq.com/api/addToolPV
+{"ret":0,"msg":"OK"}
