@@ -7,7 +7,7 @@
   "scripts": {
     "test": "playwright test",
     "test:json": "playwright test --reporter=json",
+    "test:grade": "node --test scripts/grade-remote-branches.test.mjs",
     "grade": "node scripts/grade-remote-branches.mjs"
   }
 }
-

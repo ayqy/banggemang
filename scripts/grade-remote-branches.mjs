@@ -1,10 +1,13 @@
 import { execSync, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import http from 'node:http';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const AUTO_GRADE_START = '<!-- AUTO-GRADE:START -->';
+const AUTO_GRADE_END = '<!-- AUTO-GRADE:END -->';
 
 function sh(cmd, options = {}) {
   const out = execSync(cmd, {
@@ -23,6 +26,63 @@ function shOk(cmd, options = {}) {
   } catch {
     return false;
   }
+}
+
+function shellQuote(value) {
+  return `'${String(value).replace(/'/g, "'\\''")}'`;
+}
+
+function parseCliArgs(argv) {
+  let targetPath = null;
+  let targetBranch = null;
+
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+
+    if (arg === '--path') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('--')) throw new Error('Missing value for --path');
+      if (targetPath !== null) throw new Error('Duplicate --path option');
+      targetPath = value;
+      i += 1;
+      continue;
+    }
+
+    if (arg.startsWith('--path=')) {
+      const value = arg.slice('--path='.length);
+      if (!value) throw new Error('Missing value for --path');
+      if (targetPath !== null) throw new Error('Duplicate --path option');
+      targetPath = value;
+      continue;
+    }
+
+    if (arg === '--branch') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('--')) throw new Error('Missing value for --branch');
+      if (targetBranch !== null) throw new Error('Duplicate --branch option');
+      targetBranch = value;
+      i += 1;
+      continue;
+    }
+
+    if (arg.startsWith('--branch=')) {
+      const value = arg.slice('--branch='.length);
+      if (!value) throw new Error('Missing value for --branch');
+      if (targetBranch !== null) throw new Error('Duplicate --branch option');
+      targetBranch = value;
+      continue;
+    }
+
+    throw new Error(`Unknown argument: ${arg}`);
+  }
+
+  if (targetPath !== null && targetBranch !== null) {
+    throw new Error('--path and --branch cannot be used together');
+  }
+
+  if (targetPath !== null) return { mode: 'path', path: targetPath };
+  if (targetBranch !== null) return { mode: 'branch', branch: targetBranch };
+  return { mode: 'default' };
 }
 
 function listRemoteBranches() {
@@ -88,7 +148,6 @@ function startStaticServer(rootDir) {
 
       if (reqPath === '/' || reqPath.endsWith('/')) reqPath = path.posix.join(reqPath, 'index.html');
 
-      // Prevent path traversal.
       const absPath = path.resolve(rootDir, '.' + reqPath);
       if (!absPath.startsWith(path.resolve(rootDir))) {
         res.statusCode = 403;
@@ -105,7 +164,7 @@ function startStaticServer(rootDir) {
       res.statusCode = 200;
       res.setHeader('Content-Type', mimeType(absPath));
       fs.createReadStream(absPath).pipe(res);
-    } catch (err) {
+    } catch {
       res.statusCode = 500;
       res.end('Internal Server Error');
     }
@@ -133,7 +192,6 @@ function flattenPlaywrightJson(json) {
   function walkSuite(suite) {
     for (const s of suite.suites || []) walkSuite(s);
 
-    // Playwright JSON reporter groups actual tests under suite.specs[*].tests[*].results[*].
     for (const spec of suite.specs || []) {
       const tests = spec.tests || [];
 
@@ -143,7 +201,6 @@ function flattenPlaywrightJson(json) {
       if (tests.length === 0) {
         finalStatus = spec.ok ? 'passed' : 'failed';
       } else {
-        // Aggregate across projects/retries: fail if any failed, else skip if all skipped, else pass.
         let sawFail = false;
         let sawPass = false;
         let sawSkip = false;
@@ -182,7 +239,7 @@ function flattenPlaywrightJson(json) {
 function shortError(msg) {
   if (!msg) return '';
   return String(msg)
-    .replace(/\x1b\[[0-9;]*m/g, '') // strip ANSI color codes
+    .replace(/\x1b\[[0-9;]*m/g, '')
     .replace(/\s+/g, ' ')
     .slice(0, 160);
 }
@@ -213,8 +270,7 @@ function computeScoreByRoute(cases) {
   }));
 
   const routeCount = routeRates.length || 1;
-  const avgRate =
-    routeRates.reduce((sum, r) => sum + r.rate, 0) / routeCount;
+  const avgRate = routeRates.reduce((sum, r) => sum + r.rate, 0) / routeCount;
 
   const score = Math.round(avgRate * 100);
   const passedRoutes = routeRates.filter((r) => r.passed === r.total && r.total > 0).length;
@@ -314,7 +370,7 @@ async function runPlaywright({ baseURL, branchName }) {
       rawStderr: stderr,
       cases: flattenPlaywrightJson(json)
     };
-  } catch (e) {
+  } catch {
     return {
       exitCode: exitCode ?? 1,
       rawStdout: stdout,
@@ -330,6 +386,97 @@ async function runPlaywright({ baseURL, branchName }) {
   }
 }
 
+function resolvePathTarget(inputPath) {
+  const targetRoot = path.resolve(process.cwd(), inputPath);
+  if (!fs.existsSync(targetRoot) || !fs.statSync(targetRoot).isDirectory()) {
+    throw new Error(`Path does not exist or is not a directory: ${targetRoot}`);
+  }
+
+  const indexPath = path.join(targetRoot, 'index.html');
+  if (!fs.existsSync(indexPath) || !fs.statSync(indexPath).isFile()) {
+    throw new Error(`Path does not contain index.html: ${targetRoot}`);
+  }
+
+  return targetRoot;
+}
+
+function refExists(ref) {
+  return shOk(`git rev-parse --verify --quiet ${shellQuote(`${ref}^{commit}`)}`);
+}
+
+function resolveBranchRef(branchName) {
+  const candidates = [
+    `refs/heads/${branchName}`,
+    `refs/remotes/origin/${branchName}`,
+    branchName
+  ];
+
+  for (const ref of candidates) {
+    if (refExists(ref)) return ref;
+  }
+
+  throw new Error(`Branch not found: ${branchName}`);
+}
+
+function materializeBranchSnapshot(branchRef, branchName) {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), `grade-${safeDirName(branchName)}-`));
+
+  try {
+    sh(`git archive ${shellQuote(branchRef)} | tar -x -C ${shellQuote(tempDir)}`);
+    return tempDir;
+  } catch (error) {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+    throw error;
+  }
+}
+
+async function gradeTarget({ targetRoot, targetLabel, branchNameForEnv }) {
+  console.log(`\n=== Grading ${targetLabel} ===`);
+
+  const server = await startStaticServer(targetRoot);
+  let run;
+  try {
+    run = await runPlaywright({ baseURL: server.baseURL, branchName: branchNameForEnv });
+  } finally {
+    await server.close();
+  }
+
+  const totalCases = run.cases.length || 1;
+  const passedCases = run.cases.filter((c) => c.status === 'passed').length;
+  const routeScore = computeScoreByRoute(run.cases);
+
+  return {
+    targetLabel,
+    branchName: branchNameForEnv,
+    score: routeScore.score,
+    passedRoutes: routeScore.passedRoutes,
+    totalRoutes: routeScore.totalRoutes,
+    passedCases,
+    totalCases,
+    cases: run.cases
+  };
+}
+
+function printScoreReport(result) {
+  const lines = [];
+  lines.push(`目标：${result.targetLabel}`);
+  lines.push(`总分：${result.score}/100`);
+  lines.push(`路由通过：${result.passedRoutes}/${result.totalRoutes}`);
+  lines.push(`用例通过：${result.passedCases}/${result.totalCases}`);
+  lines.push('');
+  lines.push('| Route | Case | 结果 | 备注 |');
+  lines.push('| --- | --- | --- | --- |');
+
+  for (const c of result.cases) {
+    const ok = c.status === 'passed';
+    const status = ok ? 'PASS' : c.status === 'skipped' ? 'SKIP' : 'FAILED';
+    const note = ok ? '' : shortError(c.error);
+    lines.push(`| ${routeIdFromTitle(c.title)} | ${c.title} | ${status} | ${note} |`);
+  }
+
+  console.log(lines.join('\n'));
+}
+
 function ensureWorktree(branchName) {
   const worktreesDir = path.join(REPO_ROOT, '.worktrees');
   ensureDir(worktreesDir);
@@ -339,7 +486,6 @@ function ensureWorktree(branchName) {
 
   if (fs.existsSync(worktreePath)) {
     shOk(`git worktree remove -f "${worktreePath}"`);
-    // If still exists (e.g. not a worktree), leave it as-is and reuse.
   }
 
   if (!fs.existsSync(worktreePath)) {
@@ -360,7 +506,7 @@ function writeReadmeAndPush({ worktreePath, branchName, readmeContent }) {
   const staged = sh('git diff --cached --name-only', { cwd: worktreePath });
   if (!staged) return;
 
-  sh(`git commit -m "chore: auto grading score"`, { cwd: worktreePath });
+  sh('git commit -m "chore: auto grading score"', { cwd: worktreePath });
   sh(`git push origin "${branchName}"`, { cwd: worktreePath, stdio: ['ignore', 'inherit', 'inherit'] });
 }
 
@@ -379,7 +525,7 @@ function rankBadge(rank) {
 
 function renderMainLeaderboardBlock(results) {
   const lines = [];
-  lines.push('<!-- AUTO-GRADE:START -->');
+  lines.push(AUTO_GRADE_START);
   lines.push('## 自动测评排行榜');
   lines.push('');
   lines.push(`更新时间：${nowTimestamp()}`);
@@ -401,7 +547,7 @@ function renderMainLeaderboardBlock(results) {
   }
 
   lines.push('');
-  lines.push('<!-- AUTO-GRADE:END -->');
+  lines.push(AUTO_GRADE_END);
   return lines.join('\n');
 }
 
@@ -409,10 +555,70 @@ function escapeRegExp(s) {
   return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function parseAutogradeLeaderboard(existingReadme) {
+  const content = String(existingReadme || '');
+  const re = new RegExp(`${escapeRegExp(AUTO_GRADE_START)}([\\s\\S]*?)${escapeRegExp(AUTO_GRADE_END)}`, 'm');
+  const match = content.match(re);
+  if (!match) return [];
+
+  const rows = [];
+  const lines = match[1].split('\n');
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line.startsWith('|')) continue;
+
+    const cells = line
+      .split('|')
+      .slice(1, -1)
+      .map((cell) => cell.trim());
+
+    if (cells.length !== 5) {
+      throw new Error(`Invalid leaderboard row: ${line}`);
+    }
+
+    const isHeader = cells[0] === '排名' && cells[1] === '分支' && cells[2] === '分数';
+    const isDivider = cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+    if (isHeader || isDivider) continue;
+
+    const branchName = cells[1];
+    const scoreMatch = cells[2].match(/^(\d+)\/100$/);
+    const routeMatch = cells[3].match(/^(\d+)\/(\d+)$/);
+    const caseMatch = cells[4].match(/^(\d+)\/(\d+)$/);
+
+    if (!branchName || !scoreMatch || !routeMatch || !caseMatch) {
+      throw new Error(`Invalid leaderboard row: ${line}`);
+    }
+
+    rows.push({
+      branchName,
+      score: Number(scoreMatch[1]),
+      passedRoutes: Number(routeMatch[1]),
+      totalRoutes: Number(routeMatch[2]),
+      passedCases: Number(caseMatch[1]),
+      totalCases: Number(caseMatch[2])
+    });
+  }
+
+  return rows;
+}
+
+function mergeLeaderboardResults(existingRows, newRows) {
+  const merged = new Map();
+
+  for (const row of existingRows) {
+    merged.set(row.branchName, { ...row });
+  }
+
+  for (const row of newRows) {
+    merged.set(row.branchName, { ...row });
+  }
+
+  return Array.from(merged.values());
+}
+
 function upsertAutogradeBlock(existing, block) {
-  const start = '<!-- AUTO-GRADE:START -->';
-  const end = '<!-- AUTO-GRADE:END -->';
-  const re = new RegExp(`${escapeRegExp(start)}[\\s\\S]*?${escapeRegExp(end)}\\n*`, 'm');
+  const re = new RegExp(`${escapeRegExp(AUTO_GRADE_START)}[\\s\\S]*?${escapeRegExp(AUTO_GRADE_END)}\\n*`, 'm');
 
   if (re.test(existing)) {
     return existing.replace(re, `${block}\n\n`);
@@ -428,7 +634,9 @@ function writeMainLeaderboardAndPush({ results }) {
   const readmePath = path.join(worktreePath, 'README.md');
   const oldContent = fs.existsSync(readmePath) ? fs.readFileSync(readmePath, 'utf8') : '';
 
-  const block = renderMainLeaderboardBlock(results);
+  const existingRows = parseAutogradeLeaderboard(oldContent);
+  const mergedResults = mergeLeaderboardResults(existingRows, results);
+  const block = renderMainLeaderboardBlock(mergedResults);
   const newContent = upsertAutogradeBlock(oldContent, block);
   fs.writeFileSync(readmePath, newContent, 'utf8');
 
@@ -441,7 +649,37 @@ function writeMainLeaderboardAndPush({ results }) {
   sh(`git push origin "${branchName}"`, { cwd: worktreePath, stdio: ['ignore', 'inherit', 'inherit'] });
 }
 
-async function main() {
+async function main(argv = process.argv.slice(2)) {
+  const options = parseCliArgs(argv);
+
+  if (options.mode === 'path') {
+    const targetRoot = resolvePathTarget(options.path);
+    const result = await gradeTarget({
+      targetRoot,
+      targetLabel: targetRoot,
+      branchNameForEnv: targetRoot
+    });
+    printScoreReport(result);
+    return;
+  }
+
+  if (options.mode === 'branch') {
+    const branchRef = resolveBranchRef(options.branch);
+    const targetRoot = materializeBranchSnapshot(branchRef, options.branch);
+
+    try {
+      const result = await gradeTarget({
+        targetRoot,
+        targetLabel: options.branch,
+        branchNameForEnv: options.branch
+      });
+      printScoreReport(result);
+    } finally {
+      fs.rmSync(targetRoot, { recursive: true, force: true });
+    }
+    return;
+  }
+
   sh('git fetch origin --prune', { stdio: ['ignore', 'inherit', 'inherit'] });
   sh('git worktree prune', { stdio: ['ignore', 'inherit', 'inherit'] });
 
@@ -456,44 +694,35 @@ async function main() {
   const results = [];
 
   for (const branchName of branches) {
-    console.log(`\n=== Grading ${branchName} ===`);
     const worktreePath = ensureWorktree(branchName);
-
-    const server = await startStaticServer(worktreePath);
-    let run;
-    try {
-      run = await runPlaywright({ baseURL: server.baseURL, branchName });
-    } finally {
-      await server.close();
-    }
-
-    const total = run.cases.length || 1;
-    const passed = run.cases.filter((c) => c.status === 'passed').length;
-    const routeScore = computeScoreByRoute(run.cases);
-    const score = routeScore.score;
+    const result = await gradeTarget({
+      targetRoot: worktreePath,
+      targetLabel: branchName,
+      branchNameForEnv: branchName
+    });
 
     const readme = renderReadme({
       branchName,
-      score,
-      passedCases: passed,
-      totalCases: total,
-      passedRoutes: routeScore.passedRoutes,
-      totalRoutes: routeScore.totalRoutes,
-      cases: run.cases
+      score: result.score,
+      passedCases: result.passedCases,
+      totalCases: result.totalCases,
+      passedRoutes: result.passedRoutes,
+      totalRoutes: result.totalRoutes,
+      cases: result.cases
     });
     writeReadmeAndPush({ worktreePath, branchName, readmeContent: readme });
 
     console.log(
-      `Score ${score}/100 (routes ${routeScore.passedRoutes}/${routeScore.totalRoutes}, cases ${passed}/${total})`
+      `Score ${result.score}/100 (routes ${result.passedRoutes}/${result.totalRoutes}, cases ${result.passedCases}/${result.totalCases})`
     );
 
     results.push({
       branchName,
-      score,
-      passedRoutes: routeScore.passedRoutes,
-      totalRoutes: routeScore.totalRoutes,
-      passedCases: passed,
-      totalCases: total
+      score: result.score,
+      passedRoutes: result.passedRoutes,
+      totalRoutes: result.totalRoutes,
+      passedCases: result.passedCases,
+      totalCases: result.totalCases
     });
   }
 
@@ -501,4 +730,18 @@ async function main() {
   writeMainLeaderboardAndPush({ results });
 }
 
-await main();
+const isDirectExecution =
+  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+
+if (isDirectExecution) {
+  await main(process.argv.slice(2));
+}
+
+export {
+  main,
+  mergeLeaderboardResults,
+  parseAutogradeLeaderboard,
+  parseCliArgs,
+  renderMainLeaderboardBlock,
+  upsertAutogradeBlock
+};
